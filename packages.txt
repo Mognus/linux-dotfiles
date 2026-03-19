@@ -1,0 +1,35 @@
+# =============================================================================
+# Arch Linux Packages
+# Install with: sudo pacman -S $(grep -v '^#' packages.txt | grep -v '^$' | tr '\n' ' ')
+# =============================================================================
+
+# --- Shell ---
+zsh
+tmux
+fzf
+zsh-autosuggestions
+zsh-syntax-highlighting
+
+# --- Editor ---
+neovim
+
+# --- Terminal ---
+alacritty
+
+# --- Wayland / Desktop ---
+hyprland
+waybar
+rofi-wayland
+xdg-desktop-portal-hyprland
+
+# --- Fonts ---
+ttf-meslo-nerd
+
+# --- Tools ---
+git
+curl
+wget
+openssh
+man-db
+ripgrep
+htop
