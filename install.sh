@@ -26,5 +26,6 @@ link tmux.conf      "$HOME/.tmux.conf"
 link wezterm.lua    "$HOME/.wezterm.lua"
 link starship.toml  "$HOME/.config/starship.toml"
 link gitconfig      "$HOME/.gitconfig"
+link hyprland.conf  "$HOME/.config/hypr/hyprland.conf"
 
 echo "Done."
