@@ -25,6 +25,16 @@ xdg-desktop-portal-hyprland
 # --- Fonts ---
 ttf-meslo-nerd
 
+# --- Dev Languages ---
+rustup
+go
+nodejs
+npm
+
+# --- Containers ---
+docker
+docker-compose
+
 # --- Tools ---
 git
 curl
