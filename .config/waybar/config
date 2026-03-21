@@ -6,18 +6,20 @@
     "modules-center": ["hyprland/workspaces"],
 
     "hyprland/workspaces": {
-        "format": "{icon}",
+        "format": "{icon} {name}",
         "on-click": "activate",
+        "sort-by-id": true,
         "persistent-workspaces": {
-            "*": [1, 2, 3, 4, 5]
+            "*": [1, 2, 3, 4, 5, 6]
         },
         "show-special": false,
         "format-icons": {
-            "1": "\uf121",
-            "2": "\uf0c3",
-            "3": "\uf001",
-            "4": "\uf544",
-            "5": "\uf120"
+            "code":  "\uf121",
+            "test":  "\uf0c3",
+            "flow":  "\uf001",
+            "voice": "\uf130",
+            "ai":    "\uf0eb",
+            "term":  "\uf120"
         }
     }
 }
