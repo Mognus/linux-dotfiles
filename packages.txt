@@ -21,6 +21,9 @@ hyprland
 waybar
 rofi-wayland
 xdg-desktop-portal-hyprland
+dunst
+hyprlock
+hyprpaper
 
 # --- Fonts ---
 ttf-meslo-nerd

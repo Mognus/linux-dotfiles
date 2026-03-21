@@ -1,0 +1,23 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 36,
+
+    "modules-center": ["hyprland/workspaces"],
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "persistent-workspaces": {
+            "*": [1, 2, 3, 4, 5]
+        },
+        "show-special": false,
+        "format-icons": {
+            "1": "\uf121",
+            "2": "\uf0c3",
+            "3": "\uf001",
+            "4": "\uf544",
+            "5": "\uf120"
+        }
+    }
+}

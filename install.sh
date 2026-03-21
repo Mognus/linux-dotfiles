@@ -21,11 +21,19 @@ link() {
     echo "Linked: $dst → $src"
 }
 
-link zshrc          "$HOME/.zshrc"
-link tmux.conf      "$HOME/.tmux.conf"
-link wezterm.lua    "$HOME/.wezterm.lua"
-link starship.toml  "$HOME/.config/starship.toml"
-link gitconfig      "$HOME/.gitconfig"
-link hyprland.conf  "$HOME/.config/hypr/hyprland.conf"
+# --- Home ---
+link zshrc      "$HOME/.zshrc"
+link tmux.conf  "$HOME/.tmux.conf"
+link gitconfig  "$HOME/.gitconfig"
+
+# --- .config ---
+link .config/hypr/hyprland.conf         "$HOME/.config/hypr/hyprland.conf"
+link .config/hypr/hyprlock.conf         "$HOME/.config/hypr/hyprlock.conf"
+link .config/hypr/hyprpaper.conf        "$HOME/.config/hypr/hyprpaper.conf"
+link .config/waybar/config              "$HOME/.config/waybar/config"
+link .config/waybar/style.css           "$HOME/.config/waybar/style.css"
+link .config/dunst/dunstrc              "$HOME/.config/dunst/dunstrc"
+link .config/alacritty/alacritty.toml  "$HOME/.config/alacritty/alacritty.toml"
+link .config/starship.toml             "$HOME/.config/starship.toml"
 
 echo "Done."

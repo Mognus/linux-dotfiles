@@ -1,13 +1,3 @@
-# tmux autostart — must run before everything else
-if [ -z "$TMUX" ]; then
-    # -d creates session in background, but throws error if session already exists
-    # 2>/dev/null suppresses that error — session simply stays as is
-    tmux new-session -d -s claude 2>/dev/null
-    tmux new-session -d -s dev 2>/dev/null
-    # -A: attach to main if it already exists instead of creating a new one
-    exec tmux new-session -A -s main
-fi
-
 # Completion
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
@@ -25,11 +15,14 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # fzf
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
 
 # Aliases
 alias ll='ls -al'
+alias ta='tmux attach -t'
+alias tn='tmux new-session -s'
+alias tk='tmux kill-session -t'
 
 # Keybindings
 bindkey "$terminfo[kcuu1]" history-substring-search-up    # Up
