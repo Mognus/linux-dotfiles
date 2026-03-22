@@ -4,24 +4,35 @@
     "height": 36,
 
     "modules-center": ["hyprland/workspaces"],
-    "modules-right": ["custom/firefox-scratchpad"],
+    "modules-right": ["group/scratchpads"],
 
     "hyprland/workspaces": {
         "format": "{icon} {name}",
         "on-click": "activate",
         "sort-by-id": true,
         "persistent-workspaces": {
-            "*": [1, 2, 3, 4, 5, 6]
+            "*": [1, 2, 3, 4, 5]
         },
         "show-special": false,
         "format-icons": {
             "code":  "\uf121",
             "test":  "\uf0c3",
             "flow":  "\uf001",
-            "voice": "\uf130",
             "ai":    "\uf0eb",
             "term":  "\uf120"
         }
+    },
+
+    "group/scratchpads": {
+        "orientation": "horizontal",
+        "modules": ["custom/discord-scratchpad", "custom/firefox-scratchpad"]
+    },
+
+    "custom/discord-scratchpad": {
+        "exec": "~/.config/waybar/scripts/discord-scratchpad.sh",
+        "return-type": "json",
+        "interval": "once",
+        "signal": 9
     },
 
     "custom/firefox-scratchpad": {

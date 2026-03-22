@@ -1,0 +1,8 @@
+{
+  "effortLevel": "high",
+  "permissions": {
+    "allow": [
+      "Read"
+    ]
+  }
+}

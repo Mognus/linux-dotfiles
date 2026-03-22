@@ -37,16 +37,37 @@ window#waybar {
     color: #f38ba8;
 }
 
+#scratchpads {
+    background: white;
+    border-radius: 4px 18px 18px 4px;
+    margin: 4px 4px 4px 0;
+}
+
+#custom-discord-scratchpad {
+    padding: 2px 10px 2px 10px;
+    font-size: 18px;
+    color: #45475a;
+    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+    background-size: 1px 55%;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
 #custom-firefox-scratchpad {
-    padding: 2px 14px;
+    padding: 2px 10px 2px 5px;
     font-size: 18px;
     color: #45475a;
 }
 
-#custom-firefox-scratchpad.hidden {
+#custom-firefox-scratchpad.hidden,
+#custom-discord-scratchpad.hidden {
     color: #6c7086;
 }
 
 #custom-firefox-scratchpad.visible {
     color: #fab387;
+}
+
+#custom-discord-scratchpad.visible {
+    color: #cba4f7;
 }
