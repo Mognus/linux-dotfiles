@@ -4,6 +4,7 @@
     "height": 36,
 
     "modules-center": ["hyprland/workspaces"],
+    "modules-right": ["custom/firefox-scratchpad"],
 
     "hyprland/workspaces": {
         "format": "{icon} {name}",
@@ -21,5 +22,12 @@
             "ai":    "\uf0eb",
             "term":  "\uf120"
         }
+    },
+
+    "custom/firefox-scratchpad": {
+        "exec": "~/.config/waybar/scripts/firefox-scratchpad.sh",
+        "return-type": "json",
+        "interval": "once",
+        "signal": 8
     }
 }

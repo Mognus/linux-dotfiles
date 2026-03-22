@@ -38,6 +38,10 @@ npm
 docker
 docker-compose
 
+# --- File Manager ---
+nnn
+thunar
+
 # --- Tools ---
 git
 curl

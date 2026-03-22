@@ -36,3 +36,17 @@ window#waybar {
 #workspaces button.urgent {
     color: #f38ba8;
 }
+
+#custom-firefox-scratchpad {
+    padding: 2px 14px;
+    font-size: 18px;
+    color: #45475a;
+}
+
+#custom-firefox-scratchpad.hidden {
+    color: #6c7086;
+}
+
+#custom-firefox-scratchpad.visible {
+    color: #fab387;
+}
