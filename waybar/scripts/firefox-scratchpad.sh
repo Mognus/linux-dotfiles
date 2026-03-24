@@ -4,6 +4,7 @@
 # "hidden"  = Firefox is running in scratchpad but toggled off
 # "empty"   = scratchpad doesn't exist yet
 
+echo "$(date): script called" >> /tmp/waybar-debug.log
 visible=$(hyprctl monitors -j | jq '[.[] | select(.specialWorkspace.name == "special:firefox")] | length')
 exists=$(hyprctl workspaces -j | jq '[.[] | select(.name == "special:firefox")] | length')
 

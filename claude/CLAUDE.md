@@ -14,6 +14,7 @@
 - No docstrings unless explicitly asked
 - No unnecessary abstractions or helpers for one-time use
 - Only commit when explicitly asked
+- No Co-Authored-By watermark in commit messages
 
 ## System
 - **OS:** Arch Linux (rolling)
