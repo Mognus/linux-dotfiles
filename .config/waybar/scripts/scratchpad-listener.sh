@@ -6,8 +6,17 @@ socat -u UNIX-CONNECT:"$socket" - | while read -r event; do
         pkill -RTMIN+8 waybar
     elif echo "$event" | grep -q 'activespecial.*discord'; then
         pkill -RTMIN+9 waybar
+    elif echo "$event" | grep -q 'activespecial.*notes'; then
+        pkill -RTMIN+10 waybar
+    elif echo "$event" | grep -q 'activespecial.*music'; then
+        pkill -RTMIN+11 waybar
+    elif echo "$event" | grep -q 'activespecial.*cmus'; then
+        pkill -RTMIN+11 waybar
     elif echo "$event" | grep -q '^activespecial>>,'; then
         pkill -RTMIN+8 waybar
         pkill -RTMIN+9 waybar
+        pkill -RTMIN+10 waybar
+        pkill -RTMIN+11 waybar
+        pkill -RTMIN+12 waybar
     fi
 done

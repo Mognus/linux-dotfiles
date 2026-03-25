@@ -25,8 +25,32 @@ dunst
 hyprlock
 hyprpaper
 
+# --- Wayland Tools ---
+grim
+slurp
+wl-clipboard
+swappy
+socat
+jq
+
+# --- Audio ---
+pipewire-alsa
+pipewire-pulse
+alsa-utils
+
+# --- Bluetooth ---
+bluez
+bluez-utils
+
 # --- Fonts ---
 ttf-meslo-nerd
+ttf-jetbrains-mono-nerd
+
+# --- Apps ---
+firefox
+discord
+obsidian
+mullvad-vpn
 
 # --- Dev Languages ---
 rustup
@@ -42,6 +66,9 @@ docker-compose
 nnn
 thunar
 
+# --- Media ---
+yt-dlp
+
 # --- Tools ---
 git
 curl
@@ -49,4 +76,8 @@ wget
 openssh
 man-db
 ripgrep
-htop
+btop
+stow
+github-cli
+fastfetch
+networkmanager

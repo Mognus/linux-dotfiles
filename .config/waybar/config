@@ -3,8 +3,20 @@
     "position": "top",
     "height": 36,
 
+    "modules-left": ["clock", "wireplumber"],
     "modules-center": ["hyprland/workspaces"],
     "modules-right": ["group/scratchpads"],
+
+    "clock": {
+        "format": "{:%H:%M  %d.%m.%Y}"
+    },
+
+    "wireplumber": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟",
+        "on-click": "pavucontrol",
+        "format-icons": ["󰕿", "󰖀", "󰕾"]
+    },
 
     "hyprland/workspaces": {
         "format": "{icon} {name}",
@@ -25,7 +37,7 @@
 
     "group/scratchpads": {
         "orientation": "horizontal",
-        "modules": ["custom/discord-scratchpad", "custom/firefox-scratchpad"]
+        "modules": ["custom/music-scratchpad", "custom/obsidian-scratchpad", "custom/discord-scratchpad", "custom/firefox-scratchpad"]
     },
 
     "custom/discord-scratchpad": {
@@ -40,5 +52,26 @@
         "return-type": "json",
         "interval": "once",
         "signal": 8
+    },
+
+    "custom/cmus-scratchpad": {
+        "exec": "~/.config/waybar/scripts/cmus-scratchpad.sh",
+        "return-type": "json",
+        "interval": "once",
+        "signal": 12
+    },
+
+    "custom/music-scratchpad": {
+        "exec": "~/.config/waybar/scripts/music-scratchpad.sh",
+        "return-type": "json",
+        "interval": "once",
+        "signal": 11
+    },
+
+    "custom/obsidian-scratchpad": {
+        "exec": "~/.config/waybar/scripts/obsidian-scratchpad.sh",
+        "return-type": "json",
+        "interval": "once",
+        "signal": 10
     }
 }
