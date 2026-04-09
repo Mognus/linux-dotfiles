@@ -8,6 +8,7 @@
 - Longer explanations only when explicitly requested
 
 ## Code Style
+- Autisticly follow "Uncle Bobs" SOLID principles, and also recheck if your work abides to those standards
 - Default coding style: prioritize human readability over cleverness
 - No over-engineering by default — but go as deep as needed when explicitly asked
 - No comments unless explicitly asked
@@ -15,7 +16,7 @@
 - No unnecessary abstractions or helpers for one-time use
 - Only commit when explicitly asked
 - No Co-Authored-By watermark in commit messages
-
+- Always clean and thoughfully designed COde, not just writing code "to make it work"
 ## System
 - **OS:** Arch Linux (rolling)
 - **Kernel:** 6.19.8-arch1-1

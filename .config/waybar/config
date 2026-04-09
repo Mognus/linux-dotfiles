@@ -3,7 +3,7 @@
     "position": "top",
     "height": 36,
 
-    "modules-left": ["clock", "wireplumber"],
+    "modules-left": ["clock", "wireplumber", "custom/record"],
     "modules-center": ["hyprland/workspaces"],
     "modules-right": ["group/scratchpads"],
 
@@ -18,26 +18,31 @@
         "format-icons": ["󰕿", "󰖀", "󰕾"]
     },
 
+    "custom/record": {
+        "exec": "~/.config/waybar/scripts/record-status.sh",
+        "return-type": "json",
+        "interval": 1
+    },
+
     "hyprland/workspaces": {
         "format": "{icon} {name}",
         "on-click": "activate",
         "sort-by-id": true,
         "persistent-workspaces": {
-            "*": [1, 2, 3, 4, 5]
+            "*": [1, 2, 3, 4]
         },
         "show-special": false,
         "format-icons": {
             "code":  "\uf121",
             "test":  "\uf0c3",
             "flow":  "\uf001",
-            "ai":    "\uf0eb",
-            "term":  "\uf120"
+            "extra": "\uf0eb"
         }
     },
 
     "group/scratchpads": {
         "orientation": "horizontal",
-        "modules": ["custom/music-scratchpad", "custom/obsidian-scratchpad", "custom/discord-scratchpad", "custom/firefox-scratchpad"]
+        "modules": ["custom/term-scratchpad", "custom/music-scratchpad", "custom/obsidian-scratchpad", "custom/discord-scratchpad", "custom/firefox-scratchpad"]
     },
 
     "custom/discord-scratchpad": {
@@ -59,6 +64,13 @@
         "return-type": "json",
         "interval": "once",
         "signal": 12
+    },
+
+    "custom/term-scratchpad": {
+        "exec": "~/.config/waybar/scripts/term-scratchpad.sh",
+        "return-type": "json",
+        "interval": "once",
+        "signal": 13
     },
 
     "custom/music-scratchpad": {

@@ -1,0 +1,5 @@
+^/packages\.txt$
+^/install\.sh$
+^/docs$
+^/README.*$
+^/.git$

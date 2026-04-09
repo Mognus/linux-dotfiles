@@ -18,6 +18,9 @@ source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
+# zoxide
+eval "$(zoxide init zsh)"
+
 # Aliases
 alias ll='ls -al'
 alias ss='grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +%F_%T).png'
@@ -33,6 +36,7 @@ bindkey "$terminfo[kcuu1]" history-substring-search-up    # Up
 bindkey "$terminfo[kcud1]" history-substring-search-down  # Down
 bindkey "^[[1;5C" forward-word     # Ctrl+→
 bindkey "^[[1;5D" backward-word    # Ctrl+←
+bindkey "^G" fzf-cd-widget         # Ctrl+G → cd jump
 
 # PATH
 export PATH=$HOME/.local/bin:$PATH
@@ -44,7 +48,7 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:git:*' formats '%F{244} (%b)%f'
 
 _full_prompt='
-%F{236}┌─%f %F{246}%~%f${vcs_info_msg_0_} %F{white}%*%f
+%F{236}┌─%f %F{green}%n@%m%f %F{246}%~%f${vcs_info_msg_0_} %F{white}%*%f
 %F{236}└─%f%F{cyan}❯%f '
 
 # Restore full prompt and update vcs_info before each prompt

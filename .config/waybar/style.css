@@ -75,6 +75,24 @@ window#waybar {
     color: #f38ba8;
 }
 
+#custom-term-scratchpad {
+    padding: 2px 10px 2px 10px;
+    font-size: 18px;
+    color: #45475a;
+    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+    background-size: 1px 55%;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+#custom-term-scratchpad.hidden {
+    color: #6c7086;
+}
+
+#custom-term-scratchpad.visible {
+    color: #a6e3a1;
+}
+
 #custom-music-scratchpad {
     padding: 2px 10px 2px 10px;
     font-size: 18px;
@@ -135,4 +153,13 @@ window#waybar {
 
 #custom-obsidian-scratchpad.visible {
     color: #b4befe;
+}
+
+#custom-record {
+    padding: 0 12px;
+    color: transparent;
+}
+
+#custom-record.recording {
+    color: #f38ba8;
 }

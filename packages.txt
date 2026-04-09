@@ -1,83 +1,103 @@
 # =============================================================================
 # Arch Linux Packages
-# Install with: sudo pacman -S $(grep -v '^#' packages.txt | grep -v '^$' | tr '\n' ' ')
+# Install with: ./install.sh
 # =============================================================================
 
 # --- Shell ---
-zsh
-tmux
-fzf
-zsh-autosuggestions
-zsh-syntax-highlighting
+zsh                         # Shell
+tmux                        # Terminal multiplexer
+fzf                         # Fuzzy finder (Ctrl+R history, Ctrl+T files, Ctrl+G dirs)
+fd                          # Fast find, used as fzf backend
+zoxide                      # Smart cd replacement (z, zi)
+zsh-autosuggestions         # Command suggestions from history
+zsh-syntax-highlighting     # Syntax highlighting in the shell
 
 # --- Editor ---
-neovim
+neovim                      # Editor
 
 # --- Terminal ---
-alacritty
+alacritty                   # Terminal emulator
 
 # --- Wayland / Desktop ---
-hyprland
-waybar
-rofi-wayland
-xdg-desktop-portal-hyprland
-dunst
-hyprlock
-hyprpaper
+hyprland                    # Wayland compositor / WM
+waybar                      # Status bar
+rofi-wayland                # App launcher
+xdg-desktop-portal-hyprland # Screen sharing, file picker for Wayland apps
+xdg-user-dirs               # Creates ~/Downloads, ~/Pictures etc.
+dunst                       # Notification daemon
+hyprlock                    # Lock screen
+hyprpaper                   # Wallpaper daemon
+hypridle                    # Idle daemon (lock/turn off screen)
+polkit-gnome                # Privilege dialog (sudo popups in GUI)
 
 # --- Wayland Tools ---
-grim
-slurp
-wl-clipboard
-swappy
-socat
-jq
+grim                        # Screenshot (full screen)
+slurp                       # Select screen region for screenshots
+wl-clipboard                # Clipboard (wl-copy, wl-paste)
+swappy                      # Screenshot editor
+socat                       # Socket communication (e.g. Hyprland IPC)
+jq                          # JSON processing in CLI
 
 # --- Audio ---
-pipewire-alsa
-pipewire-pulse
-alsa-utils
+pipewire                    # Audio server
+wireplumber                 # Pipewire session manager
+pipewire-alsa               # ALSA compatibility via Pipewire
+pipewire-pulse              # PulseAudio compatibility via Pipewire
+alsa-utils                  # ALSA CLI tools (alsamixer etc.)
+pavucontrol                 # Audio mixer GUI
 
 # --- Bluetooth ---
-bluez
-bluez-utils
+bluez                       # Bluetooth stack
+bluez-utils                 # Bluetooth CLI tools (bluetoothctl)
 
 # --- Fonts ---
-ttf-meslo-nerd
-ttf-jetbrains-mono-nerd
+ttf-meslo-nerd              # Nerd Font (Meslo)
+ttf-jetbrains-mono-nerd     # Nerd Font (JetBrains Mono)
 
 # --- Apps ---
-firefox
-discord
-obsidian
-mullvad-vpn
+firefox                     # Browser
+discord                     # Chat
+obsidian                    # Notes (Markdown vault)
 
 # --- Dev Languages ---
-rustup
-go
-nodejs
-npm
+rustup                      # Rust toolchain manager
+go                          # Go
+nodejs                      # Node.js
+npm                         # Node package manager
 
 # --- Containers ---
-docker
-docker-compose
+docker                      # Container runtime
+docker-compose              # Multi-container orchestration
 
 # --- File Manager ---
-nnn
-thunar
+nnn                         # Terminal file manager
+thunar                      # GUI file manager
 
 # --- Media ---
-yt-dlp
+yt-dlp                      # YouTube/video downloader
+playerctl                   # Media key / playback control (Waybar integration)
+mpv                         # Video player
 
 # --- Tools ---
-git
-curl
-wget
-openssh
-man-db
-ripgrep
-btop
-stow
-github-cli
-fastfetch
-networkmanager
+git                         # Version control
+curl                        # HTTP requests
+wget                        # File download
+openssh                     # SSH client/server
+man-db                      # Man pages
+ripgrep                     # Fast grep (rg)
+bat                         # Better cat (syntax highlighting)
+btop                        # Resource monitor
+stow                        # Dotfiles symlink manager
+github-cli                  # GitHub CLI (gh)
+fastfetch                   # System info (neofetch replacement)
+networkmanager              # Network management
+unzip                       # ZIP extraction
+7zip                        # 7z archives
+reflector                   # Update pacman mirrorlist
+
+# =============================================================================
+# [AUR] — installed via yay
+# =============================================================================
+
+mullvad-vpn                 # VPN
+tor-browser                 # Tor Browser (.onion access)
