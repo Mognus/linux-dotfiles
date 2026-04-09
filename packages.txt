@@ -94,6 +94,7 @@ networkmanager              # Network management
 unzip                       # ZIP extraction
 7zip                        # 7z archives
 reflector                   # Update pacman mirrorlist
+ufw                         # Firewall (deny incoming, allow outgoing)
 
 # =============================================================================
 # [AUR] — installed via yay

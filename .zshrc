@@ -23,10 +23,10 @@ eval "$(zoxide init zsh)"
 
 # Aliases
 alias ll='ls -al'
-alias ss='grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +%F_%T).png'
-alias ssf='grim ~/Pictures/Screenshots/$(date +%F_%T).png'
-alias sse='grim -g "$(slurp)" - | swappy -f -'
-alias ssc='grim -g "$(slurp)" - | wl-copy'
+alias sc='grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +%F_%T).png'
+alias scf='grim ~/Pictures/Screenshots/$(date +%F_%T).png'
+alias sce='grim -g "$(slurp)" - | swappy -f -'
+alias scc='grim -g "$(slurp)" - | wl-copy'
 alias ta='tmux attach -t'
 alias tn='tmux new-session -s'
 alias tk='tmux kill-session -t'

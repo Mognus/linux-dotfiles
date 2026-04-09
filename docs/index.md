@@ -13,6 +13,10 @@
 ## Tools & Apps
 - [[mullvad]]
 - [[docker]]
+- [[ufw]]
+
+## Networking
+- [[networking]]
 
 ## Security
 - [[gpg-secrets]]
