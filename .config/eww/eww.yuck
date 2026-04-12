@@ -1,0 +1,26 @@
+(defvar tux-opacity "1")
+(defvar tux-visible true)
+
+(defwindow tux-angel
+  :monitor 0
+  :geometry (geometry
+              :x "0px"
+              :y "16px"
+              :width "100px"
+              :height "136px"
+              :anchor "bottom right")
+  :layer "overlay"
+  :exclusive false
+  :focusable false
+  (tux-widget))
+
+(defwidget tux-widget []
+  (eventbox
+    :visible tux-visible
+    :onhover     "eww update tux-opacity=0"
+    :onhoverlost "eww update tux-opacity=1"
+    (image
+      :style "opacity: ${tux-opacity};"
+      :path "/home/magnus/Pictures/icons/gif/tuxangel_small.gif"
+      :image-width 100
+      :image-height 136)))
