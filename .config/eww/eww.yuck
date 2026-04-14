@@ -1,4 +1,3 @@
-(defvar tux-opacity "1")
 (defvar tux-visible true)
 
 (defwindow tux-angel
@@ -17,10 +16,8 @@
 (defwidget tux-widget []
   (eventbox
     :visible tux-visible
-    :onhover     "eww update tux-opacity=0"
-    :onhoverlost "eww update tux-opacity=1"
+    :onhover "~/.config/eww/scripts/tux-hide.sh &"
     (image
-      :style "opacity: ${tux-opacity};"
       :path "/home/magnus/Pictures/icons/gif/tuxangel_small.gif"
       :image-width 100
       :image-height 136)))

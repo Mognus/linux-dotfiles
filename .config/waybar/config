@@ -1,9 +1,9 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 36,
+    "height": 60,
 
-    "modules-left": ["clock", "wireplumber", "custom/record"],
+    "modules-left": ["group/utilities"],
     "modules-center": ["hyprland/workspaces"],
     "modules-right": ["group/scratchpads"],
 
@@ -25,7 +25,7 @@
     },
 
     "hyprland/workspaces": {
-        "format": "{icon} {name}",
+        "format": "{name}",
         "on-click": "activate",
         "sort-by-id": true,
         "persistent-workspaces": {
@@ -33,11 +33,16 @@
         },
         "show-special": false,
         "format-icons": {
-            "code":  "\uf121",
-            "test":  "\uf0c3",
-            "flow":  "\uf001",
-            "extra": "\uf0eb"
+            "CODE":  "\uf121",
+            "TEST":  "\uf0c3",
+            "FLOW":  "\uf001",
+            "EXTRA": "\uf0eb"
         }
+    },
+
+    "group/utilities": {
+        "orientation": "horizontal",
+        "modules": ["clock", "wireplumber", "custom/record"]
     },
 
     "group/scratchpads": {

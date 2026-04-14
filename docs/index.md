@@ -6,9 +6,13 @@
 ## Hyprland
 - [[workspaces]]
 - [[sleep]]
+- [[theme]]
 
 ## Audio
 - [[setup]]
+
+## Fonts
+- [[fonts]]
 
 ## Tools & Apps
 - [[mullvad]]
@@ -17,6 +21,8 @@
 
 ## Networking
 - [[networking]]
+- [[vps-setup]]
+- [[cicd]]
 
 ## Security
 - [[gpg-secrets]]

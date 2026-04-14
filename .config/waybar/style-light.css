@@ -1,0 +1,166 @@
+* {
+    font-family: "MesloLGS Nerd Font", monospace;
+    font-size: 16px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+    color: #000000;
+}
+
+#clock {
+    padding: 0 16px;
+    color: #000000;
+}
+
+#wireplumber {
+    padding: 0 12px;
+    color: #000000;
+}
+
+#wireplumber.muted {
+    color: #aaaaaa;
+}
+
+#workspaces {
+    margin: 4px 0;
+}
+
+#workspaces button {
+    padding: 2px 14px;
+    color: #000000;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0;
+    font-family: "Syne";
+    transition: all 0.15s ease;
+}
+
+#workspaces button:hover {
+    background: rgba(0,0,0,0.08);
+}
+
+#workspaces button.active {
+    color: #000000;
+    background: transparent;
+    border: 1px solid #000000;
+}
+
+#workspaces button.urgent {
+    color: #d20f39;
+}
+
+#scratchpads {
+    background: transparent;
+    margin: 4px 4px 4px 0;
+}
+
+#custom-cmus-scratchpad {
+    padding: 2px 10px 2px 10px;
+    font-size: 18px;
+    color: #000000;
+    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+    background-size: 1px 55%;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+#custom-cmus-scratchpad.hidden {
+    color: #aaaaaa;
+}
+
+#custom-cmus-scratchpad.visible {
+    color: #e64553;
+}
+
+#custom-term-scratchpad {
+    padding: 2px 10px 2px 10px;
+    font-size: 18px;
+    color: #000000;
+    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+    background-size: 1px 55%;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+#custom-term-scratchpad.hidden {
+    color: #aaaaaa;
+}
+
+#custom-term-scratchpad.visible {
+    color: #40a02b;
+}
+
+#custom-music-scratchpad {
+    padding: 2px 10px 2px 10px;
+    font-size: 18px;
+    color: #000000;
+    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+    background-size: 1px 55%;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+#custom-music-scratchpad.hidden {
+    color: #aaaaaa;
+}
+
+#custom-music-scratchpad.visible {
+    color: #40a02b;
+}
+
+#custom-obsidian-scratchpad {
+    padding: 2px 10px 2px 10px;
+    font-size: 18px;
+    color: #000000;
+    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+    background-size: 1px 55%;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+#custom-discord-scratchpad {
+    padding: 2px 10px 2px 4px;
+    font-size: 18px;
+    color: #000000;
+    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+    background-size: 1px 55%;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+#custom-firefox-scratchpad {
+    padding: 2px 10px 2px 5px;
+    font-size: 18px;
+    color: #000000;
+}
+
+#custom-firefox-scratchpad.hidden,
+#custom-discord-scratchpad.hidden,
+#custom-obsidian-scratchpad.hidden {
+    color: #aaaaaa;
+}
+
+#custom-firefox-scratchpad.visible {
+    color: #fe640b;
+}
+
+#custom-discord-scratchpad.visible {
+    color: #8839ef;
+}
+
+#custom-obsidian-scratchpad.visible {
+    color: #7287fd;
+}
+
+#custom-record {
+    padding: 0 12px;
+    color: transparent;
+}
+
+#custom-record.recording {
+    color: #d20f39;
+}

@@ -1,0 +1,157 @@
+* {
+    font-family: "Syne", "MesloLGS Nerd Font", monospace;
+    font-size: 16px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+    color: #ffffff;
+}
+
+#clock {
+    padding: 0 16px;
+    color: #ffffff;
+    font-size: 22px;
+}
+
+#wireplumber {
+    padding: 0 12px;
+    color: #ffffff;
+    font-size: 22px;
+}
+
+#wireplumber.muted {
+    color: #666666;
+}
+
+#workspaces {
+    margin: 4px 0;
+    font-size: 20px;
+}
+
+#workspaces button {
+    padding: 2px 14px;
+    color: #ffffff;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0;
+    font-weight: 700;
+    transition: all 0.15s ease;
+}
+
+#workspaces button:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+#workspaces button.active {
+    color: #ffffff;
+    background: transparent;
+    border: 1px solid #ffffff;
+}
+
+#workspaces button.urgent {
+    color: #d20f39;
+}
+
+#utilities {
+    background: transparent;
+}
+
+#scratchpads {
+    background: transparent;
+    margin: 4px 4px 4px 0;
+}
+
+#custom-cmus-scratchpad,
+#custom-term-scratchpad,
+#custom-music-scratchpad,
+#custom-obsidian-scratchpad,
+#custom-discord-scratchpad,
+#custom-firefox-scratchpad {
+    font-size: 26px;
+    margin: 4px 2px;
+}
+
+#custom-cmus-scratchpad {
+    padding: 2px 10px 2px 10px;
+    color: #ffffff;
+}
+
+#custom-cmus-scratchpad.hidden {
+    color: #666666;
+}
+
+#custom-cmus-scratchpad.visible {
+    color: #e64553;
+}
+
+#custom-term-scratchpad {
+    padding: 2px 10px 2px 10px;
+    color: #ffffff;
+}
+
+#custom-term-scratchpad.hidden {
+    color: #666666;
+}
+
+#custom-term-scratchpad.visible {
+    color: #40a02b;
+}
+
+#custom-music-scratchpad {
+    padding: 2px 10px 2px 10px;
+    color: #ffffff;
+}
+
+#custom-music-scratchpad.hidden {
+    color: #666666;
+}
+
+#custom-music-scratchpad.visible {
+    color: #40a02b;
+}
+
+#custom-obsidian-scratchpad {
+    padding: 2px 10px 2px 10px;
+    color: #ffffff;
+}
+
+#custom-discord-scratchpad {
+    padding: 2px 10px 2px 4px;
+    color: #ffffff;
+}
+
+#custom-firefox-scratchpad {
+    padding: 2px 14px 2px 5px;
+    color: #ffffff;
+}
+
+#custom-firefox-scratchpad.hidden,
+#custom-discord-scratchpad.hidden,
+#custom-obsidian-scratchpad.hidden {
+    color: #666666;
+}
+
+#custom-firefox-scratchpad.visible {
+    color: #fe640b;
+}
+
+#custom-discord-scratchpad.visible {
+    color: #8839ef;
+}
+
+#custom-obsidian-scratchpad.visible {
+    color: #7287fd;
+}
+
+#custom-record {
+    padding: 0 12px;
+    color: transparent;
+}
+
+#custom-record.recording {
+    color: #d20f39;
+}

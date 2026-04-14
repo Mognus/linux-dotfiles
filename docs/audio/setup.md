@@ -1,50 +1,50 @@
-# Audio Setup unter Linux (PipeWire + USB Headset)
+# Audio Setup on Linux (PipeWire + USB Headset)
 
-## Architektur
+## Architecture
 
-Der Linux-Audio-Stack ist historisch gewachsen und besteht aus mehreren Schichten:
+The Linux audio stack has grown historically and consists of several layers:
 
 ```
 Apps (Firefox, mpv, Discord, ...)
         ↓
-  PulseAudio API  ←→  pipewire-pulse   (Kompatibilitätsschicht)
-  ALSA API        ←→  pipewire-alsa    (Kompatibilitätsschicht)
-  JACK API        ←→  pipewire-jack    (Kompatibilitätsschicht, pro-audio)
+  PulseAudio API  ←→  pipewire-pulse   (compatibility layer)
+  ALSA API        ←→  pipewire-alsa    (compatibility layer)
+  JACK API        ←→  pipewire-jack    (compatibility layer, pro-audio)
         ↓
-    PipeWire                            (zentraler Audio-Server)
+    PipeWire                            (central audio server)
         ↓
-    WirePlumber                         (Session-Manager, entscheidet Routing)
+    WirePlumber                         (session manager, handles routing)
         ↓
-    ALSA (Kernel)                       (spricht direkt mit Hardware)
+    ALSA (Kernel)                       (talks directly to hardware)
         ↓
-    Hardware (USB Headset, Soundkarte, HDMI, ...)
+    Hardware (USB Headset, soundcard, HDMI, ...)
 ```
 
-PipeWire ist der Hub — alle Apps landen dort, egal welche API sie nutzen. WirePlumber entscheidet welches Gerät welchen Stream bekommt.
+PipeWire is the hub — all apps land there regardless of which API they use. WirePlumber decides which device gets which stream.
 
 ---
 
 ## Trivia
 
-- **ALSA** (Advanced Linux Sound Architecture) ist seit ~2001 im Kernel und spricht direkt mit der Hardware. Für einfache Anwendungsfälle reicht es, aber kein Mixing über mehrere Apps hinweg.
-- **PulseAudio** war ab ~2008 der Standard-Sound-Server auf Desktop-Linux und hat das Mixing übernommen. Viel Arch-Wiki-Doku zeigt noch PulseAudio.
-- **PipeWire** ersetzt seit ~2021 sowohl PulseAudio als auch JACK. Es ist rückwärtskompatibel — d.h. `pactl` (PulseAudio Control) funktioniert weiterhin, weil `pipewire-pulse` dieselbe API implementiert.
-- **WirePlumber** ist der Session-Manager für PipeWire — er entscheidet welche Streams zu welchen Geräten geroutet werden.
-- **USB Audio** funktioniert unter Linux meist ohne Treiber, weil USB Audio Class ein standardisiertes Protokoll ist das der Kernel direkt unterstützt.
-- `pactl` heißt "PulseAudio Control" — funktioniert aber 1:1 mit PipeWire solange `pipewire-pulse` läuft.
+- **ALSA** (Advanced Linux Sound Architecture) has been in the kernel since ~2001 and talks directly to hardware. Sufficient for simple use cases but no mixing across multiple apps.
+- **PulseAudio** was the standard desktop sound server from ~2008 and handled mixing. Much Arch Wiki documentation still refers to PulseAudio.
+- **PipeWire** has replaced both PulseAudio and JACK since ~2021. It is backwards-compatible — `pactl` (PulseAudio Control) still works because `pipewire-pulse` implements the same API.
+- **WirePlumber** is the session manager for PipeWire — it decides which streams are routed to which devices.
+- **USB Audio** works on Linux mostly without drivers because USB Audio Class is a standardized protocol supported directly by the kernel.
+- `pactl` stands for "PulseAudio Control" — works 1:1 with PipeWire as long as `pipewire-pulse` is running.
 
 ---
 
-## Pakete
+## Packages
 
-| Paket | Zweck |
-|-------|-------|
-| `pipewire` | Der Audio-Server selbst |
-| `pipewire-pulse` | PulseAudio-Kompatibilität (für Firefox, Discord, etc.) |
-| `pipewire-alsa` | ALSA-Kompatibilität (für `speaker-test`, `aplay`, etc.) |
-| `pipewire-jack` | JACK-Kompatibilität (pro-audio, DAWs) |
-| `wireplumber` | Session-Manager, Routing-Logik |
-| `alsa-utils` | CLI-Tools: `speaker-test`, `aplay`, `arecord` |
+| Package | Purpose |
+|---------|---------|
+| `pipewire` | The audio server itself |
+| `pipewire-pulse` | PulseAudio compatibility (Firefox, Discord, etc.) |
+| `pipewire-alsa` | ALSA compatibility (`speaker-test`, `aplay`, etc.) |
+| `pipewire-jack` | JACK compatibility (pro-audio, DAWs) |
+| `wireplumber` | Session manager, routing logic |
+| `alsa-utils` | CLI tools: `speaker-test`, `aplay`, `arecord` |
 
 ```bash
 sudo pacman -S pipewire pipewire-pulse pipewire-alsa wireplumber alsa-utils
@@ -54,53 +54,53 @@ sudo pacman -S pipewire pipewire-pulse pipewire-alsa wireplumber alsa-utils
 
 ## Setup
 
-### 1. Services aktivieren
+### 1. Enable services
 
 ```bash
 systemctl --user enable --now pipewire pipewire-pulse wireplumber
 ```
 
-Status prüfen:
+Check status:
 ```bash
 systemctl --user status pipewire pipewire-pulse wireplumber
 ```
 
-### 2. Hardware prüfen
+### 2. Check hardware
 
 ```bash
 cat /proc/asound/cards
 ```
 
-Gibt alle vom Kernel erkannten Soundkarten aus. USB-Headsets tauchen hier automatisch auf.
+Lists all sound cards recognized by the kernel. USB headsets appear here automatically.
 
-### 3. PipeWire-Geräte anzeigen
-
-```bash
-pactl list sinks short      # Ausgabe (Kopfhörer, Lautsprecher)
-pactl list sources short    # Eingabe (Mikrofon)
-```
-
-Gerätenamen sehen z.B. so aus:
-```
-alsa_output.usb-Kingston_HyperX_7.1_Audio_00000000-00.analog-stereo
-alsa_input.usb-Kingston_HyperX_7.1_Audio_00000000-00.analog-stereo
-```
-
-Aufgebaut aus: `alsa_output` + USB-Gerätename + Profil (`analog-stereo`, `mono-fallback`, ...)
-
-### 4. Als Standard setzen
+### 3. Show PipeWire devices
 
 ```bash
-pactl set-default-sink   alsa_output.usb-DEIN_HEADSET...
-pactl set-default-source alsa_input.usb-DEIN_HEADSET...
+pactl list sinks short      # output (headphones, speakers)
+pactl list sources short    # input (microphone)
 ```
 
-Prüfen:
+Device names look like:
+```
+alsa_output.usb-<device>-00.analog-stereo
+alsa_input.usb-<device>-00.analog-stereo
+```
+
+Built from: `alsa_output` + USB device name + profile (`analog-stereo`, `mono-fallback`, ...)
+
+### 4. Set as default
+
+```bash
+pactl set-default-sink   <sink-name>
+pactl set-default-source <source-name>
+```
+
+Verify:
 ```bash
 pactl info | grep -E "Default Sink|Default Source"
 ```
 
-### 5. Lautstärke
+### 5. Volume
 
 ```bash
 pactl set-sink-volume   @DEFAULT_SINK@   80%
@@ -111,28 +111,28 @@ pactl set-sink-mute   @DEFAULT_SINK@   toggle
 pactl set-source-mute @DEFAULT_SOURCE@ toggle
 ```
 
-### 6. Testen
+### 6. Test
 
 ```bash
-# Ausgabe
+# Output
 speaker-test -t wav -c 2 -l 1
 
-# Mikro (5 Sek aufnehmen, dann abspielen)
+# Microphone (record 5s, then play back)
 arecord -d 5 /tmp/test.wav && aplay /tmp/test.wav
 ```
 
 ---
 
-## Dauerhaft (Hyprland)
+## Persistent (Hyprland)
 
 In `~/.config/hypr/hyprland.conf`:
 
 ```
-exec-once = pactl set-default-sink   alsa_output.usb-Kingston_HyperX_7.1_Audio_00000000-00.analog-stereo
-exec-once = pactl set-default-source alsa_input.usb-Kingston_HyperX_7.1_Audio_00000000-00.analog-stereo
+exec-once = pactl set-default-sink   <sink-name>
+exec-once = pactl set-default-source <source-name>
 ```
 
-### Lautstärke-Keybindings
+### Volume keybindings
 
 ```
 bind = , XF86AudioRaiseVolume, exec, pactl set-sink-volume   @DEFAULT_SINK@ +5%
@@ -143,17 +143,17 @@ bind = , XF86AudioMicMute,     exec, pactl set-source-mute   @DEFAULT_SOURCE@ to
 
 ---
 
-## Debug-Workflow
+## Debug Workflow
 
-**Von unten nach oben:**
+**Bottom to top:**
 
 ```
-1. Hardware erkannt?    →  cat /proc/asound/cards
-2. PipeWire läuft?      →  systemctl --user status pipewire pipewire-pulse
-3. Gerät sichtbar?      →  pactl list sinks short
-4. Standard gesetzt?    →  pactl info | grep Default
-5. Stream kommt an?     →  pactl list sink-inputs short
-6. App neu starten?     →  z.B. Firefox nach pipewire-pulse-Start neu starten
+1. Hardware detected?   →  cat /proc/asound/cards
+2. PipeWire running?    →  systemctl --user status pipewire pipewire-pulse
+3. Device visible?      →  pactl list sinks short
+4. Default set?         →  pactl info | grep Default
+5. Stream arriving?     →  pactl list sink-inputs short
+6. Restart app?         →  e.g. Firefox after pipewire-pulse start
 ```
 
 Logs:
@@ -162,11 +162,3 @@ journalctl --user -u pipewire -e
 journalctl --user -u pipewire-pulse -e
 dmesg | grep -i audio
 ```
-
----
-
-## Mein Setup (HyperX 7.1)
-
-- Karte: `Kingston HyperX 7.1 Audio` → ALSA-Karte 3
-- Sink:   `alsa_output.usb-Kingston_HyperX_7.1_Audio_00000000-00.analog-stereo`
-- Source: `alsa_input.usb-Kingston_HyperX_7.1_Audio_00000000-00.analog-stereo`

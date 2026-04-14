@@ -28,8 +28,7 @@ gpgconf --reload gpg-agent
 
 | File | Contents |
 |------|----------|
-| `mullvad.gpg` | Mullvad account number |
-| `proton-recovery.gpg` | Proton Mail recovery kit |
+| `<service>.gpg` | ... |
 
 ## Use in Scripts
 

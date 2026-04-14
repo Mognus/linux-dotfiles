@@ -8,7 +8,7 @@ mullvad account login $(gpg -d ~/.local/share/secrets/mullvad.gpg)
 mullvad connect
 ```
 
-Account-Number liegt verschlüsselt in `~/.local/share/secrets/mullvad.gpg`.
+Account number stored encrypted at `~/.local/share/secrets/mullvad.gpg`.
 
 ## Basic Usage
 

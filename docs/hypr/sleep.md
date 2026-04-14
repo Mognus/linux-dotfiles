@@ -11,75 +11,74 @@ bind = $mod, F1, exec, systemctl suspend
 ## Modes
 
 ```bash
-systemctl suspend       # RAM bleibt an, sofortiges Aufwachen (Tastatur/Maus)
-systemctl hibernate     # RAM auf Disk, Rechner komplett aus, nur Power-Knopf weckt
-systemctl hybrid-sleep  # beides: RAM auf Disk + suspend
+systemctl suspend       # RAM stays on, instant wake (keyboard/mouse)
+systemctl hibernate     # RAM to disk, machine fully off, only power button wakes
+systemctl hybrid-sleep  # both: RAM to disk + suspend
 ```
 
-| Mode      | RAM       | Stromverbrauch | Aufwachen       | Swap nötig |
-|-----------|-----------|----------------|-----------------|------------|
-| suspend   | bleibt an | minimal        | Tastatur / Maus | nein       |
-| hibernate | auf Disk  | null           | Power-Knopf     | ja         |
-| hybrid    | beides    | minimal        | Tastatur / Maus | ja         |
+| Mode      | RAM       | Power draw | Wake            | Swap needed |
+|-----------|-----------|------------|-----------------|-------------|
+| suspend   | stays on  | minimal    | keyboard / mouse | no         |
+| hibernate | to disk   | none       | power button    | yes         |
+| hybrid    | both      | minimal    | keyboard / mouse | yes        |
 
 ---
 
-## Wie es funktioniert
+## How it works
 
-`systemctl suspend` schreibt letztendlich in ein Kernel-Interface:
+`systemctl suspend` ultimately writes to a kernel interface:
 
 ```bash
 echo mem  > /sys/power/state   # suspend
 echo disk > /sys/power/state   # hibernate
 ```
 
-`/sys/power/state` ist **keine echte Datei** — es ist Teil von `sysfs`, einem
-virtuellen Dateisystem das der Kernel als API exponiert. Reinschreiben ruft
-direkt eine Kernel-Funktion auf.
+`/sys/power/state` is **not a real file** — it's part of `sysfs`, a virtual filesystem
+the kernel exposes as an API. Writing to it calls a kernel function directly.
 
-Verfügbare Werte:
+Available values:
 ```
 mem    → Suspend to RAM (S3)
 disk   → Suspend to Disk (S4)
-freeze → Prozesse einfrieren, kein echter Sleep
+freeze → Freeze processes, no actual sleep
 ```
 
-### Was systemd zusätzlich macht
+### What systemd does additionally
 
-Vor dem eigentlichen Sleep koordiniert systemd:
-1. Laufende Services pausieren
-2. Locks setzen (z.B. Hyprlock triggern vor dem Sleep)
-3. Dann erst → `/sys/power/state`
+Before the actual sleep, systemd coordinates:
+1. Pausing running services
+2. Setting locks (e.g. triggering Hyprlock before sleep)
+3. Then → `/sys/power/state`
 
-### Vor systemd
+### Before systemd
 
-`pm-utils` war der Standard:
+`pm-utils` was the standard:
 ```bash
 pm-suspend
 pm-hibernate
 ```
-Auch nur Shell-Skripte die am Ende dasselbe in `/sys/power/state` geschrieben haben.
-Noch früher: `acpid` mit eigenen Skripten in `/etc/acpi/` — sehr fragmentiert.
+Also just shell scripts that wrote to `/sys/power/state` in the end.
+Even earlier: `acpid` with custom scripts in `/etc/acpi/` — very fragmented.
 
 ---
 
-## Linux-Philosophie: Alles ist eine Datei
+## Linux philosophy: Everything is a file
 
-`/sys/` und `/proc/` sind virtuelle Dateisysteme — keine echten Dateien auf Disk,
-sondern Kernel-Interfaces die als Dateien aussehen:
+`/sys/` and `/proc/` are virtual filesystems — no real files on disk,
+but kernel interfaces that look like files:
 
 ```bash
-cat /proc/cpuinfo                              # CPU-Info, on-the-fly generiert
-cat /sys/class/backlight/*/brightness          # Helligkeit lesen
-echo 100 > /sys/class/backlight/*/brightness   # Helligkeit setzen
+cat /proc/cpuinfo                              # CPU info, generated on the fly
+cat /sys/class/backlight/*/brightness          # read brightness
+echo 100 > /sys/class/backlight/*/brightness   # set brightness
 echo mem > /sys/power/state                    # suspend
 ```
 
-Einheitliche API: lesen/schreiben statt proprietäre Syscalls.
+Unified API: read/write instead of proprietary syscalls.
 
 ---
 
-## Automatisch bei Inaktivität (hypridle)
+## Auto-sleep on inactivity (hypridle)
 
 ```bash
 sudo pacman -S hypridle
