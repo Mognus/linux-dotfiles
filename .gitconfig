@@ -1,3 +1,5 @@
 [user]
-	email = your@email.com
 	name = Mognus
+
+[include]
+	path = ~/.gitconfig.local
