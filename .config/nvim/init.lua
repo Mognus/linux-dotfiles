@@ -1,0 +1,6 @@
+require("core.options")
+require("core.ui")
+require("core.plugins")
+require("core.lsp")
+require("core.git")
+require("core.keymaps")
