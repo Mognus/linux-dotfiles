@@ -1,0 +1,22 @@
+model = "gpt-5.5"
+model_reasoning_effort = "high"
+approval_policy = "untrusted"
+sandbox_mode = "read-only"
+
+[projects."/home/magnus"]
+trust_level = "trusted"
+
+[projects."/home/magnus/books/epub"]
+trust_level = "trusted"
+
+[projects."/home/magnus/projects/Personal-Blog"]
+trust_level = "trusted"
+
+[projects."/home/magnus/projects/Personal-Blog/frontend-shell"]
+trust_level = "trusted"
+
+[projects."/home/magnus/projects/Personal-Blog/frontend-shell/components"]
+trust_level = "trusted"
+
+[tui.model_availability_nux]
+"gpt-5.5" = 2

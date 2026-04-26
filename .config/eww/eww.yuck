@@ -18,6 +18,6 @@
     :visible tux-visible
     :onhover "~/.config/eww/scripts/tux-hide.sh &"
     (image
-      :path "/home/magnus/Pictures/icons/gif/tuxangel_small.gif"
+      :path "/home/magnus/.config/eww/assets/tuxangel_small.gif"
       :image-width 100
       :image-height 136)))
