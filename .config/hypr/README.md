@@ -1,6 +1,18 @@
-# Desktop Keybinds
+# Hyprland
 
 `SUPER` is the main desktop modifier.
+
+## Does
+
+- Keyboard-first window control
+- Named workspaces for daily contexts
+- Scratchpads for temporary apps
+- Hyprpaper wallpaper setup
+- Hyprlock session locking
+
+## Desktop Role
+
+Hyprland runs the desktop. Hyprpaper sets the wallpaper. Hyprlock locks the session.
 
 ## Apps
 
@@ -62,4 +74,4 @@
 
 ## Workflow
 
-Open apps with `SUPER`, move focus with `H/J/K/L`, keep work split across numbered workspaces, and use scratchpads for temporary apps.
+Start from the launcher or terminal, keep long-running work on workspaces, pull scratchpads in only when needed, and move focus with `H/J/K/L`.

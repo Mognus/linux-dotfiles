@@ -1,0 +1,1 @@
+../../.config/waybar/README.md

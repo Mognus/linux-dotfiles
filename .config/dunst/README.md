@@ -1,4 +1,4 @@
-# Notifications Overview
+# Notifications
 
 Dunst handles desktop notifications.
 

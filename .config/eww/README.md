@@ -1,4 +1,4 @@
-# EWW Overview
+# EWW
 
 EWW is the small custom widget layer.
 

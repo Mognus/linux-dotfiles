@@ -1,4 +1,4 @@
-# Git Overview
+# Git
 
 Git config stays small and predictable.
 
