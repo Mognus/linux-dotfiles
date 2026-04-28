@@ -57,12 +57,18 @@ vim.lsp.enable({ "ts_ls", "eslint", "gopls", "buf_ls" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
-        local opts = { buffer = args.buf }
+        local function map(keys, action, desc)
+            vim.keymap.set("n", keys, action, { buffer = args.buf, desc = desc })
+        end
 
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+        map("<leader>gd", vim.lsp.buf.definition, "Go to definition")
+        map("<leader>gr", vim.lsp.buf.references, "Go to references")
+        map("<leader>gi", vim.lsp.buf.hover, "Show symbol info")
+        map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
+        map("<leader>ca", vim.lsp.buf.code_action, "Code action")
+        map("<leader>de", vim.diagnostic.open_float, "Show diagnostic")
+        map("<leader>dn", vim.diagnostic.goto_next, "Next diagnostic")
+        map("<leader>dp", vim.diagnostic.goto_prev, "Previous diagnostic")
+        map("<leader>dq", vim.diagnostic.setqflist, "Diagnostics quickfix")
     end,
 })

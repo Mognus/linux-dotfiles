@@ -1,25 +1,22 @@
 # Desktop Overview
 
-This setup is built around a lightweight Wayland workflow with Hyprland and Waybar.
+Hyprland runs the desktop. Waybar shows status. Hyprpaper sets the wallpaper. Hyprlock locks the session.
 
-## What this topic covers
+## Does
 
-- Window management and workspace flow
-- Status bar modules and visual feedback
-- Wallpaper and lock screen integration
-- The overall structure of the desktop configuration
+- Keyboard-first window control
+- Named workspaces for daily contexts
+- Scratchpads for temporary apps
+- Waybar for compact system state
 
-## Main files
+## Keybinds
 
-- `.config/hypr/hyprland.conf`
-- `.config/hypr/hyprlock.conf`
-- `.config/hypr/hyprpaper.conf`
-- `.config/waybar/config`
-- `.config/waybar/style-dark.css`
-- `.config/waybar/style-light.css`
+- `SUPER+Space`: launcher
+- `SUPER+Return`: terminal
+- `SUPER+H/J/K/L`: focus windows
+- `SUPER+1..5`: switch workspaces
+- `SUPER+Ctrl+Return/B/D/N`: scratchpads
 
-## Workflow idea
+## Workflow
 
-The desktop is optimized for keyboard-first usage. Workspaces, focus changes, window layout, and launcher actions should be fast enough to become muscle memory.
-
-The bar is kept practical: it should give context without becoming the center of attention.
+Start from the launcher or terminal, keep long-running work on workspaces, and pull scratchpads in only when needed.

@@ -2,6 +2,8 @@ vim.pack.add({
     { src = "https://github.com/stevearc/oil.nvim" },
     { src = "https://github.com/malewicz1337/oil-git.nvim" },
     { src = "https://github.com/folke/snacks.nvim" },
+    { src = "https://github.com/nvim-lua/plenary.nvim" },
+    { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
     { src = "https://github.com/saghen/blink.cmp", version = "v1.10.2" },
     { src = "https://github.com/nvim-mini/mini.diff" },
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
@@ -26,6 +28,16 @@ require("snacks").setup({
         enabled = true,
     },
 })
+
+local harpoon = require("harpoon")
+
+harpoon:setup({
+    default = {
+        sync_on_ui_close = true,
+    },
+})
+
+require("core.harpoon_marks").setup()
 
 require("blink.cmp").setup({
     keymap = {

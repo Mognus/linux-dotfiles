@@ -1,6 +1,16 @@
 # Completion
-autoload -Uz compinit && compinit
+zmodload zsh/complist
+autoload -Uz compinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%F{cyan}%d%f'
+zstyle ':completion:*' matcher-list \
+    '' \
+    'm:{a-zA-Z}={A-Za-z}' \
+    'r:|[._-]=* r:|=*'
+zstyle ':completion:*' rehash true
+[[ -n $LS_COLORS ]] && zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+compinit
 
 # History
 HISTFILE=~/.zsh_history
@@ -15,8 +25,7 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # fzf
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+source <(fzf --zsh)
 
 # zoxide
 eval "$(zoxide init zsh)"
@@ -32,11 +41,11 @@ alias tn='tmux new-session -s'
 alias tk='tmux kill-session -t'
 
 # Keybindings
+WORDCHARS=${WORDCHARS//\//}
 bindkey "$terminfo[kcuu1]" history-substring-search-up    # Up
 bindkey "$terminfo[kcud1]" history-substring-search-down  # Down
 bindkey "^[[1;5C" forward-word     # Ctrl+→
 bindkey "^[[1;5D" backward-word    # Ctrl+←
-bindkey "^G" fzf-cd-widget         # Ctrl+G → cd jump
 
 # PATH
 export PATH=$HOME/.local/bin:$PATH

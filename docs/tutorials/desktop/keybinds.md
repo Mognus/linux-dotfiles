@@ -1,115 +1,65 @@
 # Desktop Keybinds
 
-The desktop uses `SUPER` as the main modifier.
+`SUPER` is the main desktop modifier.
 
-## Core Apps
+## Apps
 
-- `SUPER + Return`: open `alacritty`
-  Command: `alacritty`
-- `SUPER + B`: open `firefox`
-  Command: `firefox`
-- `SUPER + T`: open `tor-browser`
-  Command: `tor-browser`
-- `SUPER + Space`: open `rofi`
-  Command: `rofi -show drun`
+| Keybind | Does |
+|---|---|
+| `SUPER+Return` | Terminal |
+| `SUPER+B` | Firefox |
+| `SUPER+T` | Tor Browser |
+| `SUPER+Space` | App launcher |
 
-## Session Controls
+## Session
 
-- `SUPER + Escape`: lock the screen with `hyprlock`
-  Command: `hyprlock`
-- `SUPER + F1`: suspend the system
-  Command: `systemctl suspend`
-- `SUPER + S`: take an area screenshot and save it to `~/Pictures/Screenshots`
-  Command: `grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +%F_%T).png`
-- `SUPER + CTRL + S`: take an area screenshot and copy it to the clipboard
-  Command: `grim -g "$(slurp)" - | wl-copy`
-- `SUPER + CTRL + V`: toggle screen recording through the Waybar script
-  Command: `~/.config/waybar/scripts/record-toggle.sh`
+| Keybind | Does |
+|---|---|
+| `SUPER+Escape` | Lock |
+| `SUPER+F1` | Suspend |
+| `SUPER+S` | Area screenshot to file |
+| `SUPER+Ctrl+S` | Area screenshot to clipboard |
+| `SUPER+Ctrl+V` | Toggle recording |
 
-## Window Controls
+## Windows
 
-- `SUPER + Q`: close the active window
-- `SUPER + F`: toggle fullscreen
-- `SUPER + CTRL + Space`: toggle floating mode
-
-## Focus Navigation
-
-Focus movement is mapped to the home row:
-
-- `SUPER + H`: move focus left
-- `SUPER + L`: move focus right
-- `SUPER + K`: move focus up
-- `SUPER + J`: move focus down
-
-## Move Windows
-
-Move the active window inside the current layout:
-
-- `SUPER + CTRL + H`: move window left
-- `SUPER + CTRL + L`: move window right
-- `SUPER + CTRL + K`: move window up
-- `SUPER + CTRL + J`: move window down
-
-Move the active window to another workspace:
-
-- `SUPER + CTRL + Left`: move window to previous workspace
-- `SUPER + CTRL + Right`: move window to next workspace
-- `SUPER + CTRL + 1..5`: move window directly to workspace `1..5`
+| Keybind | Does |
+|---|---|
+| `SUPER+Q` | Close window |
+| `SUPER+F` | Fullscreen |
+| `SUPER+Ctrl+Space` | Toggle floating |
+| `SUPER+H/J/K/L` | Focus left/down/up/right |
+| `SUPER+Ctrl+H/J/K/L` | Move window left/down/up/right |
+| `SUPER+Shift+H/J/K/L` | Resize window left/down/up/right |
 
 ## Workspaces
 
-Cycle workspaces:
+| Keybind | Does |
+|---|---|
+| `SUPER+Left/Right` | Previous/next workspace |
+| `SUPER+1..5` | Go to workspace |
+| `SUPER+Ctrl+1..5` | Move window to workspace |
+| `SUPER+Ctrl+Left/Right` | Move window to previous/next workspace |
+| `SUPER+Ctrl+C/Q/F/A` | Go to workspace 1/2/3/4 |
 
-- `SUPER + Left`: previous workspace
-- `SUPER + Right`: next workspace
+## Scratchpads
 
-Jump directly:
+| Keybind | Does |
+|---|---|
+| `SUPER+Ctrl+Return` | Terminal scratchpad |
+| `SUPER+Ctrl+B` | Firefox scratchpad |
+| `SUPER+Ctrl+D` | Discord scratchpad |
+| `SUPER+Ctrl+N` | Notes scratchpad |
 
-- `SUPER + 1`: workspace `1` (`CODE`)
-- `SUPER + 2`: workspace `2` (`TEST`)
-- `SUPER + 3`: workspace `3` (`FLOW`)
-- `SUPER + 4`: workspace `4` (`EXTRA`)
-- `SUPER + 5`: workspace `5`
+## Music
 
-There is also a second layer of direct workspace shortcuts:
+| Keybind | Does |
+|---|---|
+| `SUPER+Ctrl+M` | Enter music mode |
+| `M` | Toggle YouTube Music |
+| `L` | Toggle local music |
+| `Escape` | Leave music mode |
 
-- `SUPER + CTRL + C`: workspace `1`
-- `SUPER + CTRL + Q`: workspace `2`
-- `SUPER + CTRL + F`: workspace `3`
-- `SUPER + CTRL + A`: workspace `4`
+## Workflow
 
-## Special Workspaces
-
-These bindings toggle named special workspaces:
-
-- `SUPER + CTRL + Return`: terminal scratchpad
-- `SUPER + CTRL + B`: Firefox scratchpad
-- `SUPER + CTRL + D`: Discord scratchpad
-- `SUPER + CTRL + N`: Notes scratchpad
-
-## Music Submap
-
-The music workspace uses a small submap:
-
-- `SUPER + CTRL + M`: enter music submap
-- `M`: toggle the YouTube Music special workspace
-- `L`: toggle the local `cmus` special workspace
-- `Escape`: leave the submap
-
-## Extra Toggle
-
-- `CTRL + SUPER + SHIFT + T`: toggle the EWW `tux` widget
-  Command: `~/.config/eww/scripts/tux-toggle.sh`
-
-## Recommendation
-
-The highest-value binds to memorize first are:
-
-- terminal
-- rofi
-- focus movement
-- close window
-- workspace switching
-- terminal scratchpad
-
-Once those feel natural, the scratchpads and music submap become much easier to integrate into daily use.
+Open apps with `SUPER`, move focus with `H/J/K/L`, keep work split across numbered workspaces, and use scratchpads for temporary apps.

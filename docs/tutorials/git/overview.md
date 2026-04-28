@@ -1,18 +1,17 @@
 # Git Overview
 
-The Git setup is intentionally small and predictable.
+Git config stays small and predictable.
 
-## Main file
+## Does
 
-- `.gitconfig`
+- Sets identity defaults
+- Keeps common behavior consistent
+- Leaves project-specific choices to each repo
 
-## What this topic covers
+## Keybinds
 
-- Identity defaults
-- Quality-of-life settings
-- Helpful aliases if present
-- Safe daily Git behavior
+None.
 
-## Design goal
+## Workflow
 
-Git configuration should stay boring in the best sense: clear defaults, reliable behavior, and no hidden surprises when working across personal and remote repositories.
+Use Git normally per project. Keep global config boring, and only add aliases when they remove real daily friction.

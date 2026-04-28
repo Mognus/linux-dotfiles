@@ -1,86 +1,55 @@
 # Neovim Setup
 
-Minimal Neovim setup managed from `~/dotfiles/.config/nvim`.
+Neovim is managed from `~/dotfiles/.config/nvim`.
 
-## Structure
+## Does
 
-```text
-init.lua
-lua/core/options.lua
-lua/core/ui.lua
-lua/core/plugins.lua
-lua/core/lsp.lua
-lua/core/git.lua
-lua/core/keymaps.lua
-```
+- Loads config from `init.lua`
+- Keeps core behavior in `lua/core`
+- Uses `vim.pack` for plugins
+- Uses system-installed LSP servers
 
-`init.lua` only loads the core modules. Most changes should go into the matching file under `lua/core`.
+## Keybinds
 
-## Plugins
+| Keybind | Does |
+|---|---|
+| `Space e` | File explorer |
+| `Space f f` | Find files |
+| `Space f g` | Grep |
+| `Space h a` | Pin current file with Harpoon |
+| `Space h m` | Open Harpoon menu |
+| `Space h t` | Toggle Harpoon marks overlay |
+| `Ctrl n` | Next Harpoon file |
+| `Ctrl p` | Previous Harpoon file |
+| `Space h 1` - `Space h 4` | Jump to Harpoon file 1-4 |
+| `Space g s` | Git workspace status |
+| `Space g o` | Toggle diff overlay |
+| `Space g d` | Go to definition |
+| `Space g r` | References |
+| `Space g i` | Hover docs |
+| `Space r n` | Rename |
+| `Space c a` | Code action |
+| `Space d e` | Show diagnostic under cursor |
+| `Space d n` | Next diagnostic |
+| `Space d p` | Previous diagnostic |
+| `Space d q` | Open diagnostics quickfix list |
+| `Space d c` | Close quickfix list |
 
-Plugins are installed with Neovim's built-in `vim.pack`.
+## Workflow
 
-Current plugins:
+Open files through Oil or picker, pin important files with Harpoon, navigate code through LSP, and use the Git popup for quick changed-file jumps.
 
-- `oil.nvim`: floating file explorer
-- `oil-git.nvim`: Git status symbols in Oil
-- `snacks.nvim`: file, grep, and Git pickers
-- `blink.cmp`: completion menu
-- `mini.diff`: Git diff signs in buffers
-- `lualine.nvim`: statusline
+## Buffers
 
-## Keymaps
+A buffer is a loaded file in Neovim memory. A window is only a view onto a buffer, so multiple windows can show the same buffer or different buffers.
 
-Leader is `Space`.
+Opening one file loads that file as a buffer. Referenced or imported files are not automatically opened as buffers, but the LSP can still know about them through the project root. Jumping to a definition in another file loads that target file as a new buffer.
 
-```text
-Space e    open floating file explorer
-Space f f  find files
-Space f g  grep files
-Space g s  show Git workspace status
-Space g d  toggle Git diff overlay
-```
+Useful commands:
 
-LSP keymaps:
-
-```text
-gd          go to definition
-gr          show references
-K           hover docs
-Space r n   rename symbol
-Space c a   code action
-```
-
-Completion:
-
-```text
-Tab         accept completion
-Ctrl-j      next completion item
-Ctrl-k      previous completion item
-Ctrl-e      close completion menu
-```
-
-## Git Workspace Status
-
-`Space g s` shows changed files grouped by Git repository/submodule.
-
-Inside the popup:
-
-```text
-Enter       open selected file
-q           close popup
-Esc         close popup
-```
-
-## LSP
-
-LSP servers are installed as normal system programs, not through Mason.
-
-Configured servers:
-
-```text
-ts_ls       TypeScript, React, Next
-eslint      ESLint diagnostics and code actions
-gopls       Go
-buf_ls      Protobuf through Buf
-```
+| Command | Does |
+|---|---|
+| `:ls` | List open buffers |
+| `:buffers` | List open buffers |
+| `:copen` | Open quickfix list |
+| `:cclose` | Close quickfix list |

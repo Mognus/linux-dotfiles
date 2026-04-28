@@ -5,8 +5,10 @@
 
 # --- Shell ---
 zsh                         # Shell
+fish                        # Friendly interactive shell
 tmux                        # Terminal multiplexer
-fzf                         # Fuzzy finder (Ctrl+R history, Ctrl+T files, Ctrl+G dirs)
+zsh-completions             # Extra Zsh completions
+fzf                         # Fuzzy finder (Ctrl+R history, Ctrl+T files, Alt-C dirs)
 fd                          # Fast find, used as fzf backend
 zoxide                      # Smart cd replacement (z, zi)
 zsh-autosuggestions         # Command suggestions from history

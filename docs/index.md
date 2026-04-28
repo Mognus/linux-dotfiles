@@ -1,13 +1,5 @@
 # Dotfiles Docs
 
-## Shell
-- [[shell]]
-
-## Hyprland
-- [[workspaces]]
-- [[sleep]]
-- [[theme]]
-
 ## Audio
 - [[setup]]
 
