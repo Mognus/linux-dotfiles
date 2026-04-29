@@ -1,17 +1,21 @@
 # Tools
 
-This page covers small supporting tools.
+This topic covers supporting tools that are important to the setup but do not need their own visual desktop topic.
 
 ## Does
 
-- `yt-dlp`: downloads music as MP3 into `~/Music`
-- `packages.txt`: tracks the rebuild package list
-- CLI tools: support search, shell work, media, and maintenance
+- Tracks the package list used to rebuild the machine
+- Documents CLI agents and assistant tooling
+- Documents media helpers such as `yt-dlp`
+- Documents font choices and terminal rendering support
 
-## Keybinds
+## Documents
 
-None.
+- `packages.md` - package groups from `packages.txt`
+- `cli-agents.md` - Codex and Claude CLI setup
+- `media-tools.md` - download and playback helpers
+- `fonts.md` - Nerd Fonts and fontconfig notes
 
 ## Workflow
 
-Use this area for tools that matter to daily work but do not need a full topic yet.
+Use this area as the catch-all for operational tooling. If a tool grows enough config or workflow surface, it can become its own topic later.
