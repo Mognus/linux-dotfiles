@@ -12,20 +12,16 @@ Fish is the daily shell.
 
 ## Keybinds
 
-| Keybind | Does |
-|---|---|
-| `Ctrl+R` | Search command history through FZF |
-| `Ctrl+T` | Search files through FZF |
-| `Alt-C` | Jump to directory through FZF |
+- `Ctrl+R` - Search command history through FZF
+- `Ctrl+T` - Search files through FZF
+- `Alt-C` - Jump to directory through FZF
 
 ## Aliases
 
-| Alias | Does |
-|---|---|
-| `ll` | List files with details |
-| `tn` | New tmux session |
-| `ta` | Attach tmux session |
-| `tk` | Kill tmux session |
+- `ll` - List files with details
+- `tn` - New tmux session
+- `ta` - Attach tmux session
+- `tk` - Kill tmux session
 
 ## Workflow
 

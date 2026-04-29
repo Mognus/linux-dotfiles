@@ -10,11 +10,9 @@ Tmux keeps terminal sessions alive.
 
 ## Shell Aliases
 
-| Alias | Does |
-|---|---|
-| `tn` | New tmux session |
-| `ta` | Attach tmux session |
-| `tk` | Kill tmux session |
+- `tn` - New tmux session
+- `ta` - Attach tmux session
+- `tk` - Kill tmux session
 
 ## Workflow
 

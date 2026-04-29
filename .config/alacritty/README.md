@@ -10,9 +10,7 @@ Alacritty is the terminal window.
 
 ## Keybinds
 
-| Keybind | Does |
-|---|---|
-| `SUPER+Return` | Open terminal |
+- `SUPER+Return` - Open terminal
 
 ## Workflow
 
