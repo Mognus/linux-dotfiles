@@ -36,6 +36,22 @@ Flush leftover nftables rules from the running kernel:
 sudo nft flush ruleset
 ```
 
+## If containers fail with TTRPC or shim errors
+
+If even a simple container fails with an error like `failed to create TTRPC connection`,
+clear stale Docker/containerd runtime sockets and restart both services:
+
+```bash
+sudo systemctl stop docker
+sudo systemctl stop containerd
+sudo rm -rf /var/run/docker /run/docker /run/containerd
+sudo systemctl start containerd
+sudo systemctl start docker
+docker run --rm alpine echo ok
+```
+
+This fixes broken runtime socket state below Compose or the project build itself.
+
 ## Verify
 
 ```bash
