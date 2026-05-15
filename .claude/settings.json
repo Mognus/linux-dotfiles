@@ -1,8 +1,13 @@
 {
-  "effortLevel": "high",
   "permissions": {
     "allow": [
       "Read"
     ]
-  }
+  },
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true
+  },
+  "effortLevel": "high",
+  "theme": "dark-ansi"
 }
