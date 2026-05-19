@@ -1,20 +1,18 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 60,
+    "height": 34,
 
-    "modules-left": ["group/utilities"],
-    "modules-center": ["hyprland/workspaces"],
-    "modules-right": ["group/scratchpads"],
-
-    "clock": {
-        "format": "{:%H:%M  %d.%m.%Y}"
-    },
+    "modules-left": ["hyprland/workspaces", "group/utilities"],
+    "modules-center": [],
+    "modules-right": ["group/audio", "group/scratchpads"],
 
     "wireplumber": {
         "format": "{icon} {volume}%",
         "format-muted": "󰝟",
         "on-click": "pavucontrol",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
         "format-icons": ["󰕿", "󰖀", "󰕾"]
     },
 
@@ -25,24 +23,23 @@
     },
 
     "hyprland/workspaces": {
-        "format": "{name}",
+        "format": "{id}",
         "on-click": "activate",
         "sort-by-id": true,
         "persistent-workspaces": {
-            "*": [1, 2, 3, 4]
+            "*": [1, 2, 3, 4, 5, 6, 7, 8, 9]
         },
-        "show-special": false,
-        "format-icons": {
-            "CODE":  "\uf121",
-            "TEST":  "\uf0c3",
-            "FLOW":  "\uf001",
-            "EXTRA": "\uf0eb"
-        }
+        "show-special": false
     },
 
     "group/utilities": {
         "orientation": "horizontal",
-        "modules": ["clock", "wireplumber", "custom/record"]
+        "modules": ["custom/record"]
+    },
+
+    "group/audio": {
+        "orientation": "horizontal",
+        "modules": ["wireplumber"]
     },
 
     "group/scratchpads": {
