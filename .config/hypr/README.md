@@ -5,7 +5,7 @@
 ## Does
 
 - Keyboard-first window control
-- Named workspaces for daily contexts
+- Numbered workspaces for daily contexts
 - Scratchpads for temporary apps
 - Hyprpaper wallpaper setup
 - Hyprlock session locking
@@ -35,16 +35,15 @@ Hyprland runs the desktop. Hyprpaper sets the wallpaper. Hyprlock locks the sess
 - `SUPER+F` - Fullscreen
 - `SUPER+Ctrl+Space` - Toggle floating
 - `SUPER+H/J/K/L` - Focus left/down/up/right
-- `SUPER+Ctrl+H/J/K/L` - Move window left/down/up/right
+- `SUPER+Ctrl+Shift+H/J/K/L` - Move window left/down/up/right
 - `SUPER+Shift+H/J/K/L` - Resize window left/down/up/right
 
 ## Workspaces
 
-- `SUPER+Left/Right` - Previous/next workspace
-- `SUPER+1..5` - Go to workspace
-- `SUPER+Ctrl+1..5` - Move window to workspace
-- `SUPER+Ctrl+Left/Right` - Move window to previous/next workspace
-- `SUPER+Ctrl+C/Q/F/A` - Go to workspace 1/2/3/4
+- `SUPER+Ctrl+H/L` - Previous/next workspace
+- `SUPER+1..9` - Go to workspace
+- `SUPER+Ctrl+1..9` - Move window to workspace
+- `SUPER+Alt+H/L` - Move window to previous/next workspace and follow
 
 ## Scratchpads
 
