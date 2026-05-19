@@ -42,7 +42,8 @@ Hyprland runs the desktop. Hyprpaper sets the wallpaper. Hyprlock locks the sess
 
 - `SUPER+Ctrl+H/L` - Previous/next workspace
 - `SUPER+1..9` - Go to workspace
-- `SUPER+Ctrl+1..9` - Move window to workspace
+- `SUPER+Ctrl+1..9` - Go to workspace
+- `SUPER+Ctrl+Shift+1..9` - Move window to workspace
 - `SUPER+Alt+H/L` - Move window to previous/next workspace and follow
 
 ## Scratchpads
