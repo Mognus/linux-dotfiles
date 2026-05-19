@@ -4,8 +4,8 @@ Waybar shows compact system state at the top of the desktop.
 
 ## Does
 
-- Shows persistent workspaces
-- Groups clock, audio, and recording state
+- Shows numbered workspaces
+- Groups audio and recording state
 - Groups scratchpad indicators
 - Uses small scripts for dynamic status
 
