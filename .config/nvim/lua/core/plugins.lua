@@ -1,26 +1,7 @@
 vim.pack.add({
-    { src = "https://github.com/stevearc/oil.nvim" },
-    { src = "https://github.com/malewicz1337/oil-git.nvim" },
+    { src = "https://github.com/nvim-tree/nvim-tree.lua" },
+    { src = "https://github.com/nvim-tree/nvim-web-devicons" },
     { src = "https://github.com/folke/snacks.nvim" },
-    { src = "https://github.com/nvim-lua/plenary.nvim" },
-    { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
-    { src = "https://github.com/saghen/blink.cmp", version = "v1.10.2" },
-    { src = "https://github.com/nvim-mini/mini.diff" },
-    { src = "https://github.com/nvim-lualine/lualine.nvim" },
-})
-
-require("oil").setup({
-    default_file_explorer = false,
-    view_options = {
-        show_hidden = true,
-    },
-})
-
-require("oil-git").setup({
-    show_file_highlights = true,
-    show_directory_highlights = true,
-    show_file_symbols = true,
-    show_directory_symbols = true,
 })
 
 require("snacks").setup({
@@ -29,41 +10,51 @@ require("snacks").setup({
     },
 })
 
-local harpoon = require("harpoon")
+-- VSCode-like Git colors for the file explorer.
+vim.api.nvim_set_hl(0, "NvimTreeGitDirty", { fg = "#e2c08d" })
+vim.api.nvim_set_hl(0, "NvimTreeGitStaged", { fg = "#73c991" })
+vim.api.nvim_set_hl(0, "NvimTreeGitNew", { fg = "#73c991" })
+vim.api.nvim_set_hl(0, "NvimTreeGitDeleted", { fg = "#f14c4c" })
+vim.api.nvim_set_hl(0, "NvimTreeGitRenamed", { fg = "#73c991" })
+vim.api.nvim_set_hl(0, "NvimTreeGitMerge", { fg = "#c586c0" })
+vim.api.nvim_set_hl(0, "NvimTreeGitIgnored", { fg = "#8c8c8c" })
 
-harpoon:setup({
-    default = {
-        sync_on_ui_close = true,
+require("nvim-tree").setup({
+    sort = {
+        sorter = "case_sensitive",
     },
-})
-
-require("core.harpoon_marks").setup()
-
-require("blink.cmp").setup({
-    keymap = {
-        preset = "super-tab",
-        ["<C-j>"] = { "select_next", "fallback" },
-        ["<C-k>"] = { "select_prev", "fallback" },
+    view = {
+        width = 34,
+        side = "left",
     },
-    sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
-    },
-    completion = {
-        documentation = {
-            auto_show = true,
-            auto_show_delay_ms = 300,
+    renderer = {
+        group_empty = true,
+        highlight_git = true,
+        icons = {
+            show = {
+                file = true,
+                folder = true,
+                folder_arrow = true,
+                git = true,
+            },
+            glyphs = {
+                git = {
+                    unstaged = "M",
+                    staged = "S",
+                    unmerged = "U",
+                    renamed = "R",
+                    untracked = "?",
+                    deleted = "D",
+                    ignored = "I",
+                },
+            },
         },
     },
-    fuzzy = {
-        implementation = "prefer_rust_with_warning",
+    git = {
+        enable = true,
+        ignore = false,
+    },
+    filters = {
+        dotfiles = false,
     },
 })
-
-require("mini.diff").setup({
-    view = {
-        style = "sign",
-        signs = { add = "+", change = "~", delete = "-" },
-    },
-})
-
-require("lualine").setup()

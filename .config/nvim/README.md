@@ -6,36 +6,31 @@ Neovim is managed from `~/dotfiles/.config/nvim`.
 
 - Loads config from `init.lua`
 - Keeps core behavior in `lua/core`
-- Uses `vim.pack` for plugins
-- Uses system-installed LSP servers
+- Uses `vim.pack` for focused plugins
+- Provides a VSCode-like file explorer with Git status
+- Provides VSCode-like file search and global grep
+- Enables the TypeScript language server for JavaScript and TypeScript projects
 
 ## Keybinds
 
-- `Space e` - File explorer
-- `Space f f` - Find files
-- `Space f g` - Grep
-- `Space h a` - Pin current file with Harpoon
-- `Space h m` - Open Harpoon menu
-- `Space h t` - Toggle Harpoon marks overlay
-- `Ctrl n` - Next Harpoon file
-- `Ctrl p` - Previous Harpoon file
-- `Space h 1` to `Space h 4` - Jump to Harpoon file 1-4
-- `Space g s` - Git workspace status
-- `Space g o` - Toggle diff overlay
-- `Space g d` - Go to definition
-- `Space g r` - References
-- `Space g i` - Hover docs
-- `Space r n` - Rename
-- `Space c a` - Code action
-- `Space d e` - Show diagnostic under cursor
-- `Space d n` - Next diagnostic
-- `Space d p` - Previous diagnostic
-- `Space d q` - Open diagnostics quickfix list
-- `Space d c` - Close quickfix list
+- `Ctrl+B` - Toggle file explorer
+- `Ctrl+P` - Find files
+- `Ctrl+Shift+F` - Grep files
+- `Ctrl+Shift+M` - Show problems
+- `F12` - Go to definition
+- `Shift+F12` - Find references
+- `F24` - Find references fallback for terminals that encode `Shift+F12` as `F24`
+- `F2` - Rename symbol
+- `Ctrl+.` - Code action
+- `K` - Show hover
+- `F4` - Show problem under cursor
+- `F8` - Next problem
+- `Shift+F8` - Previous problem
+- `F20` - Previous problem fallback for terminals that encode `Shift+F8` as `F20`
 
 ## Workflow
 
-Open files through Oil or picker, pin important files with Harpoon, navigate code through LSP, and use the Git popup for quick changed-file jumps.
+Use the left file explorer for project navigation, then add editor features in small steps from `lua/core`.
 
 ## Buffers
 

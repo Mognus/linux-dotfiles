@@ -20,7 +20,7 @@ neovim                      # Editor
 nano                        # Simple terminal editor
 
 # --- Terminal ---
-alacritty                   # Terminal emulator
+ghostty                     # Terminal emulator
 
 # --- Base System ---
 base                        # Minimal Arch base
@@ -91,6 +91,8 @@ gopls                       # Go language server
 nodejs                      # Node.js
 npm                         # Node package manager
 pnpm                        # Fast Node package manager
+typescript                  # TypeScript compiler and language tooling
+typescript-language-server  # TypeScript/JavaScript LSP server
 python-pip                  # Python package installer
 python-pipx                 # Isolated Python CLI app installer
 buf                         # Protobuf tooling
