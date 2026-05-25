@@ -13,17 +13,31 @@ fd                          # Fast find, used as fzf backend
 zoxide                      # Smart cd replacement (z, zi)
 zsh-autosuggestions         # Command suggestions from history
 zsh-syntax-highlighting     # Syntax highlighting in the shell
+starship                    # Cross-shell prompt
 
 # --- Editor ---
 neovim                      # Editor
+nano                        # Simple terminal editor
 
 # --- Terminal ---
 alacritty                   # Terminal emulator
 
+# --- Base System ---
+base                        # Minimal Arch base
+base-devel                  # Build tools for AUR packages
+linux                       # Linux kernel
+linux-firmware              # Firmware files
+amd-ucode                   # AMD CPU microcode
+grub                        # Bootloader
+efibootmgr                  # UEFI boot manager
+os-prober                   # Detect other operating systems for GRUB
+mesa                        # OpenGL drivers
+vulkan-radeon               # Vulkan driver for AMD GPU
+
 # --- Wayland / Desktop ---
 hyprland                    # Wayland compositor / WM
 waybar                      # Status bar
-rofi-wayland                # App launcher
+rofi                        # App launcher
 xdg-desktop-portal-hyprland # Screen sharing, file picker for Wayland apps
 xdg-user-dirs               # Creates ~/Downloads, ~/Pictures etc.
 dunst                       # Notification daemon
@@ -39,6 +53,9 @@ wl-clipboard                # Clipboard (wl-copy, wl-paste)
 swappy                      # Screenshot editor
 socat                       # Socket communication (e.g. Hyprland IPC)
 jq                          # JSON processing in CLI
+wf-recorder                 # Wayland screen recorder
+imv                         # Wayland image viewer
+imagemagick                 # Image conversion and manipulation
 
 # --- Audio ---
 pipewire                    # Audio server
@@ -55,20 +72,32 @@ bluez-utils                 # Bluetooth CLI tools (bluetoothctl)
 # --- Fonts ---
 ttf-meslo-nerd              # Nerd Font (Meslo)
 ttf-jetbrains-mono-nerd     # Nerd Font (JetBrains Mono)
+noto-fonts-cjk              # CJK font coverage
 
 # --- Apps ---
 firefox                     # Browser
+chromium                    # Chromium browser
 discord                     # Chat
 obsidian                    # Notes (Markdown vault)
+gimp                        # Image editor
+steam                       # Games
+mullvad-vpn                 # VPN
+sunshine                    # Game streaming host
 
 # --- Dev Languages ---
 rustup                      # Rust toolchain manager
 go                          # Go
+gopls                       # Go language server
 nodejs                      # Node.js
 npm                         # Node package manager
+pnpm                        # Fast Node package manager
+python-pip                  # Python package installer
+python-pipx                 # Isolated Python CLI app installer
+buf                         # Protobuf tooling
 
 # --- Containers ---
 docker                      # Container runtime
+docker-buildx               # Docker BuildKit builder
 docker-compose              # Multi-container orchestration
 
 # --- File Manager ---
@@ -79,6 +108,7 @@ thunar                      # GUI file manager
 yt-dlp                      # YouTube/video downloader
 playerctl                   # Media key / playback control (Waybar integration)
 mpv                         # Video player
+cmus                        # Terminal music player
 
 # --- Tools ---
 git                         # Version control
@@ -89,18 +119,46 @@ man-db                      # Man pages
 ripgrep                     # Fast grep (rg)
 bat                         # Better cat (syntax highlighting)
 btop                        # Resource monitor
+htop                        # Process monitor
 stow                        # Dotfiles symlink manager
 github-cli                  # GitHub CLI (gh)
+lazygit                     # Git TUI
 fastfetch                   # System info (neofetch replacement)
 networkmanager              # Network management
 unzip                       # ZIP extraction
 7zip                        # 7z archives
 reflector                   # Update pacman mirrorlist
 ufw                         # Firewall (deny incoming, allow outgoing)
+rsync                       # File synchronization
+lynx                        # Terminal web browser
+w3m                         # Terminal web browser
+qrencode                    # QR code generator
+termdown                    # Terminal countdown/stopwatch
+perf                        # Linux performance tools
+iptables                    # Firewall backend/tools
+
+# --- Security / Network Tools ---
+nmap                        # Network scanner
+gobuster                    # Directory/DNS brute forcing
+hashcat                     # Password recovery
+john                        # Password recovery
+openvpn                     # OpenVPN client
+
+# --- TeX ---
+texlive-basic               # Basic TeX Live packages
+texlive-langgerman          # German TeX language support
+texlive-langeuropean        # European TeX language support
+texlive-latexextra          # Extra LaTeX packages
+texlive-latexrecommended    # Recommended LaTeX packages
 
 # =============================================================================
 # [AUR] — installed via yay
 # =============================================================================
 
-mullvad-vpn                 # VPN
-tor-browser                 # Tor Browser (.onion access)
+eww                         # Widgets
+ffuf                        # Web fuzzer
+paru-bin                    # AUR helper
+peaclock                    # Terminal clock
+tor-browser-bin             # Tor Browser (.onion access)
+tty-clock                   # Terminal clock
+yay                         # AUR helper
