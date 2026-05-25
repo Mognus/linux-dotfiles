@@ -4,6 +4,7 @@ vim.pack.add({
     { src = "https://github.com/folke/snacks.nvim" },
     { src = "https://github.com/saghen/blink.cmp", version = "v1.10.2" },
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 })
 
 require("snacks").setup({
@@ -62,6 +63,33 @@ require("gitsigns").setup({
         map("<A-h>", gs.preview_hunk, "Preview Git hunk")
         map("<A-s>", gs.stage_hunk, "Stage Git hunk")
         map("<A-r>", gs.reset_hunk, "Reset Git hunk")
+    end,
+})
+
+local treesitter_languages = {
+    "go",
+    "gomod",
+    "javascript",
+    "tsx",
+    "typescript",
+}
+
+require("nvim-treesitter").install(treesitter_languages)
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {
+        "go",
+        "gomod",
+        "gowork",
+        "gotmpl",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+    },
+    callback = function()
+        vim.treesitter.start()
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end,
 })
 

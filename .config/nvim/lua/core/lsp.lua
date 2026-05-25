@@ -66,7 +66,22 @@ vim.lsp.config("eslint", {
     },
 })
 
-vim.lsp.enable({ "ts_ls", "eslint" })
+vim.lsp.config("gopls", {
+    cmd = { "gopls" },
+    filetypes = {
+        "go",
+        "gomod",
+        "gowork",
+        "gotmpl",
+    },
+    root_markers = {
+        "go.work",
+        "go.mod",
+        ".git",
+    },
+})
+
+vim.lsp.enable({ "ts_ls", "eslint", "gopls" })
 
 vim.diagnostic.config({
     virtual_text = true,
