@@ -2,12 +2,67 @@ vim.pack.add({
     { src = "https://github.com/nvim-tree/nvim-tree.lua" },
     { src = "https://github.com/nvim-tree/nvim-web-devicons" },
     { src = "https://github.com/folke/snacks.nvim" },
+    { src = "https://github.com/saghen/blink.cmp", version = "v1.10.2" },
+    { src = "https://github.com/lewis6991/gitsigns.nvim" },
 })
 
 require("snacks").setup({
     picker = {
         enabled = true,
     },
+})
+
+require("blink.cmp").setup({
+    keymap = {
+        preset = "none",
+        ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<Tab>"] = { "select_next", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "fallback" },
+        ["<CR>"] = { "accept", "fallback" },
+        ["<Esc>"] = { "hide", "fallback" },
+    },
+    sources = {
+        default = { "lsp", "path", "buffer" },
+    },
+    completion = {
+        menu = {
+            auto_show = true,
+        },
+        documentation = {
+            auto_show = true,
+            auto_show_delay_ms = 300,
+        },
+    },
+    fuzzy = {
+        implementation = "prefer_rust_with_warning",
+    },
+})
+
+require("gitsigns").setup({
+    signs = {
+        add = { text = "+" },
+        change = { text = "~" },
+        delete = { text = "-" },
+        topdelete = { text = "-" },
+        changedelete = { text = "~" },
+        untracked = { text = "?" },
+    },
+    on_attach = function(bufnr)
+        local gs = require("gitsigns")
+        local function map(keys, action, desc)
+            vim.keymap.set("n", keys, action, { buffer = bufnr, desc = desc })
+        end
+
+        map("<A-n>", function()
+            gs.nav_hunk("next")
+        end, "Next Git hunk")
+        map("<A-p>", function()
+            gs.nav_hunk("prev")
+        end, "Previous Git hunk")
+        map("<A-h>", gs.preview_hunk, "Preview Git hunk")
+        map("<A-s>", gs.stage_hunk, "Stage Git hunk")
+        map("<A-r>", gs.reset_hunk, "Reset Git hunk")
+    end,
 })
 
 -- VSCode-like Git colors for the file explorer.
