@@ -19,6 +19,7 @@ Fish is the daily shell.
 ## Aliases
 
 - `ll` - List files with details
+- `tl` - List tmux sessions
 - `tn` - New tmux session
 - `ta` - Attach tmux session
 - `tk` - Kill tmux session

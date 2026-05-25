@@ -6,6 +6,7 @@ if status is-interactive
     command -q zoxide; and zoxide init fish | source
 
     alias ll='ls -al'
+    alias tl='tmux list-sessions'
     alias ta='tmux attach -t'
     alias tn='tmux new-session -s'
     alias tk='tmux kill-session -t'
