@@ -2,6 +2,10 @@ local git = require("core.git")
 
 vim.keymap.set("n", "<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
 
+vim.keymap.set("n", "<F1>", function()
+    Snacks.picker.keymaps()
+end, { desc = "Show keymaps" })
+
 vim.keymap.set("n", "<C-p>", function()
     Snacks.picker.files({
         hidden = true,

@@ -25,6 +25,7 @@ Neovim is managed from `~/dotfiles/.config/nvim`.
 
 | Key | Action |
 | --- | --- |
+| `F1` | Show keymap help |
 | `Ctrl+B` | Toggle file explorer |
 | `Ctrl+P` | Find files |
 | `Ctrl+Shift+F` | Grep files |
