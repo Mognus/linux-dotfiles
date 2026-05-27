@@ -4,6 +4,7 @@ vim.pack.add({
     { src = "https://github.com/folke/snacks.nvim" },
     { src = "https://github.com/saghen/blink.cmp", version = "v1.10.2" },
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
+    { src = "https://github.com/nvim-lualine/lualine.nvim" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
     { src = "https://github.com/windwp/nvim-autopairs" },
@@ -49,6 +50,54 @@ require("nvim-autopairs").setup({
 
 require("todo-comments").setup({
     signs = true,
+})
+
+local function lsp_clients()
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
+    if #clients == 0 then
+        return "no lsp"
+    end
+
+    local names = {}
+    for _, client in ipairs(clients) do
+        table.insert(names, client.name)
+    end
+    return table.concat(names, ",")
+end
+
+require("lualine").setup({
+    options = {
+        theme = "auto",
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
+        globalstatus = true,
+        disabled_filetypes = {
+            statusline = { "NvimTree" },
+        },
+    },
+    sections = {
+        lualine_a = { "mode" },
+        lualine_b = { "branch", "diff" },
+        lualine_c = {
+            {
+                "filename",
+                path = 1,
+                symbols = {
+                    modified = " [+]",
+                    readonly = " [ro]",
+                    unnamed = "[no name]",
+                },
+            },
+        },
+        lualine_x = {
+            "diagnostics",
+            lsp_clients,
+            "encoding",
+            "filetype",
+        },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
+    },
 })
 
 require("nvim-treesitter-textobjects").setup({

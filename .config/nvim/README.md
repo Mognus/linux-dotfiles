@@ -22,6 +22,7 @@ Neovim is managed from `~/dotfiles/.config/nvim`.
 - Auto-pairs through `nvim-autopairs`.
 - Highlighted `TODO`, `FIXME`, and `NOTE` comments through `todo-comments.nvim`.
 - Inline Git hunks through `gitsigns.nvim`.
+- Statusline through `lualine.nvim`.
 - Mouse support and system clipboard integration are enabled.
 
 ## Daily Keys
