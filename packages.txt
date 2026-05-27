@@ -86,6 +86,7 @@ sunshine                    # Game streaming host
 
 # --- Dev Languages ---
 rustup                      # Rust toolchain manager
+rust-analyzer               # Rust language server
 go                          # Go
 gopls                       # Go language server
 nodejs                      # Node.js

@@ -5,6 +5,10 @@ vim.pack.add({
     { src = "https://github.com/saghen/blink.cmp", version = "v1.10.2" },
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
+    { src = "https://github.com/windwp/nvim-autopairs" },
+    { src = "https://github.com/nvim-lua/plenary.nvim" },
+    { src = "https://github.com/folke/todo-comments.nvim" },
 })
 
 require("snacks").setup({
@@ -39,6 +43,20 @@ require("blink.cmp").setup({
     },
 })
 
+require("nvim-autopairs").setup({
+    check_ts = true,
+})
+
+require("todo-comments").setup({
+    signs = true,
+})
+
+require("nvim-treesitter-textobjects").setup({
+    move = {
+        set_jumps = true,
+    },
+})
+
 require("gitsigns").setup({
     signs = {
         add = { text = "+" },
@@ -70,6 +88,7 @@ local treesitter_languages = {
     "go",
     "gomod",
     "javascript",
+    "rust",
     "tsx",
     "typescript",
 }
@@ -84,6 +103,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "gotmpl",
         "javascript",
         "javascriptreact",
+        "rust",
         "typescript",
         "typescriptreact",
     },

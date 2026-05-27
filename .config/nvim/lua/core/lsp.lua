@@ -81,7 +81,27 @@ vim.lsp.config("gopls", {
     },
 })
 
-vim.lsp.enable({ "ts_ls", "eslint", "gopls" })
+vim.lsp.config("rust_analyzer", {
+    cmd = { "rust-analyzer" },
+    filetypes = { "rust" },
+    root_markers = {
+        "Cargo.toml",
+        "rust-project.json",
+        ".git",
+    },
+    settings = {
+        ["rust-analyzer"] = {
+            cargo = {
+                allFeatures = true,
+            },
+            check = {
+                command = "clippy",
+            },
+        },
+    },
+})
+
+vim.lsp.enable({ "ts_ls", "eslint", "gopls", "rust_analyzer" })
 
 vim.diagnostic.config({
     virtual_text = true,

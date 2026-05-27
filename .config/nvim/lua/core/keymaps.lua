@@ -21,6 +21,18 @@ vim.keymap.set("n", "<C-S-m>", function()
     Snacks.picker.diagnostics()
 end, { desc = "Show problems" })
 
+vim.keymap.set("n", "<C-S-o>", function()
+    Snacks.picker.lsp_symbols()
+end, { desc = "Show file symbols" })
+
+vim.keymap.set("n", "<A-u>", function()
+    require("nvim-treesitter-textobjects.move").goto_previous_start({ "@function.outer", "@class.outer" }, "textobjects")
+end, { desc = "Previous function or class" })
+
+vim.keymap.set("n", "<A-d>", function()
+    require("nvim-treesitter-textobjects.move").goto_next_start({ "@function.outer", "@class.outer" }, "textobjects")
+end, { desc = "Next function or class" })
+
 vim.keymap.set("n", "<C-S-g>", function()
     git.workspace_status()
 end, { desc = "Show Git workspace status" })

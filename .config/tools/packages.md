@@ -52,7 +52,7 @@ The package list lives in `packages.txt` at the repository root.
 
 ## Development
 
-- `rustup` - Rust toolchain
+- `rustup` and `rust-analyzer` - Rust toolchain and LSP server
 - `go` - Go
 - `nodejs` and `npm` - Node.js tooling
 - `docker` and `docker-compose` - containers

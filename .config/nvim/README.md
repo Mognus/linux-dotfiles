@@ -17,7 +17,10 @@ Neovim is managed from `~/dotfiles/.config/nvim`.
 - File search, grep, LSP pickers, and diagnostics through `snacks.nvim`.
 - TypeScript/JavaScript LSP through `typescript-language-server`.
 - ESLint diagnostics and code actions through `vscode-eslint-language-server`.
+- Rust LSP through `rust-analyzer`.
 - Completion through `blink.cmp`.
+- Auto-pairs through `nvim-autopairs`.
+- Highlighted `TODO`, `FIXME`, and `NOTE` comments through `todo-comments.nvim`.
 - Inline Git hunks through `gitsigns.nvim`.
 - Mouse support and system clipboard integration are enabled.
 
@@ -30,8 +33,11 @@ Neovim is managed from `~/dotfiles/.config/nvim`.
 | `Ctrl+P` | Find files |
 | `Ctrl+Shift+F` | Grep files |
 | `Ctrl+Shift+M` | Show project problems |
+| `Ctrl+Shift+O` | Show symbols in current file |
 | `Ctrl+Shift+G` | Show Git workspace status, including submodules |
 | `Alt+Shift+G` | Show Git diff/hunks |
+| `Alt+u` | Previous function or class |
+| `Alt+d` | Next function or class |
 | `F12` | Go to definition |
 | `Shift+F12` | Find references |
 | `F24` | Find references fallback when the terminal encodes `Shift+F12` as `F24` |
@@ -77,7 +83,7 @@ Use `Ctrl+Shift+F` for project-wide grep. In the Snacks picker, toggle ignored f
 
 Use `F12` on a symbol to jump to its definition. Use `Shift+F12` to list references. In Ghostty, `Shift+F12` may arrive as `F24`, so both are mapped.
 
-Use `K` for hover information and `Ctrl+.` for TypeScript or ESLint code actions. ESLint format-on-save and fix-on-save are intentionally disabled.
+Use `K` for hover information and `Ctrl+.` for TypeScript, ESLint, Go, or Rust code actions. ESLint format-on-save and fix-on-save are intentionally disabled.
 
 ### Diagnostics
 
