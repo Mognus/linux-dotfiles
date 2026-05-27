@@ -16,5 +16,8 @@ foreground = "#cdd6f4"
 [keyboard]
 bindings = [
   { key = "F", mods = "Control|Shift", action = "ReceiveChar" },
+  { key = "B", mods = "Control|Shift", action = "ReceiveChar" },
   { key = "/", mods = "Control|Alt", action = "SearchForward" },
+  { key = "?", mods = "Control|Alt", action = "SearchBackward" },
+  { key = "?", mods = "Control|Alt|Shift", action = "SearchBackward" },
 ]
