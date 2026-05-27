@@ -20,7 +20,7 @@ neovim                      # Editor
 nano                        # Simple terminal editor
 
 # --- Terminal ---
-ghostty                     # Terminal emulator
+alacritty                   # Terminal emulator
 
 # --- Base System ---
 base                        # Minimal Arch base
