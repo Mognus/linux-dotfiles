@@ -12,3 +12,9 @@ decorations = "None"
 [colors.primary]
 background = "#0e0e11"
 foreground = "#cdd6f4"
+
+[keyboard]
+bindings = [
+  { key = "F", mods = "Control|Shift", action = "ReceiveChar" },
+  { key = "/", mods = "Control|Alt", action = "SearchForward" },
+]
