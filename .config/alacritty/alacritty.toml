@@ -14,6 +14,7 @@ background = "#0e0e11"
 foreground = "#cdd6f4"
 
 [keyboard]
+# Keep terminal search away from Neovim's Ctrl+Shift mappings.
 bindings = [
   { key = "F", mods = "Control|Shift", action = "ReceiveChar" },
   { key = "B", mods = "Control|Shift", action = "ReceiveChar" },
