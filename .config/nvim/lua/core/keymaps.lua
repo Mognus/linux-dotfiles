@@ -11,6 +11,10 @@ vim.keymap.set("n", "<F1>", function()
     Snacks.picker.keymaps()
 end, { desc = "Show keymaps" })
 
+vim.keymap.set("n", "<F3>", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Toggle inlay hints" })
+
 vim.keymap.set("n", "<C-p>", function()
     Snacks.picker.files({
         hidden = true,
