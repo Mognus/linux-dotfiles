@@ -3,3 +3,4 @@
 ^/docs$
 ^/README.*$
 ^/.git$
+^/agent-instructions\.md$

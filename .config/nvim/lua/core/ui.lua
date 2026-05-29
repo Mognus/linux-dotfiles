@@ -36,3 +36,5 @@ hl("@lsp.type.type", { fg = "#4ec9b0" })
 hl("@lsp.type.variable", { fg = "#d4d4d4" })
 hl("@lsp.type.property", { fg = "#9cdcfe" })
 hl("@lsp.type.parameter", { fg = "#9cdcfe" })
+
+hl("LspInlayHint", { fg = "#8a5a8a", italic = true })

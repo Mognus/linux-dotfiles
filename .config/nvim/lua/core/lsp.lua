@@ -101,7 +101,20 @@ vim.lsp.config("rust_analyzer", {
     },
 })
 
-vim.lsp.enable({ "ts_ls", "eslint", "gopls", "rust_analyzer" })
+vim.lsp.config("sqls", {
+    cmd = { "sqls" },
+    filetypes = { "sql" },
+    root_markers = { ".git" },
+})
+
+vim.lsp.enable({ "ts_ls", "eslint", "gopls", "rust_analyzer", "sqls" })
+
+vim.lsp.inlay_hint.enable(true)
+
+vim.api.nvim_create_user_command("LspRestart", function()
+    vim.lsp.stop_client(vim.lsp.get_clients({ bufnr = 0 }))
+    vim.cmd("e")
+end, {})
 
 vim.diagnostic.config({
     virtual_text = true,

@@ -159,6 +159,7 @@ texlive-latexrecommended    # Recommended LaTeX packages
 # =============================================================================
 
 eww                         # Widgets
+sqls                        # SQL language server
 ffuf                        # Web fuzzer
 paru-bin                    # AUR helper
 peaclock                    # Terminal clock

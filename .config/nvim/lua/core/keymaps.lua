@@ -2,6 +2,11 @@ local git = require("core.git")
 
 vim.keymap.set("n", "<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
 
+vim.keymap.set("n", "<C-t>", "<cmd>tabnew<CR>", { desc = "New tab" })
+vim.keymap.set("n", "<C-S-t>", "<cmd>tabclose<CR>", { desc = "Close tab" })
+vim.keymap.set("n", "<A-h>", "<cmd>tabprev<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "<A-l>", "<cmd>tabnext<CR>", { desc = "Next tab" })
+
 vim.keymap.set("n", "<F1>", function()
     Snacks.picker.keymaps()
 end, { desc = "Show keymaps" })
@@ -13,7 +18,7 @@ vim.keymap.set("n", "<C-p>", function()
     })
 end, { desc = "Find files" })
 
-vim.keymap.set("n", "<C-S-f>", function()
+vim.keymap.set("n", "<C-/>", function()
     Snacks.picker.grep()
 end, { desc = "Grep files" })
 

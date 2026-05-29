@@ -10,6 +10,11 @@ vim.pack.add({
     { src = "https://github.com/windwp/nvim-autopairs" },
     { src = "https://github.com/nvim-lua/plenary.nvim" },
     { src = "https://github.com/folke/todo-comments.nvim" },
+    { src = "https://github.com/stevearc/conform.nvim" },
+    { src = "https://github.com/numToStr/Comment.nvim" },
+    { src = "https://github.com/nanozuki/tabby.nvim" },
+    { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+    { src = "https://github.com/kylechui/nvim-surround" },
 })
 
 require("snacks").setup({
@@ -30,6 +35,9 @@ require("blink.cmp").setup({
     sources = {
         default = { "lsp", "path", "buffer" },
     },
+    signature = {
+        enabled = true,
+    },
     completion = {
         menu = {
             auto_show = true,
@@ -47,6 +55,24 @@ require("blink.cmp").setup({
 require("nvim-autopairs").setup({
     check_ts = true,
 })
+
+require("tabby").setup({ preset = "tab_only" })
+
+require("render-markdown").setup()
+
+require("nvim-surround").setup()
+
+require("Comment").setup({ mappings = false })
+
+vim.keymap.set("n", "<C-S-k>", function()
+    require("Comment.api").toggle.linewise.current()
+end, { desc = "Toggle comment" })
+
+vim.keymap.set("x", "<C-S-k>", function()
+    local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+    vim.api.nvim_feedkeys(esc, "nx", false)
+    require("Comment.api").toggle.linewise(vim.fn.visualmode())
+end, { desc = "Toggle comment" })
 
 require("todo-comments").setup({
     signs = true,
@@ -127,9 +153,8 @@ require("gitsigns").setup({
         map("<A-p>", function()
             gs.nav_hunk("prev")
         end, "Previous Git hunk")
-        map("<A-h>", gs.preview_hunk, "Preview Git hunk")
-        map("<A-s>", gs.stage_hunk, "Stage Git hunk")
-        map("<A-r>", gs.reset_hunk, "Reset Git hunk")
+        map("<A-e>", gs.preview_hunk, "Preview Git hunk")
+
     end,
 })
 
@@ -138,6 +163,9 @@ local treesitter_languages = {
     "gomod",
     "javascript",
     "rust",
+    "markdown",
+    "markdown_inline",
+    "sql",
     "tsx",
     "typescript",
 }
@@ -172,6 +200,12 @@ vim.api.nvim_set_hl(0, "NvimTreeGitMerge", { fg = "#c586c0" })
 vim.api.nvim_set_hl(0, "NvimTreeGitIgnored", { fg = "#8c8c8c" })
 
 require("nvim-tree").setup({
+    tab = {
+        sync = {
+            open = true,
+            close = true,
+        },
+    },
     sort = {
         sorter = "case_sensitive",
     },

@@ -1,6 +1,7 @@
 if status is-interactive
     set -g fish_transient_prompt 1
-    fish_add_path $HOME/.local/bin /usr/local/go/bin
+    set -gx PNPM_HOME "$HOME/.local/share/pnpm"
+    fish_add_path $HOME/.local/bin /usr/local/go/bin $PNPM_HOME
 
     command -q fzf; and fzf --fish | source
     command -q zoxide; and zoxide init fish | source
