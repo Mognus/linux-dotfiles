@@ -1,3 +1,4 @@
 /.gitconfig.local
 /.config/fish/fish_variables
+/.config/hypr/hyprland.conf
 /.codex/config.toml

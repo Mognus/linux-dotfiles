@@ -14,6 +14,11 @@
 
 Hyprland runs the desktop. Hyprpaper sets the wallpaper. Hyprlock locks the session.
 
+## Config
+
+- `hyprland.lua` - Main Hyprland config
+- `lua/` - Split Lua modules for monitors, binds, workspaces, and appearance
+
 ## Apps
 
 - `SUPER+Return` - Terminal

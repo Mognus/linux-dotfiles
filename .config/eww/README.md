@@ -4,14 +4,14 @@ EWW is the small custom widget layer.
 
 ## Does
 
-- Shows the `tux-angel` desktop overlay
+- Shows the `tux-angel` and `tux-devil` desktop overlays
 - Uses EWW state for visibility
 - Uses scripts for toggle/hide behavior
 
 ## Keybinds
 
-- `Ctrl+SUPER+Shift+T`: toggle `tux-angel`
-- Hover: hide `tux-angel`
+- `Ctrl+SUPER+Shift+T`: toggle both Tux widgets
+- Hover: hide the hovered Tux widget
 
 ## Workflow
 
