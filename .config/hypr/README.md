@@ -52,6 +52,7 @@ Hyprland runs the desktop. Hyprpaper sets the wallpaper. Hyprlock locks the sess
 - `SUPER+Ctrl+B` - Firefox scratchpad
 - `SUPER+Ctrl+D` - Discord scratchpad
 - `SUPER+Ctrl+N` - Notes scratchpad
+- `SUPER+Ctrl+F` - File manager scratchpad
 
 ## Music
 
