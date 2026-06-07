@@ -31,6 +31,10 @@ Neovim is managed from `~/dotfiles/.config/nvim`.
 | --- | --- |
 | `F1` | Show keymap help |
 | `Ctrl+B` | Toggle file explorer |
+| `Ctrl+T` | New tab |
+| `Ctrl+Q` | Close tab |
+| `Ctrl+J` | Previous tab |
+| `Ctrl+K` | Next tab |
 | `Ctrl+P` | Find files |
 | `Ctrl+Shift+F` | Grep files |
 | `Ctrl+Shift+M` | Show project problems |
@@ -64,7 +68,9 @@ Neovim is managed from `~/dotfiles/.config/nvim`.
 
 ### Project Navigation
 
-Use `Ctrl+B` to open the file explorer. Git state is shown with simple markers:
+Use `Ctrl+B` to open the file explorer. `Enter` opens a file and closes the explorer; `t` opens it in a new tab. Use `j`/`k` to browse, `l`/`h` to open and close directories, and `/` to filter the tree.
+
+Git state is shown with simple markers:
 
 - `M` modified
 - `S` staged

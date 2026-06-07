@@ -54,16 +54,16 @@ function M.setup(programs)
     mod_bind("k", hl.dsp.focus({ direction = "up" }))
     mod_bind("j", hl.dsp.focus({ direction = "down" }))
 
-    mod_bind("CTRL + h", hl.dsp.focus({ workspace = "r-1" }))
-    mod_bind("CTRL + l", hl.dsp.focus({ workspace = "r+1" }))
+    mod_bind("CTRL + j", hl.dsp.focus({ workspace = "r-1" }))
+    mod_bind("CTRL + k", hl.dsp.focus({ workspace = "r+1" }))
 
     mod_bind("CTRL + SHIFT + h", hl.dsp.window.move({ direction = "left" }))
     mod_bind("CTRL + SHIFT + l", hl.dsp.window.move({ direction = "right" }))
     mod_bind("CTRL + SHIFT + k", hl.dsp.window.move({ direction = "up" }))
     mod_bind("CTRL + SHIFT + j", hl.dsp.window.move({ direction = "down" }))
 
-    mod_bind("ALT + h", hl.dsp.window.move({ workspace = "r-1" }))
-    mod_bind("ALT + l", hl.dsp.window.move({ workspace = "r+1" }))
+    mod_bind("ALT + j", hl.dsp.window.move({ workspace = "r-1" }))
+    mod_bind("ALT + k", hl.dsp.window.move({ workspace = "r+1" }))
 
     mod_bind("SHIFT + h", hl.dsp.window.resize({ x = -40, y = 0, relative = true }), { repeating = true })
     mod_bind("SHIFT + l", hl.dsp.window.resize({ x = 40, y = 0, relative = true }), { repeating = true })

@@ -1,11 +1,13 @@
 local git = require("core.git")
 
-vim.keymap.set("n", "<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
+vim.keymap.set("n", "<C-b>", function()
+    Snacks.explorer()
+end, { desc = "Toggle file explorer" })
 
 vim.keymap.set("n", "<C-t>", "<cmd>tabnew<CR>", { desc = "New tab" })
-vim.keymap.set("n", "<C-S-t>", "<cmd>tabclose<CR>", { desc = "Close tab" })
-vim.keymap.set("n", "<A-h>", "<cmd>tabprev<CR>", { desc = "Previous tab" })
-vim.keymap.set("n", "<A-l>", "<cmd>tabnext<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "<C-q>", "<cmd>tabclose<CR>", { desc = "Close tab" })
+vim.keymap.set("n", "<C-j>", "<cmd>tabprev<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "<C-k>", "<cmd>tabnext<CR>", { desc = "Next tab" })
 
 vim.keymap.set("n", "<F1>", function()
     Snacks.picker.keymaps()
@@ -42,7 +44,7 @@ vim.keymap.set("n", "<A-d>", function()
     require("nvim-treesitter-textobjects.move").goto_next_start({ "@function.outer", "@class.outer" }, "textobjects")
 end, { desc = "Next function or class" })
 
-vim.keymap.set("n", "<C-S-g>", function()
+vim.keymap.set("n", "<C-g>", function()
     git.workspace_status()
 end, { desc = "Show Git workspace status" })
 

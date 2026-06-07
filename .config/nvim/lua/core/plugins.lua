@@ -1,7 +1,7 @@
 vim.pack.add({
-    { src = "https://github.com/nvim-tree/nvim-tree.lua" },
     { src = "https://github.com/nvim-tree/nvim-web-devicons" },
     { src = "https://github.com/folke/snacks.nvim" },
+    { src = "https://github.com/folke/flash.nvim" },
     { src = "https://github.com/saghen/blink.cmp", version = "v1.10.2" },
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
@@ -18,10 +18,50 @@ vim.pack.add({
 })
 
 require("snacks").setup({
+    explorer = {
+        enabled = true,
+        replace_netrw = true,
+    },
     picker = {
         enabled = true,
+        sources = {
+            explorer = {
+                hidden = true,
+                ignored = true,
+                git_status = true,
+                git_status_open = true,
+                git_untracked = true,
+                formatters = {
+                    file = { git_status_hl = true },
+                },
+                jump = { close = true },
+                win = {
+                    list = {
+                        keys = { t = "tab" },
+                    },
+                },
+                layout = {
+                    preset = "default",
+                    preview = false,
+                    layout = {
+                        width = 0.9,
+                        height = 0.9,
+                    },
+                },
+            },
+        },
     },
 })
+
+require("flash").setup()
+
+vim.keymap.set({ "n", "x", "o" }, "gw", function()
+    require("flash").jump()
+end, { desc = "Flash jump" })
+
+vim.keymap.set({ "n", "x", "o" }, "gW", function()
+    require("flash").treesitter()
+end, { desc = "Flash treesitter jump" })
 
 require("blink.cmp").setup({
     keymap = {
@@ -97,9 +137,6 @@ require("lualine").setup({
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
         globalstatus = true,
-        disabled_filetypes = {
-            statusline = { "NvimTree" },
-        },
     },
     sections = {
         lualine_a = { "mode" },
@@ -188,59 +225,4 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.treesitter.start()
         vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end,
-})
-
--- VSCode-like Git colors for the file explorer.
-vim.api.nvim_set_hl(0, "NvimTreeGitDirty", { fg = "#e2c08d" })
-vim.api.nvim_set_hl(0, "NvimTreeGitStaged", { fg = "#73c991" })
-vim.api.nvim_set_hl(0, "NvimTreeGitNew", { fg = "#73c991" })
-vim.api.nvim_set_hl(0, "NvimTreeGitDeleted", { fg = "#f14c4c" })
-vim.api.nvim_set_hl(0, "NvimTreeGitRenamed", { fg = "#73c991" })
-vim.api.nvim_set_hl(0, "NvimTreeGitMerge", { fg = "#c586c0" })
-vim.api.nvim_set_hl(0, "NvimTreeGitIgnored", { fg = "#8c8c8c" })
-
-require("nvim-tree").setup({
-    tab = {
-        sync = {
-            open = true,
-            close = true,
-        },
-    },
-    sort = {
-        sorter = "case_sensitive",
-    },
-    view = {
-        width = 34,
-        side = "left",
-    },
-    renderer = {
-        group_empty = true,
-        highlight_git = true,
-        icons = {
-            show = {
-                file = true,
-                folder = true,
-                folder_arrow = true,
-                git = true,
-            },
-            glyphs = {
-                git = {
-                    unstaged = "M",
-                    staged = "S",
-                    unmerged = "U",
-                    renamed = "R",
-                    untracked = "?",
-                    deleted = "D",
-                    ignored = "I",
-                },
-            },
-        },
-    },
-    git = {
-        enable = true,
-        ignore = false,
-    },
-    filters = {
-        dotfiles = false,
-    },
 })

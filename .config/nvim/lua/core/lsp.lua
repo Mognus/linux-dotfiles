@@ -66,6 +66,46 @@ vim.lsp.config("eslint", {
     },
 })
 
+vim.lsp.config("tailwindcss", {
+    cmd = { "tailwindcss-language-server", "--stdio" },
+    filetypes = {
+        "html",
+        "css",
+        "scss",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+    },
+    root_markers = {
+        "tailwind.config.js",
+        "tailwind.config.cjs",
+        "tailwind.config.mjs",
+        "tailwind.config.ts",
+        "postcss.config.js",
+        "postcss.config.cjs",
+        "postcss.config.mjs",
+        "package.json",
+        ".git",
+    },
+    settings = {
+        tailwindCSS = {
+            classAttributes = {
+                "class",
+                "className",
+                "class:list",
+                "classList",
+                "ngClass",
+            },
+            classFunctions = {
+                "cn",
+                "cva",
+            },
+            validate = true,
+        },
+    },
+})
+
 vim.lsp.config("gopls", {
     cmd = { "gopls" },
     filetypes = {
@@ -107,7 +147,7 @@ vim.lsp.config("sqls", {
     root_markers = { ".git" },
 })
 
-vim.lsp.enable({ "ts_ls", "eslint", "gopls", "rust_analyzer", "sqls" })
+vim.lsp.enable({ "ts_ls", "eslint", "tailwindcss", "gopls", "rust_analyzer", "sqls" })
 
 vim.lsp.inlay_hint.enable(true)
 
