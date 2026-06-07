@@ -35,7 +35,6 @@ Neovim is managed from `~/dotfiles/.config/nvim`.
 | `Ctrl+Q` | Close tab |
 | `Ctrl+J` | Previous tab |
 | `Ctrl+K` | Next tab |
-| `Ctrl+P` | Find files |
 | `Ctrl+Shift+F` | Grep files |
 | `Ctrl+Shift+M` | Show project problems |
 | `Ctrl+Shift+O` | Show symbols in current file |
@@ -68,7 +67,7 @@ Neovim is managed from `~/dotfiles/.config/nvim`.
 
 ### Project Navigation
 
-Use `Ctrl+B` to open the file explorer. `Enter` opens a file and closes the explorer; `t` opens it in a new tab. Use `j`/`k` to browse, `l`/`h` to open and close directories, and `/` to filter the tree.
+Use `Ctrl+B` to open or close the file explorer. `Enter` opens a file and closes the explorer; `t` adds it as a background tab and keeps the explorer open. Use `j`/`k` to browse, `l`/`h` to open and close directories, and `/` to fuzzy-filter the tree. Prefix a query with `'` for an exact match, `^` for a prefix match, or append `$` for a suffix match. Git-ignored files are excluded; toggle them with `I`.
 
 Git state is shown with simple markers:
 
@@ -79,8 +78,6 @@ Git state is shown with simple markers:
 - `R` renamed
 - `U` conflict
 - `I` ignored
-
-Use `Ctrl+P` when you know the filename and want to jump without opening the tree.
 
 ### Search
 

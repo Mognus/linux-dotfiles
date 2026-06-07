@@ -17,13 +17,6 @@ vim.keymap.set("n", "<F3>", function()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = "Toggle inlay hints" })
 
-vim.keymap.set("n", "<C-p>", function()
-    Snacks.picker.files({
-        hidden = true,
-        exclude = { ".git" },
-    })
-end, { desc = "Find files" })
-
 vim.keymap.set("n", "<C-/>", function()
     Snacks.picker.grep()
 end, { desc = "Grep files" })

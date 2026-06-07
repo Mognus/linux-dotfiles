@@ -17,6 +17,23 @@ vim.pack.add({
     { src = "https://github.com/kylechui/nvim-surround" },
 })
 
+local function open_explorer_item_in_background_tab(picker, item)
+    if not item then
+        return
+    end
+
+    if item.dir then
+        require("snacks.explorer.actions").actions.confirm(picker, item, {})
+        return
+    end
+
+    local explorer_tab = vim.api.nvim_get_current_tabpage()
+    local buffer = vim.fn.bufadd(item.file)
+    vim.bo[buffer].buflisted = true
+    vim.cmd("tab sbuffer " .. buffer)
+    vim.api.nvim_set_current_tabpage(explorer_tab)
+end
+
 require("snacks").setup({
     explorer = {
         enabled = true,
@@ -26,23 +43,48 @@ require("snacks").setup({
         enabled = true,
         sources = {
             explorer = {
-                hidden = true,
-                ignored = true,
-                git_status = true,
-                git_status_open = true,
-                git_untracked = true,
-                formatters = {
-                    file = { git_status_hl = true },
+                hidden = true, -- Show dotfiles such as .env and .gitignore.
+                ignored = false, -- Hide Git-ignored paths; toggle them with I.
+                git_status = true, -- Show Git state next to files and directories.
+                git_status_open = true, -- Keep aggregate Git state on expanded directories.
+                git_untracked = true, -- Include untracked files in Git state.
+                matcher = {
+                    fuzzy = true, -- Match non-contiguous characters while searching.
+                    smartcase = true, -- Uppercase input makes matching case-sensitive.
+                    ignorecase = true, -- Lowercase searches ignore case.
+                    filename_bonus = true, -- Rank filename matches above directory matches.
+                    sort_empty = false, -- Preserve tree order before a search is entered.
                 },
-                jump = { close = true },
+                formatters = {
+                    file = { git_status_hl = true }, -- Color filenames by Git state.
+                },
+                actions = {
+                    open_background_tab = open_explorer_item_in_background_tab,
+                },
+                jump = { close = true }, -- Close the explorer after opening a file.
                 win = {
+                    input = {
+                        keys = {
+                            ["<c-b>"] = { "close", mode = { "n", "i" } },
+                            H = { "toggle_hidden", mode = "n" },
+                            I = { "toggle_ignored", mode = "n" },
+                            h = { "explorer_close", mode = "n" },
+                            l = { "confirm", mode = "n" },
+                        },
+                    },
                     list = {
-                        keys = { t = "tab" },
+                        keys = {
+                            ["<c-b>"] = "close",
+                            t = "open_background_tab", -- Add the file as a tab and keep browsing.
+                        },
+                    },
+                    preview = {
+                        keys = { ["<c-b>"] = "close" },
                     },
                 },
                 layout = {
-                    preset = "default",
-                    preview = false,
+                    preset = "default", -- Use a centered popup instead of a sidebar.
+                    preview = true, -- Show the selected file beside the tree.
                     layout = {
                         width = 0.9,
                         height = 0.9,
