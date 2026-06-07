@@ -1,0 +1,12 @@
+[mgr]
+
+# Match the Neovim explorer by showing dotfiles initially.
+show_hidden = true
+
+# Open in nvim explicitly — the files scratchpad launches `terminal -e yazi`
+# without an interactive shell, so $EDITOR is never set and the default
+# `${EDITOR:-vi}` opener fails with exit 127. Hardcoding nvim avoids that.
+[opener]
+edit = [
+  { run = 'nvim "$@"', block = true, desc = "Open in Neovim", for = "unix" },
+]

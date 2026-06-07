@@ -1,3 +1,7 @@
+# Default editor — used by Yazi, git, frg, etc.
+set -gx EDITOR nvim
+set -gx VISUAL nvim
+
 if status is-interactive
     set -g fish_transient_prompt 1
     set -gx PNPM_HOME "$HOME/.local/share/pnpm"

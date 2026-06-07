@@ -1,0 +1,11 @@
+[mgr]
+
+prepend_keymap = [
+  { on = "h", run = "leave", desc = "Go to parent directory" },
+  { on = "l", run = "enter", desc = "Enter child directory" },
+  { on = "<C-t>", run = "tab_create --current", desc = "New tab in current directory" },
+  { on = "<C-q>", run = "close", desc = "Close current tab" },
+  { on = "<C-j>", run = "tab_switch -1 --relative", desc = "Previous tab" },
+  { on = "<C-k>", run = "tab_switch 1 --relative", desc = "Next tab" },
+  { on = "H", run = "hidden toggle", desc = "Toggle hidden files" },
+]
