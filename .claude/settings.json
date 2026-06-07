@@ -11,5 +11,6 @@
     "rust-analyzer-lsp@claude-plugins-official": true
   },
   "effortLevel": "high",
-  "theme": "dark-ansi"
+  "theme": "dark-ansi",
+  "tui": "fullscreen"
 }
