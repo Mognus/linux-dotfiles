@@ -35,7 +35,6 @@ vim.lsp.config("eslint", {
     },
     settings = {
         validate = "on",
-        packageManager = "pnpm",
         useFlatConfig = true,
         workingDirectory = { mode = "auto" },
         codeAction = {
@@ -55,7 +54,7 @@ vim.lsp.config("eslint", {
             useFlatConfig = true,
         },
         format = false,
-        nodePath = "",
+        nodePath = vim.NIL,
         onIgnoredFiles = "off",
         problems = {
             shortenToSingleLine = false,
