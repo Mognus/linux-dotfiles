@@ -1,5 +1,10 @@
 (defvar tux-visible true)
 
+;; Slideshow source: emits JSON {image,title,author}, paced by the script.
+(deflisten slideshow
+  :initial `{"image":"","title":"","author":""}`
+  "~/.config/eww/scripts/slideshow.sh")
+
 ;; Generisches Tux-Widget: Pfad, Breite und Hover-Script werden je Fenster reingereicht.
 ;; Hoehe ist fix 136, Breite seitenverhaeltnis-korrekt pro Gif (sonst Stauchung).
 (defwidget tux [path width onhover]
@@ -42,3 +47,34 @@
   (tux :path "/home/magnus/.config/eww/assets/tuxdevil_small.gif"
        :width 139
        :onhover "~/.config/eww/scripts/tux-hide-devil.sh &"))
+
+;; Picture frame: three nested boxes form the three black lines that get
+;; thinner toward the center (4px -> 2px -> 1px); the innermost box is a black
+;; matte holding the cover and the two-line caption.
+(defwidget slideshow_frame []
+  (box :class "frame-outer"
+    (box :class "frame-mid"
+      (box :class "frame-inner"
+        (box :class "frame-content" :orientation "vertical" :space-evenly false
+          ;; Max bounding box; eww scales proportionally, so the frame ends up
+          ;; hugging each image's real aspect ratio.
+          (image :class "cover"
+                 :visible {slideshow.image != ""}
+                 :path {slideshow.image}
+                 :image-width 480
+                 :image-height 480)
+          (label :class "cap-title"  :text {slideshow.title}  :wrap true :limit-width 28)
+          (label :class "cap-author" :text {slideshow.author} :wrap true :limit-width 28))))))
+
+;; Left side of the desktop background (layer "background" -> behind windows),
+;; vertically centered, leaving the right-aligned wallpaper art uncovered.
+(defwindow slideshow
+  :monitor 0
+  ;; No width/height -> the window sizes itself to the frame content.
+  :geometry (geometry
+              :x "180px"
+              :anchor "center left")
+  :stacking "bg"
+  :exclusive false
+  :focusable false
+  (slideshow_frame))

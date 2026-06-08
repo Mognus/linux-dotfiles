@@ -3,3 +3,34 @@
   border: none;
   box-shadow: none;
 }
+
+// Slideshow picture frame: three concentric white lines getting thinner
+// inward, with the desktop showing through the gaps between them.
+.frame-outer {
+  border: 4px solid white;
+  padding: 3px;
+}
+.frame-mid {
+  border: 2px solid white;
+  padding: 3px;
+}
+.frame-inner {
+  border: 1px solid white;
+}
+
+// Black matte behind the cover and caption.
+.frame-content {
+  background: black;
+  padding: 14px;
+}
+.cap-title {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+.cap-author {
+  color: #cccccc;
+  font-size: 14px;
+  margin-top: 3px;
+}
