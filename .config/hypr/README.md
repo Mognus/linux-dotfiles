@@ -23,7 +23,7 @@ Hyprland runs the desktop. Hyprpaper sets the wallpaper. Hyprlock locks the sess
 
 - `SUPER+Return` - Terminal
 - `SUPER+B` - Firefox
-- `SUPER+T` - Tor Browser
+- `SUPER+Ctrl+W` - Pick wallpaper
 - `SUPER+Space` - App launcher
 
 ## Session
@@ -58,6 +58,10 @@ Hyprland runs the desktop. Hyprpaper sets the wallpaper. Hyprlock locks the sess
 - `SUPER+Ctrl+D` - Discord scratchpad
 - `SUPER+Ctrl+N` - Notes scratchpad
 - `SUPER+Ctrl+F` - File manager scratchpad
+
+## Desktop Widgets
+
+- `Ctrl+SUPER+Shift+T` - Toggle both Quickshell Tux widgets
 
 ## Music
 

@@ -140,13 +140,7 @@ vim.lsp.config("rust_analyzer", {
     },
 })
 
-vim.lsp.config("sqls", {
-    cmd = { "sqls" },
-    filetypes = { "sql" },
-    root_markers = { ".git" },
-})
-
-vim.lsp.enable({ "ts_ls", "eslint", "tailwindcss", "gopls", "rust_analyzer", "sqls" })
+vim.lsp.enable({ "ts_ls", "eslint", "tailwindcss", "gopls", "rust_analyzer" })
 
 vim.lsp.inlay_hint.enable(true)
 

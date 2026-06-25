@@ -4,27 +4,18 @@
 # =============================================================================
 
 # --- Shell ---
-zsh                         # Shell
 fish                        # Friendly interactive shell
 tmux                        # Terminal multiplexer
-zsh-completions             # Extra Zsh completions
 fzf                         # Fuzzy finder (Ctrl+R history, Ctrl+T files, Alt-C dirs)
 fd                          # Fast find, used as fzf backend
 zoxide                      # Smart cd replacement (z, zi)
-zsh-autosuggestions         # Command suggestions from history
-zsh-syntax-highlighting     # Syntax highlighting in the shell
-starship                    # Cross-shell prompt
 
 # --- Editor ---
 neovim                      # Editor
 nano                        # Simple terminal editor
 
-# --- Terminal ---
-alacritty                   # Terminal emulator
-
 # --- Base System ---
 base                        # Minimal Arch base
-base-devel                  # Build tools for AUR packages
 linux                       # Linux kernel
 linux-firmware              # Firmware files
 amd-ucode                   # AMD CPU microcode
@@ -37,7 +28,9 @@ vulkan-radeon               # Vulkan driver for AMD GPU
 # --- Wayland / Desktop ---
 hyprland                    # Wayland compositor / WM
 waybar                      # Status bar
+quickshell                  # Lightweight desktop widgets
 rofi                        # App launcher
+kitty                       # Terminal emulator
 xdg-desktop-portal-hyprland # Screen sharing, file picker for Wayland apps
 xdg-user-dirs               # Creates ~/Downloads, ~/Pictures etc.
 dunst                       # Notification daemon
@@ -104,7 +97,6 @@ docker-buildx               # Docker BuildKit builder
 docker-compose              # Multi-container orchestration
 
 # --- File Manager ---
-nnn                         # Terminal file manager
 thunar                      # GUI file manager
 
 # --- Media ---
@@ -133,8 +125,6 @@ unzip                       # ZIP extraction
 reflector                   # Update pacman mirrorlist
 ufw                         # Firewall (deny incoming, allow outgoing)
 rsync                       # File synchronization
-lynx                        # Terminal web browser
-w3m                         # Terminal web browser
 qrencode                    # QR code generator
 termdown                    # Terminal countdown/stopwatch
 perf                        # Linux performance tools
@@ -153,16 +143,3 @@ texlive-langgerman          # German TeX language support
 texlive-langeuropean        # European TeX language support
 texlive-latexextra          # Extra LaTeX packages
 texlive-latexrecommended    # Recommended LaTeX packages
-
-# =============================================================================
-# [AUR] — installed via yay
-# =============================================================================
-
-eww                         # Widgets
-sqls                        # SQL language server
-ffuf                        # Web fuzzer
-paru-bin                    # AUR helper
-peaclock                    # Terminal clock
-tor-browser-bin             # Tor Browser (.onion access)
-tty-clock                   # Terminal clock
-yay                         # AUR helper

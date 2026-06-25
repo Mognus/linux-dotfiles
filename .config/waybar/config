@@ -1,10 +1,8 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 34,
-
     "modules-left": ["hyprland/workspaces", "group/utilities"],
-    "modules-center": ["clock"],
+    "modules-center": ["group/metaphysics"],
     "modules-right": ["group/audio", "group/scratchpads"],
 
     "wireplumber": {
@@ -19,6 +17,17 @@
     "clock": {
         "format": "{:%H:%M}",
         "tooltip-format": "{:%A, %d.%m.%Y}"
+    },
+
+    "group/metaphysics": {
+        "orientation": "vertical",
+        "modules": ["image#metaphysics", "clock"]
+    },
+
+    "image#metaphysics": {
+        "path": "/home/magnus/.config/waybar/assets/eye-triangle.svg",
+        "size": 20,
+        "tooltip": false
     },
 
     "custom/record": {

@@ -22,9 +22,18 @@ window#waybar {
 }
 
 #clock {
-    padding: 0 12px;
+    padding: 0 12px 2px;
     color: #ffffff;
+    font-size: 12px;
     font-weight: 700;
+}
+
+#metaphysics {
+    margin: 2px 0 0;
+}
+
+#image.metaphysics {
+    margin: 1px 0 -2px;
 }
 
 #workspaces {

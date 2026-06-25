@@ -18,11 +18,10 @@ local function toggle_special(name)
 end
 
 function M.setup(programs)
-    bind("CTRL + SUPER + SHIFT + T", exec(os.getenv("HOME") .. "/.config/eww/scripts/tux-toggle.sh"))
-
+    bind("CTRL + SUPER + SHIFT + T", exec("qs -p $HOME/dotfiles/.config/quickshell ipc call tux toggle"))
     mod_bind("Return", exec(programs.terminal))
     mod_bind("B", exec(programs.browser))
-    mod_bind("T", exec(programs.tor_browser))
+    mod_bind("CTRL + W", exec(os.getenv("HOME") .. "/.config/hypr/scripts/wallpaper-picker.sh"))
     mod_bind("Space", exec(programs.launcher))
     mod_bind("Escape", exec(programs.lock))
     mod_bind("F1", exec("systemctl suspend"))

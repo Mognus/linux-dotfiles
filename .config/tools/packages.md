@@ -9,12 +9,11 @@ The package list lives in `packages.txt` at the repository root.
 - `fzf` - fuzzy search for history, files, and directories
 - `fd` - fast file search backend for FZF
 - `zoxide` - smart directory jumping
-- `zsh` and related plugins - legacy shell support
 
 ## Editor and Terminal
 
 - `neovim` - editor
-- `alacritty` - terminal emulator
+- `kitty` - terminal emulator
 - `ttf-meslo-nerd` - primary Nerd Font
 - `ttf-jetbrains-mono-nerd` - secondary Nerd Font
 
@@ -22,7 +21,8 @@ The package list lives in `packages.txt` at the repository root.
 
 - `hyprland` - Wayland compositor
 - `waybar` - status bar
-- `rofi-wayland` - app launcher
+- `quickshell` - lightweight desktop widgets
+- `rofi` - app launcher and wallpaper picker
 - `dunst` - notifications
 - `hyprlock`, `hyprpaper`, `hypridle` - lock screen, wallpaper, and idle handling
 - `xdg-desktop-portal-hyprland` - portal integration for Wayland apps
@@ -47,8 +47,7 @@ The package list lives in `packages.txt` at the repository root.
 - `firefox` - browser
 - `discord` - chat
 - `obsidian` - notes
-- `tor-browser` - Tor access from AUR
-- `mullvad-vpn` - VPN from AUR
+- `mullvad-vpn` - VPN
 
 ## Development
 
