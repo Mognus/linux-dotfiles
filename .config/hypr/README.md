@@ -23,7 +23,6 @@ Hyprland runs the desktop. Hyprpaper sets the wallpaper. Hyprlock locks the sess
 
 - `SUPER+Return` - Terminal
 - `SUPER+B` - Firefox
-- `SUPER+Ctrl+W` - Pick wallpaper
 - `SUPER+Space` - App launcher
 
 ## Session

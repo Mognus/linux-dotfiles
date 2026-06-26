@@ -1,0 +1,100 @@
+* {
+    bg: #111111ee;
+    bg-alt: #181818ee;
+    fg: #ffffffff;
+    muted: #777777ff;
+    border: #333333ff;
+    accent: #40a02bff;
+    danger: #e64553ff;
+
+    background-color: transparent;
+    text-color: @fg;
+    font: "Syne 12";
+}
+
+window {
+    width: 720px;
+    location: center;
+    anchor: center;
+    border: 1px;
+    border-color: @border;
+    border-radius: 0;
+    background-color: @bg;
+}
+
+mainbox {
+    padding: 18px;
+    spacing: 14px;
+}
+
+inputbar {
+    padding: 0 0 12px 0;
+    spacing: 10px;
+    border: 0 0 1px 0;
+    border-color: @border;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    text-color: @accent;
+    font: "Syne Bold 12";
+}
+
+entry {
+    placeholder: "launch";
+    placeholder-color: @muted;
+    cursor-color: @accent;
+}
+
+listview {
+    lines: 10;
+    columns: 1;
+    fixed-height: true;
+    spacing: 4px;
+}
+
+element {
+    padding: 8px 10px;
+    spacing: 12px;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+element selected {
+    background-color: @bg-alt;
+    border: 0 0 0 3px;
+    border-color: @accent;
+}
+
+element-icon {
+    size: 24px;
+}
+
+element-text {
+    vertical-align: 0.5;
+}
+
+element-text selected {
+    text-color: @fg;
+}
+
+mode-switcher {
+    spacing: 8px;
+}
+
+button {
+    padding: 6px 10px;
+    border-radius: 0;
+    background-color: @bg-alt;
+    text-color: @muted;
+}
+
+button selected {
+    text-color: @accent;
+}
+
+message {
+    border: 1px;
+    border-color: @danger;
+    padding: 8px;
+}

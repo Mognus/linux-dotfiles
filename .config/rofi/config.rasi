@@ -1,0 +1,17 @@
+configuration {
+    modes: "drun,run,window";
+    show-icons: true;
+    display-drun: "apps";
+    display-run: "run";
+    display-window: "windows";
+    drun-display-format: "{name}";
+    matching: "fuzzy";
+    sorting-method: "fzf";
+    sort: true;
+    case-sensitive: false;
+    cycle: true;
+    terminal: "kitty";
+    font: "Syne 12";
+}
+
+@theme "theme"
