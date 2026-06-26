@@ -27,7 +27,6 @@ vulkan-radeon               # Vulkan driver for AMD GPU
 
 # --- Wayland / Desktop ---
 hyprland                    # Wayland compositor / WM
-waybar                      # Status bar
 quickshell                  # Lightweight desktop widgets
 rofi                        # App launcher
 kitty                       # Terminal emulator
@@ -101,7 +100,7 @@ thunar                      # GUI file manager
 
 # --- Media ---
 yt-dlp                      # YouTube/video downloader
-playerctl                   # Media key / playback control (Waybar integration)
+playerctl                   # Media key / playback control
 mpv                         # Video player
 cmus                        # Terminal music player
 

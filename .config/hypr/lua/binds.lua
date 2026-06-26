@@ -42,7 +42,7 @@ function M.setup(programs)
 
     mod_bind("S", exec([[grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +%F_%T).png]]))
     mod_bind("CTRL + S", exec([[grim -g "$(slurp)" -t png - | wl-copy --type image/png]]))
-    mod_bind("CTRL + v", exec(os.getenv("HOME") .. "/.config/waybar/scripts/record-toggle.sh"))
+    mod_bind("CTRL + v", exec(os.getenv("HOME") .. "/.config/hypr/scripts/record-toggle.sh"))
 
     mod_bind("Q", hl.dsp.window.close())
     mod_bind("F", hl.dsp.window.fullscreen())

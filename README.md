@@ -3,7 +3,7 @@
 Personal Linux dotfiles managed with GNU Stow.
 
 The repository contains my daily desktop and terminal configuration, including
-Neovim, Fish, Tmux, Hyprland, Waybar, Git, CLI tooling and package lists for
+Neovim, Fish, Tmux, Hyprland, Quickshell, Git, CLI tooling and package lists for
 rebuilding a workstation.
 
 ## Install
