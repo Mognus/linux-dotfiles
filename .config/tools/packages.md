@@ -13,7 +13,7 @@ The package list lives in `packages.txt` at the repository root.
 ## Editor and Terminal
 
 - `neovim` - editor
-- `kitty` - terminal emulator
+- `alacritty` - terminal emulator
 - `ttf-meslo-nerd` - primary Nerd Font
 - `ttf-jetbrains-mono-nerd` - secondary Nerd Font
 

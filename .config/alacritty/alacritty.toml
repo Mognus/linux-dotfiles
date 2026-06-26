@@ -1,0 +1,55 @@
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 11
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[window]
+decorations = "None"
+opacity = 0.95
+padding = { x = 12, y = 12 }
+
+[colors.primary]
+background = "#0e0e11"
+foreground = "#cdd6f4"
+
+[[keyboard.bindings]]
+key = "T"
+mods = "Alt"
+action = "CreateNewWindow"
+
+[[keyboard.bindings]]
+key = "J"
+mods = "Control|Alt"
+chars = "\u001b[1;7B"
+
+[[keyboard.bindings]]
+key = "K"
+mods = "Control|Alt"
+chars = "\u001b[1;7A"
+
+# Vim-style buffer search. Gated to ~Vi so these stay out of the way once Vi
+# mode is active — there you already get native /, ?, n, N.
+[[keyboard.bindings]]
+key = "/"
+mods = "Control|Alt"
+mode = "~Vi"
+action = "SearchForward"
+
+[[keyboard.bindings]]
+key = "/"
+mods = "Control|Alt|Shift"
+mode = "~Vi"
+action = "SearchBackward"

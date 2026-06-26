@@ -29,7 +29,7 @@ vulkan-radeon               # Vulkan driver for AMD GPU
 hyprland                    # Wayland compositor / WM
 quickshell                  # Lightweight desktop widgets
 rofi                        # App launcher and dmenu replacement
-kitty                       # Terminal emulator
+alacritty                   # Lightweight terminal emulator
 xdg-desktop-portal-hyprland # Screen sharing, file picker for Wayland apps
 xdg-user-dirs               # Creates ~/Downloads, ~/Pictures etc.
 dunst                       # Notification daemon
