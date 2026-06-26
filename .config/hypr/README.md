@@ -62,6 +62,7 @@ Hyprland runs the desktop. Hyprpaper sets the wallpaper. Hyprlock locks the sess
 ## Desktop Widgets
 
 - `Ctrl+SUPER+Shift+T` - Toggle both Quickshell Tux widgets
+- `SUPER+Ctrl+G` - Toggle Quickshell quick settings
 
 ## Music
 
