@@ -45,6 +45,9 @@ function M.setup(programs)
     mod_bind("CTRL + v", exec(os.getenv("HOME") .. "/.config/hypr/scripts/record-toggle.sh"))
     mod_bind("W", exec(os.getenv("HOME") .. "/.config/hypr/scripts/wallpaper-switcher.sh"))
 
+    mod_bind("equal", exec(os.getenv("HOME") .. "/.config/hypr/scripts/opacity-switch.sh up"), { repeating = true })
+    mod_bind("minus", exec(os.getenv("HOME") .. "/.config/hypr/scripts/opacity-switch.sh down"), { repeating = true })
+
     mod_bind("Q", hl.dsp.window.close())
     mod_bind("F", hl.dsp.window.fullscreen())
     mod_bind("CTRL + Space", hl.dsp.window.float({ action = "toggle" }))
