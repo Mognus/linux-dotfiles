@@ -38,3 +38,40 @@ key = "/"
 mods = "Control|Alt|Shift"
 mode = "~Vi"
 action = "SearchBackward"
+
+# tmux has no native "Super" modifier, so Super+Alt+hjkl is remapped here to
+# emit the same bytes as Ctrl+Alt+hjkl, which tmux's pane-switch binds expect.
+[[keyboard.bindings]]
+key = "H"
+mods = "Super|Alt"
+chars = "\u001b\u0008"
+
+[[keyboard.bindings]]
+key = "J"
+mods = "Super|Alt"
+chars = "\u001b\u000a"
+
+[[keyboard.bindings]]
+key = "K"
+mods = "Super|Alt"
+chars = "\u001b\u000b"
+
+[[keyboard.bindings]]
+key = "L"
+mods = "Super|Alt"
+chars = "\u001b\u000c"
+
+[[keyboard.bindings]]
+key = "T"
+mods = "Super|Alt"
+chars = "\u001b\u0014"
+
+[[keyboard.bindings]]
+key = "V"
+mods = "Super|Alt"
+chars = "\u001b\u0016"
+
+[[keyboard.bindings]]
+key = "D"
+mods = "Super|Alt"
+chars = "\u001b\u0004"
