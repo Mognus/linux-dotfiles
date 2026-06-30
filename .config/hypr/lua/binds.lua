@@ -65,8 +65,8 @@ function M.setup(programs)
     mod_bind("CTRL + SHIFT + k", hl.dsp.window.move({ direction = "up" }))
     mod_bind("CTRL + SHIFT + j", hl.dsp.window.move({ direction = "down" }))
 
-    mod_bind("ALT + j", hl.dsp.window.move({ workspace = "r-1" }))
-    mod_bind("ALT + k", hl.dsp.window.move({ workspace = "r+1" }))
+    mod_bind("ALT + bracketleft", hl.dsp.window.move({ workspace = "r-1" }))
+    mod_bind("ALT + bracketright", hl.dsp.window.move({ workspace = "r+1" }))
 
     mod_bind("SHIFT + h", hl.dsp.window.resize({ x = -40, y = 0, relative = true }), { repeating = true })
     mod_bind("SHIFT + l", hl.dsp.window.resize({ x = 40, y = 0, relative = true }), { repeating = true })
