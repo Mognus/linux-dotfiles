@@ -5,7 +5,7 @@ local special_workspaces = {
     { name = "firefox", command = "firefox", gaps_out = 48 },
     { name = "discord", command = "discord", gaps_out = 48 },
     { name = "notes", command = "obsidian", gaps_out = { top = 32, right = 240, bottom = 32, left = 240 } },
-    { name = "files", command = function(programs) return programs.terminal .. " -e yazi" end, gaps_out = 48 },
+    { name = "files", command = "thunar", gaps_out = 48 },
     { name = "music", command = "chromium --app=https://music.youtube.com", gaps_out = 48 },
     { name = "cmus", command = function(programs) return programs.terminal .. " -e cmus" end, gaps_out = 48 },
 }

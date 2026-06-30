@@ -1,15 +1,18 @@
 * {
-    bg: #111111ee;
-    bg-alt: #181818ee;
+    bg: #050507e8;
+    bg-alt: #101014f2;
+    bg-hover: #18181df2;
     fg: #ffffffff;
-    muted: #777777ff;
-    border: #333333ff;
-    accent: #40a02bff;
-    danger: #e64553ff;
+    fg-soft: #cdd6f4ff;
+    muted: #888888ff;
+    edge: #d8d8d8ff;
+    edge-muted: #2a2a30ff;
+    accent: #00d7d7ff;
+    danger: #f38ba8ff;
 
     background-color: transparent;
     text-color: @fg;
-    font: "Syne 12";
+    font: "JetBrainsMono Nerd Font 12";
 }
 
 window {
@@ -17,60 +20,78 @@ window {
     location: center;
     anchor: center;
     border: 1px;
-    border-color: @border;
+    border-color: @edge;
     border-radius: 0;
     background-color: @bg;
 }
 
 mainbox {
-    padding: 18px;
-    spacing: 14px;
+    padding: 12px;
+    spacing: 10px;
 }
 
 inputbar {
-    padding: 0 0 12px 0;
-    spacing: 10px;
+    padding: 0 0 10px 0;
+    spacing: 12px;
     border: 0 0 1px 0;
-    border-color: @border;
+    border-color: @edge-muted;
     children: [ prompt, entry ];
 }
 
 prompt {
+    min-width: 86px;
+    padding: 5px 10px;
+    border: 1px;
+    border-color: @edge-muted;
+    background-color: @bg-alt;
     text-color: @accent;
-    font: "Syne Bold 12";
+    font: "JetBrainsMono Nerd Font Bold 12";
 }
 
 entry {
-    placeholder: "launch";
+    padding: 6px 8px;
+    border: 1px;
+    border-color: @edge-muted;
+    background-color: @bg-alt;
+    text-color: @fg-soft;
+    placeholder: "type to filter";
     placeholder-color: @muted;
     cursor-color: @accent;
 }
 
 listview {
-    lines: 10;
+    lines: 9;
     columns: 1;
     fixed-height: true;
-    spacing: 4px;
+    spacing: 3px;
 }
 
 element {
-    padding: 8px 10px;
+    padding: 7px 10px;
     spacing: 12px;
+    border: 1px;
+    border-color: transparent;
     border-radius: 0;
     background-color: transparent;
 }
 
+element normal active,
+element alternate active {
+    background-color: @bg-hover;
+}
+
 element selected {
-    background-color: @bg-alt;
-    border: 0 0 0 3px;
-    border-color: @accent;
+    background-color: @bg-hover;
+    border-color: @edge;
 }
 
 element-icon {
     size: 24px;
+    background-color: transparent;
 }
 
 element-text {
+    text-color: @fg-soft;
     vertical-align: 0.5;
 }
 
@@ -78,19 +99,32 @@ element-text selected {
     text-color: @fg;
 }
 
+element-icon selected {
+    text-color: @fg;
+}
+
 mode-switcher {
-    spacing: 8px;
+    spacing: 4px;
 }
 
 button {
-    padding: 6px 10px;
+    padding: 7px 12px;
+    border: 1px;
+    border-color: @edge-muted;
     border-radius: 0;
-    background-color: @bg-alt;
+    background-color: transparent;
     text-color: @muted;
 }
 
+button hover {
+    background-color: @bg-hover;
+    text-color: @fg;
+}
+
 button selected {
-    text-color: @accent;
+    background-color: @bg-hover;
+    border-color: @edge;
+    text-color: @fg;
 }
 
 message {

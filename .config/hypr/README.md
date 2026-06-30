@@ -21,9 +21,9 @@ Hyprland runs the desktop. Hyprpaper sets the wallpaper. Hyprlock locks the sess
 
 ## Apps
 
-- `SUPER+Return` - Terminal
+- `SUPER+Return` - Alacritty terminal
 - `SUPER+B` - Firefox
-- `SUPER+Space` - App launcher
+- `SUPER+Space` - Rofi launcher, starts in apps and can switch to run/windows
 
 ## Session
 

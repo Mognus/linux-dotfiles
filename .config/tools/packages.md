@@ -23,7 +23,7 @@ The package list lives in `packages.txt` at the repository root.
 - `quickshell` - lightweight desktop widgets
 - `rofi` - app launcher and dmenu replacement
 - `dunst` - notifications
-- `hyprlock`, `hyprpaper`, `hypridle` - lock screen, wallpaper, and idle handling
+- `hyprlock`, `awww`, `hypridle` - lock screen, wallpaper, and idle handling
 - `xdg-desktop-portal-hyprland` - portal integration for Wayland apps
 
 ## Wayland Helpers

@@ -1,17 +1,26 @@
 configuration {
-    modes: "drun,run,window";
+    modes: "combi,drun,run,window";
+    combi-modes: "drun,run,window";
     show-icons: true;
-    display-drun: "apps";
-    display-run: "run";
-    display-window: "windows";
+    icon-theme: "Adwaita";
+    application-fallback-icon: "application-x-executable";
+    display-drun: "󰣆 apps";
+    display-run: " run";
+    display-window: "󰖲 windows";
+    display-combi: "󰘳 all";
     drun-display-format: "{name}";
     matching: "fuzzy";
     sorting-method: "fzf";
     sort: true;
     case-sensitive: false;
     cycle: true;
-    terminal: "kitty";
-    font: "Syne 12";
+    sidebar-mode: true;
+    kb-mode-next: "Alt+l,Shift+Right,Control+Tab";
+    kb-mode-previous: "Alt+h,Shift+Left,Control+ISO_Left_Tab";
+    kb-row-up: "Alt+k,Up,Control+p";
+    kb-row-down: "Alt+j,Down,Control+n";
+    terminal: "alacritty";
+    font: "JetBrainsMono Nerd Font 12";
 }
 
 @theme "theme"

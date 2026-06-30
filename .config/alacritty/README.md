@@ -10,8 +10,6 @@ Alacritty is the terminal emulator — GPU-accelerated and minimal, configured i
 
 ## Keybinds
 
-- `Alt+T` - new window
-- `Ctrl+Alt+J` / `Ctrl+Alt+K` - send Ctrl+Alt+Down / Up (Neovim split navigation)
 - `Ctrl+Alt+/` - search forward, `Ctrl+Alt+?` - search backward (only outside Vi mode)
 - `Ctrl+Shift+Space` - toggle Vi mode; inside it use `/` `?` `n` `N` natively
 

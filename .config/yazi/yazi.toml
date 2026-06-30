@@ -10,3 +10,11 @@ show_hidden = true
 edit = [
   { run = 'nvim "$@"', block = true, desc = "Open in Neovim", for = "unix" },
 ]
+pdf = [
+  { run = 'zathura "$@"', orphan = true, desc = "Open PDF in Zathura", for = "unix" },
+]
+
+[open]
+prepend_rules = [
+  { mime = "application/pdf", use = "pdf" },
+]
