@@ -14,7 +14,7 @@ ShellRoot {
     property string activeSpecialWorkspace: ""
     property var specialWorkspaces: [
         { name: "term", label: "T", accent: "#40a02b" },
-        { name: "files", label: "Y", accent: "#ffffff" },
+        { name: "files", label: "Y", accent: "#1e66f5" },
         { name: "music", label: "M", accent: "#40a02b" },
         { name: "cmus", label: "C", accent: "#e64553" },
         { name: "notes", label: "N", accent: "#7287fd" },
