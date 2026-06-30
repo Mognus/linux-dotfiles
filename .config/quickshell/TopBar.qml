@@ -69,7 +69,7 @@ PanelWindow {
         right: true
     }
 
-    implicitHeight: 28
+    implicitHeight: 34
     color: "transparent"
     aboveWindows: true
 
@@ -92,7 +92,7 @@ PanelWindow {
             model: 9
 
             Rectangle {
-                width: 28
+                width: 36
                 height: bar.implicitHeight
                 color: "transparent"
 
@@ -102,7 +102,7 @@ PanelWindow {
                     color: "#ffffff"
                     opacity: bar.workspaceActive(modelData + 1) ? 1.0 : bar.workspaceExists(modelData + 1) ? 0.82 : 0.42
                     font.family: "Syne, MesloLGS Nerd Font, monospace"
-                    font.pixelSize: 16
+                    font.pixelSize: 20
                     font.bold: bar.workspaceActive(modelData + 1)
                 }
 
@@ -130,7 +130,7 @@ PanelWindow {
             text: "●"
             color: bar.recording ? "#d20f39" : "transparent"
             font.family: "Syne, MesloLGS Nerd Font, monospace"
-            font.pixelSize: 13
+            font.pixelSize: 17
             font.bold: true
 
             MouseArea {
@@ -148,7 +148,7 @@ PanelWindow {
             text: bar.clockText
             color: "#ffffff"
             font.family: "Syne, MesloLGS Nerd Font, monospace"
-            font.pixelSize: 12
+            font.pixelSize: 15
             font.bold: true
         }
     }
@@ -168,12 +168,12 @@ PanelWindow {
             text: "VOL " + Audio.percent(Pipewire.defaultAudioSink)
             color: Audio.muted(Pipewire.defaultAudioSink) ? "#e64553" : "#ffffff"
             font.family: "Syne, MesloLGS Nerd Font, monospace"
-            font.pixelSize: 14
+            font.pixelSize: 18
         }
 
         Rectangle {
             anchors.verticalCenter: parent.verticalCenter
-            width: 24
+            width: 31
             height: bar.implicitHeight
             color: "transparent"
 
@@ -182,7 +182,7 @@ PanelWindow {
                 text: "⚙"
                 color: bar.quickSettingsOpen ? "#40a02b" : "#ffffff"
                 font.family: "Syne, MesloLGS Nerd Font, monospace"
-                font.pixelSize: 15
+                font.pixelSize: 19
                 font.bold: true
             }
 
@@ -212,7 +212,7 @@ PanelWindow {
                 text: modelData.label
                 color: bar.specialWorkspaceVisible(modelData.name) ? modelData.accent : bar.specialWorkspaceExists(modelData.name) ? "#ffffff" : "#666666"
                 font.family: "Syne, MesloLGS Nerd Font, monospace"
-                font.pixelSize: 18
+                font.pixelSize: 23
                 font.bold: true
 
                 MouseArea {
