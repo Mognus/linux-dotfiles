@@ -4,13 +4,13 @@
       "Read"
     ]
   },
-  "model": "opus",
+  "model": "sonnet",
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true
   },
   "effortLevel": "high",
-  "theme": "dark-ansi",
-  "tui": "fullscreen"
+  "tui": "fullscreen",
+  "theme": "dark-ansi"
 }
