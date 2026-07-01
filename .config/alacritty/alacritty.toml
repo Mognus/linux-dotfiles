@@ -75,3 +75,27 @@ chars = "\u001b\u0016"
 key = "D"
 mods = "Super|Alt"
 chars = "\u001b\u0004"
+
+# Super+Alt+Shift+hjkl: pane resize (mirrors Hyprland's Super+Shift+hjkl
+# window resize). Ctrl+Shift+letter is indistinguishable from Ctrl+letter at
+# the byte level, so this sends custom sequences tmux registers as user-keys.
+[[keyboard.bindings]]
+key = "H"
+mods = "Super|Alt|Shift"
+chars = "\u001bRh"
+
+[[keyboard.bindings]]
+key = "J"
+mods = "Super|Alt|Shift"
+chars = "\u001bRj"
+
+[[keyboard.bindings]]
+key = "K"
+mods = "Super|Alt|Shift"
+chars = "\u001bRk"
+
+[[keyboard.bindings]]
+key = "L"
+mods = "Super|Alt|Shift"
+chars = "\u001bRl"
+
