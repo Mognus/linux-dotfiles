@@ -10,6 +10,8 @@ Neovim is managed from `~/dotfiles/.config/nvim`.
 - `lua/core/plugins.lua` declares and configures `vim.pack` plugins.
 - `lua/core/keymaps.lua` contains global keymaps.
 - `lua/core/lsp.lua` contains language server and diagnostic behavior.
+- `lua/core/format.lua` configures on-demand formatting through `conform.nvim`.
+- `lua/core/git.lua` implements a custom Snacks picker for Git status across the root repo and its submodules.
 
 ## Features
 
@@ -19,6 +21,7 @@ Neovim is managed from `~/dotfiles/.config/nvim`.
 - ESLint diagnostics and code actions through `vscode-eslint-language-server`.
 - Rust LSP through `rust-analyzer`.
 - Completion through `blink.cmp`.
+- On-demand formatting through `conform.nvim` (Prettier for JS/TS, `rustfmt` for Rust).
 - Auto-pairs through `nvim-autopairs`.
 - Highlighted `TODO`, `FIXME`, and `NOTE` comments through `todo-comments.nvim`.
 - Inline Git hunks through `gitsigns.nvim`.
@@ -35,7 +38,8 @@ Neovim is managed from `~/dotfiles/.config/nvim`.
 | `Ctrl+Q` | Close tab |
 | `Ctrl+J` | Previous tab |
 | `Ctrl+K` | Next tab |
-| `Ctrl+Shift+F` | Grep files |
+| `Ctrl+F` | Grep files |
+| `Ctrl+P` | Find files |
 | `Ctrl+Shift+M` | Show project problems |
 | `Ctrl+Shift+O` | Show symbols in current file |
 | `Ctrl+Shift+G` | Show Git workspace status, including submodules |
@@ -47,6 +51,7 @@ Neovim is managed from `~/dotfiles/.config/nvim`.
 | `F24` | Find references fallback when the terminal encodes `Shift+F12` as `F24` |
 | `F2` | Rename symbol |
 | `Ctrl+.` | Code action |
+| `Ctrl+Shift+I` | Format file |
 | `K` | Show hover information |
 | `F4` | Show problem under cursor |
 | `F8` | Next problem |
@@ -81,7 +86,7 @@ Git state is shown with simple markers:
 
 ### Search
 
-Use `Ctrl+Shift+F` for project-wide grep. In the Snacks picker, toggle ignored files with `Alt+i` when you need to search `node_modules` or other ignored paths. Toggle hidden files with `Alt+h` when dotfiles are missing from the results.
+Use `Ctrl+F` for project-wide grep and `Ctrl+P` to find files by name. In the Snacks picker, toggle ignored files with `Alt+i` when you need to search `node_modules` or other ignored paths. Toggle hidden files with `Alt+h` when dotfiles are missing from the results.
 
 ### TypeScript Navigation
 

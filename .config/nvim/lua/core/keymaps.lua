@@ -4,6 +4,14 @@ vim.keymap.set("n", "<C-b>", function()
     Snacks.explorer()
 end, { desc = "Toggle file explorer" })
 
+vim.keymap.set("n", "<C-f>", function()
+    Snacks.picker.grep()
+end, { desc = "Grep files" })
+
+vim.keymap.set("n", "<C-p>", function()
+    Snacks.picker.files()
+end, { desc = "Find files" })
+
 vim.keymap.set("n", "<C-t>", "<cmd>tabnew<CR>", { desc = "New tab" })
 vim.keymap.set("n", "<C-q>", "<cmd>tabclose<CR>", { desc = "Close tab" })
 vim.keymap.set("n", "<C-j>", "<cmd>tabprev<CR>", { desc = "Previous tab" })
@@ -16,10 +24,6 @@ end, { desc = "Show keymaps" })
 vim.keymap.set("n", "<F3>", function()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = "Toggle inlay hints" })
-
-vim.keymap.set("n", "<C-/>", function()
-    Snacks.picker.grep()
-end, { desc = "Grep files" })
 
 vim.keymap.set("n", "<C-S-m>", function()
     Snacks.picker.diagnostics()
