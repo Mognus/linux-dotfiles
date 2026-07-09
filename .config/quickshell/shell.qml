@@ -7,6 +7,7 @@ import QtQuick
 ShellRoot {
     id: root
 
+    property bool topBarVisible: true
     property bool tuxVisible: true
     property bool quickSettingsOpen: false
     property string clockText: Qt.formatTime(new Date(), "hh:mm")
@@ -104,6 +105,14 @@ ShellRoot {
     }
 
     IpcHandler {
+        target: "bar"
+
+        function toggle(): void {
+            root.topBarVisible = !root.topBarVisible
+        }
+    }
+
+    IpcHandler {
         target: "tux"
 
         function toggle(): void {
@@ -124,6 +133,7 @@ ShellRoot {
     }
 
     TopBar {
+        shown: root.topBarVisible
         recording: root.recording
         clockText: root.clockText
         quickSettingsOpen: root.quickSettingsOpen

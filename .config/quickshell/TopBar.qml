@@ -7,11 +7,13 @@ import "lib/Audio.js" as Audio
 PanelWindow {
     id: bar
 
+    property bool shown: true
     property bool recording: false
     property bool quickSettingsOpen: false
     property string clockText: ""
     property string activeSpecialWorkspace: ""
     property var specialWorkspaces: []
+    readonly property int barHeight: 34
 
     signal recordingToggleRequested()
     signal quickSettingsToggleRequested()
@@ -69,16 +71,50 @@ PanelWindow {
         right: true
     }
 
-    implicitHeight: 34
+    // Collapse the surface so a hidden bar does not reserve screen space.
+    implicitHeight: bar.shown ? bar.barHeight : 0
     color: "transparent"
     aboveWindows: true
 
+    Behavior on implicitHeight {
+        NumberAnimation {
+            duration: 180
+            easing.type: Easing.OutCubic
+        }
+    }
+
+    // Clip the fixed-height content while it moves out of the collapsing surface.
+    Item {
+        id: viewport
+
+        anchors.fill: parent
+        clip: true
+
+        Item {
+            id: content
+
+            width: parent.width
+            height: bar.barHeight
+            y: bar.shown ? 0 : -height
+
+            Behavior on y {
+                NumberAnimation {
+                    duration: 180
+                    easing.type: Easing.OutCubic
+                }
+            }
+        }
+    }
+
     Rectangle {
+        parent: content
+        z: -1
         anchors.fill: parent
         color: "#b8000000"
     }
 
     Row {
+        parent: content
         anchors {
             left: parent.left
             leftMargin: 8
@@ -93,7 +129,7 @@ PanelWindow {
 
             Rectangle {
                 width: 36
-                height: bar.implicitHeight
+                height: bar.barHeight
                 color: "transparent"
 
                 Text {
@@ -141,6 +177,7 @@ PanelWindow {
     }
 
     Column {
+        parent: content
         anchors.centerIn: parent
 
         Text {
@@ -154,6 +191,7 @@ PanelWindow {
     }
 
     Row {
+        parent: content
         anchors {
             right: parent.right
             rightMargin: 10
@@ -174,7 +212,7 @@ PanelWindow {
         Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             width: 31
-            height: bar.implicitHeight
+            height: bar.barHeight
             color: "transparent"
 
             Text {

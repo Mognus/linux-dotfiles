@@ -18,7 +18,8 @@ local function toggle_special(name)
 end
 
 function M.setup(programs)
-    bind("CTRL + SUPER + SHIFT + T", exec("qs -p $HOME/dotfiles/.config/quickshell ipc call tux toggle"))
+    mod_bind("CTRL + P", exec("qs -p $HOME/dotfiles/.config/quickshell ipc call bar toggle"))
+    mod_bind("CTRL + T", exec("qs -p $HOME/dotfiles/.config/quickshell ipc call tux toggle"))
     mod_bind("CTRL + G", exec("qs -p $HOME/dotfiles/.config/quickshell ipc call quicksettings toggle"))
     mod_bind("Return", exec(programs.terminal))
     mod_bind("B", exec(programs.browser))
