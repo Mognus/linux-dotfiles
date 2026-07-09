@@ -7,7 +7,6 @@ Fish is the daily shell.
 - Loads local user binaries into `PATH`
 - Enables FZF keybinds when available
 - Enables Zoxide directory jumping when available
-- Keeps common Tmux actions behind short aliases
 - Provides screenshot helper functions
 
 ## Keybinds
@@ -19,11 +18,7 @@ Fish is the daily shell.
 ## Aliases
 
 - `ll` - List files with details
-- `tl` - List tmux sessions
-- `tn` - New tmux session
-- `ta` - Attach tmux session
-- `tk` - Kill tmux session
 
 ## Workflow
 
-Use Fish for interactive shell work, FZF for search, Zoxide for directory jumps, and Tmux aliases for project sessions.
+Use Fish for interactive shell work, FZF for search, and Zoxide for directory jumps.
