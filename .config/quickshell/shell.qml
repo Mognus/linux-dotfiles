@@ -7,7 +7,8 @@ import QtQuick
 ShellRoot {
     id: root
 
-    property bool topBarVisible: true
+    property bool bottomBarVisible: true
+    property bool workspaceHudVisible: false
     property bool tuxVisible: true
     property bool quickSettingsOpen: false
     property string clockText: Qt.formatTime(new Date(), "hh:mm")
@@ -47,6 +48,20 @@ ShellRoot {
     function toggleSpecialWorkspace(name) {
         root.activeSpecialWorkspace = root.specialWorkspaceVisible(name) ? "" : "special:" + name;
         Hyprland.dispatch("togglespecialworkspace " + name);
+    }
+
+    function toggleBottomBar() {
+        root.bottomBarVisible = !root.bottomBarVisible;
+        if (root.bottomBarVisible) {
+            root.workspaceHudVisible = false;
+        }
+    }
+
+    function toggleWorkspaceHud() {
+        root.workspaceHudVisible = !root.workspaceHudVisible;
+        if (root.workspaceHudVisible) {
+            root.bottomBarVisible = false;
+        }
     }
 
     Timer {
@@ -105,10 +120,18 @@ ShellRoot {
     }
 
     IpcHandler {
-        target: "bar"
+        target: "bottombar"
 
         function toggle(): void {
-            root.topBarVisible = !root.topBarVisible
+            root.toggleBottomBar()
+        }
+    }
+
+    IpcHandler {
+        target: "workspacehud"
+
+        function toggle(): void {
+            root.toggleWorkspaceHud()
         }
     }
 
@@ -132,8 +155,8 @@ ShellRoot {
         }
     }
 
-    TopBar {
-        shown: root.topBarVisible
+    BottomBar {
+        shown: root.bottomBarVisible
         recording: root.recording
         clockText: root.clockText
         quickSettingsOpen: root.quickSettingsOpen
@@ -143,6 +166,12 @@ ShellRoot {
         onRecordingToggleRequested: recordToggleProcess.running = true
         onQuickSettingsToggleRequested: root.quickSettingsOpen = !root.quickSettingsOpen
         onSpecialWorkspaceToggleRequested: name => root.toggleSpecialWorkspace(name)
+    }
+
+    WorkspaceHud {
+        shown: root.workspaceHudVisible
+
+        onWorkspaceSelected: id => Hyprland.dispatch("workspace " + id)
     }
 
     QuickSettingsPanel {
@@ -158,5 +187,7 @@ ShellRoot {
     TuxMascot {
         visible: root.tuxVisible
         angel: true
+        bottomInset: root.workspaceHudVisible ? 42 : 0
     }
+
 }

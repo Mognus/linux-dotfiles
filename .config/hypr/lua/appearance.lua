@@ -2,12 +2,14 @@ local M = {}
 
 local function animations()
     hl.curve("easeOut", { type = "bezier", points = { { 0.05, 0.9 }, { 0.1, 1.05 } } })
+    -- Keep workspace transitions smooth without overshooting their destination.
+    hl.curve("workspaceEaseOut", { type = "bezier", points = { { 0.16, 1.0 }, { 0.3, 1.0 } } })
     hl.curve("linear", { type = "bezier", points = { { 0.0, 0.0 }, { 1.0, 1.0 } } })
 
     hl.animation({ leaf = "windows", enabled = true, speed = 4, bezier = "easeOut", style = "slide" })
     hl.animation({ leaf = "windowsOut", enabled = true, speed = 3, bezier = "linear", style = "slide" })
     hl.animation({ leaf = "fade", enabled = true, speed = 4, bezier = "linear" })
-    hl.animation({ leaf = "workspaces", enabled = true, speed = 4, bezier = "easeOut", style = "slide" })
+    hl.animation({ leaf = "workspaces", enabled = true, speed = 4, bezier = "workspaceEaseOut", style = "slide" })
     hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 4, bezier = "easeOut", style = "slidevert" })
 end
 

@@ -6,7 +6,7 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 ## Structure
 
 - `shell.qml` — root state, timers, IPC, process hooks, and component wiring.
-- `TopBar.qml` — workspace strip, clock, recording indicator, volume text, quick settings trigger, special workspace buttons.
+- `BottomBar.qml` — workspace strip, clock, recording indicator, volume text, quick settings trigger, special workspace buttons.
 - `QuickSettingsPanel.qml` — right side quick settings panel.
 - `AudioControl.qml` — reusable output/input volume control.
 - `TuxMascot.qml` — left/right mascot panel.

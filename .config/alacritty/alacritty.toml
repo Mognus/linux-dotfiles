@@ -2,7 +2,7 @@
 TERM = "xterm-256color"
 
 [font]
-size = 11
+size = 16
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
@@ -98,4 +98,3 @@ chars = "\u001bRk"
 key = "L"
 mods = "Super|Alt|Shift"
 chars = "\u001bRl"
-

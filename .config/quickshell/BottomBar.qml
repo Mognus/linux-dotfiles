@@ -67,14 +67,14 @@ PanelWindow {
     }
 
     anchors {
-        top: true
+        bottom: true
         left: true
         right: true
     }
 
     // Collapse the surface so a hidden bar does not reserve screen space.
     implicitHeight: bar.shown ? bar.barHeight : 0
-    // Reserve a small visual separation only while the bar is visible.
+    // Keep a small visual separation above the bottom bar while it is visible.
     exclusiveZone: bar.implicitHeight + (bar.shown ? bar.contentGap : 0)
     color: "transparent"
     aboveWindows: true
@@ -86,7 +86,7 @@ PanelWindow {
         }
     }
 
-    // Clip the fixed-height content while it moves out of the collapsing surface.
+    // Clip the fixed-height content while it moves below the collapsing surface.
     Item {
         id: viewport
 
@@ -98,7 +98,7 @@ PanelWindow {
 
             width: parent.width
             height: bar.barHeight
-            y: bar.shown ? 0 : -height
+            y: bar.shown ? 0 : height
 
             Behavior on y {
                 NumberAnimation {
@@ -119,8 +119,8 @@ PanelWindow {
     Row {
         parent: content
         anchors {
-            left: parent.left
-            leftMargin: 8
+            right: parent.right
+            rightMargin: 8
             verticalCenter: parent.verticalCenter
         }
 
@@ -196,20 +196,30 @@ PanelWindow {
     Row {
         parent: content
         anchors {
-            right: parent.right
-            rightMargin: 10
+            left: parent.left
+            leftMargin: 10
             verticalCenter: parent.verticalCenter
         }
 
         height: parent.height
         spacing: 14
 
-        Text {
-            anchors.verticalCenter: parent.verticalCenter
-            text: "VOL " + Audio.percent(Pipewire.defaultAudioSink)
-            color: Audio.muted(Pipewire.defaultAudioSink) ? "#e64553" : "#ffffff"
-            font.family: "Syne, MesloLGS Nerd Font, monospace"
-            font.pixelSize: 18
+        Repeater {
+            model: bar.specialWorkspaces
+
+            Text {
+                anchors.verticalCenter: parent.verticalCenter
+                text: modelData.label
+                color: bar.specialWorkspaceVisible(modelData.name) ? modelData.accent : bar.specialWorkspaceExists(modelData.name) ? "#ffffff" : "#666666"
+                font.family: "Syne, MesloLGS Nerd Font, monospace"
+                font.pixelSize: 23
+                font.bold: true
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: bar.specialWorkspaceToggleRequested(modelData.name)
+                }
+            }
         }
 
         Rectangle {
@@ -245,22 +255,12 @@ PanelWindow {
             }
         }
 
-        Repeater {
-            model: bar.specialWorkspaces
-
-            Text {
-                anchors.verticalCenter: parent.verticalCenter
-                text: modelData.label
-                color: bar.specialWorkspaceVisible(modelData.name) ? modelData.accent : bar.specialWorkspaceExists(modelData.name) ? "#ffffff" : "#666666"
-                font.family: "Syne, MesloLGS Nerd Font, monospace"
-                font.pixelSize: 23
-                font.bold: true
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: bar.specialWorkspaceToggleRequested(modelData.name)
-                }
-            }
+        Text {
+            anchors.verticalCenter: parent.verticalCenter
+            text: "VOL " + Audio.percent(Pipewire.defaultAudioSink)
+            color: Audio.muted(Pipewire.defaultAudioSink) ? "#e64553" : "#ffffff"
+            font.family: "Syne, MesloLGS Nerd Font, monospace"
+            font.pixelSize: 18
         }
     }
 }
