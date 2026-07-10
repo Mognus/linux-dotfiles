@@ -15,12 +15,8 @@ function M.setup()
     hl.config({
         general = {
             gaps_in = 0,
-            gaps_out = 8,
-            border_size = 1,
-            col = {
-                active_border = "rgb(d8d8d8)",
-                inactive_border = "rgb(1a1a1a)",
-            },
+            gaps_out = 0,
+            border_size = 0,
             layout = "dwindle",
         },
         decoration = {

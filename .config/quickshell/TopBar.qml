@@ -14,6 +14,7 @@ PanelWindow {
     property string activeSpecialWorkspace: ""
     property var specialWorkspaces: []
     readonly property int barHeight: 34
+    readonly property int contentGap: 4
 
     signal recordingToggleRequested()
     signal quickSettingsToggleRequested()
@@ -73,6 +74,8 @@ PanelWindow {
 
     // Collapse the surface so a hidden bar does not reserve screen space.
     implicitHeight: bar.shown ? bar.barHeight : 0
+    // Reserve a small visual separation only while the bar is visible.
+    exclusiveZone: bar.implicitHeight + (bar.shown ? bar.contentGap : 0)
     color: "transparent"
     aboveWindows: true
 
