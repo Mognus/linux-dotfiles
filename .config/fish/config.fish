@@ -1,4 +1,4 @@
-# Default editor — used by Yazi, git, frg, etc.
+# Default editor — used by git, frg, etc.
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 
