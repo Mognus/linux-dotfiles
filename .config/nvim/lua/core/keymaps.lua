@@ -12,6 +12,14 @@ vim.keymap.set("n", "<C-p>", function()
     Snacks.picker.files()
 end, { desc = "Find files" })
 
+vim.keymap.set({ "n", "x", "o" }, "gs", function()
+    require("flash").jump()
+end, { desc = "Flash jump" })
+
+vim.keymap.set({ "n", "x", "o" }, "gS", function()
+    require("flash").treesitter()
+end, { desc = "Flash treesitter jump" })
+
 vim.keymap.set("n", "<C-t>", "<cmd>tabnew<CR>", { desc = "New tab" })
 vim.keymap.set("n", "<C-q>", "<cmd>tabclose<CR>", { desc = "Close tab" })
 vim.keymap.set("n", "<C-j>", "<cmd>tabprev<CR>", { desc = "Previous tab" })

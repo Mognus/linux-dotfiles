@@ -97,14 +97,6 @@ require("snacks").setup({
 
 require("flash").setup()
 
-vim.keymap.set({ "n", "x", "o" }, "gw", function()
-    require("flash").jump()
-end, { desc = "Flash jump" })
-
-vim.keymap.set({ "n", "x", "o" }, "gW", function()
-    require("flash").treesitter()
-end, { desc = "Flash treesitter jump" })
-
 require("blink.cmp").setup({
     keymap = {
         preset = "none",
