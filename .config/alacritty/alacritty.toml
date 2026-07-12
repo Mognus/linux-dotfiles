@@ -72,9 +72,25 @@ mods = "Super|Alt"
 chars = "\u001b\u0016"
 
 [[keyboard.bindings]]
-key = "D"
+key = "Q"
 mods = "Super|Alt"
-chars = "\u001b\u0004"
+chars = "\u001b\u0011"
+
+# Use a custom sequence so the session picker does not emit Ctrl+S/XOFF.
+[[keyboard.bindings]]
+key = "S"
+mods = "Super|Alt"
+chars = "\u001bRs"
+
+[[keyboard.bindings]]
+key = "N"
+mods = "Super|Alt"
+chars = "\u001bRn"
+
+[[keyboard.bindings]]
+key = "R"
+mods = "Super|Alt"
+chars = "\u001bRr"
 
 # Super+Alt+Shift+hjkl: pane resize (mirrors Hyprland's Super+Shift+hjkl
 # window resize). Ctrl+Shift+letter is indistinguishable from Ctrl+letter at
