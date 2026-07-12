@@ -51,7 +51,7 @@ end
 
 function fish_right_prompt
     if test "$argv[1]" = --final-rendering
-        set_color brblack
+        set_color 777777
         printf '%s' (date +%H:%M:%S)
         set_color normal
     end
