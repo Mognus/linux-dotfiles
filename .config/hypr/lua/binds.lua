@@ -58,6 +58,7 @@ function M.setup(programs)
     mod_bind("CTRL + S", exec([[grim -g "$(slurp)" -t png - | wl-copy --type image/png]]))
     mod_bind("CTRL + v", exec(os.getenv("HOME") .. "/.config/hypr/scripts/record-toggle.sh"))
     mod_bind("W", exec(os.getenv("HOME") .. "/.config/hypr/scripts/wallpaper-switcher.sh"))
+    mod_bind("SHIFT + W", exec(os.getenv("HOME") .. "/.config/hypr/scripts/theme-switcher.sh"))
 
     mod_bind("equal", exec(os.getenv("HOME") .. "/.config/hypr/scripts/opacity-switch.sh up"), { repeating = true })
     mod_bind("minus", exec(os.getenv("HOME") .. "/.config/hypr/scripts/opacity-switch.sh down"), { repeating = true })

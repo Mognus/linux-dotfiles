@@ -1,3 +1,6 @@
+[general]
+import = ["~/.local/state/dotfiles-theme/alacritty.toml"]
+
 [env]
 TERM = "xterm-256color"
 
@@ -18,12 +21,8 @@ style = "Italic"
 
 [window]
 decorations = "None"
-opacity = 0.80
+opacity = 0.75
 padding = { x = 12, y = 12 }
-
-[colors.primary]
-background = "#0e0e11"
-foreground = "#cdd6f4"
 
 # Vim-style buffer search. Gated to ~Vi so these stay out of the way once Vi
 # mode is active — there you already get native /, ?, n, N.

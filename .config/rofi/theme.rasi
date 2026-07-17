@@ -1,15 +1,6 @@
-* {
-    bg: #050507e8;
-    bg-alt: #101014f2;
-    bg-hover: #18181df2;
-    fg: #ffffffff;
-    fg-soft: #cdd6f4ff;
-    muted: #888888ff;
-    edge: #d8d8d8ff;
-    edge-muted: #2a2a30ff;
-    accent: #00d7d7ff;
-    danger: #f38ba8ff;
+@import "~/.local/state/dotfiles-theme/rofi.rasi"
 
+* {
     background-color: transparent;
     text-color: @fg;
     font: "JetBrainsMono Nerd Font 12";

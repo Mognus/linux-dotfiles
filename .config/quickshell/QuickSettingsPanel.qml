@@ -31,10 +31,10 @@ PanelWindow {
 
     Rectangle {
         anchors.fill: parent
-        color: "#e6111111"
+        color: Colors.panel
         radius: 0
         border.width: 1
-        border.color: "#24ffffff"
+        border.color: Colors.subtle
     }
 
     Column {
@@ -53,7 +53,7 @@ PanelWindow {
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width - 32
                 text: "Quick Settings"
-                color: "#ffffff"
+                color: Colors.foreground
                 font.family: "Syne, MesloLGS Nerd Font, monospace"
                 font.pixelSize: 18
                 font.bold: true
@@ -63,12 +63,12 @@ PanelWindow {
                 width: 28
                 height: 28
                 radius: 0
-                color: closeMouse.containsMouse ? "#28ffffff" : "#14ffffff"
+                color: closeMouse.containsMouse ? Colors.hoverOverlay : Colors.lowOverlay
 
                 Text {
                     anchors.centerIn: parent
                     text: "x"
-                    color: "#ffffff"
+                    color: Colors.foreground
                     font.family: "Syne, MesloLGS Nerd Font, monospace"
                     font.pixelSize: 15
                     font.bold: true
@@ -87,27 +87,27 @@ PanelWindow {
             width: parent.width
             title: "Output"
             node: Pipewire.defaultAudioSink
-            accent: "#40a02b"
+            accent: Colors.accent
             showPresets: true
         }
 
         Rectangle {
             width: parent.width
             height: 1
-            color: "#20ffffff"
+            color: Colors.divider
         }
 
         AudioControl {
             width: parent.width
             title: "Microphone"
             node: Pipewire.defaultAudioSource
-            accent: "#7287fd"
+            accent: Colors.secondary
         }
 
         Text {
             width: parent.width
             text: Pipewire.ready ? "PIPEWIRE READY" : "PIPEWIRE WAIT"
-            color: Pipewire.ready ? "#7dffffff" : "#e64553"
+            color: Pipewire.ready ? Colors.foregroundSoft : Colors.danger
             horizontalAlignment: Text.AlignRight
             font.family: "Syne, MesloLGS Nerd Font, monospace"
             font.pixelSize: 10

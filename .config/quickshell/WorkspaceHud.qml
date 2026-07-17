@@ -54,7 +54,7 @@ PanelWindow {
 
     Rectangle {
         anchors.fill: parent
-        color: "#cc0e0e11"
+        color: Colors.panel
     }
 
     Row {
@@ -79,7 +79,7 @@ PanelWindow {
                 Text {
                     anchors.centerIn: parent
                     text: modelData + 1
-                    color: "#ffffff"
+                    color: Colors.foreground
                     opacity: hud.workspaceActive(modelData + 1) ? 1.0 : hud.workspaceExists(modelData + 1) ? 0.82 : 0.42
                     font.family: "Syne, MesloLGS Nerd Font, monospace"
                     font.pixelSize: 20
@@ -94,7 +94,7 @@ PanelWindow {
                     }
 
                     height: 2
-                    color: hud.workspaceActive(modelData + 1) ? "#ffffff" : "#59ffffff"
+                    color: hud.workspaceActive(modelData + 1) ? Colors.foreground : Colors.faint
                     visible: hud.workspaceActive(modelData + 1) || hud.workspaceExists(modelData + 1)
                 }
 

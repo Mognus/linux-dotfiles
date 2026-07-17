@@ -3,7 +3,8 @@ local M = {}
 function M.setup(programs)
     hl.on("hyprland.start", function()
         hl.exec_cmd("pactl set-default-source alsa_input.usb-Kingston_HyperX_7.1_Audio_00000000-00.analog-stereo")
-        hl.exec_cmd("dunst")
+        -- Generate the saved palette before themed desktop processes start.
+        hl.exec_cmd("bash -lc '$HOME/.config/hypr/scripts/theme-switcher.sh --apply && exec dunst -conf $HOME/.local/state/dotfiles-theme/dunstrc'")
         hl.exec_cmd("awww-daemon")
         hl.exec_cmd("awww img /home/magnus/Pictures/wallpapers/Tank-Girl-Wallpaper-Black.png")
         hl.exec_cmd("qs -p " .. os.getenv("HOME") .. "/dotfiles/.config/quickshell")

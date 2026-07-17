@@ -1,0 +1,6 @@
+singleton Colors 1.0 Colors.qml
+AudioControl 1.0 AudioControl.qml
+BottomBar 1.0 BottomBar.qml
+QuickSettingsPanel 1.0 QuickSettingsPanel.qml
+TuxMascot 1.0 TuxMascot.qml
+WorkspaceHud 1.0 WorkspaceHud.qml

@@ -113,7 +113,7 @@ PanelWindow {
         parent: content
         z: -1
         anchors.fill: parent
-        color: "#b8000000"
+        color: Colors.bar
     }
 
     Row {
@@ -138,7 +138,7 @@ PanelWindow {
                 Text {
                     anchors.centerIn: parent
                     text: modelData + 1
-                    color: "#ffffff"
+                    color: Colors.foreground
                     opacity: bar.workspaceActive(modelData + 1) ? 1.0 : bar.workspaceExists(modelData + 1) ? 0.82 : 0.42
                     font.family: "Syne, MesloLGS Nerd Font, monospace"
                     font.pixelSize: 20
@@ -153,7 +153,7 @@ PanelWindow {
                     }
 
                     height: 2
-                    color: bar.workspaceUrgent(modelData + 1) ? "#d20f39" : bar.workspaceActive(modelData + 1) ? "#ffffff" : "#59ffffff"
+                    color: bar.workspaceUrgent(modelData + 1) ? Colors.danger : bar.workspaceActive(modelData + 1) ? Colors.foreground : Colors.faint
                     visible: bar.workspaceActive(modelData + 1) || bar.workspaceExists(modelData + 1) || bar.workspaceUrgent(modelData + 1)
                 }
 
@@ -167,7 +167,7 @@ PanelWindow {
         Text {
             anchors.verticalCenter: parent.verticalCenter
             text: "●"
-            color: bar.recording ? "#d20f39" : "transparent"
+            color: bar.recording ? Colors.danger : "transparent"
             font.family: "Syne, MesloLGS Nerd Font, monospace"
             font.pixelSize: 17
             font.bold: true
@@ -186,7 +186,7 @@ PanelWindow {
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
             text: bar.clockText
-            color: "#ffffff"
+            color: Colors.foreground
             font.family: "Syne, MesloLGS Nerd Font, monospace"
             font.pixelSize: 15
             font.bold: true
@@ -210,7 +210,7 @@ PanelWindow {
             Text {
                 anchors.verticalCenter: parent.verticalCenter
                 text: modelData.label
-                color: bar.specialWorkspaceVisible(modelData.name) ? modelData.accent : bar.specialWorkspaceExists(modelData.name) ? "#ffffff" : "#666666"
+                color: bar.specialWorkspaceVisible(modelData.name) ? modelData.accent : bar.specialWorkspaceExists(modelData.name) ? Colors.foreground : Colors.muted
                 font.family: "Syne, MesloLGS Nerd Font, monospace"
                 font.pixelSize: 23
                 font.bold: true
@@ -231,7 +231,7 @@ PanelWindow {
             Text {
                 anchors.centerIn: parent
                 text: "⚙"
-                color: bar.quickSettingsOpen ? "#40a02b" : "#ffffff"
+                color: bar.quickSettingsOpen ? Colors.accent : Colors.foreground
                 font.family: "Syne, MesloLGS Nerd Font, monospace"
                 font.pixelSize: 19
                 font.bold: true
@@ -245,7 +245,7 @@ PanelWindow {
                 }
 
                 height: 2
-                color: "#40a02b"
+                color: Colors.accent
                 visible: bar.quickSettingsOpen
             }
 
@@ -258,7 +258,7 @@ PanelWindow {
         Text {
             anchors.verticalCenter: parent.verticalCenter
             text: "VOL " + Audio.percent(Pipewire.defaultAudioSink)
-            color: Audio.muted(Pipewire.defaultAudioSink) ? "#e64553" : "#ffffff"
+            color: Audio.muted(Pipewire.defaultAudioSink) ? Colors.danger : Colors.foreground
             font.family: "Syne, MesloLGS Nerd Font, monospace"
             font.pixelSize: 18
         }

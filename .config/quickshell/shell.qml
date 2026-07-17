@@ -15,13 +15,13 @@ ShellRoot {
     property bool recording: false
     property string activeSpecialWorkspace: ""
     property var specialWorkspaces: [
-        { name: "term", label: "T", accent: "#40a02b" },
-        { name: "files", label: "Y", accent: "#1e66f5" },
-        { name: "music", label: "M", accent: "#40a02b" },
-        { name: "cmus", label: "C", accent: "#e64553" },
-        { name: "notes", label: "N", accent: "#7287fd" },
-        { name: "discord", label: "D", accent: "#8839ef" },
-        { name: "firefox", label: "F", accent: "#fe640b" },
+        { name: "term", label: "T", accent: Colors.success },
+        { name: "files", label: "Y", accent: Colors.accent },
+        { name: "music", label: "M", accent: Colors.success },
+        { name: "cmus", label: "C", accent: Colors.danger },
+        { name: "notes", label: "N", accent: Colors.secondary },
+        { name: "discord", label: "D", accent: Colors.violet },
+        { name: "firefox", label: "F", accent: Colors.orange },
     ]
 
     function setActiveSpecialFromEvent(event) {

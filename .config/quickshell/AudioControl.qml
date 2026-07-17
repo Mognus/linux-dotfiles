@@ -6,7 +6,7 @@ Column {
 
     property string title: ""
     property var node: null
-    property color accent: "#40a02b"
+    property color accent: Colors.accent
     property bool showPresets: false
 
     spacing: 10
@@ -19,7 +19,7 @@ Column {
             anchors.verticalCenter: parent.verticalCenter
             width: parent.width - 76
             text: control.title
-            color: "#ffffff"
+            color: Colors.foreground
             font.family: "Syne, MesloLGS Nerd Font, monospace"
             font.pixelSize: 15
             font.bold: true
@@ -29,12 +29,12 @@ Column {
             width: 76
             height: 24
             radius: 0
-            color: Audio.muted(control.node) ? "#36e64553" : "#18ffffff"
+            color: Audio.muted(control.node) ? Colors.withAlpha(Colors.danger, 0.21) : Colors.lowOverlay
 
             Text {
                 anchors.centerIn: parent
                 text: Audio.muted(control.node) ? "MUTED" : "MUTE"
-                color: Audio.muted(control.node) ? "#e64553" : "#ffffff"
+                color: Audio.muted(control.node) ? Colors.danger : Colors.foreground
                 font.family: "Syne, MesloLGS Nerd Font, monospace"
                 font.pixelSize: 11
                 font.bold: true
@@ -50,7 +50,7 @@ Column {
     Text {
         width: parent.width
         text: Audio.label(control.node)
-        color: "#b8ffffff"
+        color: Colors.foregroundSoft
         elide: Text.ElideRight
         font.family: "Syne, MesloLGS Nerd Font, monospace"
         font.pixelSize: 12
@@ -67,13 +67,13 @@ Column {
             width: parent.width - 52
             height: 10
             radius: 0
-            color: "#26ffffff"
+            color: Colors.subtle
 
             Rectangle {
                 width: track.width * Audio.volumeRatio(control.node)
                 height: parent.height
                 radius: 0
-                color: Audio.muted(control.node) ? "#e64553" : control.accent
+                color: Audio.muted(control.node) ? Colors.danger : control.accent
             }
 
             MouseArea {
@@ -91,7 +91,7 @@ Column {
             anchors.verticalCenter: parent.verticalCenter
             width: 42
             text: Audio.percent(control.node) + "%"
-            color: "#ffffff"
+            color: Colors.foreground
             horizontalAlignment: Text.AlignRight
             font.family: "Syne, MesloLGS Nerd Font, monospace"
             font.pixelSize: 13
@@ -114,12 +114,12 @@ Column {
                 width: (presetRow.width - 24) / 4
                 height: 28
                 radius: 0
-                color: Math.abs(Audio.percent(control.node) - modelData) < 3 ? "#3040a02b" : "#14ffffff"
+                color: Math.abs(Audio.percent(control.node) - modelData) < 3 ? Colors.withAlpha(control.accent, 0.19) : Colors.lowOverlay
 
                 Text {
                     anchors.centerIn: parent
                     text: modelData
-                    color: "#ffffff"
+                    color: Colors.foreground
                     font.family: "Syne, MesloLGS Nerd Font, monospace"
                     font.pixelSize: 12
                     font.bold: true

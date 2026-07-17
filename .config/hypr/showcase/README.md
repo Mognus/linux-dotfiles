@@ -33,6 +33,11 @@ Hyprland runs the desktop. Hyprpaper sets the wallpaper. Hyprlock locks the sess
 - `SUPER+Ctrl+S` - Area screenshot to clipboard
 - `SUPER+Ctrl+V` - Toggle recording
 
+## Appearance
+
+- `SUPER+W` - Pick a wallpaper
+- `SUPER+Shift+W` - Pick the Black, White, Pink, or Cyan palette
+
 ## Windows
 
 - `SUPER+Q` - Close window
