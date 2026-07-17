@@ -54,7 +54,7 @@ function M.setup(programs)
         bind("catchall", hl.dsp.submap("reset"))
     end)
 
-    mod_bind("S", exec([[grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +%F_%T).png]]))
+    mod_bind("S", exec([[grim -g "$(slurp)" ~/Pictures/screenshots/$(date +%F_%T).png]]))
     mod_bind("CTRL + S", exec([[grim -g "$(slurp)" -t png - | wl-copy --type image/png]]))
     mod_bind("CTRL + v", exec(os.getenv("HOME") .. "/.config/hypr/scripts/record-toggle.sh"))
     mod_bind("W", exec(os.getenv("HOME") .. "/.config/hypr/scripts/wallpaper-switcher.sh"))

@@ -6,7 +6,7 @@ function M.setup(programs)
         -- Generate the saved palette before themed desktop processes start.
         hl.exec_cmd("bash -lc '$HOME/.config/hypr/scripts/theme-switcher.sh --apply && exec dunst -conf $HOME/.local/state/dotfiles-theme/dunstrc'")
         hl.exec_cmd("awww-daemon")
-        hl.exec_cmd("awww img /home/magnus/Pictures/wallpapers/Tank-Girl-Wallpaper-Black.png")
+        hl.exec_cmd("awww img /home/magnus/Pictures/wallpapers/tank-girl-black.png")
         hl.exec_cmd("qs -p " .. os.getenv("HOME") .. "/dotfiles/.config/quickshell")
         hl.exec_cmd(programs.terminal, { workspace = "special:term silent" })
     end)
