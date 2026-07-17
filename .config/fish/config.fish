@@ -10,15 +10,15 @@ if status is-interactive
     command -q fzf; and fzf --fish | source
     command -q zoxide; and zoxide init fish | source
 
-    alias ll='eza -lah --group-directories-first'
+    alias ll='eza -lahg --group-directories-first'
     alias lt='eza --tree --level=2'
 
     function sc
-        grim -g (slurp) ~/Pictures/Screenshots/(date +%F_%T).png
+        grim -g (slurp) ~/Pictures/screenshots/(date +%F_%T).png
     end
 
     function scf
-        grim ~/Pictures/Screenshots/(date +%F_%T).png
+        grim ~/Pictures/screenshots/(date +%F_%T).png
     end
 
     function sce
