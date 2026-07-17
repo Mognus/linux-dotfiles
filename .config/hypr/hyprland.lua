@@ -1,4 +1,7 @@
 -- Native Hyprland Lua config.
+hl.env("XCURSOR_THEME", "macOS")
+hl.env("XCURSOR_SIZE", "40")
+
 local programs = require("lua.programs")
 
 require("lua.monitors")
