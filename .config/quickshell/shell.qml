@@ -187,7 +187,7 @@ ShellRoot {
     TuxMascot {
         visible: root.tuxVisible
         angel: true
-        bottomInset: root.workspaceHudVisible ? 42 : 0
+        bottomInset: root.workspaceHudVisible ? 34 : 0
     }
 
 }

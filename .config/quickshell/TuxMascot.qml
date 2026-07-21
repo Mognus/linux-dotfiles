@@ -15,13 +15,15 @@ PanelWindow {
 
     margins.bottom: mascot.bottomInset
 
-    implicitWidth: mascot.angel ? 61 : 66
-    implicitHeight: 66
+    implicitWidth: sprite.sourceSize.width > 0 ? sprite.sourceSize.width : 100
+    implicitHeight: sprite.sourceSize.height > 0 ? sprite.sourceSize.height : 100
     exclusiveZone: 0
     color: "transparent"
     aboveWindows: true
 
     AnimatedImage {
+        id: sprite
+
         anchors.fill: parent
         source: mascot.angel ? "assets/tuxangel_bottom.gif" : "assets/tuxdevil_bottom.gif"
         fillMode: Image.PreserveAspectFit
