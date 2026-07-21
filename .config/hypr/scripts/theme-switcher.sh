@@ -34,6 +34,7 @@ tmp_dir="$(mktemp -d "$state_dir/.generate.XXXXXX")"
 trap 'rm -rf "$tmp_dir"' EXIT
 
 value() { jq -er ".$1" "$palette"; }
+value_or() { jq -er ".$1 // .$2" "$palette"; }
 hex() { value "$1" | tr -d '#'; }
 
 # Quickshell watches this file, while other apps import their generated format.
@@ -56,16 +57,16 @@ EOF
 
 cat > "$tmp_dir/alacritty.toml" <<EOF
 [colors.primary]
-background = "$(value background)"
-foreground = "$(value foregroundSoft)"
+background = "$(value_or terminalBackground background)"
+foreground = "$(value_or terminalForeground foregroundSoft)"
 
 [colors.cursor]
 cursor = "$(value accent)"
-text = "$(value background)"
+text = "$(value_or terminalBackground background)"
 
 [colors.selection]
 background = "$(value accent)"
-text = "$(value background)"
+text = "$(value_or terminalForeground foregroundSoft)"
 EOF
 
 cat > "$tmp_dir/dunstrc" <<EOF
