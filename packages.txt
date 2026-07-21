@@ -8,6 +8,7 @@ fish                        # Friendly interactive shell
 tmux                        # Terminal multiplexer
 fzf                         # Fuzzy finder (Ctrl+R history, Ctrl+T files, Alt-C dirs)
 fd                          # Fast find, used as fzf backend
+eza                         # Directory listings used by Fish aliases
 zoxide                      # Smart cd replacement (z, zi)
 
 # --- Editor ---
@@ -28,6 +29,7 @@ vulkan-radeon               # Vulkan driver for AMD GPU
 # --- Wayland / Desktop ---
 hyprland                    # Wayland compositor / WM
 quickshell                  # Lightweight desktop widgets
+awww                        # Wallpaper daemon used by Hyprland scripts
 rofi                        # App launcher and dmenu replacement
 alacritty                   # Lightweight terminal emulator
 xdg-desktop-portal-hyprland # Screen sharing, file picker for Wayland apps
@@ -73,7 +75,6 @@ discord                     # Chat
 obsidian                    # Notes (Markdown vault)
 gimp                        # Image editor
 steam                       # Games
-mullvad-vpn                 # VPN
 sunshine                    # Game streaming host
 
 # --- Dev Languages ---
@@ -106,6 +107,7 @@ cmus                        # Terminal music player
 
 # --- Tools ---
 git                         # Version control
+pass                        # GPG-backed password store
 curl                        # HTTP requests
 wget                        # File download
 openssh                     # SSH client/server

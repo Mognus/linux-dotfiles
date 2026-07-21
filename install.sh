@@ -1,26 +1,43 @@
-#!/bin/bash
-set -e
+#!/usr/bin/env bash
+set -Eeuo pipefail
 
-packages=$(grep -v '^#' "$HOME/dotfiles/packages.txt" | sed 's/#.*//' | awk '{print $1}' | grep -v '^$' | tr '\n' ' ')
+repo_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+mapfile -t packages < <(awk '!/^#/ && NF { print $1 }' "$repo_dir/packages.txt")
 
-sudo pacman -S --needed $packages
+if ! command -v pacman >/dev/null 2>&1; then
+    printf 'Error: this installer requires an Arch-based system.\n' >&2
+    exit 1
+fi
 
-stow --dir="$HOME/dotfiles" --target="$HOME" .
+# Install Stow first so conflicts are detected before the full package transaction.
+sudo pacman -S --needed stow
+stow --simulate --dir="$repo_dir" --target="$HOME" .
 
-# Materialize the saved palette before themed applications are launched.
+sudo pacman -S --needed "${packages[@]}"
+stow --dir="$repo_dir" --target="$HOME" .
+
+# Materialize the saved palette before themed applications launch.
 "$HOME/.config/hypr/scripts/theme-switcher.sh" --apply
 
-# Cursor theme via dconf — GTK apps on Wayland read it through the XDG portal,
-# which ignores settings.ini; dconf is binary, so it can't live in the repo
-gsettings set org.gnome.desktop.interface cursor-theme 'macOS'
-gsettings set org.gnome.desktop.interface cursor-size 40
+# Cursor settings are best-effort because TTY installs may have no D-Bus session.
+if command -v gsettings >/dev/null 2>&1; then
+    gsettings set org.gnome.desktop.interface cursor-theme 'macOS' ||
+        printf 'Warning: could not apply the cursor theme through gsettings.\n' >&2
+    gsettings set org.gnome.desktop.interface cursor-size 40 ||
+        printf 'Warning: could not apply the cursor size through gsettings.\n' >&2
+fi
 
-# Firefox userChrome.css — symlink into the active profile
-FIREFOX_PROFILE=$(find "$HOME/.mozilla/firefox" -maxdepth 1 -name "*.default-release" -type d | head -1)
-if [ -n "$FIREFOX_PROFILE" ]; then
-    mkdir -p "$FIREFOX_PROFILE/chrome"
-    ln -sf "$HOME/dotfiles/firefox/userChrome.css" "$FIREFOX_PROFILE/chrome/userChrome.css"
-    echo "Firefox: symlinked userChrome.css -> $FIREFOX_PROFILE/chrome/"
+# Firefox userChrome.css — symlink into the active profile when one exists.
+firefox_root="$HOME/.mozilla/firefox"
+firefox_profile=""
+if [[ -d "$firefox_root" ]]; then
+    firefox_profile="$(find "$firefox_root" -maxdepth 1 -name '*.default-release' -type d -print -quit)"
+fi
+
+if [[ -n "$firefox_profile" ]]; then
+    mkdir -p "$firefox_profile/chrome"
+    ln -sfn "$repo_dir/firefox/userChrome.css" "$firefox_profile/chrome/userChrome.css"
+    printf 'Firefox: symlinked userChrome.css -> %s/chrome/\n' "$firefox_profile"
 else
-    echo "Firefox: no default-release profile found, skipping"
+    printf 'Firefox: no default-release profile found, skipping\n'
 fi
