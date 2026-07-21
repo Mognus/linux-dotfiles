@@ -11,7 +11,7 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 - `AudioControl.qml` — reusable output/input volume control.
 - `TuxMascot.qml` — left/right mascot panel.
 - `lib/Audio.js` — Pipewire audio helper functions.
-- `assets/` — Tux mascot sprites (`tux*_{tiny,small,hires}.gif`, `ai/`).
+- `assets/` — animated angel/devil Tux sprites.
 
 ## What it does
 
@@ -32,7 +32,7 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 ## Run
 
 ```bash
-qs -c quickshell        # or: quickshell -c quickshell
+qs -p "$HOME/.config/quickshell"
 ```
 
-Started automatically from the Hyprland config (`exec-once`).
+Started automatically from Hyprland's native Lua autostart module.

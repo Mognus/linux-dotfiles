@@ -8,6 +8,7 @@ The package list lives in `packages.txt` at the repository root.
 - `tmux` - persistent terminal sessions
 - `fzf` - fuzzy search for history, files, and directories
 - `fd` - fast file search backend for FZF
+- `eza` - directory listings and trees
 - `zoxide` - smart directory jumping
 
 ## Editor and Terminal
@@ -46,7 +47,6 @@ The package list lives in `packages.txt` at the repository root.
 - `firefox` - browser
 - `discord` - chat
 - `obsidian` - notes
-- `mullvad-vpn` - VPN
 
 ## Development
 
@@ -58,6 +58,7 @@ The package list lives in `packages.txt` at the repository root.
 ## System Tools
 
 - `git` and `github-cli` - version control and GitHub workflow
+- `pass` - GPG-backed password storage
 - `curl`, `wget`, `openssh` - network and remote access
 - `ripgrep`, `bat`, `btop`, `fastfetch` - CLI quality-of-life tools
 - `stow` - dotfiles symlink management

@@ -17,7 +17,15 @@ Fish is the daily shell.
 
 ## Aliases
 
-- `ll` - List files with details
+- `ll` - detailed `eza` listing
+- `lt` - two-level `eza` tree
+
+## Screenshots
+
+- `sc` - select an area and save it
+- `scf` - save the full screen
+- `sce` - select an area and open it in Swappy
+- `scc` - select an area and copy it to the clipboard
 
 ## Workflow
 

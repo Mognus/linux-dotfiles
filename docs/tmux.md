@@ -1,1 +1,1 @@
-../../.config/tmux/README.md
+../.config/tmux/showcase/README.md

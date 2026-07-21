@@ -1,1 +1,1 @@
-../../.config/dunst/README.md
+../.config/dunst/showcase/README.md

@@ -1,1 +1,1 @@
-../../.config/hypr/README.md
+../.config/hypr/showcase/README.md

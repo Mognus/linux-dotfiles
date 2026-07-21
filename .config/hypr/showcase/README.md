@@ -7,12 +7,14 @@
 - Keyboard-first window control
 - Numbered workspaces for daily contexts
 - Scratchpads for temporary apps
-- Hyprpaper wallpaper setup
+- `awww` wallpaper setup
 - Hyprlock session locking
+- Quickshell desktop widgets and quick settings
 
 ## Desktop Role
 
-Hyprland runs the desktop. Hyprpaper sets the wallpaper. Hyprlock locks the session.
+Hyprland runs the desktop, `awww` sets the wallpaper, Quickshell provides the
+desktop widgets, and Hyprlock locks the session.
 
 ## Config
 
@@ -37,6 +39,7 @@ Hyprland runs the desktop. Hyprpaper sets the wallpaper. Hyprlock locks the sess
 
 - `SUPER+W` - Pick a wallpaper
 - `SUPER+Shift+W` - Pick the Black, White, Pink, or Cyan palette
+- `SUPER+=/-` - Increase/decrease window opacity
 
 ## Windows
 
@@ -53,7 +56,7 @@ Hyprland runs the desktop. Hyprpaper sets the wallpaper. Hyprlock locks the sess
 - `SUPER+1..9` - Go to workspace
 - `SUPER+Ctrl+1..9` - Go to workspace
 - `SUPER+Ctrl+Shift+1..9` - Move window to workspace
-- `SUPER+Alt+[/]` - Move window to previous/next workspace and follow
+- `SUPER+Alt+[/]` - Move window to previous/next workspace
 
 ## Scratchpads
 
@@ -65,8 +68,9 @@ Hyprland runs the desktop. Hyprpaper sets the wallpaper. Hyprlock locks the sess
 
 ## Desktop Widgets
 
-- `Ctrl+SUPER+Shift+T` - Toggle both Quickshell Tux widgets
+- `SUPER+Ctrl+T` - Toggle both Quickshell Tux widgets
 - `SUPER+Ctrl+G` - Toggle Quickshell quick settings
+- `SUPER+Ctrl+P`, then `B/P` - Toggle bottom bar/workspace HUD
 
 ## Music
 

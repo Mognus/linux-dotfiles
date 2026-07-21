@@ -1,1 +1,1 @@
-../../.config/nvim/README.md
+../.config/nvim/showcase/README.md

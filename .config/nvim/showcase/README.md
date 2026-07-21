@@ -90,13 +90,13 @@ Use `Ctrl+F` for project-wide grep and `Ctrl+P` to find files by name. In the Sn
 
 ### TypeScript Navigation
 
-Use `F12` on a symbol to jump to its definition. Use `Shift+F12` to list references. In Ghostty, `Shift+F12` may arrive as `F24`, so both are mapped.
+Use `F12` on a symbol to jump to its definition. Use `Shift+F12` to list references. Some terminal encodings report `Shift+F12` as `F24`, so both are mapped.
 
 Use `K` for hover information and `Ctrl+.` for TypeScript, ESLint, Go, or Rust code actions. ESLint format-on-save and fix-on-save are intentionally disabled.
 
 ### Diagnostics
 
-Use `Ctrl+Shift+M` to open the Problems picker. Use `F4` to expand the problem under the cursor. Use `F8` and `Shift+F8` to move through problems. In Ghostty, `Shift+F8` may arrive as `F20`, so both are mapped.
+Use `Ctrl+Shift+M` to open the Problems picker. Use `F4` to expand the problem under the cursor. Use `F8` and `Shift+F8` to move through problems. Some terminal encodings report `Shift+F8` as `F20`, so both are mapped.
 
 ### Completion
 

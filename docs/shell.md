@@ -1,1 +1,1 @@
-../../.config/fish/README.md
+../.config/fish/showcase/README.md

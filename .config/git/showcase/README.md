@@ -4,9 +4,9 @@ Git config stays small and predictable.
 
 ## Does
 
-- Sets identity defaults
-- Keeps common behavior consistent
-- Leaves project-specific choices to each repo
+- Tracks the public user name
+- Loads the machine-local email from the ignored `~/.gitconfig.local`
+- Leaves project-specific behavior to each repo
 
 ## Keybinds
 

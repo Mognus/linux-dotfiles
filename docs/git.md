@@ -1,1 +1,1 @@
-../../.config/git/README.md
+../.config/git/showcase/README.md

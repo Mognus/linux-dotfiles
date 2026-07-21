@@ -1,1 +1,1 @@
-../../.config/tools/README.md
+../.config/tools/showcase/README.md
