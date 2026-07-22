@@ -36,7 +36,6 @@ xdg-desktop-portal-hyprland # Screen sharing, file picker for Wayland apps
 xdg-user-dirs               # Creates ~/Downloads, ~/Pictures etc.
 dunst                       # Notification daemon
 hyprlock                    # Lock screen
-hyprpaper                   # Wallpaper daemon
 hypridle                    # Idle daemon (lock/turn off screen)
 polkit-gnome                # Privilege dialog (sudo popups in GUI)
 
