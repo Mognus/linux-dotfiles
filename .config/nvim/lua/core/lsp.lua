@@ -14,6 +14,17 @@ vim.lsp.config("ts_ls", {
     },
 })
 
+vim.lsp.config("svelte", {
+    cmd = { "svelteserver", "--stdio" },
+    filetypes = { "svelte" },
+    root_markers = {
+        "svelte.config.js",
+        "svelte.config.ts",
+        "package.json",
+        ".git",
+    },
+})
+
 vim.lsp.config("eslint", {
     cmd = { "vscode-eslint-language-server", "--stdio" },
     filetypes = {
@@ -140,7 +151,7 @@ vim.lsp.config("rust_analyzer", {
     },
 })
 
-vim.lsp.enable({ "ts_ls", "eslint", "tailwindcss", "gopls", "rust_analyzer" })
+vim.lsp.enable({ "ts_ls", "svelte", "eslint", "tailwindcss", "gopls", "rust_analyzer" })
 
 vim.lsp.inlay_hint.enable(true)
 

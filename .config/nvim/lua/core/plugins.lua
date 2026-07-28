@@ -230,13 +230,17 @@ require("gitsigns").setup({
 })
 
 local treesitter_languages = {
+    "css",
     "go",
     "gomod",
+    "html",
+    "html_tags",
     "javascript",
     "rust",
     "markdown",
     "markdown_inline",
     "sql",
+    "svelte",
     "tsx",
     "typescript",
 }
@@ -252,6 +256,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "javascript",
         "javascriptreact",
         "rust",
+        "svelte",
         "typescript",
         "typescriptreact",
     },
