@@ -16,6 +16,7 @@
 - Prefer clean, readable code over clever code.
 - Avoid over-engineering by default.
 - Use comments sparingly but consistently: every non-obvious block, function, or decision gets a short comment explaining the *why*, not the *what*.
+- Write all code comments, identifiers, and commit messages in English, even when the conversation is in German.
 - Do not commit unless explicitly asked.
 - Do not add co-author trailers to commit messages.
 - When committing, use Conventional Commits such as `feat: ...`, `fix: ...`, `refactor: ...`, `docs: ...`, or `chore: ...`.
