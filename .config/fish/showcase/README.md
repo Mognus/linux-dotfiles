@@ -6,7 +6,6 @@ Fish is the daily shell.
 
 - Loads local user binaries into `PATH`
 - Enables FZF keybinds when available
-- Enables Zoxide directory jumping when available
 - Provides screenshot helper functions
 
 ## Keybinds
@@ -28,4 +27,4 @@ Fish is the daily shell.
 
 ## Workflow
 
-Use Fish for interactive shell work, FZF for search, and Zoxide for directory jumps.
+Use Fish for interactive shell work and FZF for history, file, and directory search.

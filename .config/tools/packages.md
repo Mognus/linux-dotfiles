@@ -7,8 +7,7 @@ The package list lives in `packages.txt` at the repository root.
 - `fish` - daily interactive shell
 - `tmux` - persistent terminal sessions
 - `fzf` - fuzzy search for history, files, and directories
-- `fd` - fast file search backend for FZF
-- `zoxide` - smart directory jumping
+- `fd` - fast, ignore-aware file search
 
 ## Editor and Terminal
 
