@@ -8,7 +8,6 @@ fish                        # Friendly interactive shell
 tmux                        # Terminal multiplexer
 fzf                         # Fuzzy finder (Ctrl+R history, Ctrl+T files, Alt-C dirs)
 fd                          # Fast find, used as fzf backend
-eza                         # Directory listings used by Fish aliases
 zoxide                      # Smart cd replacement (z, zi)
 
 # --- Editor ---
@@ -47,7 +46,6 @@ swappy                      # Screenshot editor
 socat                       # Socket communication (e.g. Hyprland IPC)
 jq                          # JSON processing in CLI
 wf-recorder                 # Wayland screen recorder
-imv                         # Wayland image viewer
 imagemagick                 # Image conversion and manipulation
 
 # --- Audio ---
@@ -70,6 +68,8 @@ noto-fonts-cjk              # CJK font coverage
 # --- Apps ---
 firefox                     # Browser
 chromium                    # Chromium browser
+papers                      # GNOME document viewer for PDF and other formats
+loupe                       # GNOME image viewer
 discord                     # Chat
 obsidian                    # Notes (Markdown vault)
 gimp                        # Image editor

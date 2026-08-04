@@ -17,8 +17,7 @@ Fish is the daily shell.
 
 ## Aliases
 
-- `ll` - detailed `eza` listing
-- `lt` - two-level `eza` tree
+- `ll` - detailed GNU `ls` listing with directories first
 
 ## Screenshots
 

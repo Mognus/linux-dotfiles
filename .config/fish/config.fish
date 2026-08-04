@@ -10,8 +10,7 @@ if status is-interactive
     command -q fzf; and fzf --fish | source
     command -q zoxide; and zoxide init fish | source
 
-    alias ll='eza -lahg --group-directories-first'
-    alias lt='eza --tree --level=2'
+    alias ll='ls -lah --group-directories-first --color=auto'
 
     function sc
         grim -g (slurp) ~/Pictures/screenshots/(date +%F_%T).png

@@ -8,7 +8,6 @@ The package list lives in `packages.txt` at the repository root.
 - `tmux` - persistent terminal sessions
 - `fzf` - fuzzy search for history, files, and directories
 - `fd` - fast file search backend for FZF
-- `eza` - directory listings and trees
 - `zoxide` - smart directory jumping
 
 ## Editor and Terminal
@@ -45,6 +44,8 @@ The package list lives in `packages.txt` at the repository root.
 ## Apps
 
 - `firefox` - browser
+- `papers` - GTK document viewer for PDF and other document formats
+- `loupe` - GTK image viewer
 - `discord` - chat
 - `obsidian` - notes
 
