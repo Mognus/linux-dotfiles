@@ -18,7 +18,6 @@ ShellRoot {
         { name: "term", label: "T", accent: Colors.success },
         { name: "files", label: "Y", accent: Colors.accent },
         { name: "music", label: "M", accent: Colors.success },
-        { name: "cmus", label: "C", accent: Colors.danger },
         { name: "notes", label: "N", accent: Colors.secondary },
         { name: "discord", label: "D", accent: Colors.violet },
         { name: "firefox", label: "F", accent: Colors.orange },

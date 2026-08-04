@@ -16,7 +16,7 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 ## What it does
 
 - **Workspaces** — live Hyprland workspaces plus named *special* workspaces
-  (term, files, music, cmus, notes, discord, firefox), each with its own accent.
+  (term, files, music, notes, discord, firefox), each with its own accent.
 - **Clock** — `hh:mm`, top center.
 - **Quick settings** — togglable panel.
 - **Audio** — volume via Pipewire (`Quickshell.Services.Pipewire`).

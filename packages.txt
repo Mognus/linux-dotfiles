@@ -101,7 +101,6 @@ thunar                      # GUI file manager
 yt-dlp                      # YouTube/video downloader
 playerctl                   # Media key / playback control
 mpv                         # Video player
-cmus                        # Terminal music player
 
 # --- Tools ---
 git                         # Version control

@@ -3,6 +3,7 @@ local M = {}
 function M.setup(programs)
     hl.on("hyprland.start", function()
         hl.exec_cmd("pactl set-default-source alsa_input.usb-Kingston_HyperX_7.1_Audio_00000000-00.analog-stereo")
+        hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/polkit-agent.sh")
         -- Generate the saved palette before themed desktop processes start.
         hl.exec_cmd("bash -lc '$HOME/.config/hypr/scripts/theme-switcher.sh --apply && exec dunst -conf $HOME/.local/state/dotfiles-theme/dunstrc'")
         hl.exec_cmd("awww-daemon")

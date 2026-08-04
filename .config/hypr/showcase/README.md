@@ -9,6 +9,7 @@
 - Scratchpads for temporary apps
 - `awww` wallpaper setup
 - Hyprlock session locking
+- Polkit authentication prompts through the GNOME agent
 - Quickshell desktop widgets and quick settings
 
 ## Desktop Role
@@ -74,10 +75,7 @@ desktop widgets, and Hyprlock locks the session.
 
 ## Music
 
-- `SUPER+Ctrl+M` - Enter music mode
-- `M` - Toggle YouTube Music
-- `L` - Toggle local music
-- `Escape` - Leave music mode
+- `SUPER+Ctrl+M` - Toggle YouTube Music
 
 ## Workflow
 
