@@ -7,6 +7,7 @@ This topic covers supporting tools that are important to the setup but do not ne
 - Tracks the package list used to rebuild the machine
 - Documents CLI agents and assistant tooling
 - Documents media helpers such as `yt-dlp`
+- Documents Markdown reading through Glow
 - Documents font choices and terminal rendering support
 
 ## Documents
@@ -14,6 +15,7 @@ This topic covers supporting tools that are important to the setup but do not ne
 - `packages.md` - package groups from `packages.txt`
 - `cli-agents.md` - Codex and Claude CLI setup
 - `media-tools.md` - download and playback helpers
+- `markdown.md` - rendered project documentation with Glow
 - `fonts.md` - Nerd Fonts and fontconfig notes
 
 ## Workflow

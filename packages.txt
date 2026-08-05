@@ -111,6 +111,7 @@ openssh                     # SSH client/server
 man-db                      # Man pages
 ripgrep                     # Fast grep (rg)
 bat                         # Better cat (syntax highlighting)
+glow                        # Terminal Markdown reader
 btop                        # Resource monitor
 stow                        # Dotfiles symlink manager
 github-cli                  # GitHub CLI (gh)

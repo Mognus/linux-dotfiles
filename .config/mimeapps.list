@@ -26,6 +26,8 @@ image/x-tga=org.gnome.Loupe.desktop;
 image/x-win-bitmap=org.gnome.Loupe.desktop;
 image/x-xbitmap=org.gnome.Loupe.desktop;
 image/x-xpixmap=org.gnome.Loupe.desktop;
+text/markdown=glow.desktop;
+text/x-markdown=glow.desktop;
 x-scheme-handler/claude-cli=claude-code-url-handler.desktop;
 
 [Added Associations]
@@ -56,3 +58,5 @@ image/x-tga=org.gnome.Loupe.desktop;
 image/x-win-bitmap=org.gnome.Loupe.desktop;
 image/x-xbitmap=org.gnome.Loupe.desktop;
 image/x-xpixmap=org.gnome.Loupe.desktop;
+text/markdown=glow.desktop;
+text/x-markdown=glow.desktop;

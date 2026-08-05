@@ -60,7 +60,7 @@ The package list lives in `packages.txt` at the repository root.
 - `git` and `github-cli` - version control and GitHub workflow
 - `pass` - GPG-backed password storage
 - `curl`, `wget`, `openssh` - network and remote access
-- `ripgrep`, `bat`, `btop`, `fastfetch` - CLI quality-of-life tools
+- `ripgrep`, `bat`, `glow`, `btop`, `fastfetch` - CLI quality-of-life tools
 - `stow` - dotfiles symlink management
 - `reflector` - pacman mirror updates
 - `ufw` - firewall

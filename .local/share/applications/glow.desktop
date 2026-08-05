@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Glow Markdown Reader
+Comment=Read rendered Markdown in the terminal
+Exec=alacritty --title Glow -e glow --tui %f
+TryExec=glow
+Icon=text-x-generic
+Terminal=false
+Categories=Office;Viewer;
+MimeType=text/markdown;text/x-markdown;
+Keywords=Markdown;README;Documentation;
