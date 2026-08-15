@@ -1,0 +1,81 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "vim_mode": true,
+  "agent_servers": {
+    "codex-acp": {
+      "type": "registry"
+    },
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
+  "project_panel": { "dock": "left" },
+  "git_panel": { "dock": "left" },
+  "agent": { "dock": "right" },
+
+  "inlay_hints": { "enabled": true },
+  "diagnostics": { "inline": { "enabled": true } },
+
+  // On-demand only, like conform.nvim.
+  "format_on_save": "off",
+  "auto_install_extensions": { "svelte": true },
+
+  "lsp": {
+    "rust-analyzer": {
+      "initialization_options": {
+        "cargo": { "allFeatures": true },
+        "check": { "command": "clippy" }
+      }
+    },
+    "eslint": {
+      // Diagnostics only — never format or fix on save.
+      "settings": {
+        "codeActionOnSave": { "enable": false },
+        "run": "onType",
+        "workingDirectory": { "mode": "auto" },
+        "problems": { "shortenToSingleLine": false }
+      }
+    },
+    "tailwindcss-language-server": {
+      "settings": {
+        "tailwindCSS": {
+          "classAttributes": ["class", "className", "class:list", "classList", "ngClass"],
+          "classFunctions": ["cn", "cva"],
+          "validate": true
+        }
+      }
+    }
+  },
+
+  "languages": {
+    "JavaScript": { "formatter": "prettier" },
+    "TypeScript": { "formatter": "prettier" },
+    "TSX": { "formatter": "prettier" },
+    "Svelte": { "formatter": "prettier" },
+    "Rust": { "formatter": "language_server" },
+    "Go": { "formatter": "language_server" }
+  },
+
+  "icon_theme": {
+    "mode": "system",
+    "light": "Zed (Default)",
+    "dark": "Material Icon Theme"
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "Gruvbox Light",
+    "dark": "Gruvbox Dark",
+  },
+}

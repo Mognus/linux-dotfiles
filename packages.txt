@@ -11,6 +11,7 @@ fd                          # Fast, ignore-aware file search
 
 # --- Editor ---
 neovim                      # Editor
+zed                         # GUI editor for agentic workflows (binary: zeditor)
 nano                        # Simple terminal editor
 
 # --- Base System ---

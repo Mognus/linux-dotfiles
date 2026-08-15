@@ -1,0 +1,16 @@
+// Zed keymap — mirrors ~/.config/nvim/lua/core/keymaps.lua where possible.
+//
+// Precedence: the user keymap is loaded after Zed's defaults, so a binding
+// here wins over a default binding with a matching context.
+[
+  {
+    // "Workspace" applies everywhere, including while a panel has focus.
+    "context": "Workspace",
+    "bindings": {
+      // Overrides vim's page-up, same trade-off as in nvim.
+      "ctrl-b": "workspace::ToggleLeftDock",
+      // Overrides vim::Increment (increment number under cursor).
+      "ctrl-a": "agent::ToggleFocus"
+    }
+  }
+]
