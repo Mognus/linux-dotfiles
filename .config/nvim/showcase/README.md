@@ -46,24 +46,22 @@ Neovim is managed from `~/dotfiles/.config/nvim`.
 | `Alt+Shift+G` | Show Git diff/hunks |
 | `Alt+u` | Previous function or class |
 | `Alt+d` | Next function or class |
-| `F12` | Go to definition |
-| `Shift+F12` | Find references |
-| `F24` | Find references fallback when the terminal encodes `Shift+F12` as `F24` |
-| `F2` | Rename symbol |
+| `F12` / `gd` | Go to definition |
+| `Shift+F12` / `grr` | Find references |
+| `F2` / `grn` | Rename symbol |
 | `Ctrl+.` | Code action |
 | `Ctrl+Shift+I` | Format file |
 | `K` | Show hover information |
 | `F4` | Show problem under cursor |
-| `F8` | Next problem |
-| `Shift+F8` | Previous problem |
-| `F20` | Previous problem fallback when the terminal encodes `Shift+F8` as `F20` |
+| `F8` / `]d` | Next problem |
+| `Shift+F8` / `[d` | Previous problem |
 | `Ctrl+Space` | Trigger completion manually |
 | `Tab` | Next completion item |
 | `Shift+Tab` | Previous completion item |
 | `Enter` | Accept completion item |
 | `Esc` | Close completion menu |
-| `Alt+n` | Next Git hunk |
-| `Alt+p` | Previous Git hunk |
+| `Alt+n` / `]c` | Next Git hunk |
+| `Alt+p` / `[c` | Previous Git hunk |
 | `Alt+h` | Preview Git hunk |
 | `Alt+s` | Stage Git hunk |
 | `Alt+r` | Reset Git hunk |
@@ -90,13 +88,13 @@ Use `Ctrl+F` for project-wide grep and `Ctrl+P` to find files by name. In the Sn
 
 ### TypeScript Navigation
 
-Use `F12` on a symbol to jump to its definition. Use `Shift+F12` to list references. Some terminal encodings report `Shift+F12` as `F24`, so both are mapped.
+Use `F12` or `gd` on a symbol to jump to its definition. Use `Shift+F12` or the built-in `grr` to list references.
 
 Use `K` for hover information and `Ctrl+.` for TypeScript, ESLint, Go, or Rust code actions. ESLint format-on-save and fix-on-save are intentionally disabled.
 
 ### Diagnostics
 
-Use `Ctrl+Shift+M` to open the Problems picker. Use `F4` to expand the problem under the cursor. Use `F8` and `Shift+F8` to move through problems. Some terminal encodings report `Shift+F8` as `F20`, so both are mapped.
+Use `Ctrl+Shift+M` to open the Problems picker. Use `F4` to expand the problem under the cursor. Use `F8` and `Shift+F8`, or the built-in `]d` and `[d`, to move through problems.
 
 ### Completion
 

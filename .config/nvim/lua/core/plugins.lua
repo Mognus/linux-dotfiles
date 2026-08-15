@@ -226,6 +226,14 @@ require("gitsigns").setup({
         end, "Previous Git hunk")
         map("<A-e>", gs.preview_hunk, "Preview Git hunk")
 
+        -- Aliases matching Zed's vim mode, so both editors share one idiom.
+        map("]c", function()
+            gs.nav_hunk("next")
+        end, "Next Git hunk")
+        map("[c", function()
+            gs.nav_hunk("prev")
+        end, "Previous Git hunk")
+
     end,
 })
 
