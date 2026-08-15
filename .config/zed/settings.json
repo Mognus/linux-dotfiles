@@ -19,9 +19,15 @@
       "type": "registry"
     }
   },
-  "project_panel": { "dock": "left" },
-  "git_panel": { "dock": "left" },
-  "agent": { "dock": "right" },
+  "project_panel": { "dock": "left", "default_width": 260 },
+  "git_panel": { "dock": "left", "default_width": 320 },
+  "agent": { "dock": "right", "default_width": 480 },
+
+  // Ports lua/core/options.lua: hybrid line numbers, cursorline, scrolloff.
+  "relative_line_numbers": "enabled",
+  "current_line_highlight": "line",
+  "vertical_scroll_margin": 8,
+  "horizontal_scroll_margin": 8,
 
   "inlay_hints": { "enabled": true },
   "diagnostics": { "inline": { "enabled": true } },

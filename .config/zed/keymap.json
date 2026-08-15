@@ -21,7 +21,11 @@
       // Overrides vim: ctrl-b page-up, ctrl-g file info, ctrl-a increment.
       "ctrl-b": "project_panel::Toggle",
       "ctrl-g": "git_panel::Toggle",
-      "ctrl-a": "agent::Toggle"
+      "ctrl-a": "agent::Toggle",
+
+      // alt-e mirrors gitsigns' preview_hunk binding in nvim.
+      "alt-e": "editor::ToggleSelectedDiffHunks",
+      "alt-b": "editor::ToggleGitBlameInline"
     }
   }
 ]
