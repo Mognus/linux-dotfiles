@@ -1,9 +1,3 @@
-local git = require("core.git")
-
-vim.keymap.set("n", "<C-b>", function()
-    Snacks.explorer()
-end, { desc = "Toggle file explorer" })
-
 vim.keymap.set("n", "<C-f>", function()
     Snacks.picker.grep()
 end, { desc = "Grep files" })
@@ -11,14 +5,6 @@ end, { desc = "Grep files" })
 vim.keymap.set("n", "<C-p>", function()
     Snacks.picker.files()
 end, { desc = "Find files" })
-
-vim.keymap.set({ "n", "x", "o" }, "gs", function()
-    require("flash").jump()
-end, { desc = "Flash jump" })
-
-vim.keymap.set({ "n", "x", "o" }, "gS", function()
-    require("flash").treesitter()
-end, { desc = "Flash treesitter jump" })
 
 vim.keymap.set("n", "<C-t>", "<cmd>tabnew<CR>", { desc = "New tab" })
 vim.keymap.set("n", "<C-q>", "<cmd>tabclose<CR>", { desc = "Close tab" })
@@ -41,18 +27,10 @@ vim.keymap.set("n", "<C-S-o>", function()
     Snacks.picker.lsp_symbols()
 end, { desc = "Show file symbols" })
 
-vim.keymap.set("n", "<A-u>", function()
-    require("nvim-treesitter-textobjects.move").goto_previous_start({ "@function.outer", "@class.outer" }, "textobjects")
-end, { desc = "Previous function or class" })
-
-vim.keymap.set("n", "<A-d>", function()
-    require("nvim-treesitter-textobjects.move").goto_next_start({ "@function.outer", "@class.outer" }, "textobjects")
-end, { desc = "Next function or class" })
-
-vim.keymap.set("n", "<C-g>", function()
-    git.workspace_status()
-end, { desc = "Show Git workspace status" })
-
 vim.keymap.set("n", "<A-S-g>", function()
     Snacks.picker.git_diff()
 end, { desc = "Show Git diff" })
+
+-- Keeps the old chord on nvim 0.12's built-in gc/gcc commenting.
+vim.keymap.set("n", "<C-S-k>", "gcc", { remap = true, desc = "Toggle comment" })
+vim.keymap.set("x", "<C-S-k>", "gc", { remap = true, desc = "Toggle comment" })

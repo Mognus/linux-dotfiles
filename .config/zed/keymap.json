@@ -1,16 +1,27 @@
-// Zed keymap — mirrors ~/.config/nvim/lua/core/keymaps.lua where possible.
+// Zed keymap — see ~/.config/nvim/lua/core/keymaps.lua for the nvim side.
 //
-// Precedence: the user keymap is loaded after Zed's defaults, so a binding
-// here wins over a default binding with a matching context.
+// <panel>::Toggle opens and closes a specific panel. <panel>::ToggleFocus only
+// moves focus, and workspace::ToggleLeftDock cannot tell project from git panel
+// since both share the left dock.
+//
+// Zed resolves keys innermost-first, so an Editor-level vim binding beats a
+// Workspace-level one. The panel keys are therefore declared in both contexts.
 [
   {
-    // "Workspace" applies everywhere, including while a panel has focus.
     "context": "Workspace",
     "bindings": {
-      // Overrides vim's page-up, same trade-off as in nvim.
-      "ctrl-b": "workspace::ToggleLeftDock",
-      // Overrides vim::Increment (increment number under cursor).
-      "ctrl-a": "agent::ToggleFocus"
+      "ctrl-b": "project_panel::Toggle",
+      "ctrl-g": "git_panel::Toggle",
+      "ctrl-a": "agent::Toggle"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      // Overrides vim: ctrl-b page-up, ctrl-g file info, ctrl-a increment.
+      "ctrl-b": "project_panel::Toggle",
+      "ctrl-g": "git_panel::Toggle",
+      "ctrl-a": "agent::Toggle"
     }
   }
 ]

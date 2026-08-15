@@ -31,7 +31,7 @@ opt.hlsearch = true -- Highlight all current search matches.
 -- Window and editing behavior.
 opt.splitright = true -- Open vertical splits to the right.
 opt.splitbelow = true -- Open horizontal splits below.
-opt.showmode = false -- Hide mode text; statusline can show it later.
+opt.showmode = true -- No statusline plugin, so the built-in mode text is needed.
 opt.wrap = false -- Keep long lines on one visual line.
 opt.confirm = true -- Ask before closing buffers with unsaved changes.
 opt.undofile = true -- Persist undo history across sessions.
