@@ -19,9 +19,24 @@
       "type": "registry"
     }
   },
-  "project_panel": { "dock": "left", "default_width": 260 },
+  // Stepping through entries reuses one italic preview tab instead of
+  // opening a tab per file — the closest thing to a Snacks preview pane.
+  "preview_tabs": {
+    "enabled": true,
+    "enable_preview_from_project_panel": true,
+    "enable_preview_from_file_finder": true,
+    "enable_preview_from_code_navigation": true
+  },
+
+  "project_panel": { "dock": "left", "default_width": 260, "git_status": true },
   "git_panel": { "dock": "left", "default_width": 320 },
-  "agent": { "dock": "right", "default_width": 480 },
+  "agent": {
+    "dock": "right",
+    "default_width": 480,
+    // Off by default, which hides agent edits in normally opened files.
+    "single_file_review": true,
+    "expand_edit_card": true
+  },
 
   // Ports lua/core/options.lua: hybrid line numbers, cursorline, scrolloff.
   "relative_line_numbers": "enabled",
@@ -73,14 +88,14 @@
   },
 
   "icon_theme": {
-    "mode": "system",
-    "light": "Zed (Default)",
+    "mode": "dark",
+    "light": "Material Icon Theme",
     "dark": "Material Icon Theme"
   },
   "ui_font_size": 16,
   "buffer_font_size": 15,
   "theme": {
-    "mode": "system",
+    "mode": "dark",
     "light": "Gruvbox Light",
     "dark": "Gruvbox Dark",
   },

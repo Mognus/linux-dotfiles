@@ -1,0 +1,25 @@
+// Zed has no project-wide format action, so formatting whole trees runs as a
+// task. Spawn via the command palette: "task: spawn".
+[
+  {
+    "label": "Format project (Prettier)",
+    "command": "prettier",
+    "args": ["--write", "--ignore-unknown", "."],
+    "reveal": "always",
+    "use_new_terminal": false
+  },
+  {
+    "label": "Format project (Rust)",
+    "command": "cargo",
+    "args": ["fmt"],
+    "reveal": "always",
+    "use_new_terminal": false
+  },
+  {
+    "label": "Format project (Go)",
+    "command": "go",
+    "args": ["fmt", "./..."],
+    "reveal": "always",
+    "use_new_terminal": false
+  }
+]
