@@ -174,24 +174,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
             vim.keymap.set("n", keys, action, { buffer = args.buf, desc = desc })
         end
 
-        map("<F12>", function()
-            Snacks.picker.lsp_definitions()
-        end, "Go to definition")
+        -- Everything else (grr, grn, gra, ]d, [d, <C-w>d) is built into 0.12.
         map("gd", function()
             Snacks.picker.lsp_definitions()
         end, "Go to definition")
-        map("<S-F12>", function()
-            Snacks.picker.lsp_references()
-        end, "Find references")
-        map("<F2>", vim.lsp.buf.rename, "Rename symbol")
-        map("<C-.>", vim.lsp.buf.code_action, "Code action")
         map("K", vim.lsp.buf.hover, "Show hover")
-        map("<F4>", vim.diagnostic.open_float, "Show problem")
-        map("<F8>", function()
-            vim.diagnostic.jump({ count = 1, float = true })
-        end, "Next problem")
-        map("<S-F8>", function()
-            vim.diagnostic.jump({ count = -1, float = true })
-        end, "Previous problem")
     end,
 })

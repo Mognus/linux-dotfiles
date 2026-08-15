@@ -36,29 +36,26 @@ Mouse support and system clipboard integration are enabled.
 
 ## Daily Keys
 
+The leader key is `Space`.
+
 | Key | Action |
 | --- | --- |
-| `F1` | Show keymap help |
-| `Ctrl+T` | New tab |
-| `Ctrl+Q` | Close tab |
-| `Ctrl+J` | Previous tab |
-| `Ctrl+K` | Next tab |
-| `Ctrl+F` | Grep files |
 | `Ctrl+P` | Find files |
-| `Ctrl+Shift+M` | Show project problems |
-| `Ctrl+Shift+O` | Show symbols in current file |
-| `Alt+Shift+G` | Show Git diff/hunks |
-| `F12` / `gd` | Go to definition |
-| `Shift+F12` / `grr` | Find references |
-| `F2` / `grn` | Rename symbol |
-| `Ctrl+.` / `gra` | Code action |
-| `Ctrl+Shift+I` | Format file |
-| `Ctrl+Shift+K` | Toggle comment |
+| `Ctrl+F` | Grep files |
+| `<leader>?` | Show keymap help |
+| `<leader>d` | Show project problems |
+| `<leader>s` | Show symbols in current file |
+| `<leader>g` | Show Git diff/hunks |
+| `<leader>f` | Format file |
+| `<leader>i` | Toggle inlay hints |
+| `gd` | Go to definition |
 | `K` | Show hover information |
-| `F3` | Toggle inlay hints |
-| `F4` | Show problem under cursor |
-| `F8` / `]d` | Next problem |
-| `Shift+F8` / `[d` | Previous problem |
+| `grr` | Find references |
+| `grn` | Rename symbol |
+| `gra` | Code action |
+| `gcc` / `gc` | Toggle comment |
+| `]d` / `[d` | Next / previous problem |
+| `Ctrl+W` `d` | Show problem under cursor |
 | `Ctrl+Space` | Trigger completion manually |
 | `Tab` | Next completion item |
 | `Shift+Tab` | Previous completion item |
@@ -84,17 +81,15 @@ dotfiles are missing from the results.
 
 ### TypeScript Navigation
 
-Use `F12` or `gd` on a symbol to jump to its definition. Use `Shift+F12` or the
-built-in `grr` to list references.
+Use `gd` on a symbol to jump to its definition and `grr` to list references.
 
-Use `K` for hover information and `Ctrl+.` for TypeScript, ESLint, Go, or Rust
-code actions. ESLint format-on-save and fix-on-save are intentionally disabled.
+Use `K` for hover information and `gra` for TypeScript, ESLint, Go, or Rust code
+actions. ESLint format-on-save and fix-on-save are intentionally disabled.
 
 ### Diagnostics
 
-Use `Ctrl+Shift+M` to open the Problems picker. Use `F4` to expand the problem
-under the cursor. Use `F8` and `Shift+F8`, or the built-in `]d` and `[d`, to
-move through problems.
+Use `<leader>d` to open the Problems picker and `Ctrl+W` `d` to expand the
+problem under the cursor. Use `]d` and `[d` to move through problems.
 
 ### Completion
 
