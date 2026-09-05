@@ -29,7 +29,8 @@
 - WM: Hyprland
 - Shell: fish
 - Terminal multiplexer: tmux
-- Editor: nvim
+- Main IDE: Zed
+- Editor: nvim (terminal work, quick edits)
 - CPU: AMD Ryzen 7 5700X
 - GPU: AMD Radeon RX 6650 XT
 - RAM: 16 GB
