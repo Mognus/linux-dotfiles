@@ -1,0 +1,17 @@
+// Custom keyboard layout: US base, umlauts on the intuitive AltGr keys.
+// Lives in ~/.config/xkb/symbols/magnus -> survives pacman updates.
+
+default partial alphanumeric_keys
+xkb_symbols "umlaut" {
+
+    // Start from altgr-intl: no dead keys, quotes stay quotes.
+    include "us(altgr-intl)"
+
+    name[Group1] = "English (US, Magnus umlauts)";
+
+    // Move the umlauts onto their own vowel key, overriding the acute accents.
+    key <AC01> { [ a, A, adiaeresis, Adiaeresis ] };  // AltGr+a = ä
+    key <AD09> { [ o, O, odiaeresis, Odiaeresis ] };  // AltGr+o = ö
+    key <AD07> { [ u, U, udiaeresis, Udiaeresis ] };  // AltGr+u = ü
+    key <AC02> { [ s, S, ssharp,     section    ] };  // AltGr+s = ß
+};
