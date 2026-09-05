@@ -1,6 +1,6 @@
 model = "gpt-5.5"
 model_reasoning_effort = "high"
-approval_policy = "untrusted"
+approval_policy = "on-request"
 sandbox_mode = "read-only"
 
 [projects."/path/to/dotfiles"]
