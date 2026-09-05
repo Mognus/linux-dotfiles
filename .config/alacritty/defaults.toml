@@ -1,0 +1,3 @@
+# Keep defaults in an import so saved runtime settings can override them.
+[window]
+opacity = 0.80
