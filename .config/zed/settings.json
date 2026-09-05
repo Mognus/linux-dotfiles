@@ -13,6 +13,10 @@
   "vim_mode": true,
   "agent_servers": {
     "codex-acp": {
+      "default_config_options": {
+        "reasoning_effort": "medium",
+        "model": "gpt-5.6-sol"
+      },
       "type": "registry"
     },
     "claude-acp": {
@@ -36,6 +40,26 @@
     // Off by default, which hides agent edits in normally opened files.
     "single_file_review": true,
     "expand_edit_card": true
+  },
+
+  // MCP servers for the agent. Started locally as stdio subprocesses.
+  "context_servers": {
+    // `--editor` serves draw.io from the server itself, so no browser
+    // extension is needed. Ports moved off the defaults (3333/3000) to stay
+    // clear of local dev stacks; Codex runs its own instance on 7334/7331.
+    "drawio": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "drawio-mcp-server",
+        "--editor",
+        "--extension-port",
+        "7333",
+        "--http-port",
+        "7330"
+      ],
+      "env": {}
+    }
   },
 
   // Ports lua/core/options.lua: hybrid line numbers, cursorline, scrolloff.
@@ -75,6 +99,16 @@
           "validate": true
         }
       }
+    },
+    "pyright": {
+      "settings": {
+        "python": {
+          "analysis": {
+            "typeCheckingMode": "standard",
+            "diagnosticMode": "openFilesOnly"
+          }
+        }
+      }
     }
   },
 
@@ -84,7 +118,15 @@
     "TSX": { "formatter": "prettier" },
     "Svelte": { "formatter": "prettier" },
     "Rust": { "formatter": "language_server" },
-    "Go": { "formatter": "language_server" }
+    "Go": { "formatter": "language_server" },
+    "Python": {
+      // pyright types, ruff lints and formats.
+      "language_servers": ["pyright", "ruff"],
+      "formatter": [
+        { "code_action": "source.organizeImports.ruff" },
+        { "language_server": { "name": "ruff" } }
+      ]
+    }
   },
 
   "icon_theme": {

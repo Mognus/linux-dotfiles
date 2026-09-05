@@ -1,0 +1,13 @@
+# User-level fallback. Ruff prefers a project's pyproject.toml or ruff.toml and
+# only falls back here, so per-project settings always win.
+
+line-length = 88
+
+[lint]
+# Beyond the defaults (E4/E7/E9 + F): import order, naming, modern syntax,
+# common bug patterns and simplifications.
+select = ["E", "W", "F", "I", "N", "UP", "B", "SIM", "RUF"]
+
+[format]
+# Matches .prettierrc.json's singleQuote: false.
+quote-style = "double"

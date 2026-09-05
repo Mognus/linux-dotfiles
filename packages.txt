@@ -88,6 +88,8 @@ typescript                  # TypeScript compiler and language tooling
 typescript-language-server  # TypeScript/JavaScript LSP server
 python-pip                  # Python package installer
 python-pipx                 # Isolated Python CLI app installer
+ruff                        # Python linter and formatter
+pyright                     # Python type checker and LSP server
 buf                         # Protobuf tooling
 
 # --- Containers ---

@@ -21,5 +21,19 @@
     "args": ["fmt", "./..."],
     "reveal": "always",
     "use_new_terminal": false
+  },
+  {
+    "label": "Format project (Python)",
+    "command": "ruff",
+    "args": ["format", "."],
+    "reveal": "always",
+    "use_new_terminal": false
+  },
+  {
+    "label": "Lint project (Python)",
+    "command": "ruff",
+    "args": ["check", "--fix", "."],
+    "reveal": "always",
+    "use_new_terminal": false
   }
 ]

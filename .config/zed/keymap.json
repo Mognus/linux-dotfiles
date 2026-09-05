@@ -27,5 +27,12 @@
       "alt-e": "editor::ToggleSelectedDiffHunks",
       "alt-b": "editor::ToggleGitBlameInline"
     }
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      // Close every tab in the active pane, including pinned tabs.
+      "ctrl-k w": ["pane::CloseAllItems", { "close_pinned": true }]
+    }
   }
 ]
