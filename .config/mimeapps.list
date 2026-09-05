@@ -30,6 +30,10 @@ image/x-xpixmap=org.gnome.Loupe.desktop;
 text/markdown=glow.desktop;
 text/x-markdown=glow.desktop;
 x-scheme-handler/claude-cli=claude-code-url-handler.desktop;
+x-scheme-handler/mailto=userapp-Thunderbird-WQXQU3.desktop
+x-scheme-handler/mid=userapp-Thunderbird-WQXQU3.desktop
+message/rfc822=userapp-Thunderbird-WQXQU3.desktop
+x-scheme-handler/net.thunderbird=userapp-Thunderbird-GGBBV3.desktop
 
 [Added Associations]
 inode/directory=thunar.desktop;
@@ -62,3 +66,7 @@ image/x-xbitmap=org.gnome.Loupe.desktop;
 image/x-xpixmap=org.gnome.Loupe.desktop;
 text/markdown=glow.desktop;
 text/x-markdown=glow.desktop;
+x-scheme-handler/mailto=userapp-Thunderbird-WQXQU3.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-WQXQU3.desktop;
+message/rfc822=userapp-Thunderbird-WQXQU3.desktop;
+x-scheme-handler/net.thunderbird=userapp-Thunderbird-GGBBV3.desktop;
