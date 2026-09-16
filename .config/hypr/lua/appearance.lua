@@ -10,7 +10,7 @@ local function animations()
     hl.animation({ leaf = "windowsOut", enabled = true, speed = 3, bezier = "linear", style = "slide" })
     hl.animation({ leaf = "fade", enabled = true, speed = 4, bezier = "linear" })
     hl.animation({ leaf = "workspaces", enabled = true, speed = 4, bezier = "workspaceEaseOut", style = "slide" })
-    hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 4, bezier = "easeOut", style = "slidevert" })
+    hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 4, bezier = "workspaceEaseOut", style = "slidevert" })
 end
 
 function M.setup()
