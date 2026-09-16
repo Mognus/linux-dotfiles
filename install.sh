@@ -26,18 +26,3 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.desktop.interface cursor-size 40 ||
         printf 'Warning: could not apply the cursor size through gsettings.\n' >&2
 fi
-
-# Firefox userChrome.css — symlink into the active profile when one exists.
-firefox_root="$HOME/.mozilla/firefox"
-firefox_profile=""
-if [[ -d "$firefox_root" ]]; then
-    firefox_profile="$(find "$firefox_root" -maxdepth 1 -name '*.default-release' -type d -print -quit)"
-fi
-
-if [[ -n "$firefox_profile" ]]; then
-    mkdir -p "$firefox_profile/chrome"
-    ln -sfn "$repo_dir/firefox/userChrome.css" "$firefox_profile/chrome/userChrome.css"
-    printf 'Firefox: symlinked userChrome.css -> %s/chrome/\n' "$firefox_profile"
-else
-    printf 'Firefox: no default-release profile found, skipping\n'
-fi

@@ -26,8 +26,7 @@ Run the installer on an Arch based system:
 
 The installer checks for Stow conflicts, installs the packages from
 `packages.txt`, links the dotfiles into `$HOME`, applies the saved theme palette
-and cursor defaults, and symlinks `firefox/userChrome.css` into the active
-Firefox profile when one exists.
+and cursor defaults.
 
 ## Link Only
 
