@@ -1,38 +1,29 @@
-// Zed keymap — see ~/.config/nvim/lua/core/keymaps.lua for the nvim side.
+// Zed keymap.
 //
 // <panel>::Toggle opens and closes a specific panel. <panel>::ToggleFocus only
 // moves focus, and workspace::ToggleLeftDock cannot tell project from git panel
 // since both share the left dock.
 //
-// Zed resolves keys innermost-first, so an Editor-level vim binding beats a
-// Workspace-level one. The panel keys are therefore declared in both contexts.
+// No "context" means the binding applies everywhere -- but a default bound in a
+// narrower context still wins. ctrl-shift-t therefore sits in Pane, to beat the
+// default pane::ReopenClosedItem.
 [
   {
-    "context": "Workspace",
     "bindings": {
-      "ctrl-b": "project_panel::Toggle",
-      "ctrl-g": "git_panel::Toggle",
-      "ctrl-a": "agent::Toggle"
-    }
-  },
-  {
-    "context": "Editor",
-    "bindings": {
-      // Overrides vim: ctrl-b page-up, ctrl-g file info, ctrl-a increment.
-      "ctrl-b": "project_panel::Toggle",
-      "ctrl-g": "git_panel::Toggle",
-      "ctrl-a": "agent::Toggle",
+      "ctrl-shift-b": "project_panel::Toggle",
+      "ctrl-shift-g": "git_panel::Toggle",
+      "ctrl-shift-a": "agent::Toggle",
+      "ctrl-shift-j": "terminal_panel::Toggle",
 
-      // alt-e mirrors gitsigns' preview_hunk binding in nvim.
-      "alt-e": "editor::ToggleSelectedDiffHunks",
-      "alt-b": "editor::ToggleGitBlameInline"
+      "ctrl-shift-d": "editor::ToggleSelectedDiffHunks",
+      "ctrl-shift-l": "editor::ToggleGitBlameInline"
     }
   },
   {
     "context": "Pane",
     "bindings": {
       // Close every tab in the active pane, including pinned tabs.
-      "ctrl-k w": ["pane::CloseAllItems", { "close_pinned": true }]
+      "ctrl-shift-t": ["pane::CloseAllItems", { "close_pinned": true }]
     }
   }
 ]
