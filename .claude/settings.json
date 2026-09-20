@@ -11,6 +11,14 @@
     "rust-analyzer-lsp@claude-plugins-official": true
   },
   "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5": {
+      "effortLevel": "low"
+    },
+    "claude-fable-5-1": {
+      "effortLevel": "medium"
+    }
+  },
   "tui": "fullscreen",
   "theme": "dark-ansi"
 }
