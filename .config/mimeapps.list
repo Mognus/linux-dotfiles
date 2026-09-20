@@ -1,4 +1,7 @@
 [Default Applications]
+x-scheme-handler/http=firefox.desktop;
+x-scheme-handler/https=firefox.desktop;
+text/html=firefox.desktop;
 inode/directory=thunar.desktop;
 application/pdf=org.gnome.Papers.desktop;
 image/apng=org.gnome.Loupe.desktop;
