@@ -14,12 +14,16 @@
   "agent_servers": {
     "codex-acp": {
       "default_config_options": {
+        "mode": "read-only",
         "reasoning_effort": "medium",
         "model": "gpt-5.6-sol"
       },
       "type": "registry"
     },
     "claude-acp": {
+      "default_config_options": {
+        "effort": "medium"
+      },
       "type": "registry"
     }
   },
@@ -75,57 +79,47 @@
   "format_on_save": "off",
   "auto_install_extensions": { "svelte": true },
 
-  "lsp": {
-    "rust-analyzer": {
-      "initialization_options": {
-        "cargo": { "allFeatures": true },
-        "check": { "command": "clippy" }
-      }
-    },
-    "eslint": {
-      // Diagnostics only — never format or fix on save.
-      "settings": {
-        "codeActionOnSave": { "enable": false },
-        "run": "onType",
-        "workingDirectory": { "mode": "auto" },
-        "problems": { "shortenToSingleLine": false }
-      }
-    },
-    "tailwindcss-language-server": {
-      "settings": {
-        "tailwindCSS": {
-          "classAttributes": ["class", "className", "class:list", "classList", "ngClass"],
-          "classFunctions": ["cn", "cva"],
-          "validate": true
-        }
-      }
-    },
-    "pyright": {
-      "settings": {
-        "python": {
-          "analysis": {
-            "typeCheckingMode": "standard",
-            "diagnosticMode": "openFilesOnly"
-          }
-        }
-      }
-    }
-  },
-
+  // Server settings live in each project (pyrightconfig.json, .zed/settings.json),
+  // not here.
+  //
+  // Formatting runs in two phases: code_actions_on_format first, then formatter.
+  // That is where linting with autofix hooks in.
   "languages": {
-    "JavaScript": { "formatter": "prettier" },
-    "TypeScript": { "formatter": "prettier" },
-    "TSX": { "formatter": "prettier" },
-    "Svelte": { "formatter": "prettier" },
+    "JavaScript": {
+      "code_actions_on_format": { "source.fixAll.eslint": true },
+      "formatter": "prettier"
+    },
+    "TypeScript": {
+      "code_actions_on_format": { "source.fixAll.eslint": true },
+      "formatter": "prettier"
+    },
+    "TSX": {
+      "code_actions_on_format": { "source.fixAll.eslint": true },
+      "formatter": "prettier"
+    },
+    "Svelte": {
+      "code_actions_on_format": { "source.fixAll.eslint": true },
+      "formatter": "prettier"
+    },
+    "JSON": { "formatter": "prettier" },
+    "JSONC": { "formatter": "prettier" },
+    "YAML": { "formatter": "prettier" },
+    "Markdown": { "formatter": "prettier" },
+    "CSS": { "formatter": "prettier" },
+    "HTML": { "formatter": "prettier" },
     "Rust": { "formatter": "language_server" },
-    "Go": { "formatter": "language_server" },
+    "Go": {
+      "code_actions_on_format": { "source.organizeImports": true },
+      "formatter": "language_server"
+    },
     "Python": {
       // pyright types, ruff lints and formats.
       "language_servers": ["pyright", "ruff"],
-      "formatter": [
-        { "code_action": "source.organizeImports.ruff" },
-        { "language_server": { "name": "ruff" } }
-      ]
+      "code_actions_on_format": {
+        "source.fixAll.ruff": true,
+        "source.organizeImports.ruff": true
+      },
+      "formatter": { "language_server": { "name": "ruff" } }
     }
   },
 
