@@ -15,7 +15,7 @@ configuration {
     sidebar-mode: false;
     kb-row-up: "Alt+k,Up,Control+k,Control+p";
     kb-row-down: "Alt+j,Down,Control+j,Control+n";
-    kb-remove-to-eol: "Control+u";
+    kb-remove-to-eol: "";
     kb-accept-entry: "Control+m,Return,KP_Enter";
     terminal: "alacritty";
     font: "JetBrainsMono Nerd Font 12";
