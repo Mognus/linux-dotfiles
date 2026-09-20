@@ -136,3 +136,4 @@
     "dark": "Gruvbox Dark",
   },
 }
+  "cli_default_open_behavior": "existing_window",
