@@ -8,24 +8,24 @@
     padding = 10
     horizontal_padding = 12
     frame_width = 1
-    frame_color = "#313244"
+    frame_color = "@borderMuted@"
     font = MesloLGS Nerd Font 11
     line_height = 2
     corner_radius = 6
     timeout = 5
 
 [urgency_low]
-    background = "#1e1e2e"
-    foreground = "#cdd6f4"
-    frame_color = "#313244"
+    background = "@surface@"
+    foreground = "@foregroundSoft@"
+    frame_color = "@borderMuted@"
 
 [urgency_normal]
-    background = "#1e1e2e"
-    foreground = "#cdd6f4"
-    frame_color = "#89b4fa"
+    background = "@surface@"
+    foreground = "@foregroundSoft@"
+    frame_color = "@accent@"
 
 [urgency_critical]
-    background = "#1e1e2e"
-    foreground = "#f38ba8"
-    frame_color = "#f38ba8"
+    background = "@surface@"
+    foreground = "@danger@"
+    frame_color = "@danger@"
     timeout = 0

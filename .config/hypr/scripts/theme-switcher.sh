@@ -69,39 +69,14 @@ background = "$(value accent)"
 text = "$(value_or terminalForeground foregroundSoft)"
 EOF
 
-cat > "$tmp_dir/dunstrc" <<EOF
-[global]
-    monitor = 0
-    origin = top-right
-    offset = 10x10
-    width = 300
-    height = 100
-    gap_size = 6
-    padding = 10
-    horizontal_padding = 12
-    frame_width = 1
-    frame_color = "$(value borderMuted)"
-    font = MesloLGS Nerd Font 11
-    line_height = 2
-    corner_radius = 6
-    timeout = 5
-
-[urgency_low]
-    background = "$(value surface)"
-    foreground = "$(value foregroundSoft)"
-    frame_color = "$(value borderMuted)"
-
-[urgency_normal]
-    background = "$(value surface)"
-    foreground = "$(value foregroundSoft)"
-    frame_color = "$(value accent)"
-
-[urgency_critical]
-    background = "$(value surface)"
-    foreground = "$(value danger)"
-    frame_color = "$(value danger)"
-    timeout = 0
-EOF
+# Keep notification layout in Dunst's template; only colors come from the palette.
+sed \
+    -e "s/@borderMuted@/$(value borderMuted)/g" \
+    -e "s/@surface@/$(value surface)/g" \
+    -e "s/@foregroundSoft@/$(value foregroundSoft)/g" \
+    -e "s/@accent@/$(value accent)/g" \
+    -e "s/@danger@/$(value danger)/g" \
+    "$script_dir/../../dunst/dunstrc.template" > "$tmp_dir/dunstrc"
 
 cat > "$tmp_dir/hyprlock.conf" <<EOF
 \$theme_background = rgb($(hex background))
