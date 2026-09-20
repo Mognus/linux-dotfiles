@@ -1,12 +1,11 @@
 // Zed keymap.
 //
 // <panel>::Toggle opens and closes a specific panel. <panel>::ToggleFocus only
-// moves focus, and workspace::ToggleLeftDock cannot tell project from git panel
-// since both share the left dock.
+// moves focus, and workspace::ToggleRightDock cannot tell project from git panel
+// since both share the right dock.
 //
 // No "context" means the binding applies everywhere -- but a default bound in a
-// narrower context still wins. ctrl-shift-t therefore sits in Pane, to beat the
-// default pane::ReopenClosedItem.
+// narrower context still wins.
 [
   {
     "bindings": {
@@ -23,7 +22,7 @@
     "context": "Pane",
     "bindings": {
       // Close every tab in the active pane, including pinned tabs.
-      "ctrl-shift-t": ["pane::CloseAllItems", { "close_pinned": true }]
+      "ctrl-shift-x": ["pane::CloseAllItems", { "close_pinned": true }]
     }
   }
 ]
