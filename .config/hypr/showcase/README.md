@@ -26,7 +26,13 @@ desktop widgets, and Hyprlock locks the session.
 
 - `SUPER+Return` - Alacritty terminal
 - `SUPER+B` - Firefox
-- `SUPER+Space` - Rofi launcher, starts in apps and can switch to run/windows
+- `SUPER+Space` - Rofi app launcher
+- `SUPER+Ctrl+Space` - Rofi window switcher
+
+Apps, windows, wallpapers, and palettes use separate Rofi menus with one shared
+theme. There are no mode tabs or combined search; shell commands run in the terminal.
+All menus use the same fixed nine-row layout and open without compositor animations.
+The window switcher uses Rofi's built-in window mode and shows window titles.
 
 ## Session
 
@@ -39,14 +45,14 @@ desktop widgets, and Hyprlock locks the session.
 ## Appearance
 
 - `SUPER+W` - Pick a wallpaper
-- `SUPER+Shift+W` - Pick the Black, White, Pink, or Cyan palette
+- `SUPER+Ctrl+W` - Pick the Black, White, Pink, or Cyan palette
 - `SUPER+=/-` - Increase/decrease window opacity
 
 ## Windows
 
 - `SUPER+Q` - Close window
 - `SUPER+F` - Fullscreen
-- `SUPER+Ctrl+Space` - Toggle floating
+- `SUPER+Shift+Space` - Toggle floating
 - `SUPER+H/J/K/L` - Focus left/down/up/right
 - `SUPER+Ctrl+Shift+H/J/K/L` - Move window left/down/up/right
 - `SUPER+Shift+H/J/K/L` - Resize window left/down/up/right

@@ -40,6 +40,9 @@ function M.setup()
     })
 
     animations()
+
+    -- Show every Rofi menu immediately, without sliding or fading.
+    hl.layer_rule({ match = { namespace = "rofi" }, no_anim = true })
 end
 
 return M

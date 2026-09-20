@@ -7,7 +7,7 @@
 }
 
 window {
-    width: 720px;
+    width: 600px;
     location: center;
     anchor: center;
     border: 1px;
@@ -17,6 +17,7 @@ window {
 }
 
 mainbox {
+    children: [ inputbar, message, listview ];
     padding: 12px;
     spacing: 10px;
 }
@@ -24,26 +25,23 @@ mainbox {
 inputbar {
     padding: 0 0 10px 0;
     spacing: 12px;
-    border: 0 0 1px 0;
-    border-color: @edge-muted;
+    border: 0;
     children: [ prompt, entry ];
 }
 
 prompt {
     min-width: 86px;
     padding: 5px 10px;
-    border: 1px;
-    border-color: @edge-muted;
-    background-color: @bg-alt;
+    border: 0;
+    background-color: transparent;
     text-color: @accent;
     font: "JetBrainsMono Nerd Font Bold 12";
 }
 
 entry {
     padding: 6px 8px;
-    border: 1px;
-    border-color: @edge-muted;
-    background-color: @bg-alt;
+    border: 0;
+    background-color: transparent;
     text-color: @fg-soft;
     placeholder: "type to filter";
     placeholder-color: @muted;
@@ -60,20 +58,20 @@ listview {
 element {
     padding: 7px 10px;
     spacing: 12px;
-    border: 1px;
-    border-color: transparent;
+    border: 0;
     border-radius: 0;
     background-color: transparent;
 }
 
+element normal normal,
+element alternate normal,
 element normal active,
 element alternate active {
-    background-color: @bg-hover;
+    background-color: transparent;
 }
 
 element selected {
     background-color: @bg-hover;
-    border-color: @edge;
 }
 
 element-icon {
@@ -91,30 +89,6 @@ element-text selected {
 }
 
 element-icon selected {
-    text-color: @fg;
-}
-
-mode-switcher {
-    spacing: 4px;
-}
-
-button {
-    padding: 7px 12px;
-    border: 1px;
-    border-color: @edge-muted;
-    border-radius: 0;
-    background-color: transparent;
-    text-color: @muted;
-}
-
-button hover {
-    background-color: @bg-hover;
-    text-color: @fg;
-}
-
-button selected {
-    background-color: @bg-hover;
-    border-color: @edge;
     text-color: @fg;
 }
 
