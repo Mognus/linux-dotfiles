@@ -3,3 +3,8 @@
 
 [include]
 	path = ~/.gitconfig.local
+
+; Work repositories commit under the TRAENO identity. Must stay last so it
+; overrides the personal name and email above.
+[includeIf "gitdir:~/projects/work/"]
+	path = ~/dotfiles/.gitconfig-traeno
