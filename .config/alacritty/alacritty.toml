@@ -106,3 +106,8 @@ chars = "\u001bRk"
 key = "L"
 mods = "Super|Alt|Shift"
 chars = "\u001bRl"
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"
