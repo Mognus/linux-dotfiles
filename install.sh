@@ -11,10 +11,16 @@ fi
 
 # Install Stow first so conflicts are detected before the full package transaction.
 sudo pacman -S --needed stow
+# Keep agent directories separate so Stow links their files individually.
+mkdir -p "$HOME/.codex" "$HOME/.claude"
 stow --simulate --dir="$repo_dir" --target="$HOME" .
 
 sudo pacman -S --needed "${packages[@]}"
 stow --dir="$repo_dir" --target="$HOME" .
+
+# Both agents share one instruction file, excluded from Stow.
+ln -sfn "$repo_dir/AGENTS.md" "$HOME/.codex/AGENTS.md"
+ln -sfn "$repo_dir/AGENTS.md" "$HOME/.claude/CLAUDE.md"
 
 # Materialize the saved palette before themed applications launch.
 "$HOME/.config/hypr/scripts/theme-switcher.sh" --apply

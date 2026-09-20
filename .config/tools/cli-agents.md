@@ -4,7 +4,8 @@ This setup keeps assistant tooling in dotfiles so project defaults stay reproduc
 
 ## Codex
 
-Codex config lives in `.codex/config.toml`.
+Codex config lives in `.codex/config.toml`. Shared global instructions live in the repository-root `AGENTS.md`.
+`install.sh` links it directly to `~/.codex/AGENTS.md` and `~/.claude/CLAUDE.md`; Stow excludes it.
 
 ## Does
 
@@ -15,14 +16,14 @@ Codex config lives in `.codex/config.toml`.
 
 ## Claude
 
-Claude config lives in `.claude/CLAUDE.md` and `.claude/settings.json`.
+Claude settings live in `.claude/settings.json`. Global instructions load through `~/.claude/CLAUDE.md`.
 
 ## Does
 
-- Points Claude back to the repository-level `AGENTS.md`
+- Reads the shared `AGENTS.md` through the direct global symlink
 - Keeps global assistant behavior close to the dotfiles
 - Avoids duplicating project instructions across tools
 
 ## Workflow
 
-Use Codex for codebase edits and terminal-driven refactors. Use Claude config as a lightweight global pointer to shared project instructions.
+Use Codex for codebase edits and terminal-driven refactors. Use Claude config as a lightweight global pointer to shared global instructions.
