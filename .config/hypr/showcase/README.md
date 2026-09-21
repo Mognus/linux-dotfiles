@@ -8,19 +8,24 @@
 - Numbered workspaces for daily contexts
 - Scratchpads for temporary apps
 - `awww` wallpaper setup
-- Hyprlock session locking
+- Hyprlock session locking, automatically through Hypridle after thirty idle minutes
+- Clipboard history with image thumbnails through cliphist and Rofi
+- Volume and media keys through wpctl and playerctl
 - Polkit authentication prompts through the GNOME agent
 - Quickshell desktop widgets and quick settings
 
 ## Desktop Role
 
 Hyprland runs the desktop, `awww` sets the wallpaper, Quickshell provides the
-desktop widgets, and Hyprlock locks the session.
+desktop widgets, Hyprlock locks the session, and Hypridle locks it after thirty
+idle minutes, turns the monitor off five minutes later, and locks before suspend.
 
 ## Config
 
 - `hyprland.lua` - Main Hyprland config
 - `lua/` - Split Lua modules for monitors, binds, workspaces, and appearance
+- `hypridle.conf` - Idle timeouts and suspend hooks
+- `scripts/` - Rofi pickers for wallpapers, palettes, and clipboard history
 
 ## Apps
 
@@ -29,8 +34,8 @@ desktop widgets, and Hyprlock locks the session.
 - `SUPER+Space` - Rofi app launcher
 - `SUPER+Ctrl+Space` - Rofi window switcher
 
-Apps, windows, wallpapers, and palettes use separate Rofi menus with one shared
-theme. There are no mode tabs or combined search; shell commands run in the terminal.
+Apps, windows, wallpapers, palettes, and clipboard history use separate Rofi
+menus with one shared theme. There are no mode tabs or combined search; shell commands run in the terminal.
 All menus use the same fixed nine-row layout and open without compositor animations.
 The window switcher uses Rofi's built-in window mode and shows window titles.
 
@@ -42,11 +47,27 @@ The window switcher uses Rofi's built-in window mode and shows window titles.
 - `SUPER+Ctrl+S` - Area screenshot to clipboard
 - `SUPER+Ctrl+V` - Toggle recording
 
+## Clipboard
+
+- `SUPER+V` - Pick an entry from the clipboard history
+- `SUPER+Shift+V` - Wipe the clipboard history
+
+Every clipboard change is stored by cliphist. Image entries show a thumbnail
+next to the row; text entries show their first line.
+
+## Audio
+
+- `SUPER+=/-` - Volume up/down
+- `SUPER+0` - Toggle mute
+- `XF86Audio*` keys - Volume, mute, microphone mute, play/pause, next, previous
+
+Audio bindings also work on the lock screen. The Quickshell bar shows the level.
+
 ## Appearance
 
 - `SUPER+W` - Pick a wallpaper
 - `SUPER+Ctrl+W` - Pick the Black, White, Pink, or Cyan palette
-- `SUPER+=/-` - Increase/decrease window opacity
+- `SUPER+Shift+=/-` - Increase/decrease terminal opacity
 
 ## Windows
 
