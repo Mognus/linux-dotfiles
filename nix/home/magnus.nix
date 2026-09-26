@@ -64,6 +64,18 @@ in
   xdg.configFile."mimeapps.list".source = link ".config/mimeapps.list";
   # Single file: other apps add their own launchers to this folder.
   xdg.dataFile."applications/glow.desktop".source = link ".local/share/applications/glow.desktop";
+  xdg.configFile."glow".source = link ".config/glow";
+  xdg.configFile."yt-dlp".source = link ".config/yt-dlp";
+  xdg.configFile."ruff".source = link ".config/ruff";
+  xdg.configFile."zed".source = link ".config/zed";
+
+  # A named profile gives user.js a fixed path; install.sh had to look it up.
+  programs.firefox = {
+    enable = true;
+    profiles.default.isDefault = true;
+  };
+  home.file."${config.programs.firefox.configPath}/default/user.js".source =
+    link ".config/firefox/user.js";
 
   # GTK apps read the cursor from dconf; install.sh set this through gsettings.
   dconf.settings."org/gnome/desktop/interface" = {

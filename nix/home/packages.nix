@@ -15,11 +15,11 @@
     alsa-utils
 
     # --- Apps ---
-    firefox
+    # firefox comes from programs.firefox in magnus.nix
     chromium
     thunderbird
     tor-browser
-    libreoffice-fresh
+    libreoffice
     papers
     loupe
     discord

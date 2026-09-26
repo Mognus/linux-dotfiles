@@ -80,8 +80,7 @@
     git
     vim
     wget
-    # perf has to match the running kernel.
-    config.boot.kernelPackages.perf
+    perf
   ];
 
   fonts.packages = with pkgs; [
