@@ -56,5 +56,16 @@ in
   xdg.configFile."quickshell".source = link ".config/quickshell";
   xdg.configFile."dunst".source = link ".config/dunst";
   xdg.configFile."wallpapers".source = link ".config/wallpapers";
+  xdg.configFile."gtk-3.0".source = link ".config/gtk-3.0";
+  xdg.configFile."gtk-4.0".source = link ".config/gtk-4.0";
+  # Only the file: Home Manager keeps its own conf.d next to it.
+  xdg.configFile."fontconfig/fonts.conf".source = link ".config/fontconfig/fonts.conf";
+  home.file.".icons".source = link ".icons";
+
+  # GTK apps read the cursor from dconf; install.sh set this through gsettings.
+  dconf.settings."org/gnome/desktop/interface" = {
+    cursor-theme = "macOS";
+    cursor-size = 40;
+  };
   home.file.".gitconfig".source = link ".gitconfig";
 }
