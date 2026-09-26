@@ -61,6 +61,9 @@ in
   # Only the file: Home Manager keeps its own conf.d next to it.
   xdg.configFile."fontconfig/fonts.conf".source = link ".config/fontconfig/fonts.conf";
   home.file.".icons".source = link ".icons";
+  xdg.configFile."mimeapps.list".source = link ".config/mimeapps.list";
+  # Single file: other apps add their own launchers to this folder.
+  xdg.dataFile."applications/glow.desktop".source = link ".local/share/applications/glow.desktop";
 
   # GTK apps read the cursor from dconf; install.sh set this through gsettings.
   dconf.settings."org/gnome/desktop/interface" = {
