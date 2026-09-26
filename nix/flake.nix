@@ -2,10 +2,11 @@
   description = "NixOS configuration for my machines";
 
   inputs = {
-    # Same release the laptop was installed with.
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    # Rolling like Arch, so Hyprland and Quickshell match the desktop's versions.
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      # The main branch tracks nixos-unstable.
+      url = "github:nix-community/home-manager";
       # Build Home Manager against our nixpkgs instead of its own copy.
       inputs.nixpkgs.follows = "nixpkgs";
     };
