@@ -17,10 +17,17 @@ in
     tree-sitter
     gcc
     tmux
+    # hyprland: terminal and launcher bound in hypr/lua/programs.lua
+    alacritty
+    rofi
   ];
 
   xdg.configFile."fish".source = link ".config/fish";
   xdg.configFile."nvim".source = link ".config/nvim";
   xdg.configFile."tmux".source = link ".config/tmux";
+  xdg.configFile."hypr".source = link ".config/hypr";
+  xdg.configFile."xkb".source = link ".config/xkb";
+  xdg.configFile."alacritty".source = link ".config/alacritty";
+  xdg.configFile."rofi".source = link ".config/rofi";
   home.file.".gitconfig".source = link ".gitconfig";
 }

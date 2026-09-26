@@ -83,6 +83,7 @@
   ];
 
   programs.fish.enable = true;
+  programs.hyprland.enable = true;
   programs.neovim = {
     enable = true;
     defaultEditor = true;
