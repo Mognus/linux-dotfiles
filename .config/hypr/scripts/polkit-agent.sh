@@ -6,6 +6,8 @@ agent_paths=(
     /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
     /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
     /usr/libexec/polkit-gnome-authentication-agent-1
+    # NixOS: installed through Home Manager into the per-user profile.
+    "/etc/profiles/per-user/$USER/libexec/polkit-gnome-authentication-agent-1"
 )
 
 for agent in "${agent_paths[@]}"; do
