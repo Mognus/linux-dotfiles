@@ -1,10 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euo pipefail
 
-wallpaper_dirs=(
-    "$HOME/Pictures/wallpapers"
-    "$HOME/.config/wallpapers"
-)
+wallpaper_dir="$HOME/.config/wallpapers"
 
 if ! pgrep -x awww-daemon > /dev/null; then
     awww-daemon &
@@ -12,7 +9,7 @@ if ! pgrep -x awww-daemon > /dev/null; then
 fi
 
 selected="$(
-    find "${wallpaper_dirs[@]}" -maxdepth 1 -type f \
+    find "$wallpaper_dir" -maxdepth 1 -type f \
         \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.gif' \) \
         -printf '%f\t%p\n' 2> /dev/null |
     sort |
