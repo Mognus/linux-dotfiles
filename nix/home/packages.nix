@@ -43,6 +43,9 @@
     ansible
     typst
 
+    # --- Containers ---
+    podman-compose
+
     # --- File Manager ---
     ffmpegthumbnailer
 

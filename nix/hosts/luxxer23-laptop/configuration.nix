@@ -105,13 +105,13 @@
   programs.steam.enable = true;
   programs.thunar.enable = true;
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.ssh.startAgent = true;
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-gnome3;
+  };
+  # Runs prebuilt binaries (Claude Code, Codex) that expect a regular Linux loader.
+  programs.nix-ld.enable = true;
 
   # List services that you want to enable:
 
@@ -131,6 +131,13 @@
   # Thunar: mounts, trash and remote locations, plus thumbnails.
   services.gvfs.enable = true;
   services.tumbler.enable = true;
+
+  # Rootless containers; the user socket lets compose tools reach Podman.
+  virtualisation.podman.enable = true;
+  systemd.user.sockets.podman.wantedBy = [ "sockets.target" ];
+
+  # VPN configurations
+  services.netbird.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
