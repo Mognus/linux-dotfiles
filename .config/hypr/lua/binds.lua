@@ -75,6 +75,8 @@ function M.setup(programs)
     bind("XF86AudioPause", exec("playerctl play-pause"), { locked = true })
     bind("XF86AudioNext", exec("playerctl next"), { locked = true })
     bind("XF86AudioPrev", exec("playerctl previous"), { locked = true })
+    bind("XF86MonBrightnessUp", exec("brightnessctl set 5%+"), { repeating = true, locked = true })
+    bind("XF86MonBrightnessDown", exec("brightnessctl set 5%-"), { repeating = true, locked = true })
 
     mod_bind("Q", hl.dsp.window.close())
     mod_bind("F", hl.dsp.window.fullscreen())
