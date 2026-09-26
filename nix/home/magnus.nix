@@ -38,6 +38,10 @@ in
     awww
     hypridle
     polkit_gnome
+    # audio and brightness keys: pactl in the autostart, mixer, laptop backlight
+    pulseaudio
+    pavucontrol
+    brightnessctl
   ];
 
   xdg.configFile."fish".source = link ".config/fish";

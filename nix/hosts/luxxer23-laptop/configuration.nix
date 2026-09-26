@@ -113,6 +113,16 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  # Audio through PipeWire, with ALSA and PulseAudio clients supported.
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
+  hardware.bluetooth.enable = true;
+  services.power-profiles-daemon.enable = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
