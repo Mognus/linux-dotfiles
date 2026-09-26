@@ -82,6 +82,10 @@
     wget
   ];
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+  ];
+
   programs.fish.enable = true;
   programs.hyprland.enable = true;
   programs.neovim = {

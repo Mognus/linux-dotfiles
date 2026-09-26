@@ -20,6 +20,18 @@ in
     # hyprland: terminal and launcher bound in hypr/lua/programs.lua
     alacritty
     rofi
+    adwaita-icon-theme
+    # theme-switcher.sh reads the palettes with jq
+    jq
+    # hyprland binds and scripts: clipboard, screenshots, recording, media keys
+    wl-clipboard
+    cliphist
+    grim
+    slurp
+    swappy
+    wf-recorder
+    libnotify
+    playerctl
   ];
 
   xdg.configFile."fish".source = link ".config/fish";
