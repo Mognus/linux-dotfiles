@@ -46,7 +46,6 @@ also holds the screenshots used on the website:
 
 - [Alacritty](.config/alacritty/showcase/README.md)
 - [Fish](.config/fish/showcase/README.md)
-- [Git](.config/git/showcase/README.md)
 - [Hyprland](.config/hypr/showcase/README.md)
 - [Neovim](.config/nvim/showcase/README.md)
 - [Notifications](.config/dunst/showcase/README.md)
