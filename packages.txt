@@ -79,7 +79,6 @@ discord                     # Chat
 obsidian                    # Notes (Markdown vault)
 gimp                        # Image editor
 steam                       # Games
-sunshine                    # Game streaming host
 
 # --- Dev Languages ---
 rustup                      # Rust toolchain manager
