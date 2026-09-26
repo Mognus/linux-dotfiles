@@ -99,9 +99,6 @@ ansible                     # Infrastructure automation
 typst                       # Document typesetting
 
 # --- Containers ---
-docker                      # Container runtime
-docker-buildx               # Docker BuildKit builder
-docker-compose              # Multi-container orchestration
 podman                      # Rootless container runtime
 podman-compose              # Compose frontend for Podman
 

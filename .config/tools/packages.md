@@ -58,7 +58,6 @@ The package list lives in `packages.txt` at the repository root.
 - `rustup` and `rust-analyzer` - Rust toolchain and LSP server
 - `go` - Go
 - `nodejs` and `npm` - Node.js tooling
-- `docker` and `docker-compose` - containers
 - `podman` and `podman-compose` - rootless containers
 - `ansible` - infrastructure automation
 - `typst` - document typesetting
