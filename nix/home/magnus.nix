@@ -32,6 +32,12 @@ in
     wf-recorder
     libnotify
     playerctl
+    # hyprland autostart: bar, notifications, wallpaper, idle, auth prompts
+    quickshell
+    dunst
+    awww
+    hypridle
+    polkit_gnome
   ];
 
   xdg.configFile."fish".source = link ".config/fish";
@@ -41,5 +47,8 @@ in
   xdg.configFile."xkb".source = link ".config/xkb";
   xdg.configFile."alacritty".source = link ".config/alacritty";
   xdg.configFile."rofi".source = link ".config/rofi";
+  xdg.configFile."quickshell".source = link ".config/quickshell";
+  xdg.configFile."dunst".source = link ".config/dunst";
+  xdg.configFile."wallpapers".source = link ".config/wallpapers";
   home.file.".gitconfig".source = link ".gitconfig";
 }

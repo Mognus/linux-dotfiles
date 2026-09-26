@@ -84,10 +84,17 @@
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
+    nerd-fonts.meslo-lg
+    # Syne (Quickshell) has no package of its own; google-fonts would pull ~1 GB for it.
+    (runCommand "syne-font" { } ''
+      install -Dm644 ${../../fonts}/*.ttf -t $out/share/fonts/truetype
+    '')
   ];
 
   programs.fish.enable = true;
   programs.hyprland.enable = true;
+  # Registers the PAM service hyprlock needs to unlock the session.
+  programs.hyprlock.enable = true;
   programs.neovim = {
     enable = true;
     defaultEditor = true;
