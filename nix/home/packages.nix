@@ -43,6 +43,10 @@
     ansible
     typst
 
+    # --- AI Agents ---
+    claude-code
+    codex
+
     # --- Containers ---
     podman-compose
 

@@ -77,6 +77,15 @@ in
   home.file."${config.programs.firefox.configPath}/default/user.js".source =
     link ".config/firefox/user.js";
 
+  # Both agents share one instruction file; their folders also hold local state.
+  home.file.".claude/CLAUDE.md".source = link "AGENTS.md";
+  home.file.".codex/AGENTS.md".source = link "AGENTS.md";
+  home.file.".claude/settings.json".source = link ".claude/settings.json";
+
+  # grim does not create the folder the Hyprland screenshot binds write to.
+  # Screenshots are throwaway: anything untouched for a week gets deleted.
+  systemd.user.tmpfiles.rules = [ "d %h/Pictures/screenshots - - - 7d" ];
+
   # GTK apps read the cursor from dconf; install.sh set this through gsettings.
   dconf.settings."org/gnome/desktop/interface" = {
     cursor-theme = "macOS";
