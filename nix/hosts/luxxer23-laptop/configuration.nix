@@ -16,6 +16,11 @@
 
   # Nix-Settings
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -62,6 +67,7 @@
     isNormalUser = true;
     description = "Magnus";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.fish;
     packages = with pkgs; [];
   };
 
@@ -71,13 +77,16 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-	git  	
-	neovim
-	vim 
-	wget
- ];
+    git
+    vim
+    wget
+  ];
 
- environment.variables.EDITOR = "nvim";
+  programs.fish.enable = true;
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

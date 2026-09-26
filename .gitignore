@@ -5,5 +5,8 @@
 /.codex/config.toml
 /.config/zed/settings_backup.json
 
+# Nix build output links
+result
+
 # Editor and tooling backup copies
 *.bak
