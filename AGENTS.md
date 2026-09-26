@@ -8,7 +8,7 @@
 - Always define scope before tackling any bigger Task, inside of this scope initialize little Tasks Packages, so everything stays verifiable,
 we dont do things, that are completely unnecessary / make the code unclean because AI makes code that does the Job, but is unmaintainable in the long-term
 - Small verifiable steps, stay in scope — flag adjacent problems instead of fixing them unasked.
-
+- Never test with curl unless i explicitly ask for it
 ## Git
 - Never commit unless I explicitly ask.
 - Conventional Commits: `feat:`, `fix:`, `refactor:`, `docs:`, `chore:`.

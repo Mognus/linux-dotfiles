@@ -24,12 +24,14 @@ The package list lives in `packages.txt` at the repository root.
 - `dunst` - notifications
 - `hyprlock`, `awww`, `hypridle` - lock screen, wallpaper, and idle handling
 - `xdg-desktop-portal-hyprland` - portal integration for Wayland apps
+- `gvfs`, `tumbler`, `ffmpegthumbnailer` - file manager access and previews
 
 ## Wayland Helpers
 
 - `grim` - screenshots
 - `slurp` - region selection
 - `wl-clipboard` - clipboard access
+- `cliphist` - clipboard history for the Hyprland picker
 - `swappy` - screenshot editor
 - `socat` - IPC helper
 - `jq` - JSON processing
@@ -47,6 +49,9 @@ The package list lives in `packages.txt` at the repository root.
 - `loupe` - GTK image viewer
 - `discord` - chat
 - `obsidian` - notes
+- `thunderbird` - mail
+- `torbrowser-launcher` - Tor Browser
+- `libreoffice-fresh` - office documents
 
 ## Development
 
@@ -54,6 +59,9 @@ The package list lives in `packages.txt` at the repository root.
 - `go` - Go
 - `nodejs` and `npm` - Node.js tooling
 - `docker` and `docker-compose` - containers
+- `podman` and `podman-compose` - rootless containers
+- `ansible` - infrastructure automation
+- `typst` - document typesetting
 
 ## System Tools
 
@@ -62,6 +70,11 @@ The package list lives in `packages.txt` at the repository root.
 - `curl`, `wget`, `openssh` - network and remote access
 - `ripgrep`, `bat`, `glow`, `btop`, `fastfetch` - CLI quality-of-life tools
 - `stow` - dotfiles symlink management
+- `base-devel` - build tools used with Arch and the AUR
+- `bind` - DNS diagnostic commands
 - `reflector` - pacman mirror updates
 - `ufw` - firewall
 - `unzip` and `7zip` - archive extraction
+
+`paru` and `paru-debug` are installed locally but are not in `packages.txt`: they
+are AUR packages, so the pacman-only installer cannot install them directly.

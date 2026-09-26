@@ -23,7 +23,9 @@
     },
     "claude-acp": {
       "default_config_options": {
-        "effort": "medium"
+        "mode": "default",
+        "model": "opus[1m]",
+        "effort": "high"
       },
       "type": "registry"
     }

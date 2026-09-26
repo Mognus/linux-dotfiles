@@ -16,6 +16,7 @@ nano                        # Simple terminal editor
 
 # --- Base System ---
 base                        # Minimal Arch base
+base-devel                  # Arch build tools for source packages and AUR
 linux                       # Linux kernel
 linux-firmware              # Firmware files
 amd-ucode                   # AMD CPU microcode
@@ -42,6 +43,7 @@ polkit-gnome                # Privilege dialog (sudo popups in GUI)
 grim                        # Screenshot (full screen)
 slurp                       # Select screen region for screenshots
 wl-clipboard                # Clipboard (wl-copy, wl-paste)
+cliphist                    # Clipboard history used by Hyprland and Rofi
 swappy                      # Screenshot editor
 socat                       # Socket communication (e.g. Hyprland IPC)
 jq                          # JSON processing in CLI
@@ -68,6 +70,9 @@ noto-fonts-cjk              # CJK font coverage
 # --- Apps ---
 firefox                     # Browser
 chromium                    # Chromium browser
+thunderbird                 # Mail client
+torbrowser-launcher         # Tor Browser installer and launcher
+libreoffice-fresh           # Office suite
 papers                      # GNOME document viewer for PDF and other formats
 loupe                       # GNOME image viewer
 discord                     # Chat
@@ -91,14 +96,21 @@ python-pipx                 # Isolated Python CLI app installer
 ruff                        # Python linter and formatter
 pyright                     # Python type checker and LSP server
 buf                         # Protobuf tooling
+ansible                     # Infrastructure automation
+typst                       # Document typesetting
 
 # --- Containers ---
 docker                      # Container runtime
 docker-buildx               # Docker BuildKit builder
 docker-compose              # Multi-container orchestration
+podman                      # Rootless container runtime
+podman-compose              # Compose frontend for Podman
 
 # --- File Manager ---
 thunar                      # GUI file manager
+gvfs                        # Mount and remote location support for Thunar
+tumbler                     # Thumbnail service for Thunar
+ffmpegthumbnailer           # Video thumbnails
 
 # --- Media ---
 yt-dlp                      # YouTube/video downloader
@@ -136,6 +148,7 @@ gobuster                    # Directory/DNS brute forcing
 hashcat                     # Password recovery
 john                        # Password recovery
 openvpn                     # OpenVPN client
+bind                        # DNS diagnostic tools (dig, host, nslookup)
 
 # --- TeX ---
 texlive-basic               # Basic TeX Live packages
