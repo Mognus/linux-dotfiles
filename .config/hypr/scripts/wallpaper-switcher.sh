@@ -9,7 +9,7 @@ if ! pgrep -x awww-daemon > /dev/null; then
 fi
 
 selected="$(
-    find "$wallpaper_dir" -maxdepth 1 -type f \
+    find -L "$wallpaper_dir" -maxdepth 1 -type f \
         \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.gif' \) \
         -printf '%f\t%p\n' 2> /dev/null |
     sort |
