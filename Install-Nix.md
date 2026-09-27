@@ -4,7 +4,7 @@ How to put one of the machines from `nix/` onto a fresh disk. The flake describe
 the partitions, the system and the home directory; the steps below cover what it
 cannot: secrets, the Wi-Fi password and the clone of this repository.
 
-Hosts: `luxxer23-laptop`.
+Hosts: `luxxer23-laptop`, `luxxer23-desktop`.
 
 > **Everything before Hyprland uses the US layout** — the LUKS prompt, the console
 > and the login screen. Pick the disk passphrase with that in mind.
@@ -68,6 +68,32 @@ sudo reboot
 ```
 
 Pull the stick when the screen goes dark.
+
+### First install of a host
+
+A host installed for the first time has no `hardware-configuration.nix` yet: it
+lists the kernel modules needed to reach the disk and keyboard at boot, and only
+the machine itself can detect them. Generate it in a local clone and install
+from there instead of from GitHub:
+
+```sh
+git clone https://github.com/Mognus/linux-dotfiles.git && cd linux-dotfiles/nix
+# Disks come from disko.nix, so leave file systems out.
+nixos-generate-config --no-filesystems --show-hardware-config \
+  > hosts/<host>/hardware-configuration.nix
+git add hosts/<host>/hardware-configuration.nix   # flakes only see tracked files
+
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- \
+  --mode destroy,format,mount --flake '.#<host>'
+sudo nixos-install --flake '.#<host>'
+sudo nixos-enter --root /mnt -c 'passwd magnus'
+# The live system's clone is gone after the reboot; keep the file on the new disk.
+sudo cp hosts/<host>/hardware-configuration.nix /mnt/etc/nixos/
+sudo reboot
+```
+
+After the first login, copy `/etc/nixos/hardware-configuration.nix` into
+`~/dotfiles/nix/hosts/<host>/` and commit it.
 
 ## 3. First login
 
