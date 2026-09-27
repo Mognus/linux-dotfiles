@@ -38,5 +38,19 @@
           }
         ];
       };
+
+      nixosConfigurations.luxxer23-desktop = nixpkgs.lib.nixosSystem {
+        modules = [
+          ./modules/common.nix
+          ./hosts/luxxer23-desktop/configuration.nix
+          disko.nixosModules.disko
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.magnus = import ./home/magnus.nix;
+          }
+        ];
+      };
     };
 }
