@@ -13,6 +13,9 @@
 
   # Reached from the desktop over SSH.
   services.openssh.enable = true;
+  users.users.magnus.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBelrBwJwiIX4N9J+JhDPutWqj2/cRXiAAc7vqcDyNU+ luxxer23-desktop"
+  ];
 
   services.power-profiles-daemon.enable = true;
 
