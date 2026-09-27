@@ -11,14 +11,6 @@
 
   networking.hostName = "luxxer23-laptop";
 
-  # German built-in keyboard for the console and the greeter;
-  # Hyprland switches to the custom layout from the dotfiles.
-  console.keyMap = "de";
-  services.xserver.xkb = {
-    layout = "de";
-    variant = "";
-  };
-
   # Reached from the desktop over SSH.
   services.openssh.enable = true;
 

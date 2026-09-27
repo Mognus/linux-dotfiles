@@ -29,6 +29,11 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
+  # US keys for the LUKS prompt, the console and the greeter;
+  # Hyprland switches to the custom layout from the dotfiles.
+  console.keyMap = "us";
+  services.xserver.xkb.layout = "us";
+
   users.users."magnus" = {
     isNormalUser = true;
     description = "Magnus";
