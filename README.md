@@ -11,6 +11,9 @@ online at <https://freierfreier23.de/en/personal-setup>.
 
 ## Install
 
+NixOS machines are described by the flake in `nix/`; see
+[Install-Nix.md](Install-Nix.md). The steps below are for Arch.
+
 Clone the repository into your home directory:
 
 ```sh

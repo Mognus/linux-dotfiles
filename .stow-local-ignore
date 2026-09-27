@@ -6,3 +6,4 @@
 ^/AGENTS\.md$
 ^/\.config/firefox$
 ^/nix$
+^/Install-Nix\.md$
