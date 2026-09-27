@@ -12,7 +12,7 @@ Tmux keeps terminal sessions alive.
 - `Alt+T/V/Q` - split right/split down/close pane
 - `Alt+H/J/K/L` - focus pane left/down/up/right
 - `Super+Alt+Shift+H/J/K/L` - resize pane left/down/up/right
-- `Alt+/` - copy mode, already searching upwards (`Esc` to just scroll)
+- `Alt+/` - copy mode
 
 ### Copy mode
 
