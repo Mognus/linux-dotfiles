@@ -17,6 +17,7 @@
     {
       nixosConfigurations.luxxer23-laptop = nixpkgs.lib.nixosSystem {
         modules = [
+          ./modules/common.nix
           ./hosts/luxxer23-laptop/configuration.nix
           home-manager.nixosModules.home-manager
           {
