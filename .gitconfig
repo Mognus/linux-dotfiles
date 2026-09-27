@@ -1,8 +1,6 @@
 [user]
 	name = Mognus
-
-[include]
-	path = ~/.gitconfig.local
+	email = magnusderkleine@gmail.com
 
 ; Work repositories commit under the TRAENO identity. Must stay last so it
 ; overrides the personal name and email above.

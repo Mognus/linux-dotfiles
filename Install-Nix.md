@@ -105,7 +105,6 @@ as `magnus`, then:
 ```sh
 nmtui                       # Wi-Fi, the live session's connection is gone
 git clone https://github.com/Mognus/linux-dotfiles.git ~/dotfiles
-git config --file ~/.gitconfig.local user.email "<email>"
 ```
 
 **Ctrl+Alt+F1** returns to the greeter; logging in now starts Hyprland.
