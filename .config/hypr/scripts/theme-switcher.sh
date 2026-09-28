@@ -117,10 +117,10 @@ else
     color_scheme=prefer-dark
 fi
 
-if command -v gsettings >/dev/null; then
-    gsettings set org.gnome.desktop.interface gtk-theme "$gtk_theme" 2>/dev/null || true
-    gsettings set org.gnome.desktop.interface color-scheme "$color_scheme" 2>/dev/null || true
-fi
+# dconf needs no schemas, unlike gsettings on NixOS. Home Manager must not set
+# these keys, or every rebuild would reset the theme.
+dconf write /org/gnome/desktop/interface/gtk-theme "'$gtk_theme'"
+dconf write /org/gnome/desktop/interface/color-scheme "'$color_scheme'"
 
 if pgrep -x dunst >/dev/null && command -v dunstctl >/dev/null; then
     dunstctl reload "$state_dir/dunstrc" >/dev/null 2>&1 || true
