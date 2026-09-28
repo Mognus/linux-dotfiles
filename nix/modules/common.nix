@@ -41,11 +41,11 @@
     shell = pkgs.fish;
   };
 
-  # Login: a text greeter that remembers the user and starts Hyprland.
+  # Login: a text greeter that remembers the user and starts Hyprland through UWSM.
   services.greetd = {
     enable = true;
     settings.default_session.command =
-      "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd start-hyprland";
+      "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd 'uwsm start hyprland-uwsm.desktop'";
   };
 
   environment.systemPackages = with pkgs; [
@@ -67,6 +67,9 @@
 
   programs.fish.enable = true;
   programs.hyprland.enable = true;
+  # Activates graphical-session.target, which the portal (dark mode for
+  # Firefox, screen sharing) requires before it starts.
+  programs.hyprland.withUWSM = true;
   # Registers the PAM service hyprlock needs to unlock the session.
   programs.hyprlock.enable = true;
   programs.neovim = {
@@ -100,6 +103,10 @@
   # Rootless containers; the user socket lets compose tools reach Podman.
   virtualisation.podman.enable = true;
   systemd.user.sockets.podman.wantedBy = [ "sockets.target" ];
+  # NetBird's resolver is unreachable from containers; give them Quad9.
+  virtualisation.containers.containersConf.settings.containers.dns_servers = [ "9.9.9.9" "149.112.112.112" ];
+  # Resolve short image names like "postgres:16" against Docker Hub, as Docker does.
+  virtualisation.containers.registries.search = [ "docker.io" ];
 
   # VPN configurations
   services.netbird.enable = true;
