@@ -52,26 +52,6 @@
     "expand_edit_card": true
   },
 
-  // MCP servers for the agent. Started locally as stdio subprocesses.
-  "context_servers": {
-    // `--editor` serves draw.io from the server itself, so no browser
-    // extension is needed. Ports moved off the defaults (3333/3000) to stay
-    // clear of local dev stacks; Codex runs its own instance on 7334/7331.
-    "drawio": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "drawio-mcp-server",
-        "--editor",
-        "--extension-port",
-        "7333",
-        "--http-port",
-        "7330"
-      ],
-      "env": {}
-    }
-  },
-
   // Ports lua/core/options.lua: hybrid line numbers, cursorline, scrolloff.
   "relative_line_numbers": "enabled",
   "current_line_highlight": "line",
