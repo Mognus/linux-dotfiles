@@ -18,6 +18,16 @@
       "ctrl-shift-l": "editor::ToggleGitBlameInline"
     }
   },
+  // ctrl-shift-c must stay unbound. null only removes a default in the exact
+  // same context, so every default context is listed here.
+  { "context": "!Terminal", "bindings": { "ctrl-shift-c": null } },
+  { "context": "Terminal", "bindings": { "ctrl-shift-c": null } },
+  { "context": "ProjectPanel", "bindings": { "ctrl-shift-c": null } },
+  { "context": "KeymapEditor", "bindings": { "ctrl-shift-c": null } },
+  {
+    "context": "WorktreePicker || (WorktreePicker > Picker > Editor)",
+    "bindings": { "ctrl-shift-c": null }
+  },
   {
     "context": "Pane",
     "bindings": {
