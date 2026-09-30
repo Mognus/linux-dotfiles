@@ -1,3 +1,33 @@
+-- Space as leader. Must be set before any <leader> mapping is defined;
+-- no plugin loaded before this file defines one.
+vim.g.mapleader = " "
+
+-- Space+d toggles a side-by-side diff of the current file against git
+-- (built-in diff mode). ]c / [c jump between changes.
+-- The git side is a buffer named "gitsigns://...": if one is open, pressing
+-- again closes it; otherwise it opens one.
+-- Example: 1× Space+d → "file | gitsigns://.../file", 2× → back to "file".
+local function toggle_git_diff()
+    local closed = false
+    for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+        local name = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(win))
+        if vim.startswith(name, "gitsigns://") then
+            vim.api.nvim_win_close(win, true)
+            closed = true
+        end
+    end
+
+    if closed then
+        -- The remaining window still has diff mode on; turn it off.
+        vim.cmd("diffoff!")
+        return
+    end
+
+    require("gitsigns").diffthis()
+end
+
+vim.keymap.set("n", "<leader>d", toggle_git_diff, { desc = "Toggle git diff of current file" })
+
 -- Ctrl+B toggles the fullscreen file explorer, like the sidebar toggle in Zed.
 -- Replaces the stock Ctrl+B (page up); tmux's prefix moved to Ctrl+Space for this.
 vim.keymap.set("n", "<C-b>", function()
