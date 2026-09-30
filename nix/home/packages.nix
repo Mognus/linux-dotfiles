@@ -48,6 +48,20 @@
     ansible
     typst
 
+    # --- Language Servers (configs in .config/nvim/lsp/) ---
+    nixd
+    lua-language-server
+    lemminx
+    # jsonls, cssls, html
+    vscode-langservers-extracted
+    bash-language-server
+    tinymist
+    yaml-language-server
+    ansible-language-server
+    # ansiblels runs it for validation
+    ansible-lint
+    svelte-language-server
+
     # --- AI Agents ---
     claude-code
     codex
