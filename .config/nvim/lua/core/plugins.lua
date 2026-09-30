@@ -1,6 +1,10 @@
 vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+    { src = "https://github.com/coder/claudecode.nvim" },
 })
+
+-- Starts the WebSocket server that `claude` finds via ~/.claude/ide/<port>.lock.
+require("claudecode").setup()
 
 local treesitter_languages = {
     "css",
