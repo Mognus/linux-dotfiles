@@ -6,6 +6,7 @@ vim.opt.guicursor = "a:block"
 -- Keep mouse handling in the terminal, like classic Vim.
 vim.opt.mouse = ""
 
+-- Enable 24-bit colors so the theme renders correctly.
 vim.opt.termguicolors = true
 
 require("core.ui")
