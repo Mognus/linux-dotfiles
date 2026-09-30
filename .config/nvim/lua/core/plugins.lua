@@ -2,6 +2,7 @@ vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     { src = "https://github.com/coder/claudecode.nvim" },
     { src = "https://github.com/folke/snacks.nvim" },
+    { src = "https://github.com/lewis6991/gitsigns.nvim" },
 })
 
 require("snacks").setup({
@@ -21,6 +22,21 @@ require("snacks").setup({
             },
         },
     },
+})
+
+-- Marks changed lines in the sign column; ]c / [c jump between hunks.
+require("gitsigns").setup({
+    on_attach = function(bufnr)
+        local gitsigns = require("gitsigns")
+
+        vim.keymap.set("n", "]c", function()
+            gitsigns.nav_hunk("next")
+        end, { buffer = bufnr, desc = "Next git hunk" })
+
+        vim.keymap.set("n", "[c", function()
+            gitsigns.nav_hunk("prev")
+        end, { buffer = bufnr, desc = "Previous git hunk" })
+    end,
 })
 
 -- Starts the WebSocket server that `claude` finds via ~/.claude/ide/<port>.lock.
