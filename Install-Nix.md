@@ -121,8 +121,6 @@ git -C ~/dotfiles remote set-url origin git@github.com:Mognus/linux-dotfiles.git
 These stay outside the repository on purpose:
 
 ```sh
-rustup default stable
-rustup component add rust-analyzer
 netbird up                  # asks for the login or a setup key
 ```
 

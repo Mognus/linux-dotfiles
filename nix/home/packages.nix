@@ -27,8 +27,12 @@
     gimp
 
     # --- Dev Languages ---
-    # rustup ships the rust-analyzer proxy: rustup component add rust-analyzer
-    rustup
+    # Rust straight from nixpkgs; a project that pins its own version gets a devShell.
+    cargo
+    rustc
+    rust-analyzer
+    clippy
+    rustfmt
     go
     gopls
     nodejs
