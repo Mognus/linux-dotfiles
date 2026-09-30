@@ -101,3 +101,9 @@ local function grep_repo()
 end
 vim.keymap.set("n", "<C-/>", grep_repo, { desc = "Grep in repo" })
 vim.keymap.set("n", "<C-_>", grep_repo, { desc = "Grep in repo" })
+
+-- F8 lists all LSP errors and warnings, like "Problems" in VS Code/Zed.
+-- Only covers files the LSP has seen, i.e. opened buffers.
+vim.keymap.set("n", "<F8>", function()
+    Snacks.picker.diagnostics()
+end, { desc = "Diagnostics" })
