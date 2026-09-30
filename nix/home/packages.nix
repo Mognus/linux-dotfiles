@@ -40,6 +40,7 @@
     ruff
     pyright
     buf
+    gnumake
     ansible
     typst
 
