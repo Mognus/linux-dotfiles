@@ -1,6 +1,26 @@
 vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     { src = "https://github.com/coder/claudecode.nvim" },
+    { src = "https://github.com/folke/snacks.nvim" },
+})
+
+require("snacks").setup({
+    explorer = { enabled = true },
+    picker = {
+        sources = {
+            explorer = {
+                -- Fullscreen overview with the search field on top; typing filters the tree.
+                layout = { preset = "vertical", preview = false, fullscreen = true },
+                focus = "input",
+                -- Close after opening a file, so it works like a quick overlay.
+                auto_close = true,
+                -- Explorer defaults to exact matching; turn on fuzzy and ignore case always.
+                matcher = { fuzzy = true, smartcase = false, ignorecase = true },
+                -- Show dotfiles by default; Alt+H / H still toggles them off.
+                hidden = true,
+            },
+        },
+    },
 })
 
 -- Starts the WebSocket server that `claude` finds via ~/.claude/ide/<port>.lock.

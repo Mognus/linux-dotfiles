@@ -10,3 +10,4 @@ vim.opt.termguicolors = true
 
 require("core.ui")
 require("core.plugins")
+require("core.keymaps")
