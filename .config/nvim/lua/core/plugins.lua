@@ -15,8 +15,9 @@ require("snacks").setup({
                 focus = "input",
                 -- Close after opening a file, so it works like a quick overlay.
                 auto_close = true,
-                -- Explorer defaults to exact matching; turn on fuzzy and ignore case always.
-                matcher = { fuzzy = true, smartcase = false, ignorecase = true },
+                -- Exact substring match, ignoring case. Fuzzy matches letters spread over the
+                -- whole path, e.g. "readme" hits "tRaEno_project_ADMin.../ir.ModEl..." too.
+                matcher = { fuzzy = false, smartcase = false, ignorecase = true },
                 -- Show dotfiles by default; Alt+H / H still toggles them off.
                 hidden = true,
             },
