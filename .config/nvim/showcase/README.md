@@ -1,12 +1,22 @@
 # Neovim Setup
 
-Configuration lives in `~/dotfiles/.config/nvim/init.lua`, linked to
-`~/.config/nvim` by Stow. Edit this Lua file to customize editor options.
+Configuration lives in `~/dotfiles/.config/nvim/init.lua`. Home Manager links
+it to `~/.config/nvim` with `mkOutOfStoreSymlink` (`nix/home/magnus.nix`), so
+the link chain ends in the repo:
+
+```
+~/.config/nvim -> /nix/store/...-home-manager-files/.config/nvim -> ~/dotfiles/.config/nvim
+```
+
+Edits in the repo apply on the next Neovim start without a rebuild. Only
+changing the link itself needs `sudo nixos-rebuild switch --flake ~/dotfiles/nix`.
+Edit this Lua file to customize editor options.
 
 The setup keeps Neovim's built-in keybindings. The only external plugin is
 `nvim-treesitter`, for syntax highlighting and indentation. Existing syntax
 colors and transparent backgrounds remain in `lua/core/ui.lua`; parser setup
-lives in `lua/core/plugins.lua`.
+lives in `lua/core/plugins.lua`. The parsers are compiled locally with
+`tree-sitter` and `gcc`, which Home Manager installs through `home.packages`.
 
 There are no configured language servers, automatic completion popups, pickers,
 custom keybindings, or formatting integrations.
