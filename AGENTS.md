@@ -13,6 +13,7 @@
 - Rule of Three: don't abstract until the third repetition. Duplication beats the wrong abstraction.
 - Always define scope before tackling any bigger Task, inside of this scope initialize little Tasks Packages, so everything stays verifiable.
 - Small verifiable steps, stay in scope — flag adjacent problems instead of fixing them unasked.
+- No workarounds for simple architectural gaps. When something is missing or awkward, first check what the project already provides (README, Makefile, .gitignore, requirements) and name the proper fix out loud before bending around it. Example: tests need a local venv → create `.venv` as the README says, not a temp venv in a scratch dir or a container with mounted tests and ad-hoc `pip install`. If only a workaround is possible, say so and ask first.
 - Never test with curl unless i explicitly ask for it
 
 ## General Programming Rules
@@ -26,12 +27,12 @@
 - Never commit unless I explicitly ask.
 - Conventional Commits: `feat:`, `fix:`, `refactor:`, `docs:`, `chore:`.
 - Small, focused commits — no unrelated changes mixed in.
-- No co-author trailers.
+- No AI attribution anywhere: no co-author trailers, no "Generated with …" lines in commits, PRs, issues or comments.
 
 ## Environment
-- OS: Arch Linux
-- Kernel: 6.19.8-arch1-1
-- Hostname: FreierFreier23
+- OS: NixOS 26.11 (Zokor)
+- Kernel: 7.2.8
+- Hostname: luxxer23-desktop
 - WM: Hyprland
 - Shell: fish
 - Terminal multiplexer: tmux
