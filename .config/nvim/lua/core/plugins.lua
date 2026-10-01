@@ -3,6 +3,9 @@ vim.pack.add({
     { src = "https://github.com/coder/claudecode.nvim" },
     { src = "https://github.com/folke/snacks.nvim" },
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
+    -- Renders Markdown in the buffer; the cursor line stays raw for editing.
+    -- `:RenderMarkdown toggle` switches back to plain text.
+    { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
 })
 
 require("snacks").setup({
