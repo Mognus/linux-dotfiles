@@ -45,6 +45,7 @@ require("claudecode").setup()
 
 local treesitter_languages = {
     "css",
+    "dockerfile",
     "go",
     "gomod",
     "html",
@@ -58,6 +59,7 @@ local treesitter_languages = {
     "svelte",
     "tsx",
     "typescript",
+    "yaml",
 }
 
 require("nvim-treesitter").install(treesitter_languages)
@@ -75,9 +77,21 @@ vim.api.nvim_create_autocmd("FileType", {
         "svelte",
         "typescript",
         "typescriptreact",
+        -- FileType matches the whole name, so "yaml" alone misses "yaml.ansible".
+        "yaml",
+        "yaml.ansible",
     },
     callback = function()
         vim.treesitter.start()
         vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+})
+
+-- nvim-treesitter ships no indent query for Dockerfiles, so only highlight
+-- and keep Vim's own indent there.
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "dockerfile",
+    callback = function()
+        vim.treesitter.start()
     end,
 })

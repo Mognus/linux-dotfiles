@@ -16,11 +16,14 @@ vim.lsp.enable({
     "yamlls",
     "ansiblels",
     "svelte",
+    "dockerls",
 })
 
 -- Neovim can't tell Ansible YAML from plain YAML, so mark playbooks and role
 -- files by path; ansiblels only attaches to "yaml.ansible".
 -- Example: "infra/roles/web/tasks/main.yml" → yaml.ansible, "docker-compose.yml" → yaml.
+-- Compose files need nothing extra: yamlls picks the Compose schema from
+-- SchemaStore by file name.
 vim.filetype.add({
     pattern = {
         [".*/playbooks/.*%.ya?ml"] = "yaml.ansible",

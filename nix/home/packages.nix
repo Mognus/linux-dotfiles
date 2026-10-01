@@ -61,6 +61,8 @@
     # ansiblels runs it for validation
     ansible-lint
     svelte-language-server
+    # dockerls; Compose files go through yamlls
+    dockerfile-language-server
 
     # --- AI Agents ---
     claude-code
