@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   dotfiles = "${config.home.homeDirectory}/dotfiles";
   # Link straight into the repo, like Stow did, so edits apply without a rebuild.
@@ -80,7 +80,12 @@ in
   # Both agents share one instruction file; their folders also hold local state.
   home.file.".claude/CLAUDE.md".source = link "AGENTS.md";
   home.file.".codex/AGENTS.md".source = link "AGENTS.md";
-  home.file.".claude/settings.json".source = link ".claude/settings.json";
+  # Claude Code saves via a temp file next to the first link hop, so this link
+  # must skip the read-only store. Back to home.file once
+  # https://github.com/anthropics/claude-code/issues/78162 is fixed.
+  home.activation.claudeSettings = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+    run ln -sfn ${dotfiles}/.claude/settings.json $HOME/.claude/settings.json
+  '';
 
   # grim does not create the folder the Hyprland screenshot binds write to.
   # Screenshots are throwaway: anything untouched for a week gets deleted.
