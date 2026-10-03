@@ -9,6 +9,9 @@ vim.opt.mouse = ""
 -- Enable 24-bit colors so the theme renders correctly.
 vim.opt.termguicolors = true
 
+-- Yank, delete and put through the system clipboard (wl-copy on Wayland).
+vim.opt.clipboard = "unnamedplus"
+
 require("core.ui")
 require("core.plugins")
 require("core.keymaps")
