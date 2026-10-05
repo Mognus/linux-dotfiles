@@ -94,16 +94,13 @@ vim.keymap.set("n", "<C-p>", function()
     Snacks.picker.files({
         cwd = Snacks.git.get_root(),
         hidden = true,
-        -- Alt+. (dot = dotfiles) toggles hidden files while typing in the search field.
-        -- The stock Alt+H is swallowed by tmux (select-pane -L).
-        win = { input = { keys = { ["<A-.>"] = { "toggle_hidden", mode = { "i", "n" } } } } },
     })
 end, { desc = "Find files in repo" })
 
--- Ctrl+/ greps across the whole git repo. Terminals send Ctrl+/ as Ctrl+_,
--- so both are mapped.
+-- Ctrl+/ greps across the whole git repo, dotfiles included (.git stays excluded).
+-- Terminals send Ctrl+/ as Ctrl+_, so both are mapped.
 local function grep_repo()
-    Snacks.picker.grep({ cwd = Snacks.git.get_root() })
+    Snacks.picker.grep({ cwd = Snacks.git.get_root(), hidden = true })
 end
 vim.keymap.set("n", "<C-/>", grep_repo, { desc = "Grep in repo" })
 vim.keymap.set("n", "<C-_>", grep_repo, { desc = "Grep in repo" })

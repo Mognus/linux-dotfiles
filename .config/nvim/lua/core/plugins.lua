@@ -11,6 +11,9 @@ vim.pack.add({
 require("snacks").setup({
     explorer = { enabled = true },
     picker = {
+        -- Alt+. (dot = dotfiles) toggles hidden files in every picker while typing in the
+        -- search field. The stock Alt+H is swallowed by tmux (select-pane -L).
+        win = { input = { keys = { ["<A-.>"] = { "toggle_hidden", mode = { "i", "n" } } } } },
         sources = {
             explorer = {
                 -- Fullscreen overview with the search field on top; typing filters the tree.
