@@ -4,7 +4,7 @@
       "Read"
     ]
   },
-  "model": "opus[1m]",
+  "model": "sonnet",
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
@@ -19,7 +19,10 @@
       "effortLevel": "medium"
     },
     "claude-opus-5-5": {
-      "effortLevel": "xhigh"
+      "effortLevel": "medium"
+    },
+    "claude-sonnet-5": {
+      "effortLevel": "medium"
     }
   },
   "tui": "fullscreen",
