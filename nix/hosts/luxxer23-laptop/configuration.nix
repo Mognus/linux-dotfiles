@@ -19,6 +19,9 @@
 
   services.power-profiles-daemon.enable = true;
 
+  # Battery state on D-Bus, read by the Quickshell bar (Quickshell.Services.UPower).
+  services.upower.enable = true;
+
   # First NixOS release on this machine. Never change it, see
   # https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion
   system.stateVersion = "26.05";
