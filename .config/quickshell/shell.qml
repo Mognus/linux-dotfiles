@@ -11,8 +11,6 @@ ShellRoot {
     property bool workspaceHudVisible: false
     property bool tuxVisible: true
     property bool quickSettingsOpen: false
-    property string clockText: Qt.formatTime(new Date(), "hh:mm")
-    property bool recording: false
     property string activeSpecialWorkspace: ""
     property var specialWorkspaces: [
         { name: "term", label: "T", accent: Colors.success },
@@ -61,34 +59,6 @@ ShellRoot {
         if (root.workspaceHudVisible) {
             root.bottomBarVisible = false;
         }
-    }
-
-    Timer {
-        interval: 1000
-        running: true
-        repeat: true
-
-        onTriggered: {
-            root.clockText = Qt.formatTime(new Date(), "hh:mm");
-            recordStatusProcess.exec(["pgrep", "-x", "wf-recorder"]);
-        }
-    }
-
-    Process {
-        id: recordStatusProcess
-
-        command: ["pgrep", "-x", "wf-recorder"]
-        running: true
-
-        onExited: exitCode => root.recording = exitCode === 0
-    }
-
-    Process {
-        id: recordToggleProcess
-
-        command: [Qt.resolvedUrl("../hypr/scripts/record-toggle.sh").toString().replace("file://", "")]
-
-        onExited: recordStatusProcess.exec(["pgrep", "-x", "wf-recorder"])
     }
 
     Process {
@@ -156,13 +126,10 @@ ShellRoot {
 
     BottomBar {
         shown: root.bottomBarVisible
-        recording: root.recording
-        clockText: root.clockText
         quickSettingsOpen: root.quickSettingsOpen
         specialWorkspaces: root.specialWorkspaces
         activeSpecialWorkspace: root.activeSpecialWorkspace
 
-        onRecordingToggleRequested: recordToggleProcess.running = true
         onQuickSettingsToggleRequested: root.quickSettingsOpen = !root.quickSettingsOpen
         onSpecialWorkspaceToggleRequested: name => root.toggleSpecialWorkspace(name)
     }

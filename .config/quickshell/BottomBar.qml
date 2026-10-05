@@ -2,21 +2,19 @@ import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Services.Pipewire
 import QtQuick
+import qs.services
 import "lib/Audio.js" as Audio
 
 PanelWindow {
     id: bar
 
     property bool shown: true
-    property bool recording: false
     property bool quickSettingsOpen: false
-    property string clockText: ""
     property string activeSpecialWorkspace: ""
     property var specialWorkspaces: []
     readonly property int barHeight: 34
     readonly property int contentGap: 4
 
-    signal recordingToggleRequested()
     signal quickSettingsToggleRequested()
     signal specialWorkspaceToggleRequested(string name)
 
@@ -167,14 +165,14 @@ PanelWindow {
         Text {
             anchors.verticalCenter: parent.verticalCenter
             text: "●"
-            color: bar.recording ? Colors.danger : "transparent"
+            color: Recording.recording ? Colors.danger : "transparent"
             font.family: "Syne, MesloLGS Nerd Font, monospace"
             font.pixelSize: 17
             font.bold: true
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: bar.recordingToggleRequested()
+                onClicked: Recording.toggle()
             }
         }
     }
@@ -185,7 +183,7 @@ PanelWindow {
 
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
-            text: bar.clockText
+            text: Time.clock
             color: Colors.foreground
             font.family: "Syne, MesloLGS Nerd Font, monospace"
             font.pixelSize: 15
