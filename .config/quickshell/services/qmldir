@@ -1,2 +1,4 @@
 singleton Recording 1.0 Recording.qml
+singleton ShellState 1.0 ShellState.qml
 singleton Time 1.0 Time.qml
+singleton Workspaces 1.0 Workspaces.qml

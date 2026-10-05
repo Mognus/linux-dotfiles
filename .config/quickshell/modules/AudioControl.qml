@@ -1,5 +1,6 @@
 import QtQuick
-import "lib/Audio.js" as Audio
+import qs
+import "../lib/Audio.js" as Audio
 
 Column {
     id: control

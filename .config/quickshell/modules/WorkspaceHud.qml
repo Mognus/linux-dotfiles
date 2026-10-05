@@ -1,37 +1,17 @@
 import Quickshell
 import Quickshell.Hyprland
 import QtQuick
+import qs
+import qs.services
 
 PanelWindow {
     id: hud
 
-    property bool shown: false
+    readonly property bool shown: ShellState.workspaceHudVisible
     readonly property int itemWidth: 36
     readonly property int horizontalMargin: 8
     readonly property int hudHeight: 34
     readonly property int hudWidth: workspaces.implicitWidth + (horizontalMargin * 2)
-
-    signal workspaceSelected(int id)
-
-    function workspaceFor(id) {
-        const allWorkspaces = Hyprland.workspaces.values;
-
-        for (let i = 0; i < allWorkspaces.length; i++) {
-            if (allWorkspaces[i].id === id) {
-                return allWorkspaces[i];
-            }
-        }
-
-        return null;
-    }
-
-    function workspaceActive(id) {
-        return Hyprland.focusedWorkspace !== null && Hyprland.focusedWorkspace.id === id;
-    }
-
-    function workspaceExists(id) {
-        return hud.workspaceFor(id) !== null;
-    }
 
     anchors {
         bottom: true
@@ -80,10 +60,10 @@ PanelWindow {
                     anchors.centerIn: parent
                     text: modelData + 1
                     color: Colors.foreground
-                    opacity: hud.workspaceActive(modelData + 1) ? 1.0 : hud.workspaceExists(modelData + 1) ? 0.82 : 0.42
+                    opacity: Workspaces.workspaceActive(modelData + 1) ? 1.0 : Workspaces.workspaceExists(modelData + 1) ? 0.82 : 0.42
                     font.family: "Syne, MesloLGS Nerd Font, monospace"
                     font.pixelSize: 20
-                    font.bold: hud.workspaceActive(modelData + 1)
+                    font.bold: Workspaces.workspaceActive(modelData + 1)
                 }
 
                 Rectangle {
@@ -94,13 +74,13 @@ PanelWindow {
                     }
 
                     height: 2
-                    color: hud.workspaceActive(modelData + 1) ? Colors.foreground : Colors.faint
-                    visible: hud.workspaceActive(modelData + 1) || hud.workspaceExists(modelData + 1)
+                    color: Workspaces.workspaceActive(modelData + 1) ? Colors.foreground : Colors.faint
+                    visible: Workspaces.workspaceActive(modelData + 1) || Workspaces.workspaceExists(modelData + 1)
                 }
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: hud.workspaceSelected(modelData + 1)
+                    onClicked: Hyprland.dispatch("workspace " + (modelData + 1))
                 }
             }
         }

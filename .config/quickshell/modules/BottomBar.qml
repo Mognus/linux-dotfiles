@@ -2,67 +2,16 @@ import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Services.Pipewire
 import QtQuick
+import qs
 import qs.services
-import "lib/Audio.js" as Audio
+import "../lib/Audio.js" as Audio
 
 PanelWindow {
     id: bar
 
-    property bool shown: true
-    property bool quickSettingsOpen: false
-    property string activeSpecialWorkspace: ""
-    property var specialWorkspaces: []
+    readonly property bool shown: ShellState.bottomBarVisible
     readonly property int barHeight: 34
     readonly property int contentGap: 4
-
-    signal quickSettingsToggleRequested()
-    signal specialWorkspaceToggleRequested(string name)
-
-    function workspaceFor(id) {
-        const workspaces = Hyprland.workspaces.values;
-
-        for (let i = 0; i < workspaces.length; i++) {
-            if (workspaces[i].id === id) {
-                return workspaces[i];
-            }
-        }
-
-        return null;
-    }
-
-    function workspaceExists(id) {
-        return bar.workspaceFor(id) !== null;
-    }
-
-    function workspaceActive(id) {
-        return Hyprland.focusedWorkspace !== null && Hyprland.focusedWorkspace.id === id;
-    }
-
-    function workspaceUrgent(id) {
-        const workspace = bar.workspaceFor(id);
-        return workspace !== null && workspace.urgent;
-    }
-
-    function specialWorkspaceFor(name) {
-        const workspaces = Hyprland.workspaces.values;
-        const workspaceName = "special:" + name;
-
-        for (let i = 0; i < workspaces.length; i++) {
-            if (workspaces[i].name === workspaceName) {
-                return workspaces[i];
-            }
-        }
-
-        return null;
-    }
-
-    function specialWorkspaceExists(name) {
-        return bar.specialWorkspaceFor(name) !== null;
-    }
-
-    function specialWorkspaceVisible(name) {
-        return bar.activeSpecialWorkspace === "special:" + name;
-    }
 
     anchors {
         bottom: true
@@ -137,10 +86,10 @@ PanelWindow {
                     anchors.centerIn: parent
                     text: modelData + 1
                     color: Colors.foreground
-                    opacity: bar.workspaceActive(modelData + 1) ? 1.0 : bar.workspaceExists(modelData + 1) ? 0.82 : 0.42
+                    opacity: Workspaces.workspaceActive(modelData + 1) ? 1.0 : Workspaces.workspaceExists(modelData + 1) ? 0.82 : 0.42
                     font.family: "Syne, MesloLGS Nerd Font, monospace"
                     font.pixelSize: 20
-                    font.bold: bar.workspaceActive(modelData + 1)
+                    font.bold: Workspaces.workspaceActive(modelData + 1)
                 }
 
                 Rectangle {
@@ -151,8 +100,8 @@ PanelWindow {
                     }
 
                     height: 2
-                    color: bar.workspaceUrgent(modelData + 1) ? Colors.danger : bar.workspaceActive(modelData + 1) ? Colors.foreground : Colors.faint
-                    visible: bar.workspaceActive(modelData + 1) || bar.workspaceExists(modelData + 1) || bar.workspaceUrgent(modelData + 1)
+                    color: Workspaces.workspaceUrgent(modelData + 1) ? Colors.danger : Workspaces.workspaceActive(modelData + 1) ? Colors.foreground : Colors.faint
+                    visible: Workspaces.workspaceActive(modelData + 1) || Workspaces.workspaceExists(modelData + 1) || Workspaces.workspaceUrgent(modelData + 1)
                 }
 
                 MouseArea {
@@ -203,19 +152,19 @@ PanelWindow {
         spacing: 14
 
         Repeater {
-            model: bar.specialWorkspaces
+            model: Workspaces.specialWorkspaces
 
             Text {
                 anchors.verticalCenter: parent.verticalCenter
                 text: modelData.label
-                color: bar.specialWorkspaceVisible(modelData.name) ? modelData.accent : bar.specialWorkspaceExists(modelData.name) ? Colors.foreground : Colors.muted
+                color: Workspaces.specialWorkspaceVisible(modelData.name) ? modelData.accent : Workspaces.specialWorkspaceExists(modelData.name) ? Colors.foreground : Colors.muted
                 font.family: "Syne, MesloLGS Nerd Font, monospace"
                 font.pixelSize: 23
                 font.bold: true
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: bar.specialWorkspaceToggleRequested(modelData.name)
+                    onClicked: Workspaces.toggleSpecialWorkspace(modelData.name)
                 }
             }
         }
@@ -229,7 +178,7 @@ PanelWindow {
             Text {
                 anchors.centerIn: parent
                 text: "⚙"
-                color: bar.quickSettingsOpen ? Colors.accent : Colors.foreground
+                color: ShellState.quickSettingsOpen ? Colors.accent : Colors.foreground
                 font.family: "Syne, MesloLGS Nerd Font, monospace"
                 font.pixelSize: 19
                 font.bold: true
@@ -244,12 +193,12 @@ PanelWindow {
 
                 height: 2
                 color: Colors.accent
-                visible: bar.quickSettingsOpen
+                visible: ShellState.quickSettingsOpen
             }
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: bar.quickSettingsToggleRequested()
+                onClicked: ShellState.toggleQuickSettings()
             }
         }
 

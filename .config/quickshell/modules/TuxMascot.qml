@@ -1,11 +1,14 @@
 import Quickshell
 import QtQuick
+import qs.services
 
 PanelWindow {
     id: mascot
 
     property bool angel: false
     property int bottomInset: 0
+
+    visible: ShellState.tuxVisible
 
     anchors {
         left: !mascot.angel
@@ -25,7 +28,7 @@ PanelWindow {
         id: sprite
 
         anchors.fill: parent
-        source: mascot.angel ? "assets/tuxangel_bottom.gif" : "assets/tuxdevil_bottom.gif"
+        source: mascot.angel ? "../assets/tuxangel_bottom.gif" : "../assets/tuxdevil_bottom.gif"
         fillMode: Image.PreserveAspectFit
         playing: true
     }

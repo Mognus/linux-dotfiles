@@ -1,13 +1,13 @@
 import Quickshell
 import Quickshell.Services.Pipewire
 import QtQuick
+import qs
+import qs.services
 
 PanelWindow {
     id: panel
 
-    property bool open: false
-
-    signal closeRequested()
+    readonly property bool open: ShellState.quickSettingsOpen
 
     visible: panel.open
 
@@ -78,7 +78,7 @@ PanelWindow {
                     id: closeMouse
                     anchors.fill: parent
                     hoverEnabled: true
-                    onClicked: panel.closeRequested()
+                    onClicked: ShellState.closeQuickSettings()
                 }
             }
         }
