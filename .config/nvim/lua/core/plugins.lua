@@ -3,6 +3,7 @@ vim.pack.add({
     { src = "https://github.com/coder/claudecode.nvim" },
     { src = "https://github.com/folke/snacks.nvim" },
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
+    { src = "https://github.com/nvim-lualine/lualine.nvim" },
     -- Renders Markdown in the buffer; the cursor line stays raw for editing.
     -- `:RenderMarkdown toggle` switches back to plain text.
     { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
@@ -45,6 +46,10 @@ require("gitsigns").setup({
         end, { buffer = bufnr, desc = "Previous git hunk" })
     end,
 })
+
+-- Statusline: mode, git branch, diff, diagnostics, file, cursor position. The stock
+-- defaults already cover that, the colors follow the active color scheme (theme = "auto").
+require("lualine").setup()
 
 -- Starts the WebSocket server that `claude` finds via ~/.claude/ide/<port>.lock.
 require("claudecode").setup()

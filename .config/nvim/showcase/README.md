@@ -31,6 +31,8 @@ adding one asks for confirmation.
 - `snacks.nvim` - file explorer and pickers (files, grep, git status,
   diagnostics). Opening a directory (`nvim .`) opens the explorer instead of netrw.
 - `gitsigns.nvim` - marks changed lines in the sign column, side-by-side diff
+- `lualine.nvim` - statusline with mode, git branch, diff, diagnostics, file and
+  cursor position; needs a Nerd Font for its icons
 - `claudecode.nvim` - Claude Code IDE integration, see below
 
 ## Language servers
