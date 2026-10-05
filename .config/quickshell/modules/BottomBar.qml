@@ -209,5 +209,14 @@ PanelWindow {
             font.family: "Syne, MesloLGS Nerd Font, monospace"
             font.pixelSize: 18
         }
+
+        Text {
+            anchors.verticalCenter: parent.verticalCenter
+            visible: Battery.present
+            text: "BAT " + Battery.percent
+            color: Battery.percent <= 15 && !Battery.charging ? Colors.danger : Colors.foreground
+            font.family: "Syne, MesloLGS Nerd Font, monospace"
+            font.pixelSize: 18
+        }
     }
 }
