@@ -91,7 +91,13 @@ end, { desc = "Git changed files" })
 -- Ctrl+P finds files across the whole git repo, like the file finder in Zed.
 -- Replaces the stock Ctrl+P (line up); k does the same.
 vim.keymap.set("n", "<C-p>", function()
-    Snacks.picker.files({ cwd = Snacks.git.get_root() })
+    Snacks.picker.files({
+        cwd = Snacks.git.get_root(),
+        hidden = true,
+        -- Alt+. (dot = dotfiles) toggles hidden files while typing in the search field.
+        -- The stock Alt+H is swallowed by tmux (select-pane -L).
+        win = { input = { keys = { ["<A-.>"] = { "toggle_hidden", mode = { "i", "n" } } } } },
+    })
 end, { desc = "Find files in repo" })
 
 -- Ctrl+/ greps across the whole git repo. Terminals send Ctrl+/ as Ctrl+_,
