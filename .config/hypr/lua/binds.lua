@@ -34,6 +34,7 @@ function M.setup(programs)
 
     mod_bind("CTRL + T", exec("qs -p $HOME/.config/quickshell ipc call tux toggle"))
     mod_bind("CTRL + G", exec("qs -p $HOME/.config/quickshell ipc call quicksettings toggle"))
+    mod_bind("G", exec("qs -p $HOME/.config/quickshell ipc call settings toggle"))
     mod_bind("Return", exec(programs.terminal))
     mod_bind("B", exec(programs.browser))
     mod_bind("Space", exec(programs.launcher))
