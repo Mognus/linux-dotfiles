@@ -13,7 +13,7 @@ changing the link itself needs `sudo nixos-rebuild switch --flake ~/dotfiles/nix
 
 ## Files
 
-- `init.lua` - editor options, loads the modules below
+- `init.lua` - editor options (line numbers, clipboard, cursor), loads the modules below
 - `lua/core/ui.lua` - VSCode-like syntax colors and transparent backgrounds
 - `lua/core/plugins.lua` - plugins and their setup
 - `lua/core/keymaps.lua` - all custom keybinds
