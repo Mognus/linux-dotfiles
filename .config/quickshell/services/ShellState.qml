@@ -11,6 +11,7 @@ Singleton {
     property bool workspaceHudVisible: false
     property bool tuxVisible: true
     property bool quickSettingsOpen: false
+    property bool settingsOpen: false
 
     function toggleBottomBar() {
         root.bottomBarVisible = !root.bottomBarVisible;
@@ -36,6 +37,14 @@ Singleton {
 
     function closeQuickSettings() {
         root.quickSettingsOpen = false;
+    }
+
+    function toggleSettings() {
+        root.settingsOpen = !root.settingsOpen;
+    }
+
+    function closeSettings() {
+        root.settingsOpen = false;
     }
 
     IpcHandler {
@@ -71,6 +80,18 @@ Singleton {
 
         function close(): void {
             root.closeQuickSettings()
+        }
+    }
+
+    IpcHandler {
+        target: "settings"
+
+        function toggle(): void {
+            root.toggleSettings()
+        }
+
+        function close(): void {
+            root.closeSettings()
         }
     }
 }

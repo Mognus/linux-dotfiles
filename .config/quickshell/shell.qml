@@ -17,6 +17,8 @@ ShellRoot {
 
     QuickSettingsPanel {}
 
+    SettingsMenu {}
+
     TuxMascot {}
 
     TuxMascot {

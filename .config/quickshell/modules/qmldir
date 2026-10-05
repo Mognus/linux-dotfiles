@@ -1,5 +1,9 @@
 AudioControl 1.0 AudioControl.qml
+AudioPage 1.0 AudioPage.qml
 BottomBar 1.0 BottomBar.qml
+Launcher 1.0 Launcher.qml
+LauncherEntry 1.0 LauncherEntry.qml
 QuickSettingsPanel 1.0 QuickSettingsPanel.qml
+SettingsMenu 1.0 SettingsMenu.qml
 TuxMascot 1.0 TuxMascot.qml
 WorkspaceHud 1.0 WorkspaceHud.qml
