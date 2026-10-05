@@ -63,6 +63,8 @@
     svelte-language-server
     # dockerls; Compose files go through yamlls
     dockerfile-language-server
+    # qmlls (Quickshell config)
+    qt6.qtdeclarative
 
     # --- AI Agents ---
     claude-code

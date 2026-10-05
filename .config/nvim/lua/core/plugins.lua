@@ -54,10 +54,12 @@ local treesitter_languages = {
     "html",
     "html_tags",
     "javascript",
+    "lua",
     "rust",
     "markdown",
     "markdown_inline",
     "python",
+    "qmljs",
     "sql",
     "svelte",
     "tsx",
@@ -67,6 +69,9 @@ local treesitter_languages = {
 
 require("nvim-treesitter").install(treesitter_languages)
 
+-- Neovim names the filetype "qml", but the parser is called "qmljs".
+vim.treesitter.language.register("qmljs", "qml")
+
 vim.api.nvim_create_autocmd("FileType", {
     pattern = {
         "go",
@@ -75,6 +80,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "gotmpl",
         "javascript",
         "javascriptreact",
+        "lua",
         "python",
         "rust",
         "svelte",
@@ -90,10 +96,10 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- nvim-treesitter ships no indent query for Dockerfiles, so only highlight
--- and keep Vim's own indent there.
+-- nvim-treesitter ships no indent query for Dockerfiles and QML, so only
+-- highlight and keep Vim's own indent there.
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "dockerfile",
+    pattern = { "dockerfile", "qml" },
     callback = function()
         vim.treesitter.start()
     end,

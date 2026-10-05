@@ -17,6 +17,7 @@ vim.lsp.enable({
     "ansiblels",
     "svelte",
     "dockerls",
+    "qmlls",
 })
 
 -- Neovim can't tell Ansible YAML from plain YAML, so mark playbooks and role
