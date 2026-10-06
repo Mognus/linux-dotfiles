@@ -47,7 +47,9 @@ Enabled in `lua/core/lsp.lua`, one config per server in `lsp/<name>.lua`:
 - Ansible `ansiblels`, only for files under `playbooks/` or `roles/*/tasks|handlers/`
 
 The server binaries come from Nix (`nix/home/packages.nix`). Errors show at
-the end of the line, inlay hints are on. `:checkhealth vim.lsp` shows which
+the end of the line, inlay hints are on. The completion menu opens on the
+server's trigger characters (e.g. `.`); `Ctrl+Y` accepts, `Ctrl+N` / `Ctrl+P`
+move, `Ctrl+E` closes. `:checkhealth vim.lsp` shows which
 server attached. Reference configs for other servers: the `lsp/` folder of
 [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/tree/master/lsp).
 
