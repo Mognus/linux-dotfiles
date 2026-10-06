@@ -82,15 +82,18 @@ vim.treesitter.language.register("qmljs", "qml")
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = {
+        "css",
         "go",
         "gomod",
         "gowork",
         "gotmpl",
+        "html",
         "javascript",
         "javascriptreact",
         "lua",
         "python",
         "rust",
+        "sql",
         "svelte",
         "typescript",
         "typescriptreact",
