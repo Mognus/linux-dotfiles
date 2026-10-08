@@ -76,6 +76,9 @@ in
   };
   home.file."${config.programs.firefox.configPath}/default/user.js".source =
     link ".config/firefox/user.js";
+  # Only the file: LibreWolf keeps its profiles in the same folder.
+  xdg.configFile."librewolf/librewolf/librewolf.overrides.cfg".source =
+    link ".config/librewolf/librewolf/librewolf.overrides.cfg";
 
   # Both agents share one instruction file; their folders also hold local state.
   home.file.".claude/CLAUDE.md".source = link "AGENTS.md";
