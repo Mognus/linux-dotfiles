@@ -16,6 +16,9 @@
 
     # --- Apps ---
     # firefox comes from programs.firefox in magnus.nix
+    # A plain package on purpose: programs.librewolf writes its profiles to
+    # ~/.librewolf, and LibreWolf then uses that instead of ~/.config/librewolf.
+    librewolf
     chromium
     thunderbird
     tor-browser
