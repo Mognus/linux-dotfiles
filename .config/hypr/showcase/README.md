@@ -30,7 +30,7 @@ idle minutes, turns the monitor off five minutes later, and locks before suspend
 ## Apps
 
 - `SUPER+Return` - Alacritty terminal
-- `SUPER+B` - Firefox
+- `SUPER+B` - LibreWolf
 - `SUPER+Space` - Rofi app launcher
 - `SUPER+Ctrl+Space` - Rofi window switcher
 
@@ -89,7 +89,7 @@ Audio bindings also work on the lock screen. The Quickshell bar shows the level.
 ## Scratchpads
 
 - `SUPER+Ctrl+Return` - Terminal scratchpad
-- `SUPER+Ctrl+B` - Firefox scratchpad
+- `SUPER+Ctrl+B` - Browser scratchpad (LibreWolf)
 - `SUPER+Ctrl+D` - Discord scratchpad
 - `SUPER+Ctrl+N` - Notes scratchpad
 - `SUPER+Ctrl+F` - File manager scratchpad
