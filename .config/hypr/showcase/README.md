@@ -47,11 +47,11 @@ still uses a Rofi menu. All of them open without compositor animations.
 
 ## Clipboard
 
-- `SUPER+V` - Pick an entry from the clipboard history
-- `SUPER+Shift+V` - Wipe the clipboard history
+- `SUPER+V` - Quickshell clipboard history
 
-Every clipboard change is stored by cliphist. Image entries show a thumbnail
-next to the row; text entries show their first line.
+Every clipboard change is stored by cliphist. The history shows the full text
+or image of the highlighted entry; inside it, `Delete` removes an entry and
+`Shift+Delete` wipes the history.
 
 ## Audio
 
