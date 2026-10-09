@@ -22,6 +22,9 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   - `Launcher.qml` / `LauncherEntry.qml` — rofi-style list of entries; opening
     one swaps the list for the entry's page, or fires its `triggered` signal
     when it has none. A page can be another Launcher, which makes a sub menu.
+    Its `path` lists the titles opened so far, sub menus included.
+  - `Breadcrumbs.qml` — `× ~ / Theme / Colors` header showing a Launcher's
+    path; the × reports a close request.
   - `settings/` — the settings menu (Super+G), laid out like the menu tree:
     - `SettingsMenu.qml` — the window and the top entries.
     - `AudioPage.qml` — audio settings page.

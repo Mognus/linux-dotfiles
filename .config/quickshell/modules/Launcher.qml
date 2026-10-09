@@ -10,6 +10,15 @@ FocusScope {
     property list<LauncherEntry> entries
     // Entry whose page replaces the list, null while listing.
     property LauncherEntry current: null
+    // Titles of the opened entries, outermost first, including those of a
+    // Launcher shown as page: Theme opened, then Colors in it → ["Theme", "Colors"].
+    readonly property var path: {
+        if (launcher.current === null) {
+            return [];
+        }
+        const inner = page.item && page.item.path ? page.item.path : [];
+        return [launcher.current.title].concat(inner);
+    }
 
     readonly property int rowHeight: 36
 

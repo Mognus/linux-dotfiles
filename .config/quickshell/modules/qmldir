@@ -1,5 +1,6 @@
 AudioControl 1.0 AudioControl.qml
 BottomBar 1.0 BottomBar.qml
+Breadcrumbs 1.0 Breadcrumbs.qml
 Launcher 1.0 Launcher.qml
 LauncherEntry 1.0 LauncherEntry.qml
 TuxMascot 1.0 TuxMascot.qml

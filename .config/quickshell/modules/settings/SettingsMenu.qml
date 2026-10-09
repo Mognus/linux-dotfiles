@@ -12,11 +12,12 @@ PanelWindow {
     id: menu
 
     readonly property int padding: 12
+    readonly property int headerHeight: 44
 
     visible: ShellState.settingsOpen
     // Without anchors the compositor centers the window.
     implicitWidth: 600
-    implicitHeight: 340 + menu.padding * 2
+    implicitHeight: menu.headerHeight + divider.height + 340 + menu.padding * 2
     color: "transparent"
 
     // Overlay sits above fullscreen windows; Exclusive routes the keyboard here.
@@ -39,11 +40,44 @@ PanelWindow {
         border.color: Colors.subtle
     }
 
+    Breadcrumbs {
+        id: header
+
+        // No top margin: the header's own height centers the crumbs between edge and divider.
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            leftMargin: menu.padding
+            rightMargin: menu.padding
+        }
+
+        height: menu.headerHeight
+        path: launcher.path
+        onCloseRequested: ShellState.closeSettings()
+    }
+
+    Rectangle {
+        id: divider
+
+        anchors {
+            top: header.bottom
+            left: parent.left
+            right: parent.right
+        }
+
+        height: 1
+        color: Colors.divider
+    }
+
     Launcher {
         id: launcher
 
         anchors {
-            fill: parent
+            top: divider.bottom
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
             margins: menu.padding
         }
 
