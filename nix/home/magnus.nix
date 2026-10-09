@@ -56,6 +56,7 @@ in
   xdg.configFile."quickshell".source = link ".config/quickshell";
   xdg.configFile."dunst".source = link ".config/dunst";
   xdg.configFile."wallpapers".source = link ".config/wallpapers";
+  xdg.configFile."themes".source = link ".config/themes";
   xdg.configFile."gtk-3.0".source = link ".config/gtk-3.0";
   xdg.configFile."gtk-4.0".source = link ".config/gtk-4.0";
   # Only the file: Home Manager keeps its own conf.d next to it.
