@@ -9,7 +9,8 @@
     horizontal_padding = 12
     frame_width = 1
     frame_color = "@borderMuted@"
-    font = MesloLGS Nerd Font 11
+    # "Sans" is the base UI font from fontconfig/fonts.conf; dunst's own default is Monospace.
+    font = Sans 11
     line_height = 2
     corner_radius = 6
     timeout = 5

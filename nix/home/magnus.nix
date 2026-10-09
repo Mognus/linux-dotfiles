@@ -95,9 +95,12 @@ in
   systemd.user.tmpfiles.rules = [ "d %h/Pictures/screenshots - - - 7d" ];
 
   # GTK apps read the cursor from dconf; install.sh set this through gsettings.
+  # The fonts name no font: "Sans"/"Monospace" resolve through fontconfig/fonts.conf.
   dconf.settings."org/gnome/desktop/interface" = {
     cursor-theme = "macOS";
     cursor-size = 40;
+    font-name = "Sans 11";
+    monospace-font-name = "Monospace 11";
   };
   home.file.".gitconfig".source = link ".gitconfig";
 }

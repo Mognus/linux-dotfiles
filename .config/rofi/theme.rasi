@@ -3,7 +3,8 @@
 * {
     background-color: transparent;
     text-color: @fg;
-    font: "JetBrainsMono Nerd Font 12";
+    /* "Sans" is the base UI font from fontconfig/fonts.conf; rofi's own default is mono. */
+    font: "Sans 12";
 }
 
 window {
@@ -35,7 +36,7 @@ prompt {
     border: 0;
     background-color: transparent;
     text-color: @accent;
-    font: "JetBrainsMono Nerd Font Bold 12";
+    font: "Sans Bold 12";
 }
 
 entry {
