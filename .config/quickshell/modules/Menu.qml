@@ -2,7 +2,7 @@ import QtQuick
 import qs
 import "../lib/Navigation.js" as Navigation
 
-// Rofi-style list of entries. It knows nothing about what an entry stands for;
+// Keyboard-driven list of entries. It knows nothing about what an entry stands for;
 // whoever uses it fills it. A page may be another Menu, which makes a sub menu.
 FocusScope {
     id: menu

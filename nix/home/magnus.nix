@@ -19,9 +19,8 @@ in
     tree-sitter
     gcc
     tmux
-    # hyprland: terminal and launcher bound in hypr/lua/programs.lua
+    # hyprland: terminal bound in hypr/lua/programs.lua
     alacritty
-    rofi
     adwaita-icon-theme
     # theme-switcher.sh reads the palettes with jq
     jq
@@ -52,7 +51,6 @@ in
   xdg.configFile."hypr".source = link ".config/hypr";
   xdg.configFile."xkb".source = link ".config/xkb";
   xdg.configFile."alacritty".source = link ".config/alacritty";
-  xdg.configFile."rofi".source = link ".config/rofi";
   xdg.configFile."quickshell".source = link ".config/quickshell";
   xdg.configFile."dunst".source = link ".config/dunst";
   xdg.configFile."wallpapers".source = link ".config/wallpapers";

@@ -20,7 +20,6 @@ The package list lives in `packages.txt` at the repository root.
 
 - `hyprland` - Wayland compositor
 - `quickshell` - lightweight desktop widgets
-- `rofi` - app launcher and dmenu replacement
 - `dunst` - notifications
 - `hyprlock`, `awww`, `hypridle` - lock screen, wallpaper, and idle handling
 - `xdg-desktop-portal-hyprland` - portal integration for Wayland apps
@@ -31,7 +30,7 @@ The package list lives in `packages.txt` at the repository root.
 - `grim` - screenshots
 - `slurp` - region selection
 - `wl-clipboard` - clipboard access
-- `cliphist` - clipboard history for the Hyprland picker
+- `cliphist` - clipboard history behind the Quickshell overlay
 - `swappy` - screenshot editor
 - `socat` - IPC helper
 - `jq` - JSON processing

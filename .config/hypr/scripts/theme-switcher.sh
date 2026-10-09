@@ -31,21 +31,6 @@ hex() { value "$1" | tr -d '#'; }
 # Quickshell watches this file, while other apps import their generated format.
 cp "$palette" "$tmp_dir/colors.json"
 
-cat > "$tmp_dir/rofi.rasi" <<EOF
-* {
-    bg: $(value background)e8;
-    bg-alt: $(value surface)f2;
-    bg-hover: $(value hover)f2;
-    fg: $(value foreground)ff;
-    fg-soft: $(value foregroundSoft)ff;
-    muted: $(value muted)ff;
-    edge: $(value border)ff;
-    edge-muted: $(value borderMuted)ff;
-    accent: $(value accent)ff;
-    danger: $(value danger)ff;
-}
-EOF
-
 cat > "$tmp_dir/alacritty.toml" <<EOF
 [colors.primary]
 background = "$(value_or terminalBackground background)"
@@ -95,7 +80,7 @@ cat > "$tmp_dir/gtk.css" <<EOF
 EOF
 
 # Atomic replacement prevents file watchers from reading half-written configs.
-for file in colors.json rofi.rasi alacritty.toml dunstrc hyprlock.conf gtk.css; do
+for file in colors.json alacritty.toml dunstrc hyprlock.conf gtk.css; do
     mv "$tmp_dir/$file" "$state_dir/$file"
 done
 printf '%s\n' "$theme" > "$state_dir/current"

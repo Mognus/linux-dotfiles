@@ -21,7 +21,7 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   - `BottomBar.qml` — workspace strip, clock, recording indicator, volume text,
     settings menu trigger, special workspace buttons.
   - `WorkspaceHud.qml` — compact workspace-only overlay.
-  - `Menu.qml` / `MenuEntry.qml` — rofi-style list of entries; opening
+  - `Menu.qml` / `MenuEntry.qml` — keyboard-driven list of entries; opening
     one swaps the list for the entry's page, or fires its `triggered` signal
     when it has none. A page can be another Menu, which makes a sub menu.
     Its `path` lists the titles opened so far, sub menus included.
@@ -58,7 +58,7 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 - **Workspaces** — live Hyprland workspaces plus named *special* workspaces
   (term, files, music, notes, discord, firefox), each with its own accent.
 - **Clock** — `hh:mm`, top center.
-- **Settings menu** — centered rofi-style menu on Super+G.
+- **Settings menu** — centered keyboard-driven menu on Super+G.
 - **Audio** — volume via Pipewire (`Quickshell.Services.Pipewire`).
 - **Recording indicator** — shows when a screen recording is active.
 - **Tux mascot** — animated, can be toggled.

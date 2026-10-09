@@ -9,7 +9,7 @@
 - Scratchpads for temporary apps
 - `awww` wallpaper setup
 - Hyprlock session locking, automatically through Hypridle after thirty idle minutes
-- Clipboard history with image thumbnails through cliphist and Rofi
+- Clipboard history with image previews through cliphist and Quickshell
 - Volume and media keys through wpctl and playerctl
 - Polkit authentication prompts through the GNOME agent
 - Quickshell desktop widgets and settings menu
@@ -25,7 +25,7 @@ idle minutes, turns the monitor off five minutes later, and locks before suspend
 - `hyprland.lua` - Main Hyprland config
 - `lua/` - Split Lua modules for monitors, binds, workspaces, and appearance
 - `hypridle.conf` - Idle timeouts and suspend hooks
-- `scripts/` - Rofi pickers for wallpapers, palettes, and clipboard history
+- `scripts/` - Theme switcher, recording, opacity, and polkit helpers
 
 ## Apps
 
@@ -34,8 +34,8 @@ idle minutes, turns the monitor off five minutes later, and locks before suspend
 - `SUPER+Space` - Quickshell app launcher
 - `SUPER+Ctrl+Space` - Quickshell window switcher with a live preview
 
-The app launcher and window switcher are Quickshell windows; clipboard history
-still uses a Rofi menu. All of them open without compositor animations.
+The app launcher and window switcher are Quickshell windows that open without
+compositor animations.
 
 ## Session
 
