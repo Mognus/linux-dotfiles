@@ -114,4 +114,17 @@
 
   # VPN configurations
   services.netbird.enable = true;
+  # Second NetBird client next to the default one (which listens on 51820).
+  services.netbird.clients.wt0 = {
+    port = 51821;
+    ui.enable = true;
+    openFirewall = true;
+    openInternalFirewall = true;
+    dns-resolver = {
+      address = "127.0.0.67";
+      port = 53;
+    };
+  };
+  # NetBird registers its DNS through systemd-resolved instead of rewriting resolv.conf.
+  services.resolved.enable = true;
 }
