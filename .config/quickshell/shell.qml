@@ -2,6 +2,7 @@ import Quickshell
 import Quickshell.Services.Pipewire
 import QtQuick
 import qs.modules
+import qs.modules.settings
 import qs.services
 
 ShellRoot {
