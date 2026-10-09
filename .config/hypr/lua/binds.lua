@@ -37,7 +37,7 @@ function M.setup(programs)
     mod_bind("Return", exec(programs.terminal))
     mod_bind("B", exec(programs.browser))
     mod_bind("Space", exec("qs -p $HOME/.config/quickshell ipc call launcher toggle"))
-    mod_bind("CTRL + Space", exec(programs.window_switcher))
+    mod_bind("CTRL + Space", exec("qs -p $HOME/.config/quickshell ipc call windowswitcher toggle"))
     mod_bind("Escape", exec(programs.lock))
     mod_bind("F1", exec("systemctl suspend"))
 

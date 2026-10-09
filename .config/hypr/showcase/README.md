@@ -32,12 +32,10 @@ idle minutes, turns the monitor off five minutes later, and locks before suspend
 - `SUPER+Return` - Alacritty terminal
 - `SUPER+B` - LibreWolf
 - `SUPER+Space` - Quickshell app launcher
-- `SUPER+Ctrl+Space` - Rofi window switcher
+- `SUPER+Ctrl+Space` - Quickshell window switcher with a live preview
 
-Apps, windows, wallpapers, palettes, and clipboard history use separate Rofi
-menus with one shared theme. There are no mode tabs or combined search; shell commands run in the terminal.
-All menus use the same fixed nine-row layout and open without compositor animations.
-The window switcher uses Rofi's built-in window mode and shows window titles.
+The app launcher and window switcher are Quickshell windows; clipboard history
+still uses a Rofi menu. All of them open without compositor animations.
 
 ## Session
 
