@@ -17,6 +17,10 @@ FocusScope {
     signal closeRequested
 
     function openEntry(entry) {
+        if (entry.page === null) {
+            entry.triggered();
+            return;
+        }
         launcher.current = entry;
         // The list holds the focus while listing; the page takes it over.
         page.forceActiveFocus();

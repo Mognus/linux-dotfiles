@@ -20,8 +20,8 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
     settings menu trigger, special workspace buttons.
   - `WorkspaceHud.qml` — compact workspace-only overlay.
   - `Launcher.qml` / `LauncherEntry.qml` — rofi-style list of entries; opening
-    one swaps the list for the entry's page. A page can be another Launcher,
-    which makes a sub menu.
+    one swaps the list for the entry's page, or fires its `triggered` signal
+    when it has none. A page can be another Launcher, which makes a sub menu.
   - `settings/` — the settings menu (Super+G), laid out like the menu tree:
     - `SettingsMenu.qml` — the window and the top entries.
     - `AudioPage.qml` — audio settings page.
