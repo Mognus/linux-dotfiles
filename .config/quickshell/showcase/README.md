@@ -9,7 +9,7 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   state of its own beyond the Pipewire object tracker.
 - `services/` — singletons holding all shared state and logic:
   - `ShellState.qml` — panel visibility (bottom bar, workspace HUD, tux, settings
-    menu, app launcher) and the IPC handlers that toggle them.
+    menu, app launcher, window switcher) and the IPC handlers that toggle them.
   - `Workspaces.qml` — Hyprland workspace/special-workspace queries and the
     active-special-workspace tracking (seeded from `Hyprland.monitors`, kept
     live via `rawEvent`).
@@ -30,6 +30,8 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
     Menu opens it on `/`.
   - `launcher/AppLauncher.qml` — GNOME-style grid of the desktop apps with an
     always active search; arrows or Ctrl+hjkl move, Enter starts, Esc closes.
+  - `launcher/WindowSwitcher.qml` — open windows of every workspace on the
+    left, a live view of the highlighted one on the right; same search.
   - `settings/` — the settings menu (Super+G), laid out like the menu tree:
     - `SettingsMenu.qml` — the window and the top entries.
     - `AudioPage.qml` — audio settings page.

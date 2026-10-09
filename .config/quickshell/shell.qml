@@ -21,6 +21,8 @@ ShellRoot {
 
     AppLauncher {}
 
+    WindowSwitcher {}
+
     TuxMascot {}
 
     TuxMascot {

@@ -12,6 +12,7 @@ Singleton {
     property bool tuxVisible: true
     property bool settingsOpen: false
     property bool launcherOpen: false
+    property bool windowSwitcherOpen: false
 
     function toggleBottomBar() {
         root.bottomBarVisible = !root.bottomBarVisible;
@@ -45,6 +46,14 @@ Singleton {
 
     function closeLauncher() {
         root.launcherOpen = false;
+    }
+
+    function toggleWindowSwitcher() {
+        root.windowSwitcherOpen = !root.windowSwitcherOpen;
+    }
+
+    function closeWindowSwitcher() {
+        root.windowSwitcherOpen = false;
     }
 
     IpcHandler {
@@ -92,6 +101,18 @@ Singleton {
 
         function close(): void {
             root.closeLauncher()
+        }
+    }
+
+    IpcHandler {
+        target: "windowswitcher"
+
+        function toggle(): void {
+            root.toggleWindowSwitcher()
+        }
+
+        function close(): void {
+            root.closeWindowSwitcher()
         }
     }
 }
