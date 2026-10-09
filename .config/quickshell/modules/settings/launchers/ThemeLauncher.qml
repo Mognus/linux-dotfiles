@@ -1,5 +1,6 @@
 import QtQuick
 import qs.modules
+import qs.modules.settings.launchers.theme
 
 // Theme sub menu of the settings: wallpaper and colors.
 Launcher {
@@ -12,6 +13,9 @@ Launcher {
         },
         LauncherEntry {
             title: "Colors"
+            page: Component {
+                ColorsLauncher {}
+            }
         }
     ]
 }
