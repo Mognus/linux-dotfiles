@@ -10,9 +10,13 @@ Singleton {
     property bool bottomBarVisible: true
     property bool workspaceHudVisible: false
     property bool tuxVisible: true
-    property bool settingsOpen: false
-    property bool launcherOpen: false
-    property bool windowSwitcherOpen: false
+
+    // Overlays pop up centered and take the keyboard, so only one is open at a
+    // time: "settings", "launcher", "windowSwitcher", or "" for none.
+    property string overlay: ""
+    readonly property bool settingsOpen: root.overlay === "settings"
+    readonly property bool launcherOpen: root.overlay === "launcher"
+    readonly property bool windowSwitcherOpen: root.overlay === "windowSwitcher"
 
     function toggleBottomBar() {
         root.bottomBarVisible = !root.bottomBarVisible;
@@ -32,28 +36,39 @@ Singleton {
         root.tuxVisible = !root.tuxVisible;
     }
 
+    // Opens the overlay, closing whichever was open; toggling the open one closes it.
+    function toggleOverlay(name) {
+        root.overlay = root.overlay === name ? "" : name;
+    }
+
+    function closeOverlay(name) {
+        if (root.overlay === name) {
+            root.overlay = "";
+        }
+    }
+
     function toggleSettings() {
-        root.settingsOpen = !root.settingsOpen;
+        root.toggleOverlay("settings");
     }
 
     function closeSettings() {
-        root.settingsOpen = false;
+        root.closeOverlay("settings");
     }
 
     function toggleLauncher() {
-        root.launcherOpen = !root.launcherOpen;
+        root.toggleOverlay("launcher");
     }
 
     function closeLauncher() {
-        root.launcherOpen = false;
+        root.closeOverlay("launcher");
     }
 
     function toggleWindowSwitcher() {
-        root.windowSwitcherOpen = !root.windowSwitcherOpen;
+        root.toggleOverlay("windowSwitcher");
     }
 
     function closeWindowSwitcher() {
-        root.windowSwitcherOpen = false;
+        root.closeOverlay("windowSwitcher");
     }
 
     IpcHandler {

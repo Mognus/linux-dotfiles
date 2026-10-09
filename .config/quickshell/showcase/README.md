@@ -8,8 +8,9 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 - `shell.qml` — composition root: wires `modules/` components together, keeps no
   state of its own beyond the Pipewire object tracker.
 - `services/` — singletons holding all shared state and logic:
-  - `ShellState.qml` — panel visibility (bottom bar, workspace HUD, tux, settings
-    menu, app launcher, window switcher) and the IPC handlers that toggle them.
+  - `ShellState.qml` — panel visibility (bottom bar, workspace HUD, tux) and the
+    one open overlay (settings menu, app launcher or window switcher; opening
+    one closes the other), plus the IPC handlers that toggle them.
   - `Workspaces.qml` — Hyprland workspace/special-workspace queries and the
     active-special-workspace tracking (seeded from `Hyprland.monitors`, kept
     live via `rawEvent`).
