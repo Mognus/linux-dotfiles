@@ -23,6 +23,8 @@ ShellRoot {
 
     WindowSwitcher {}
 
+    ClipboardHistory {}
+
     TuxMascot {}
 
     TuxMascot {

@@ -12,11 +12,12 @@ Singleton {
     property bool tuxVisible: true
 
     // Overlays pop up centered and take the keyboard, so only one is open at a
-    // time: "settings", "launcher", "windowSwitcher", or "" for none.
+    // time: "settings", "launcher", "windowSwitcher", "clipboard", or "" for none.
     property string overlay: ""
     readonly property bool settingsOpen: root.overlay === "settings"
     readonly property bool launcherOpen: root.overlay === "launcher"
     readonly property bool windowSwitcherOpen: root.overlay === "windowSwitcher"
+    readonly property bool clipboardOpen: root.overlay === "clipboard"
 
     function toggleBottomBar() {
         root.bottomBarVisible = !root.bottomBarVisible;
@@ -69,6 +70,14 @@ Singleton {
 
     function closeWindowSwitcher() {
         root.closeOverlay("windowSwitcher");
+    }
+
+    function toggleClipboard() {
+        root.toggleOverlay("clipboard");
+    }
+
+    function closeClipboard() {
+        root.closeOverlay("clipboard");
     }
 
     IpcHandler {
@@ -128,6 +137,18 @@ Singleton {
 
         function close(): void {
             root.closeWindowSwitcher()
+        }
+    }
+
+    IpcHandler {
+        target: "clipboard"
+
+        function toggle(): void {
+            root.toggleClipboard()
+        }
+
+        function close(): void {
+            root.closeClipboard()
         }
     }
 }
