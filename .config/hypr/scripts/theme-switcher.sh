@@ -6,23 +6,14 @@ script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 palette_dir="$(readlink -f "$script_dir/../../themes/palettes")"
 announce=true
 
-pick_theme() {
-    local selected
-    selected="$({
-        for file in "$palette_dir"/*.json; do
-            printf '%s\t%s\n' "$(jq -r .name "$file")" "$(basename "$file" .json)"
-        done
-    } | sort | rofi -dmenu -i -p Theme -display-columns 1)"
-    [[ -n "$selected" ]] || exit 0
-    printf '%s\n' "$selected" | cut -f2
-}
-
 requested="${1:-}"
 if [[ "$requested" == "--apply" ]]; then
     announce=false
     requested="$(cat "$state_dir/current" 2>/dev/null || printf black)"
 elif [[ -z "$requested" ]]; then
-    requested="$(pick_theme)"
+    # Picking happens in Quickshell's settings menu (Theme > Colors).
+    printf 'Usage: %s <theme> | --apply\n' "$0" >&2
+    exit 1
 fi
 
 theme="$(printf '%s' "$requested" | tr '[:upper:]' '[:lower:]')"

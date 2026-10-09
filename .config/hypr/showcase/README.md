@@ -65,8 +65,6 @@ Audio bindings also work on the lock screen. The Quickshell bar shows the level.
 
 ## Appearance
 
-- `SUPER+W` - Pick a wallpaper
-- `SUPER+Ctrl+W` - Pick the Black, White, Pink, or Cyan palette
 - `SUPER+Shift+=/-` - Increase/decrease terminal opacity
 
 ## Windows

@@ -54,8 +54,6 @@ function M.setup(programs)
     mod_bind("CTRL + v", exec(os.getenv("HOME") .. "/.config/hypr/scripts/record-toggle.sh"))
     mod_bind("V", exec(os.getenv("HOME") .. "/.config/hypr/scripts/clipboard-history.sh pick"))
     mod_bind("SHIFT + V", exec(os.getenv("HOME") .. "/.config/hypr/scripts/clipboard-history.sh wipe"))
-    mod_bind("W", exec(os.getenv("HOME") .. "/.config/hypr/scripts/wallpaper-switcher.sh"))
-    mod_bind("CTRL + W", exec(os.getenv("HOME") .. "/.config/hypr/scripts/theme-switcher.sh"))
 
     mod_bind("SHIFT + equal", exec(os.getenv("HOME") .. "/.config/hypr/scripts/opacity-switch.sh up"), { repeating = true })
     mod_bind("SHIFT + minus", exec(os.getenv("HOME") .. "/.config/hypr/scripts/opacity-switch.sh down"), { repeating = true })
