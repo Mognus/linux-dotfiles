@@ -43,6 +43,11 @@ PanelWindow {
     }
 
     function jumpTo(toplevel) {
+        // An open special workspace stays on top of the others; hide it unless the window lives in it.
+        const target = toplevel.workspace ? toplevel.workspace.name : "";
+        if (target !== Workspaces.activeSpecialWorkspace) {
+            Workspaces.hideSpecialWorkspace();
+        }
         // With the Lua config, dispatch takes a Lua dispatcher. Quickshell reports
         // the address without the 0x that Hyprland's window selector expects.
         Hyprland.dispatch(`hl.dsp.focus({ window = "address:0x${toplevel.address}" })`);
