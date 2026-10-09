@@ -3,8 +3,9 @@ import Quickshell.Wayland
 import Quickshell.Widgets
 import QtQuick
 import qs
+import qs.modules
 import qs.services
-import "../lib/Navigation.js" as Navigation
+import "../../lib/Navigation.js" as Navigation
 
 // App launcher: a GNOME-style grid of the desktop apps. The search line is
 // always active: typing filters, the arrows or Ctrl+hjkl move, Enter starts.

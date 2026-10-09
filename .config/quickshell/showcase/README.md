@@ -28,8 +28,8 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   - `SearchFooter.qml` — `/ cy` search line; it only types and hands every
     key to its `keyTargets` first, so the owner decides what keys drive. A
     Menu opens it on `/`.
-  - `AppLauncher.qml` — GNOME-style grid of the desktop apps with an always
-    active search; arrows or Ctrl+hjkl move, Enter starts, Esc closes.
+  - `launcher/AppLauncher.qml` — GNOME-style grid of the desktop apps with an
+    always active search; arrows or Ctrl+hjkl move, Enter starts, Esc closes.
   - `settings/` — the settings menu (Super+G), laid out like the menu tree:
     - `SettingsMenu.qml` — the window and the top entries.
     - `AudioPage.qml` — audio settings page.
