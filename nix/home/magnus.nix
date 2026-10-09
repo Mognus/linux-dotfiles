@@ -35,7 +35,6 @@ in
     playerctl
     # hyprland autostart: bar, notifications, wallpaper, idle, auth prompts
     quickshell
-    dunst
     awww
     hypridle
     polkit_gnome
@@ -52,7 +51,6 @@ in
   xdg.configFile."xkb".source = link ".config/xkb";
   xdg.configFile."alacritty".source = link ".config/alacritty";
   xdg.configFile."quickshell".source = link ".config/quickshell";
-  xdg.configFile."dunst".source = link ".config/dunst";
   xdg.configFile."wallpapers".source = link ".config/wallpapers";
   xdg.configFile."themes".source = link ".config/themes";
   xdg.configFile."gtk-3.0".source = link ".config/gtk-3.0";

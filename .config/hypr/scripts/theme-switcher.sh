@@ -45,15 +45,6 @@ background = "$(value accent)"
 text = "$(value_or terminalForeground foregroundSoft)"
 EOF
 
-# Keep notification layout in Dunst's template; only colors come from the palette.
-sed \
-    -e "s/@borderMuted@/$(value borderMuted)/g" \
-    -e "s/@surface@/$(value surface)/g" \
-    -e "s/@foregroundSoft@/$(value foregroundSoft)/g" \
-    -e "s/@accent@/$(value accent)/g" \
-    -e "s/@danger@/$(value danger)/g" \
-    "$script_dir/../../dunst/dunstrc.template" > "$tmp_dir/dunstrc"
-
 cat > "$tmp_dir/hyprlock.conf" <<EOF
 \$theme_background = rgb($(hex background))
 \$theme_surface = rgb($(hex surface))
@@ -80,7 +71,7 @@ cat > "$tmp_dir/gtk.css" <<EOF
 EOF
 
 # Atomic replacement prevents file watchers from reading half-written configs.
-for file in colors.json alacritty.toml dunstrc hyprlock.conf gtk.css; do
+for file in colors.json alacritty.toml hyprlock.conf gtk.css; do
     mv "$tmp_dir/$file" "$state_dir/$file"
 done
 printf '%s\n' "$theme" > "$state_dir/current"
@@ -97,10 +88,6 @@ fi
 # these keys, or every rebuild would reset the theme.
 dconf write /org/gnome/desktop/interface/gtk-theme "'$gtk_theme'"
 dconf write /org/gnome/desktop/interface/color-scheme "'$color_scheme'"
-
-if pgrep -x dunst >/dev/null && command -v dunstctl >/dev/null; then
-    dunstctl reload "$state_dir/dunstrc" >/dev/null 2>&1 || true
-fi
 
 if $announce; then
     notify-send -t 1200 Theme "$(value name)" 2>/dev/null || true

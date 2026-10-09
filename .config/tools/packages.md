@@ -20,7 +20,6 @@ The package list lives in `packages.txt` at the repository root.
 
 - `hyprland` - Wayland compositor
 - `quickshell` - lightweight desktop widgets
-- `dunst` - notifications
 - `hyprlock`, `awww`, `hypridle` - lock screen, wallpaper, and idle handling
 - `xdg-desktop-portal-hyprland` - portal integration for Wayland apps
 - `gvfs`, `tumbler`, `ffmpegthumbnailer` - file manager access and previews

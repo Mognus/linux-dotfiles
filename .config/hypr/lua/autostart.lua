@@ -7,7 +7,7 @@ function M.setup(programs)
         hl.exec_cmd("hypridle")
         hl.exec_cmd("wl-paste --watch cliphist store")
         -- Generate the saved palette before themed desktop processes start.
-        hl.exec_cmd("bash -lc '$HOME/.config/hypr/scripts/theme-switcher.sh --apply && exec dunst -conf $HOME/.local/state/dotfiles-theme/dunstrc'")
+        hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/theme-switcher.sh --apply")
         hl.exec_cmd("awww-daemon")
         hl.exec_cmd("awww img " .. os.getenv("HOME") .. "/.config/wallpapers/Tank-Girl-Wallpaper-Black.png")
         hl.exec_cmd("qs -p " .. os.getenv("HOME") .. "/.config/quickshell")

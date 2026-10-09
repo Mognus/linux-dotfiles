@@ -25,6 +25,8 @@ ShellRoot {
 
     ClipboardHistory {}
 
+    NotificationPopups {}
+
     TuxMascot {}
 
     TuxMascot {

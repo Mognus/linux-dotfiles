@@ -17,6 +17,8 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
     live via `rawEvent`).
   - `Time.qml` — clock.
   - `Recording.qml` — `wf-recorder` status/toggle.
+  - `Notifications.qml` — notification daemon: owns
+    `org.freedesktop.Notifications` on D-Bus and keeps the open notifications.
 - `modules/` — UI panels, purely presentational, bound to the services above:
   - `BottomBar.qml` — workspace strip, clock, recording indicator, volume text,
     settings menu trigger, special workspace buttons.
@@ -47,6 +49,8 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
     - `menus/theme/ColorsMenu.qml` — one entry per palette in
       `~/.config/themes/palettes`, Enter runs `theme-switcher.sh`.
   - `AudioControl.qml` — reusable output/input volume control.
+  - `NotificationPopups.qml` — notification popups top right; normal ones
+    expire after 5s, critical ones stay, a click closes one.
   - `TuxMascot.qml` — left/right mascot panel.
 - `lib/Audio.js` — Pipewire audio helper functions.
 - `lib/Navigation.js` — which direction a key means next to a search field:
@@ -61,6 +65,7 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 - **Settings menu** — centered keyboard-driven menu on Super+G.
 - **Audio** — volume via Pipewire (`Quickshell.Services.Pipewire`).
 - **Recording indicator** — shows when a screen recording is active.
+- **Notifications** — replaces Dunst, colored by the current theme.
 - **Tux mascot** — animated, can be toggled.
 
 ## Requirements
