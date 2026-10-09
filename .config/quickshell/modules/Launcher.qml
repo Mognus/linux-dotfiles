@@ -10,6 +10,13 @@ FocusScope {
     property list<LauncherEntry> entries
     // Entry whose page replaces the list, null while listing.
     property LauncherEntry current: null
+    // True while the search footer is open; "/" opens it.
+    property bool searching: false
+    // Search text, empty while not searching.
+    readonly property string query: footer.text
+    // Entries the list shows: all, or those whose title contains the query,
+    // ignoring case: "ger" → tiger-dragon.
+    readonly property var matches: Array.from(launcher.entries).filter(entry => entry.title.toLowerCase().includes(launcher.query.toLowerCase()))
     // Titles of the opened entries, outermost first, including those of a
     // Launcher shown as page: Theme opened, then Colors in it → ["Theme", "Colors"].
     readonly property var path: {
@@ -25,7 +32,21 @@ FocusScope {
     // A back key on the list: nothing left to leave here.
     signal closeRequested
 
+    function startSearch() {
+        launcher.searching = true;
+        footer.forceActiveFocus();
+    }
+
+    function stopSearch() {
+        footer.clear();
+        launcher.searching = false;
+        list.forceActiveFocus();
+    }
+
     function openEntry(entry) {
+        // Opening ends a search; the highlight stays on the entry in the whole list.
+        launcher.stopSearch();
+        list.currentIndex = Array.from(launcher.entries).indexOf(entry);
         if (entry.page === null) {
             entry.triggered();
             return;
@@ -36,7 +57,7 @@ FocusScope {
     }
 
     function openCurrent() {
-        const entry = launcher.entries[list.currentIndex];
+        const entry = launcher.matches[list.currentIndex];
         if (entry) {
             launcher.openEntry(entry);
         }
@@ -44,8 +65,8 @@ FocusScope {
 
     function reset() {
         launcher.current = null;
+        launcher.stopSearch();
         list.currentIndex = 0;
-        list.forceActiveFocus();
     }
 
     focus: true
@@ -70,11 +91,17 @@ FocusScope {
     ListView {
         id: list
 
-        anchors.fill: parent
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            bottom: launcher.searching ? footer.top : parent.bottom
+        }
+
         focus: true
         clip: true
         visible: launcher.current === null
-        model: launcher.entries
+        model: launcher.matches
 
         // Each group of keys does one job: move down, move up, or open the highlighted entry.
         Keys.onPressed: event => {
@@ -84,6 +111,8 @@ FocusScope {
                 list.decrementCurrentIndex();
             } else if ([Qt.Key_Return, Qt.Key_Enter, Qt.Key_Right, Qt.Key_L].includes(event.key)) {
                 launcher.openCurrent();
+            } else if (event.key === Qt.Key_Slash) {
+                launcher.startSearch();
             } else {
                 // Not ours: back keys travel on to the Launcher.
                 return;
@@ -122,6 +151,24 @@ FocusScope {
                 }
             }
         }
+    }
+
+    SearchFooter {
+        id: footer
+
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+
+        height: launcher.rowHeight
+        visible: launcher.searching && launcher.current === null
+
+        onNextRequested: list.incrementCurrentIndex()
+        onPreviousRequested: list.decrementCurrentIndex()
+        onOpenRequested: launcher.openCurrent()
+        onCloseRequested: launcher.stopSearch()
     }
 
     Loader {

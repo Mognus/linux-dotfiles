@@ -3,5 +3,6 @@ BottomBar 1.0 BottomBar.qml
 Breadcrumbs 1.0 Breadcrumbs.qml
 Launcher 1.0 Launcher.qml
 LauncherEntry 1.0 LauncherEntry.qml
+SearchFooter 1.0 SearchFooter.qml
 TuxMascot 1.0 TuxMascot.qml
 WorkspaceHud 1.0 WorkspaceHud.qml

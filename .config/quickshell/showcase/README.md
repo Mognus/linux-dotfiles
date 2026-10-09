@@ -25,6 +25,8 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
     Its `path` lists the titles opened so far, sub menus included.
   - `Breadcrumbs.qml` — `× ~ / Theme / Colors` header showing a Launcher's
     path; the × reports a close request.
+  - `SearchFooter.qml` — `/ cy` search line a Launcher opens on `/`; it filters
+    the list and reports Up/Down/Enter/Esc to the Launcher.
   - `settings/` — the settings menu (Super+G), laid out like the menu tree:
     - `SettingsMenu.qml` — the window and the top entries.
     - `AudioPage.qml` — audio settings page.
