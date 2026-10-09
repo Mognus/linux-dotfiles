@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell.Services.Pipewire
 import qs
+import qs.modules
 
 Column {
     width: parent.width

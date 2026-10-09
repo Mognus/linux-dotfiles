@@ -19,9 +19,8 @@ in
     tree-sitter
     gcc
     tmux
-    # hyprland: terminal and launcher bound in hypr/lua/programs.lua
+    # hyprland: terminal bound in hypr/lua/programs.lua
     alacritty
-    rofi
     adwaita-icon-theme
     # theme-switcher.sh reads the palettes with jq
     jq
@@ -52,10 +51,10 @@ in
   xdg.configFile."hypr".source = link ".config/hypr";
   xdg.configFile."xkb".source = link ".config/xkb";
   xdg.configFile."alacritty".source = link ".config/alacritty";
-  xdg.configFile."rofi".source = link ".config/rofi";
   xdg.configFile."quickshell".source = link ".config/quickshell";
   xdg.configFile."dunst".source = link ".config/dunst";
   xdg.configFile."wallpapers".source = link ".config/wallpapers";
+  xdg.configFile."themes".source = link ".config/themes";
   xdg.configFile."gtk-3.0".source = link ".config/gtk-3.0";
   xdg.configFile."gtk-4.0".source = link ".config/gtk-4.0";
   # Only the file: Home Manager keeps its own conf.d next to it.
@@ -76,6 +75,9 @@ in
   };
   home.file."${config.programs.firefox.configPath}/default/user.js".source =
     link ".config/firefox/user.js";
+  # Only the file: LibreWolf keeps its profiles in the same folder.
+  xdg.configFile."librewolf/librewolf/librewolf.overrides.cfg".source =
+    link ".config/librewolf/librewolf/librewolf.overrides.cfg";
 
   # Both agents share one instruction file; their folders also hold local state.
   home.file.".claude/CLAUDE.md".source = link "AGENTS.md";
@@ -92,9 +94,12 @@ in
   systemd.user.tmpfiles.rules = [ "d %h/Pictures/screenshots - - - 7d" ];
 
   # GTK apps read the cursor from dconf; install.sh set this through gsettings.
+  # The fonts name no font: "Sans"/"Monospace" resolve through fontconfig/fonts.conf.
   dconf.settings."org/gnome/desktop/interface" = {
     cursor-theme = "macOS";
     cursor-size = 40;
+    font-name = "Sans 11";
+    monospace-font-name = "Monospace 11";
   };
   home.file.".gitconfig".source = link ".gitconfig";
 }

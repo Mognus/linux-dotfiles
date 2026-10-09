@@ -178,7 +178,7 @@ PanelWindow {
             Text {
                 anchors.centerIn: parent
                 text: "⚙"
-                color: ShellState.quickSettingsOpen ? Colors.accent : Colors.foreground
+                color: ShellState.settingsOpen ? Colors.accent : Colors.foreground
                 font.family: "Syne, MesloLGS Nerd Font, monospace"
                 font.pixelSize: 19
                 font.bold: true
@@ -193,12 +193,12 @@ PanelWindow {
 
                 height: 2
                 color: Colors.accent
-                visible: ShellState.quickSettingsOpen
+                visible: ShellState.settingsOpen
             }
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: ShellState.toggleQuickSettings()
+                onClicked: ShellState.toggleSettings()
             }
         }
 

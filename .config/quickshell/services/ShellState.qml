@@ -10,8 +10,14 @@ Singleton {
     property bool bottomBarVisible: true
     property bool workspaceHudVisible: false
     property bool tuxVisible: true
-    property bool quickSettingsOpen: false
-    property bool settingsOpen: false
+
+    // Overlays pop up centered and take the keyboard, so only one is open at a
+    // time: "settings", "launcher", "windowSwitcher", "clipboard", or "" for none.
+    property string overlay: ""
+    readonly property bool settingsOpen: root.overlay === "settings"
+    readonly property bool launcherOpen: root.overlay === "launcher"
+    readonly property bool windowSwitcherOpen: root.overlay === "windowSwitcher"
+    readonly property bool clipboardOpen: root.overlay === "clipboard"
 
     function toggleBottomBar() {
         root.bottomBarVisible = !root.bottomBarVisible;
@@ -31,20 +37,47 @@ Singleton {
         root.tuxVisible = !root.tuxVisible;
     }
 
-    function toggleQuickSettings() {
-        root.quickSettingsOpen = !root.quickSettingsOpen;
+    // Opens the overlay, closing whichever was open; toggling the open one closes it.
+    function toggleOverlay(name) {
+        root.overlay = root.overlay === name ? "" : name;
     }
 
-    function closeQuickSettings() {
-        root.quickSettingsOpen = false;
+    function closeOverlay(name) {
+        if (root.overlay === name) {
+            root.overlay = "";
+        }
     }
 
     function toggleSettings() {
-        root.settingsOpen = !root.settingsOpen;
+        root.toggleOverlay("settings");
     }
 
     function closeSettings() {
-        root.settingsOpen = false;
+        root.closeOverlay("settings");
+    }
+
+    function toggleLauncher() {
+        root.toggleOverlay("launcher");
+    }
+
+    function closeLauncher() {
+        root.closeOverlay("launcher");
+    }
+
+    function toggleWindowSwitcher() {
+        root.toggleOverlay("windowSwitcher");
+    }
+
+    function closeWindowSwitcher() {
+        root.closeOverlay("windowSwitcher");
+    }
+
+    function toggleClipboard() {
+        root.toggleOverlay("clipboard");
+    }
+
+    function closeClipboard() {
+        root.closeOverlay("clipboard");
     }
 
     IpcHandler {
@@ -72,18 +105,6 @@ Singleton {
     }
 
     IpcHandler {
-        target: "quicksettings"
-
-        function toggle(): void {
-            root.toggleQuickSettings()
-        }
-
-        function close(): void {
-            root.closeQuickSettings()
-        }
-    }
-
-    IpcHandler {
         target: "settings"
 
         function toggle(): void {
@@ -92,6 +113,42 @@ Singleton {
 
         function close(): void {
             root.closeSettings()
+        }
+    }
+
+    IpcHandler {
+        target: "launcher"
+
+        function toggle(): void {
+            root.toggleLauncher()
+        }
+
+        function close(): void {
+            root.closeLauncher()
+        }
+    }
+
+    IpcHandler {
+        target: "windowswitcher"
+
+        function toggle(): void {
+            root.toggleWindowSwitcher()
+        }
+
+        function close(): void {
+            root.closeWindowSwitcher()
+        }
+    }
+
+    IpcHandler {
+        target: "clipboard"
+
+        function toggle(): void {
+            root.toggleClipboard()
+        }
+
+        function close(): void {
+            root.closeClipboard()
         }
     }
 }

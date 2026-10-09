@@ -1,7 +1,7 @@
 [Default Applications]
-x-scheme-handler/http=firefox.desktop;
-x-scheme-handler/https=firefox.desktop;
-text/html=firefox.desktop;
+x-scheme-handler/http=librewolf.desktop;
+x-scheme-handler/https=librewolf.desktop;
+text/html=librewolf.desktop;
 inode/directory=thunar.desktop;
 application/pdf=org.gnome.Papers.desktop;
 image/apng=org.gnome.Loupe.desktop;

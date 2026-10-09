@@ -2,11 +2,14 @@
 -- no plugin loaded before this file defines one.
 vim.g.mapleader = " "
 
--- Space+d toggles a side-by-side diff of the current file against git
+-- Every mapping lives under <leader>; which-key shows the options after Space.
+-- Groups: f = find, g = git, x = diagnostics (named in plugins.lua).
+
+-- Space+g+d toggles a side-by-side diff of the current file against git
 -- (built-in diff mode). ]c / [c jump between changes.
 -- The git side is a buffer named "gitsigns://...": if one is open, pressing
 -- again closes it; otherwise it opens one.
--- Example: 1× Space+d → "file | gitsigns://.../file", 2× → back to "file".
+-- Example: 1× Space+g+d → "file | gitsigns://.../file", 2× → back to "file".
 local function toggle_git_diff()
     local closed = false
     for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
@@ -26,17 +29,15 @@ local function toggle_git_diff()
     require("gitsigns").diffthis()
 end
 
-vim.keymap.set("n", "<leader>d", toggle_git_diff, { desc = "Toggle git diff of current file" })
+vim.keymap.set("n", "<leader>gd", toggle_git_diff, { desc = "Toggle git diff of current file" })
 
--- Ctrl+B toggles the fullscreen file explorer, like the sidebar toggle in Zed.
--- Replaces the stock Ctrl+B (page up); tmux's prefix moved to Ctrl+Space for this.
-vim.keymap.set("n", "<C-b>", function()
+-- Space+e toggles the fullscreen file explorer.
+vim.keymap.set("n", "<leader>e", function()
     Snacks.explorer()
 end, { desc = "File explorer" })
 
--- Ctrl+G lists all changed files of the repo, including new (untracked) ones,
+-- Space+g+s lists all changed files of the repo, including new (untracked) ones,
 -- fuzzy searchable with a diff preview. git diff alone never shows new files.
--- Replaces the stock Ctrl+G (file info); `:file` still shows the same.
 -- Outside a repo git fails with error prompts, so check first.
 --
 -- git status lists a submodule as one entry ("M repos/traeno-pm") and never
@@ -79,7 +80,7 @@ local function open_git_status(root)
     })
 end
 
-vim.keymap.set("n", "<C-g>", function()
+vim.keymap.set("n", "<leader>gs", function()
     local root = Snacks.git.get_root()
     if root == nil then
         vim.notify("Not in a git repository", vim.log.levels.WARN)
@@ -88,25 +89,21 @@ vim.keymap.set("n", "<C-g>", function()
     open_git_status(root)
 end, { desc = "Git changed files" })
 
--- Ctrl+P finds files across the whole git repo, like the file finder in Zed.
--- Replaces the stock Ctrl+P (line up); k does the same.
-vim.keymap.set("n", "<C-p>", function()
+-- Space+f+f finds files across the whole git repo.
+vim.keymap.set("n", "<leader>ff", function()
     Snacks.picker.files({
         cwd = Snacks.git.get_root(),
         hidden = true,
     })
 end, { desc = "Find files in repo" })
 
--- Ctrl+/ greps across the whole git repo, dotfiles included (.git stays excluded).
--- Terminals send Ctrl+/ as Ctrl+_, so both are mapped.
-local function grep_repo()
+-- Space+/ greps across the whole git repo, dotfiles included (.git stays excluded).
+vim.keymap.set("n", "<leader>/", function()
     Snacks.picker.grep({ cwd = Snacks.git.get_root(), hidden = true })
-end
-vim.keymap.set("n", "<C-/>", grep_repo, { desc = "Grep in repo" })
-vim.keymap.set("n", "<C-_>", grep_repo, { desc = "Grep in repo" })
+end, { desc = "Grep in repo" })
 
--- F8 lists all LSP errors and warnings, like "Problems" in VS Code/Zed.
+-- Space+x+x lists all LSP errors and warnings, like "Problems" in VS Code/Zed.
 -- Only covers files the LSP has seen, i.e. opened buffers.
-vim.keymap.set("n", "<F8>", function()
+vim.keymap.set("n", "<leader>xx", function()
     Snacks.picker.diagnostics()
 end, { desc = "Diagnostics" })

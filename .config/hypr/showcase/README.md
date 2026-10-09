@@ -9,10 +9,10 @@
 - Scratchpads for temporary apps
 - `awww` wallpaper setup
 - Hyprlock session locking, automatically through Hypridle after thirty idle minutes
-- Clipboard history with image thumbnails through cliphist and Rofi
+- Clipboard history with image previews through cliphist and Quickshell
 - Volume and media keys through wpctl and playerctl
 - Polkit authentication prompts through the GNOME agent
-- Quickshell desktop widgets and quick settings
+- Quickshell desktop widgets and settings menu
 
 ## Desktop Role
 
@@ -25,19 +25,17 @@ idle minutes, turns the monitor off five minutes later, and locks before suspend
 - `hyprland.lua` - Main Hyprland config
 - `lua/` - Split Lua modules for monitors, binds, workspaces, and appearance
 - `hypridle.conf` - Idle timeouts and suspend hooks
-- `scripts/` - Rofi pickers for wallpapers, palettes, and clipboard history
+- `scripts/` - Theme switcher, recording, opacity, and polkit helpers
 
 ## Apps
 
 - `SUPER+Return` - Alacritty terminal
-- `SUPER+B` - Firefox
-- `SUPER+Space` - Rofi app launcher
-- `SUPER+Ctrl+Space` - Rofi window switcher
+- `SUPER+B` - LibreWolf
+- `SUPER+Space` - Quickshell app launcher
+- `SUPER+Ctrl+Space` - Quickshell window switcher with a live preview
 
-Apps, windows, wallpapers, palettes, and clipboard history use separate Rofi
-menus with one shared theme. There are no mode tabs or combined search; shell commands run in the terminal.
-All menus use the same fixed nine-row layout and open without compositor animations.
-The window switcher uses Rofi's built-in window mode and shows window titles.
+The app launcher and window switcher are Quickshell windows that open without
+compositor animations.
 
 ## Session
 
@@ -49,11 +47,11 @@ The window switcher uses Rofi's built-in window mode and shows window titles.
 
 ## Clipboard
 
-- `SUPER+V` - Pick an entry from the clipboard history
-- `SUPER+Shift+V` - Wipe the clipboard history
+- `SUPER+V` - Quickshell clipboard history
 
-Every clipboard change is stored by cliphist. Image entries show a thumbnail
-next to the row; text entries show their first line.
+Every clipboard change is stored by cliphist. The history shows the full text
+or image of the highlighted entry; inside it, `Delete` removes an entry and
+`Shift+Delete` wipes the history.
 
 ## Audio
 
@@ -65,8 +63,6 @@ Audio bindings also work on the lock screen. The Quickshell bar shows the level.
 
 ## Appearance
 
-- `SUPER+W` - Pick a wallpaper
-- `SUPER+Ctrl+W` - Pick the Black, White, Pink, or Cyan palette
 - `SUPER+Shift+=/-` - Increase/decrease terminal opacity
 
 ## Windows
@@ -89,7 +85,7 @@ Audio bindings also work on the lock screen. The Quickshell bar shows the level.
 ## Scratchpads
 
 - `SUPER+Ctrl+Return` - Terminal scratchpad
-- `SUPER+Ctrl+B` - Firefox scratchpad
+- `SUPER+Ctrl+B` - Browser scratchpad (LibreWolf)
 - `SUPER+Ctrl+D` - Discord scratchpad
 - `SUPER+Ctrl+N` - Notes scratchpad
 - `SUPER+Ctrl+F` - File manager scratchpad
@@ -97,7 +93,7 @@ Audio bindings also work on the lock screen. The Quickshell bar shows the level.
 ## Desktop Widgets
 
 - `SUPER+Ctrl+T` - Toggle both Quickshell Tux widgets
-- `SUPER+Ctrl+G` - Toggle Quickshell quick settings
+- `SUPER+G` - Toggle Quickshell settings menu
 - `SUPER+Ctrl+P`, then `B/P` - Toggle bottom bar/workspace HUD
 
 ## Music

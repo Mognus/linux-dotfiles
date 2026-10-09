@@ -30,7 +30,6 @@ vulkan-radeon               # Vulkan driver for AMD GPU
 hyprland                    # Wayland compositor / WM
 quickshell                  # Lightweight desktop widgets
 awww                        # Wallpaper daemon used by Hyprland scripts
-rofi                        # App launcher and dmenu replacement
 alacritty                   # Lightweight terminal emulator
 xdg-desktop-portal-hyprland # Screen sharing, file picker for Wayland apps
 xdg-user-dirs               # Creates ~/Downloads, ~/Pictures etc.
@@ -43,7 +42,7 @@ polkit-gnome                # Privilege dialog (sudo popups in GUI)
 grim                        # Screenshot (full screen)
 slurp                       # Select screen region for screenshots
 wl-clipboard                # Clipboard (wl-copy, wl-paste)
-cliphist                    # Clipboard history used by Hyprland and Rofi
+cliphist                    # Clipboard history behind the Quickshell overlay
 swappy                      # Screenshot editor
 socat                       # Socket communication (e.g. Hyprland IPC)
 jq                          # JSON processing in CLI

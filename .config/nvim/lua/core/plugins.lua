@@ -3,6 +3,7 @@ vim.pack.add({
     { src = "https://github.com/coder/claudecode.nvim" },
     { src = "https://github.com/folke/snacks.nvim" },
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
+    { src = "https://github.com/folke/which-key.nvim" },
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
     -- Renders Markdown in the buffer; the cursor line stays raw for editing.
     -- `:RenderMarkdown toggle` switches back to plain text.
@@ -45,6 +46,16 @@ require("gitsigns").setup({
             gitsigns.nav_hunk("prev")
         end, { buffer = bufnr, desc = "Previous git hunk" })
     end,
+})
+
+-- Popup after Space (and other prefixes) listing the possible next keys. The entries come
+-- from the `desc` of each vim.keymap.set; only the group names are given here.
+local which_key = require("which-key")
+which_key.setup()
+which_key.add({
+    { "<leader>f", group = "find" },
+    { "<leader>g", group = "git" },
+    { "<leader>x", group = "diagnostics" },
 })
 
 -- Statusline: mode, git branch, diff, diagnostics, file, cursor position. The stock

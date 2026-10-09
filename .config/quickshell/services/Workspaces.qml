@@ -66,7 +66,15 @@ Singleton {
 
     function toggleSpecialWorkspace(name) {
         root.activeSpecialWorkspace = root.specialWorkspaceVisible(name) ? "" : "special:" + name;
-        Hyprland.dispatch("togglespecialworkspace " + name);
+        // With the Lua config, dispatch takes a Lua dispatcher.
+        Hyprland.dispatch(`hl.dsp.workspace.toggle_special("${name}")`);
+    }
+
+    // Hides the special workspace that is open, if any: "special:term" → term toggled off.
+    function hideSpecialWorkspace() {
+        if (root.activeSpecialWorkspace !== "") {
+            root.toggleSpecialWorkspace(root.activeSpecialWorkspace.replace("special:", ""));
+        }
     }
 
     function setActiveSpecialFromEvent(event) {

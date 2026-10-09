@@ -2,6 +2,8 @@ import Quickshell
 import Quickshell.Services.Pipewire
 import QtQuick
 import qs.modules
+import qs.modules.launcher
+import qs.modules.settings
 import qs.services
 
 ShellRoot {
@@ -15,9 +17,13 @@ ShellRoot {
 
     WorkspaceHud {}
 
-    QuickSettingsPanel {}
-
     SettingsMenu {}
+
+    AppLauncher {}
+
+    WindowSwitcher {}
+
+    ClipboardHistory {}
 
     TuxMascot {}
 

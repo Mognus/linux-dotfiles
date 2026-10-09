@@ -6,23 +6,14 @@ script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 palette_dir="$(readlink -f "$script_dir/../../themes/palettes")"
 announce=true
 
-pick_theme() {
-    local selected
-    selected="$({
-        for file in "$palette_dir"/*.json; do
-            printf '%s\t%s\n' "$(jq -r .name "$file")" "$(basename "$file" .json)"
-        done
-    } | sort | rofi -dmenu -i -p Theme -display-columns 1)"
-    [[ -n "$selected" ]] || exit 0
-    printf '%s\n' "$selected" | cut -f2
-}
-
 requested="${1:-}"
 if [[ "$requested" == "--apply" ]]; then
     announce=false
     requested="$(cat "$state_dir/current" 2>/dev/null || printf black)"
 elif [[ -z "$requested" ]]; then
-    requested="$(pick_theme)"
+    # Picking happens in Quickshell's settings menu (Theme > Colors).
+    printf 'Usage: %s <theme> | --apply\n' "$0" >&2
+    exit 1
 fi
 
 theme="$(printf '%s' "$requested" | tr '[:upper:]' '[:lower:]')"
@@ -39,21 +30,6 @@ hex() { value "$1" | tr -d '#'; }
 
 # Quickshell watches this file, while other apps import their generated format.
 cp "$palette" "$tmp_dir/colors.json"
-
-cat > "$tmp_dir/rofi.rasi" <<EOF
-* {
-    bg: $(value background)e8;
-    bg-alt: $(value surface)f2;
-    bg-hover: $(value hover)f2;
-    fg: $(value foreground)ff;
-    fg-soft: $(value foregroundSoft)ff;
-    muted: $(value muted)ff;
-    edge: $(value border)ff;
-    edge-muted: $(value borderMuted)ff;
-    accent: $(value accent)ff;
-    danger: $(value danger)ff;
-}
-EOF
 
 cat > "$tmp_dir/alacritty.toml" <<EOF
 [colors.primary]
@@ -104,7 +80,7 @@ cat > "$tmp_dir/gtk.css" <<EOF
 EOF
 
 # Atomic replacement prevents file watchers from reading half-written configs.
-for file in colors.json rofi.rasi alacritty.toml dunstrc hyprlock.conf gtk.css; do
+for file in colors.json alacritty.toml dunstrc hyprlock.conf gtk.css; do
     mv "$tmp_dir/$file" "$state_dir/$file"
 done
 printf '%s\n' "$theme" > "$state_dir/current"

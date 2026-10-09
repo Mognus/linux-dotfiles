@@ -8,8 +8,10 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 - `shell.qml` — composition root: wires `modules/` components together, keeps no
   state of its own beyond the Pipewire object tracker.
 - `services/` — singletons holding all shared state and logic:
-  - `ShellState.qml` — panel visibility (bottom bar, workspace HUD, tux, quick
-    settings) and the IPC handlers that toggle them.
+  - `ShellState.qml` — panel visibility (bottom bar, workspace HUD, tux) and the
+    one open overlay (settings menu, app launcher, window switcher or clipboard
+    history; opening one closes the other), plus the IPC handlers that toggle
+    them.
   - `Workspaces.qml` — Hyprland workspace/special-workspace queries and the
     active-special-workspace tracking (seeded from `Hyprland.monitors`, kept
     live via `rawEvent`).
@@ -17,12 +19,38 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   - `Recording.qml` — `wf-recorder` status/toggle.
 - `modules/` — UI panels, purely presentational, bound to the services above:
   - `BottomBar.qml` — workspace strip, clock, recording indicator, volume text,
-    quick settings trigger, special workspace buttons.
+    settings menu trigger, special workspace buttons.
   - `WorkspaceHud.qml` — compact workspace-only overlay.
-  - `QuickSettingsPanel.qml` — right side quick settings panel.
+  - `Menu.qml` / `MenuEntry.qml` — keyboard-driven list of entries; opening
+    one swaps the list for the entry's page, or fires its `triggered` signal
+    when it has none. A page can be another Menu, which makes a sub menu.
+    Its `path` lists the titles opened so far, sub menus included.
+  - `Breadcrumbs.qml` — `× ~ / Theme / Colors` header showing a Menu's
+    path; the × reports a close request.
+  - `SearchFooter.qml` — `/ cy` search line; it only types and hands every
+    key to its `keyTargets` first, so the owner decides what keys drive. A
+    Menu opens it on `/`.
+  - `launcher/AppLauncher.qml` — GNOME-style grid of the desktop apps with an
+    always active search; arrows or Ctrl+hjkl move, Enter starts, Esc closes.
+  - `launcher/WindowSwitcher.qml` — open windows of every workspace on the
+    left, grouped by app under an icon header, a live view of the highlighted
+    one on the right; same search.
+  - `launcher/ClipboardHistory.qml` — cliphist entries, newest first, with
+    the full text or image of the highlighted one on the right; same search,
+    Enter copies the entry back.
+  - `settings/` — the settings menu (Super+G), laid out like the menu tree:
+    - `SettingsMenu.qml` — the window and the top entries.
+    - `AudioPage.qml` — audio settings page.
+    - `menus/ThemeMenu.qml` — theme sub menu.
+    - `menus/theme/WallpaperMenu.qml` — one entry per image in
+      `~/.config/wallpapers`, Enter sets it through `awww`.
+    - `menus/theme/ColorsMenu.qml` — one entry per palette in
+      `~/.config/themes/palettes`, Enter runs `theme-switcher.sh`.
   - `AudioControl.qml` — reusable output/input volume control.
   - `TuxMascot.qml` — left/right mascot panel.
 - `lib/Audio.js` — Pipewire audio helper functions.
+- `lib/Navigation.js` — which direction a key means next to a search field:
+  arrows or Ctrl+hjkl.
 - `assets/` — animated angel/devil Tux sprites.
 
 ## What it does
@@ -30,7 +58,7 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 - **Workspaces** — live Hyprland workspaces plus named *special* workspaces
   (term, files, music, notes, discord, firefox), each with its own accent.
 - **Clock** — `hh:mm`, top center.
-- **Quick settings** — togglable panel.
+- **Settings menu** — centered keyboard-driven menu on Super+G.
 - **Audio** — volume via Pipewire (`Quickshell.Services.Pipewire`).
 - **Recording indicator** — shows when a screen recording is active.
 - **Tux mascot** — animated, can be toggled.

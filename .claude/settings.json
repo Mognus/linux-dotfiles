@@ -8,7 +8,9 @@
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
-    "rust-analyzer-lsp@claude-plugins-official": true
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true
   },
   "effortLevel": "high",
   "modelSettings": {
@@ -16,7 +18,7 @@
       "effortLevel": "low"
     },
     "claude-fable-5-1": {
-      "effortLevel": "medium"
+      "effortLevel": "xhigh"
     },
     "claude-opus-5-5": {
       "effortLevel": "high"
@@ -25,7 +27,7 @@
       "effortLevel": "medium"
     },
     "claude-sonnet-5-5": {
-      "effortLevel": "xhigh"
+      "effortLevel": "high"
     }
   },
   "tui": "fullscreen",

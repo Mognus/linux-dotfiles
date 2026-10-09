@@ -3,7 +3,7 @@
 Personal Linux dotfiles managed with GNU Stow.
 
 The repository contains my daily desktop and terminal configuration, including
-Neovim, Fish, Tmux, Alacritty, Hyprland, Quickshell, Rofi, Dunst, the desktop
+Neovim, Fish, Tmux, Alacritty, Hyprland, Quickshell, Dunst, the desktop
 theme switcher, Git, CLI tooling and package lists for rebuilding a workstation.
 
 A visual showcase of this setup, with screenshots and the matching configs, is
