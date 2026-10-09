@@ -1,6 +1,7 @@
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Wayland
+import Quickshell.Widgets
 import QtQuick
 import qs
 import qs.modules
@@ -16,13 +17,24 @@ PanelWindow {
     readonly property int padding: 12
     readonly property int rowHeight: 36
     readonly property int listWidth: 380
-    // Windows whose app or title contains the search: "wolf" → LibreWolf.
-    readonly property var matches: Array.from(Hyprland.toplevels.values).filter(toplevel => window.label(toplevel).toLowerCase().includes(footer.text.toLowerCase()))
-    readonly property var current: window.matches[list.currentIndex] ?? null
+    // Windows whose app or title contains the search, sorted by app so the list
+    // can group them: "wolf" → [{ app: "librewolf", toplevel }, …].
+    readonly property var matches: Array.from(Hyprland.toplevels.values)
+        .map(toplevel => ({ app: window.appOf(toplevel), toplevel: toplevel }))
+        .filter(item => window.label(item.toplevel).toLowerCase().includes(footer.text.toLowerCase()))
+        .sort((a, b) => a.app.localeCompare(b.app))
+    readonly property var current: window.matches[list.currentIndex]?.toplevel ?? null
 
     // "librewolf" for a LibreWolf window; empty until Wayland reports it.
     function appOf(toplevel) {
         return toplevel.wayland ? toplevel.wayland.appId : "";
+    }
+
+    // Icon from the app's desktop entry: "librewolf" → the LibreWolf icon, a
+    // generic one when no entry fits.
+    function iconOf(app) {
+        const entry = DesktopEntries.heuristicLookup(app);
+        return Quickshell.iconPath(entry ? entry.icon : "", "application-x-executable");
     }
 
     // App and title in one string to search in: "librewolf GitHub".
@@ -86,6 +98,45 @@ PanelWindow {
         clip: true
         model: window.matches
 
+        // A header with icon and app name above each app's windows; the model is
+        // sorted by app, so each app gets one.
+        section.property: "app"
+        section.delegate: Item {
+            id: header
+
+            required property string section
+
+            width: list.width
+            height: window.rowHeight
+
+            IconImage {
+                id: icon
+
+                anchors {
+                    left: parent.left
+                    leftMargin: 10
+                    verticalCenter: parent.verticalCenter
+                }
+
+                implicitSize: 20
+                asynchronous: true
+                source: window.iconOf(header.section)
+            }
+
+            Text {
+                anchors {
+                    left: icon.right
+                    leftMargin: 10
+                    verticalCenter: parent.verticalCenter
+                }
+
+                text: header.section
+                color: Colors.muted
+                font.family: "Syne, MesloLGS Nerd Font, monospace"
+                font.pixelSize: 15
+            }
+        }
+
         delegate: Rectangle {
             id: row
 
@@ -96,33 +147,17 @@ PanelWindow {
             height: window.rowHeight
             color: row.ListView.isCurrentItem ? Colors.hoverOverlay : "transparent"
 
+            // Indented under the app name in the header.
             Text {
-                id: app
-
                 anchors {
                     left: parent.left
-                    leftMargin: 10
-                    verticalCenter: parent.verticalCenter
-                }
-
-                width: 110
-                text: window.appOf(row.modelData)
-                color: Colors.muted
-                elide: Text.ElideRight
-                font.family: "Syne, MesloLGS Nerd Font, monospace"
-                font.pixelSize: 15
-            }
-
-            Text {
-                anchors {
-                    left: app.right
-                    leftMargin: 12
+                    leftMargin: 40
                     right: parent.right
                     rightMargin: 10
                     verticalCenter: parent.verticalCenter
                 }
 
-                text: row.modelData.title
+                text: row.modelData.toplevel.title
                 color: row.ListView.isCurrentItem ? Colors.foreground : Colors.foregroundSoft
                 elide: Text.ElideRight
                 font.family: "Syne, MesloLGS Nerd Font, monospace"
@@ -131,7 +166,7 @@ PanelWindow {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: window.jumpTo(row.modelData)
+                onClicked: window.jumpTo(row.modelData.toplevel)
             }
         }
     }

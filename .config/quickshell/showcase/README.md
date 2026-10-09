@@ -32,7 +32,8 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   - `launcher/AppLauncher.qml` — GNOME-style grid of the desktop apps with an
     always active search; arrows or Ctrl+hjkl move, Enter starts, Esc closes.
   - `launcher/WindowSwitcher.qml` — open windows of every workspace on the
-    left, a live view of the highlighted one on the right; same search.
+    left, grouped by app under an icon header, a live view of the highlighted
+    one on the right; same search.
   - `settings/` — the settings menu (Super+G), laid out like the menu tree:
     - `SettingsMenu.qml` — the window and the top entries.
     - `AudioPage.qml` — audio settings page.
