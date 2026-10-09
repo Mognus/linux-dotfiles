@@ -18,6 +18,8 @@ ShellRoot {
 
     SettingsMenu {}
 
+    AppLauncher {}
+
     TuxMascot {}
 
     TuxMascot {

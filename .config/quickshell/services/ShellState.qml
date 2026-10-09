@@ -11,6 +11,7 @@ Singleton {
     property bool workspaceHudVisible: false
     property bool tuxVisible: true
     property bool settingsOpen: false
+    property bool launcherOpen: false
 
     function toggleBottomBar() {
         root.bottomBarVisible = !root.bottomBarVisible;
@@ -36,6 +37,14 @@ Singleton {
 
     function closeSettings() {
         root.settingsOpen = false;
+    }
+
+    function toggleLauncher() {
+        root.launcherOpen = !root.launcherOpen;
+    }
+
+    function closeLauncher() {
+        root.launcherOpen = false;
     }
 
     IpcHandler {
@@ -71,6 +80,18 @@ Singleton {
 
         function close(): void {
             root.closeSettings()
+        }
+    }
+
+    IpcHandler {
+        target: "launcher"
+
+        function toggle(): void {
+            root.toggleLauncher()
+        }
+
+        function close(): void {
+            root.closeLauncher()
         }
     }
 }
