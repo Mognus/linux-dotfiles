@@ -60,5 +60,14 @@ FocusScope {
         font.family: "Syne, MesloLGS Nerd Font, monospace"
         font.pixelSize: 15
         Keys.forwardTo: footer.keyTargets
+
+        // Ctrl+W deletes the word before the cursor like in a terminal: "fire fox▏" → "fire ▏".
+        Keys.onPressed: event => {
+            if (event.key === Qt.Key_W && (event.modifiers & Qt.ControlModifier)) {
+                const before = field.text.slice(0, field.cursorPosition);
+                field.remove(before.replace(/\S*\s*$/, "").length, field.cursorPosition);
+                event.accepted = true;
+            }
+        }
     }
 }
