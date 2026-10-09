@@ -22,7 +22,7 @@ FocusScope {
 
     readonly property int rowHeight: 36
 
-    // Esc on the list: nothing left to leave here.
+    // A back key on the list: nothing left to leave here.
     signal closeRequested
 
     function openEntry(entry) {
@@ -50,16 +50,21 @@ FocusScope {
 
     focus: true
 
-    // Esc travels up to here from whichever child has the focus.
-    Keys.onEscapePressed: event => {
+    // Back keys travel up to here from whichever child has the focus: they leave
+    // the page, or on the list ask to close.
+    Keys.onPressed: event => {
+        const backKeys = [Qt.Key_Escape, Qt.Key_Left];
+        if (!backKeys.includes(event.key)) {
+            return;
+        }
         if (launcher.current === null) {
             launcher.closeRequested();
-            // Unaccepted, Esc travels on to an outer Launcher, which leaves this page.
-            event.accepted = false;
+            // Unaccepted, the key travels on to an outer Launcher, which leaves this page.
             return;
         }
         launcher.current = null;
         list.forceActiveFocus();
+        event.accepted = true;
     }
 
     ListView {
@@ -71,9 +76,14 @@ FocusScope {
         visible: launcher.current === null
         model: launcher.entries
 
-        // Up/Down already move the selection while the list has the focus.
-        Keys.onReturnPressed: launcher.openCurrent()
-        Keys.onEnterPressed: launcher.openCurrent()
+        // Open keys pick the highlighted entry; Up/Down already move the selection.
+        Keys.onPressed: event => {
+            const openKeys = [Qt.Key_Return, Qt.Key_Enter, Qt.Key_Right];
+            if (openKeys.includes(event.key)) {
+                launcher.openCurrent();
+                event.accepted = true;
+            }
+        }
 
         delegate: Rectangle {
             id: row
