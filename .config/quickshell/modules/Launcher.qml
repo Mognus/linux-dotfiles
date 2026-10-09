@@ -53,7 +53,7 @@ FocusScope {
     // Back keys travel up to here from whichever child has the focus: they leave
     // the page, or on the list ask to close.
     Keys.onPressed: event => {
-        const backKeys = [Qt.Key_Escape, Qt.Key_Left];
+        const backKeys = [Qt.Key_Escape, Qt.Key_Left, Qt.Key_H];
         if (!backKeys.includes(event.key)) {
             return;
         }
@@ -76,13 +76,19 @@ FocusScope {
         visible: launcher.current === null
         model: launcher.entries
 
-        // Open keys pick the highlighted entry; Up/Down already move the selection.
+        // Each group of keys does one job: move down, move up, or open the highlighted entry.
         Keys.onPressed: event => {
-            const openKeys = [Qt.Key_Return, Qt.Key_Enter, Qt.Key_Right];
-            if (openKeys.includes(event.key)) {
+            if ([Qt.Key_Down, Qt.Key_J].includes(event.key)) {
+                list.incrementCurrentIndex();
+            } else if ([Qt.Key_Up, Qt.Key_K].includes(event.key)) {
+                list.decrementCurrentIndex();
+            } else if ([Qt.Key_Return, Qt.Key_Enter, Qt.Key_Right, Qt.Key_L].includes(event.key)) {
                 launcher.openCurrent();
-                event.accepted = true;
+            } else {
+                // Not ours: back keys travel on to the Launcher.
+                return;
             }
+            event.accepted = true;
         }
 
         delegate: Rectangle {
