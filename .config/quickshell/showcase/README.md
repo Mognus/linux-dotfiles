@@ -8,8 +8,8 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 - `shell.qml` — composition root: wires `modules/` components together, keeps no
   state of its own beyond the Pipewire object tracker.
 - `services/` — singletons holding all shared state and logic:
-  - `ShellState.qml` — panel visibility (bottom bar, workspace HUD, tux, quick
-    settings) and the IPC handlers that toggle them.
+  - `ShellState.qml` — panel visibility (bottom bar, workspace HUD, tux, settings
+    menu) and the IPC handlers that toggle them.
   - `Workspaces.qml` — Hyprland workspace/special-workspace queries and the
     active-special-workspace tracking (seeded from `Hyprland.monitors`, kept
     live via `rawEvent`).
@@ -17,9 +17,8 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   - `Recording.qml` — `wf-recorder` status/toggle.
 - `modules/` — UI panels, purely presentational, bound to the services above:
   - `BottomBar.qml` — workspace strip, clock, recording indicator, volume text,
-    quick settings trigger, special workspace buttons.
+    settings menu trigger, special workspace buttons.
   - `WorkspaceHud.qml` — compact workspace-only overlay.
-  - `QuickSettingsPanel.qml` — right side quick settings panel.
   - `AudioControl.qml` — reusable output/input volume control.
   - `TuxMascot.qml` — left/right mascot panel.
 - `lib/Audio.js` — Pipewire audio helper functions.
@@ -30,7 +29,7 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 - **Workspaces** — live Hyprland workspaces plus named *special* workspaces
   (term, files, music, notes, discord, firefox), each with its own accent.
 - **Clock** — `hh:mm`, top center.
-- **Quick settings** — togglable panel.
+- **Settings menu** — centered launcher-style menu on Super+G.
 - **Audio** — volume via Pipewire (`Quickshell.Services.Pipewire`).
 - **Recording indicator** — shows when a screen recording is active.
 - **Tux mascot** — animated, can be toggled.

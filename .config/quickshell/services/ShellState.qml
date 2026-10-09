@@ -10,7 +10,6 @@ Singleton {
     property bool bottomBarVisible: true
     property bool workspaceHudVisible: false
     property bool tuxVisible: true
-    property bool quickSettingsOpen: false
     property bool settingsOpen: false
 
     function toggleBottomBar() {
@@ -29,14 +28,6 @@ Singleton {
 
     function toggleTux() {
         root.tuxVisible = !root.tuxVisible;
-    }
-
-    function toggleQuickSettings() {
-        root.quickSettingsOpen = !root.quickSettingsOpen;
-    }
-
-    function closeQuickSettings() {
-        root.quickSettingsOpen = false;
     }
 
     function toggleSettings() {
@@ -68,18 +59,6 @@ Singleton {
 
         function toggle(): void {
             root.toggleTux()
-        }
-    }
-
-    IpcHandler {
-        target: "quicksettings"
-
-        function toggle(): void {
-            root.toggleQuickSettings()
-        }
-
-        function close(): void {
-            root.closeQuickSettings()
         }
     }
 

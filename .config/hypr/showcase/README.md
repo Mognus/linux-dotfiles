@@ -12,7 +12,7 @@
 - Clipboard history with image thumbnails through cliphist and Rofi
 - Volume and media keys through wpctl and playerctl
 - Polkit authentication prompts through the GNOME agent
-- Quickshell desktop widgets and quick settings
+- Quickshell desktop widgets and settings menu
 
 ## Desktop Role
 
@@ -97,7 +97,7 @@ Audio bindings also work on the lock screen. The Quickshell bar shows the level.
 ## Desktop Widgets
 
 - `SUPER+Ctrl+T` - Toggle both Quickshell Tux widgets
-- `SUPER+Ctrl+G` - Toggle Quickshell quick settings
+- `SUPER+G` - Toggle Quickshell settings menu
 - `SUPER+Ctrl+P`, then `B/P` - Toggle bottom bar/workspace HUD
 
 ## Music
