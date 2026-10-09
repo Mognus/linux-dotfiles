@@ -19,21 +19,21 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   - `BottomBar.qml` — workspace strip, clock, recording indicator, volume text,
     settings menu trigger, special workspace buttons.
   - `WorkspaceHud.qml` — compact workspace-only overlay.
-  - `Launcher.qml` / `LauncherEntry.qml` — rofi-style list of entries; opening
+  - `Menu.qml` / `MenuEntry.qml` — rofi-style list of entries; opening
     one swaps the list for the entry's page, or fires its `triggered` signal
-    when it has none. A page can be another Launcher, which makes a sub menu.
+    when it has none. A page can be another Menu, which makes a sub menu.
     Its `path` lists the titles opened so far, sub menus included.
-  - `Breadcrumbs.qml` — `× ~ / Theme / Colors` header showing a Launcher's
+  - `Breadcrumbs.qml` — `× ~ / Theme / Colors` header showing a Menu's
     path; the × reports a close request.
-  - `SearchFooter.qml` — `/ cy` search line a Launcher opens on `/`; it filters
-    the list and reports Up/Down/Enter/Esc to the Launcher.
+  - `SearchFooter.qml` — `/ cy` search line a Menu opens on `/`; it filters
+    the list and reports Up/Down/Enter/Esc to the Menu.
   - `settings/` — the settings menu (Super+G), laid out like the menu tree:
     - `SettingsMenu.qml` — the window and the top entries.
     - `AudioPage.qml` — audio settings page.
-    - `launchers/ThemeLauncher.qml` — theme sub menu.
-    - `launchers/theme/WallpaperLauncher.qml` — one entry per image in
+    - `menus/ThemeMenu.qml` — theme sub menu.
+    - `menus/theme/WallpaperMenu.qml` — one entry per image in
       `~/.config/wallpapers`, Enter sets it through `awww`.
-    - `launchers/theme/ColorsLauncher.qml` — one entry per palette in
+    - `menus/theme/ColorsMenu.qml` — one entry per palette in
       `~/.config/themes/palettes`, Enter runs `theme-switcher.sh`.
   - `AudioControl.qml` — reusable output/input volume control.
   - `TuxMascot.qml` — left/right mascot panel.
@@ -45,7 +45,7 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 - **Workspaces** — live Hyprland workspaces plus named *special* workspaces
   (term, files, music, notes, discord, firefox), each with its own accent.
 - **Clock** — `hh:mm`, top center.
-- **Settings menu** — centered launcher-style menu on Super+G.
+- **Settings menu** — centered rofi-style menu on Super+G.
 - **Audio** — volume via Pipewire (`Quickshell.Services.Pipewire`).
 - **Recording indicator** — shows when a screen recording is active.
 - **Tux mascot** — animated, can be toggled.

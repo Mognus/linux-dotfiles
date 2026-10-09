@@ -4,7 +4,7 @@ import Qt.labs.folderlistmodel
 import qs.modules
 
 // Theme > Wallpaper: one entry per image in ~/.config/wallpapers, Enter hands it to awww.
-Launcher {
+Menu {
     entries: wallpapers.instances
 
     FolderListModel {
@@ -22,7 +22,7 @@ Launcher {
         // FolderListModel only hands out files one by one, so collect the paths.
         model: Array.from({ length: folder.count }, (_, index) => folder.get(index, "filePath"))
 
-        LauncherEntry {
+        MenuEntry {
             required property string modelData
 
             // "/home/magnus/.config/wallpapers/lynx.jpg" → "lynx"

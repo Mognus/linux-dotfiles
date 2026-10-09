@@ -43,8 +43,8 @@ function M.setup()
 
     -- Show every Rofi menu immediately, without sliding or fading.
     hl.layer_rule({ match = { namespace = "rofi" }, no_anim = true })
-    -- The Quickshell launcher (settings menu) pops up the same way.
-    hl.layer_rule({ match = { namespace = "launcher" }, no_anim = true })
+    -- The Quickshell settings menu pops up the same way.
+    hl.layer_rule({ match = { namespace = "settings" }, no_anim = true })
 end
 
 return M

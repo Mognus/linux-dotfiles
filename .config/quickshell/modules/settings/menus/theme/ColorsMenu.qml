@@ -5,7 +5,7 @@ import qs.modules
 
 // Theme > Colors: one entry per palette in ~/.config/themes/palettes, Enter runs
 // theme-switcher.sh, which regenerates every app's colors.
-Launcher {
+Menu {
     entries: palettes.instances
 
     FolderListModel {
@@ -22,7 +22,7 @@ Launcher {
         // FolderListModel only hands out files one by one, so collect the names.
         model: Array.from({ length: folder.count }, (_, index) => folder.get(index, "fileBaseName"))
 
-        LauncherEntry {
+        MenuEntry {
             required property string modelData
 
             // "cyan" → "Cyan"

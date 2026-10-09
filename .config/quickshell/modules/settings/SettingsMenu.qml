@@ -4,12 +4,12 @@ import QtQuick
 import qs
 import qs.modules
 import qs.services
-import qs.modules.settings.launchers
+import qs.modules.settings.menus
 
-// The settings menu on Super+G: a window around the top Launcher, one
-// LauncherEntry per settings page.
+// The settings menu on Super+G: a window around the top Menu, one
+// MenuEntry per settings page.
 PanelWindow {
-    id: menu
+    id: window
 
     readonly property int padding: 12
     readonly property int headerHeight: 44
@@ -17,19 +17,19 @@ PanelWindow {
     visible: ShellState.settingsOpen
     // Without anchors the compositor centers the window.
     implicitWidth: 600
-    implicitHeight: menu.headerHeight + divider.height + 340 + menu.padding * 2
+    implicitHeight: window.headerHeight + divider.height + 340 + window.padding * 2
     color: "transparent"
 
     // Overlay sits above fullscreen windows; Exclusive routes the keyboard here.
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
     // Name that Hyprland layer rules can match.
-    WlrLayershell.namespace: "launcher"
+    WlrLayershell.namespace: "settings"
 
     // Every opening starts at the top of the list.
     onVisibleChanged: {
-        if (menu.visible) {
-            launcher.reset();
+        if (window.visible) {
+            menu.reset();
         }
     }
 
@@ -48,12 +48,12 @@ PanelWindow {
             top: parent.top
             left: parent.left
             right: parent.right
-            leftMargin: menu.padding
-            rightMargin: menu.padding
+            leftMargin: window.padding
+            rightMargin: window.padding
         }
 
-        height: menu.headerHeight
-        path: launcher.path
+        height: window.headerHeight
+        path: menu.path
         onCloseRequested: ShellState.closeSettings()
     }
 
@@ -70,30 +70,30 @@ PanelWindow {
         color: Colors.divider
     }
 
-    Launcher {
-        id: launcher
+    Menu {
+        id: menu
 
         anchors {
             top: divider.bottom
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            margins: menu.padding
+            margins: window.padding
         }
 
         onCloseRequested: ShellState.closeSettings()
 
         entries: [
-            LauncherEntry {
+            MenuEntry {
                 title: "Audio"
                 page: Component {
                     AudioPage {}
                 }
             },
-            LauncherEntry {
+            MenuEntry {
                 title: "Theme"
                 page: Component {
-                    ThemeLauncher {}
+                    ThemeMenu {}
                 }
             }
         ]

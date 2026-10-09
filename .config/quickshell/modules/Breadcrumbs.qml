@@ -1,12 +1,12 @@
 import QtQuick
 import qs
 
-// Where a Launcher is: × ~ / Theme / Colors. The × only reports the click;
+// Where a Menu is: × ~ / Theme / Colors. The × only reports the click;
 // whoever uses it decides what closing means.
 Row {
     id: breadcrumbs
 
-    // Titles below the root, outermost first, e.g. a Launcher's path.
+    // Titles below the root, outermost first, e.g. a Menu's path.
     property var path: []
 
     signal closeRequested
