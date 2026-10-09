@@ -6,6 +6,9 @@ Launcher {
     entries: [
         LauncherEntry {
             title: "Wallpaper"
+            page: Component {
+                WallpaperLauncher {}
+            }
         },
         LauncherEntry {
             title: "Colors"

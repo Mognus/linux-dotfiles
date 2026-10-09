@@ -26,6 +26,8 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
     - `SettingsMenu.qml` — the window and the top entries.
     - `AudioPage.qml` — audio settings page.
     - `launchers/ThemeLauncher.qml` — theme sub menu.
+    - `launchers/WallpaperLauncher.qml` — one entry per image in
+      `~/.config/wallpapers`, Enter sets it through `awww`.
   - `AudioControl.qml` — reusable output/input volume control.
   - `TuxMascot.qml` — left/right mascot panel.
 - `lib/Audio.js` — Pipewire audio helper functions.
