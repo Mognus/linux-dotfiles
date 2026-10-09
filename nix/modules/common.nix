@@ -74,8 +74,8 @@
   # Activates graphical-session.target, which the portal (dark mode for
   # Firefox, screen sharing) requires before it starts.
   programs.hyprland.withUWSM = true;
-  # Registers the PAM service hyprlock needs to unlock the session.
-  programs.hyprlock.enable = true;
+  # PAM service the Quickshell lock screen (lock.qml) checks the password with.
+  security.pam.services.quickshell-lock = { };
   programs.neovim = {
     enable = true;
     defaultEditor = true;

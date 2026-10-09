@@ -26,7 +26,6 @@ trap 'rm -rf "$tmp_dir"' EXIT
 
 value() { jq -er ".$1" "$palette"; }
 value_or() { jq -er ".$1 // .$2" "$palette"; }
-hex() { value "$1" | tr -d '#'; }
 
 # Quickshell watches this file, while other apps import their generated format.
 cp "$palette" "$tmp_dir/colors.json"
@@ -45,17 +44,6 @@ background = "$(value accent)"
 text = "$(value_or terminalForeground foregroundSoft)"
 EOF
 
-cat > "$tmp_dir/hyprlock.conf" <<EOF
-\$theme_background = rgb($(hex background))
-\$theme_surface = rgb($(hex surface))
-\$theme_foreground = rgb($(hex foreground))
-\$theme_muted = rgb($(hex muted))
-\$theme_border = rgb($(hex border))
-\$theme_accent = rgb($(hex accent))
-\$theme_danger = rgb($(hex danger))
-\$theme_warning = rgb($(hex warning))
-EOF
-
 cat > "$tmp_dir/gtk.css" <<EOF
 @define-color theme_bg_color $(value background);
 @define-color theme_fg_color $(value foreground);
@@ -71,7 +59,7 @@ cat > "$tmp_dir/gtk.css" <<EOF
 EOF
 
 # Atomic replacement prevents file watchers from reading half-written configs.
-for file in colors.json alacritty.toml hyprlock.conf gtk.css; do
+for file in colors.json alacritty.toml gtk.css; do
     mv "$tmp_dir/$file" "$state_dir/$file"
 done
 printf '%s\n' "$theme" > "$state_dir/current"

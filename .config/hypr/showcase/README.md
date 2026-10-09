@@ -8,7 +8,7 @@
 - Numbered workspaces for daily contexts
 - Scratchpads for temporary apps
 - `awww` wallpaper setup
-- Hyprlock session locking, automatically through Hypridle after thirty idle minutes
+- Quickshell session locking, automatically through Hypridle after thirty idle minutes
 - Clipboard history with image previews through cliphist and Quickshell
 - Volume and media keys through wpctl and playerctl
 - Polkit authentication prompts through the GNOME agent
@@ -17,7 +17,7 @@
 ## Desktop Role
 
 Hyprland runs the desktop, `awww` sets the wallpaper, Quickshell provides the
-desktop widgets, Hyprlock locks the session, and Hypridle locks it after thirty
+desktop widgets and the lock screen, and Hypridle locks it after thirty
 idle minutes, turns the monitor off five minutes later, and locks before suspend.
 
 ## Config

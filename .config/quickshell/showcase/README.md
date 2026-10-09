@@ -5,6 +5,10 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 
 ## Structure
 
+- `lock.qml` — lock screen, run as its own process (`qs -n -d -p
+  ~/.config/quickshell/lock.qml`) so a shell bug or hot reload can not unlock
+  the session: blurred wallpaper, clock, password checked through PAM
+  (`quickshell-lock` service from the NixOS config).
 - `shell.qml` — composition root: wires `modules/` components together, keeps no
   state of its own beyond the Pipewire object tracker.
 - `services/` — singletons holding all shared state and logic:
