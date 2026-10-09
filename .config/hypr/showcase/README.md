@@ -31,7 +31,7 @@ idle minutes, turns the monitor off five minutes later, and locks before suspend
 
 - `SUPER+Return` - Alacritty terminal
 - `SUPER+B` - LibreWolf
-- `SUPER+Space` - Rofi app launcher
+- `SUPER+Space` - Quickshell app launcher
 - `SUPER+Ctrl+Space` - Rofi window switcher
 
 Apps, windows, wallpapers, palettes, and clipboard history use separate Rofi
