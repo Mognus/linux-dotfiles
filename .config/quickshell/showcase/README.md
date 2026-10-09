@@ -25,8 +25,9 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
     Its `path` lists the titles opened so far, sub menus included.
   - `Breadcrumbs.qml` — `× ~ / Theme / Colors` header showing a Menu's
     path; the × reports a close request.
-  - `SearchFooter.qml` — `/ cy` search line, always active under a Menu's
-    list; typing filters, the navigation keys are reported to the Menu.
+  - `SearchFooter.qml` — `/ cy` search line; it only types and hands every
+    key to its `keyTargets` first, so the owner decides what keys drive. A
+    Menu opens it on `/`.
   - `settings/` — the settings menu (Super+G), laid out like the menu tree:
     - `SettingsMenu.qml` — the window and the top entries.
     - `AudioPage.qml` — audio settings page.
@@ -38,8 +39,8 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   - `AudioControl.qml` — reusable output/input volume control.
   - `TuxMascot.qml` — left/right mascot panel.
 - `lib/Audio.js` — Pipewire audio helper functions.
-- `lib/Navigation.js` — list keys next to a search field: arrows or Ctrl+hjkl,
-  Enter opens, Esc goes back.
+- `lib/Navigation.js` — which direction a key means next to a search field:
+  arrows or Ctrl+hjkl.
 - `assets/` — animated angel/devil Tux sprites.
 
 ## What it does

@@ -1,22 +1,22 @@
 import QtQuick
 import qs
-import "../lib/Navigation.js" as Navigation
 
-// Search line under a list: / cy▏. Typing goes into the field; the keys that
-// drive a list (Navigation.js) are only reported, whoever uses it decides what
-// they mean.
+// Search line under a list: / cy▏. It only types; every key goes to
+// keyTargets first, so whoever uses it can still drive a list with it.
 FocusScope {
     id: footer
 
     readonly property alias text: field.text
-
-    signal nextRequested
-    signal previousRequested
-    signal openRequested
-    signal backRequested
+    // Items that see each key before the field types it.
+    property list<Item> keyTargets
 
     function clear() {
         field.text = "";
+    }
+
+    // Keys the field leaves alone (Left at the start) stay here instead of reaching the owner.
+    Keys.onPressed: event => {
+        event.accepted = true;
     }
 
     Rectangle {
@@ -59,21 +59,6 @@ FocusScope {
         color: Colors.foreground
         font.family: "Syne, MesloLGS Nerd Font, monospace"
         font.pixelSize: 15
-
-        // Runs before the field's own handling, so Left/Right navigate instead of moving the cursor.
-        Keys.onPressed: event => {
-            if (Navigation.isNext(event)) {
-                footer.nextRequested();
-            } else if (Navigation.isPrevious(event)) {
-                footer.previousRequested();
-            } else if (Navigation.isOpen(event)) {
-                footer.openRequested();
-            } else if (Navigation.isBack(event)) {
-                footer.backRequested();
-            } else {
-                return;
-            }
-            event.accepted = true;
-        }
+        Keys.forwardTo: footer.keyTargets
     }
 }
