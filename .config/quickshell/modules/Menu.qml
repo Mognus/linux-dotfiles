@@ -139,7 +139,7 @@ FocusScope {
                 }
 
                 text: row.modelData.title
-                color: row.ListView.isCurrentItem ? Colors.foreground : Colors.foregroundSoft
+                color: row.ListView.isCurrentItem ? Colors.accent : Colors.foregroundSoft
                 font.family: Fonts.family
                 font.pixelSize: 15
             }

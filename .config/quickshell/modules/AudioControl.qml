@@ -30,12 +30,12 @@ Column {
             width: 76
             height: 24
             radius: 0
-            color: Audio.muted(control.node) ? Colors.withAlpha(Colors.danger, 0.21) : Colors.lowOverlay
+            color: Colors.lowOverlay
 
             Text {
                 anchors.centerIn: parent
                 text: Audio.muted(control.node) ? "MUTED" : "MUTE"
-                color: Audio.muted(control.node) ? Colors.danger : Colors.foreground
+                color: Audio.muted(control.node) ? Colors.muted : Colors.foreground
                 font.family: Fonts.family
                 font.pixelSize: 11
                 font.bold: true
@@ -74,7 +74,7 @@ Column {
                 width: track.width * Audio.volumeRatio(control.node)
                 height: parent.height
                 radius: 0
-                color: Audio.muted(control.node) ? Colors.danger : control.accent
+                color: Audio.muted(control.node) ? Colors.muted : control.accent
             }
 
             MouseArea {

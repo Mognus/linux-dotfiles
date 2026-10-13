@@ -196,7 +196,7 @@ PanelWindow {
 
                 text: row.modelData.label
                 // Images read as "png 200x120", muted so they stand apart from text.
-                color: row.modelData.image ? Colors.muted : row.ListView.isCurrentItem ? Colors.foreground : Colors.foregroundSoft
+                color: row.modelData.image ? Colors.muted : row.ListView.isCurrentItem ? Colors.accent : Colors.foregroundSoft
                 elide: Text.ElideRight
                 font.family: Fonts.family
                 font.pixelSize: 15

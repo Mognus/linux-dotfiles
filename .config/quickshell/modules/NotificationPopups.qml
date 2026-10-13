@@ -50,13 +50,7 @@ PanelWindow {
                 radius: 6
                 color: Colors.surface
                 border.width: 1
-                border.color: {
-                    if (popup.critical)
-                        return Colors.danger;
-                    if (popup.modelData.urgency === NotificationUrgency.Low)
-                        return Colors.borderMuted;
-                    return Colors.accent;
-                }
+                border.color: popup.critical ? Colors.danger : Colors.borderMuted
                 clip: true
 
                 Column {

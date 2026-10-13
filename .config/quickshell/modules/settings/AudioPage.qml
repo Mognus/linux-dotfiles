@@ -25,7 +25,7 @@ Column {
         width: parent.width
         title: "Microphone"
         node: Pipewire.defaultAudioSource
-        accent: Colors.secondary
+        accent: Colors.accent
     }
 
     Text {

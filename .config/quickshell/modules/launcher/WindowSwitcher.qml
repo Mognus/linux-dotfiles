@@ -163,7 +163,7 @@ PanelWindow {
                 }
 
                 text: row.modelData.toplevel.title
-                color: row.ListView.isCurrentItem ? Colors.foreground : Colors.foregroundSoft
+                color: row.ListView.isCurrentItem ? Colors.accent : Colors.foregroundSoft
                 elide: Text.ElideRight
                 font.family: Fonts.family
                 font.pixelSize: 15

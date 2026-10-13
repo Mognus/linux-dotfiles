@@ -129,7 +129,7 @@ PanelWindow {
                 text: cell.modelData.name
                 horizontalAlignment: Text.AlignHCenter
                 elide: Text.ElideRight
-                color: cell.GridView.isCurrentItem ? Colors.foreground : Colors.foregroundSoft
+                color: cell.GridView.isCurrentItem ? Colors.accent : Colors.foregroundSoft
                 font.family: Fonts.family
                 font.pixelSize: 13
             }

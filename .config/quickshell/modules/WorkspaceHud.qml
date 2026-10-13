@@ -59,7 +59,7 @@ PanelWindow {
                 Text {
                     anchors.centerIn: parent
                     text: modelData + 1
-                    color: Colors.foreground
+                    color: Workspaces.workspaceActive(modelData + 1) ? Colors.accent : Colors.foreground
                     opacity: Workspaces.workspaceActive(modelData + 1) ? 1.0 : Workspaces.workspaceExists(modelData + 1) ? 0.82 : 0.42
                     font.family: Fonts.family
                     font.pixelSize: 20
@@ -74,7 +74,7 @@ PanelWindow {
                     }
 
                     height: 2
-                    color: Workspaces.workspaceActive(modelData + 1) ? Colors.foreground : Colors.faint
+                    color: Workspaces.workspaceActive(modelData + 1) ? Colors.accent : Colors.faint
                     visible: Workspaces.workspaceActive(modelData + 1) || Workspaces.workspaceExists(modelData + 1)
                 }
 

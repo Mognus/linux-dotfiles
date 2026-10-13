@@ -85,7 +85,7 @@ PanelWindow {
                 Text {
                     anchors.centerIn: parent
                     text: modelData + 1
-                    color: Colors.foreground
+                    color: Workspaces.workspaceActive(modelData + 1) ? Colors.accent : Colors.foreground
                     opacity: Workspaces.workspaceActive(modelData + 1) ? 1.0 : Workspaces.workspaceExists(modelData + 1) ? 0.82 : 0.42
                     font.family: Fonts.family
                     font.pixelSize: 20
@@ -100,7 +100,7 @@ PanelWindow {
                     }
 
                     height: 2
-                    color: Workspaces.workspaceUrgent(modelData + 1) ? Colors.danger : Workspaces.workspaceActive(modelData + 1) ? Colors.foreground : Colors.faint
+                    color: Workspaces.workspaceUrgent(modelData + 1) ? Colors.danger : Workspaces.workspaceActive(modelData + 1) ? Colors.accent : Colors.faint
                     visible: Workspaces.workspaceActive(modelData + 1) || Workspaces.workspaceExists(modelData + 1) || Workspaces.workspaceUrgent(modelData + 1)
                 }
 
@@ -114,7 +114,7 @@ PanelWindow {
         Text {
             anchors.verticalCenter: parent.verticalCenter
             text: "●"
-            color: Recording.recording ? Colors.danger : "transparent"
+            color: Recording.recording ? Colors.accent : "transparent"
             font.family: Fonts.family
             font.pixelSize: 17
             font.bold: true
@@ -205,7 +205,7 @@ PanelWindow {
         Text {
             anchors.verticalCenter: parent.verticalCenter
             text: "VOL " + Audio.percent(Pipewire.defaultAudioSink)
-            color: Audio.muted(Pipewire.defaultAudioSink) ? Colors.danger : Colors.foreground
+            color: Audio.muted(Pipewire.defaultAudioSink) ? Colors.muted : Colors.foreground
             font.family: Fonts.family
             font.pixelSize: 18
         }
