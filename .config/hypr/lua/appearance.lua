@@ -11,7 +11,12 @@ function M.setup()
         decoration = {
             rounding = 0,
             dim_special = 0.5,
-            blur = { enabled = false },
+            blur = {
+                enabled = true,
+                size = 6,
+                passes = 1,
+                noise = 0.1,
+            },
         },
         animations = { enabled = false },
         dwindle = {
