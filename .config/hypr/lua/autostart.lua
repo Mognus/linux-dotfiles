@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup(programs)
+function M.setup()
     hl.on("hyprland.start", function()
         hl.exec_cmd("pactl set-default-source alsa_input.usb-Kingston_HyperX_7.1_Audio_00000000-00.analog-stereo")
         hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/polkit-agent.sh")
@@ -11,7 +11,6 @@ function M.setup(programs)
         hl.exec_cmd("awww-daemon")
         hl.exec_cmd("awww img " .. os.getenv("HOME") .. "/.config/wallpapers/Tank-Girl-Wallpaper-Black.png")
         hl.exec_cmd("qs -p " .. os.getenv("HOME") .. "/.config/quickshell")
-        hl.exec_cmd(programs.terminal, { workspace = "special:term silent" })
     end)
 end
 

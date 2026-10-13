@@ -9,7 +9,7 @@ hl.config({ misc = { allow_session_lock_restore = true } })
 local programs = require("lua.programs")
 
 require("lua.monitors")
-require("lua.autostart").setup(programs)
+require("lua.autostart").setup()
 require("lua.input")
 require("lua.appearance").setup()
 require("lua.workspaces").setup(programs)
