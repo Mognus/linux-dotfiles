@@ -1,18 +1,5 @@
 local M = {}
 
-local function animations()
-    hl.curve("easeOut", { type = "bezier", points = { { 0.05, 0.9 }, { 0.1, 1.05 } } })
-    -- Keep workspace transitions smooth without overshooting their destination.
-    hl.curve("workspaceEaseOut", { type = "bezier", points = { { 0.16, 1.0 }, { 0.3, 1.0 } } })
-    hl.curve("linear", { type = "bezier", points = { { 0.0, 0.0 }, { 1.0, 1.0 } } })
-
-    hl.animation({ leaf = "windows", enabled = true, speed = 4, bezier = "easeOut", style = "slide" })
-    hl.animation({ leaf = "windowsOut", enabled = true, speed = 3, bezier = "linear", style = "slide" })
-    hl.animation({ leaf = "fade", enabled = true, speed = 4, bezier = "linear" })
-    hl.animation({ leaf = "workspaces", enabled = true, speed = 4, bezier = "workspaceEaseOut", style = "slide" })
-    hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 4, bezier = "workspaceEaseOut", style = "slidevert" })
-end
-
 function M.setup()
     hl.config({
         general = {
@@ -24,26 +11,13 @@ function M.setup()
         decoration = {
             rounding = 0,
             dim_special = 0.4,
-            blur = {
-                enabled = true,
-                size = 4,
-                passes = 1,
-                noise = 0.1,
-            },
+            blur = { enabled = false },
         },
-        animations = {
-            enabled = true,
-        },
+        animations = { enabled = false },
         dwindle = {
             preserve_split = true,
         },
     })
-
-    animations()
-
-    -- Show the Quickshell overlays immediately, without sliding or fading.
-    hl.layer_rule({ match = { namespace = "settings" }, no_anim = true })
-    hl.layer_rule({ match = { namespace = "launcher" }, no_anim = true })
 end
 
 return M

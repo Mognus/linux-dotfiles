@@ -5,7 +5,7 @@ Alacritty is the terminal emulator — GPU-accelerated and minimal, configured i
 ## Does
 
 - GPU-accelerated rendering with low input latency
-- Minimal chrome (no window decorations, slight transparency)
+- Minimal chrome (no window decorations, opaque background)
 - Vi mode for scrollback navigation and buffer search
 
 ## Keybinds
