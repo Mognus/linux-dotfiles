@@ -1,12 +1,12 @@
 local M = {}
 
 local special_workspaces = {
-    { name = "term", command = function(programs) return programs.terminal end, gaps_out = 32 },
-    { name = "firefox", command = function(programs) return programs.browser end, gaps_out = 32 },
-    { name = "discord", command = "discord", gaps_out = 32 },
-    { name = "notes", command = "obsidian", gaps_out = { top = 32, right = 240, bottom = 32, left = 240 } },
-    { name = "files", command = "thunar", gaps_out = 32 },
-    { name = "music", command = "chromium --app=https://music.youtube.com", gaps_out = 32 },
+    { name = "term", command = function(programs) return programs.terminal end },
+    { name = "firefox", command = function(programs) return programs.browser end },
+    { name = "discord", command = "discord" },
+    { name = "notes", command = "obsidian" },
+    { name = "files", command = "thunar" },
+    { name = "music", command = "chromium --app=https://music.youtube.com" },
 }
 
 function M.setup(programs)
@@ -20,7 +20,13 @@ function M.setup(programs)
         hl.workspace_rule({
             workspace = "special:" .. workspace.name,
             on_created_empty = command,
-            gaps_out = workspace.gaps_out,
+            gaps_out = 24,
+        })
+
+        hl.window_rule({
+            match = { workspace = "special:" .. workspace.name },
+            border_size = 1,
+            border_color = "rgb(888888)",
         })
     end
 end

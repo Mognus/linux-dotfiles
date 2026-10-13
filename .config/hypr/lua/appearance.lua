@@ -10,7 +10,7 @@ function M.setup()
         },
         decoration = {
             rounding = 0,
-            dim_special = 0.4,
+            dim_special = 0.5,
             blur = { enabled = false },
         },
         animations = { enabled = false },
