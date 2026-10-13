@@ -5,7 +5,7 @@ Alacritty is the terminal emulator — GPU-accelerated and minimal, configured i
 ## Does
 
 - GPU-accelerated rendering with low input latency
-- Minimal chrome (no window decorations, opaque background)
+- Minimal chrome (no window decorations, 93% background opacity)
 - Vi mode for scrollback navigation and buffer search
 
 ## Keybinds
@@ -22,7 +22,4 @@ Run tmux inside Alacritty for sessions, tabs, and splits. Alacritty forwards the
 `Super+Alt` combinations as terminal sequences understood by the tmux config.
 Use Vi mode to navigate scrollback without reaching for the mouse.
 
-`Super+=` / `Super+-` adjusts opacity in steps of 0.05, from 0.10 to 1.00.
-The default is defined in `defaults.toml`; adjustments are saved separately in
-`~/.local/state/alacritty/opacity.toml` and survive restarts without changing the
-versioned configuration.
+Background opacity is fixed at `0.93` in `alacritty.toml`.

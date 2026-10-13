@@ -54,8 +54,6 @@ function M.setup(programs)
     mod_bind("CTRL + v", exec(os.getenv("HOME") .. "/.config/hypr/scripts/record-toggle.sh"))
     mod_bind("V", exec("qs -p $HOME/.config/quickshell ipc call clipboard toggle"))
 
-    mod_bind("SHIFT + equal", exec(os.getenv("HOME") .. "/.config/hypr/scripts/opacity-switch.sh up"), { repeating = true })
-    mod_bind("SHIFT + minus", exec(os.getenv("HOME") .. "/.config/hypr/scripts/opacity-switch.sh down"), { repeating = true })
 
     -- Audio keeps working on the lock screen; the Quickshell bar shows the level.
     local volume_up = exec("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+")

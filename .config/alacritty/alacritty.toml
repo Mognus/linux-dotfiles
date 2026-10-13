@@ -1,8 +1,6 @@
 [general]
 import = [
-    "defaults.toml",
     "~/.local/state/dotfiles-theme/alacritty.toml",
-    "~/.local/state/alacritty/opacity.toml",
 ]
 
 [env]
@@ -18,6 +16,7 @@ family = "PxPlus IBM VGA 8x16"
 style = "Regular"
 
 [window]
+opacity = 0.93
 decorations = "None"
 padding = { x = 12, y = 12 }
 

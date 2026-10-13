@@ -25,7 +25,7 @@ idle minutes, turns the monitor off five minutes later, and locks before suspend
 - `hyprland.lua` - Main Hyprland config
 - `lua/` - Split Lua modules for monitors, binds, workspaces, and appearance
 - `hypridle.conf` - Idle timeouts and suspend hooks
-- `scripts/` - Theme switcher, recording, opacity, and polkit helpers
+- `scripts/` - Theme switcher, recording, and polkit helpers
 
 ## Apps
 
@@ -60,10 +60,6 @@ or image of the highlighted entry; inside it, `Delete` removes an entry and
 - `XF86Audio*` keys - Volume, mute, microphone mute, play/pause, next, previous
 
 Audio bindings also work on the lock screen. The Quickshell bar shows the level.
-
-## Appearance
-
-- `SUPER+Shift+=/-` - Increase/decrease terminal opacity
 
 ## Windows
 
