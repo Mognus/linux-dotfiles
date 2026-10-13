@@ -39,7 +39,7 @@ adding one asks for confirmation.
 
 Enabled in `lua/core/lsp.lua`, one config per server in `lsp/<name>.lua`:
 
-- Go `gopls`, Rust `rust_analyzer`, TypeScript/JavaScript `ts_ls`
+- Go `gopls`, Rust `rust_analyzer`, TypeScript/JavaScript `vtsls`
 - Python `pyright` (types) and `ruff` (lint, format)
 - Nix `nixd`, Lua `lua_ls`, XML `lemminx` (Odoo views and data)
 - JSON `jsonls`, CSS `cssls`, HTML `html`, Svelte `svelte`

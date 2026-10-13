@@ -2,7 +2,7 @@
 vim.lsp.enable({
     "gopls",
     "rust_analyzer",
-    "ts_ls",
+    "vtsls",
     "pyright",
     "ruff",
     "nixd",

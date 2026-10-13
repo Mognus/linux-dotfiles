@@ -41,7 +41,7 @@
     nodejs
     pnpm
     typescript
-    typescript-language-server
+    vtsls
     python3
     pipx
     ruff
@@ -72,6 +72,7 @@
     # --- AI Agents ---
     claude-code
     codex
+    bubblewrap
 
     # --- Containers ---
     podman-compose
