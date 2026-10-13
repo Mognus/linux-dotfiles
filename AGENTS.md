@@ -7,11 +7,10 @@
 - Explain code dry, object by object, in file order: numbered heading with the line range (e.g. `### 4. WlSessionLock (Z. 33–36)`), then the object's code, then short bullets on what each property/handler does and which other objects it reads or triggers (by number). Tables for state → result. End with a one-line flow of how the objects connect.
 
 ## Engineering
-- before making a Plan, always consult online documentation in order to find the most simple solution... Internal Training-Data can seduce onself to overengineer stuff, because of the sheer amount of overengineered ego-jerks happening inside of the World Wide Web.
 - SOLID as a diagnostic, not a checklist — name violations that actually cost something, ignore the rest.
 - KISS: simplest thing that works. Readable over clever, boring is a feature. 
 - YAGNI: build what's needed now. No speculative hooks, options, or extension points.
-- Rule of Three: don't abstract until the third repetition. Duplication beats the wrong abstraction.
+- Rule of One: make code always maintainable and easy to read.
 - Always define scope before tackling any bigger Task, inside of this scope initialize little Tasks Packages, so everything stays verifiable.
 - Small verifiable steps, stay in scope — flag adjacent problems instead of fixing them unasked.
 - No workarounds for simple architectural gaps. When something is missing or awkward, first check what the project already provides (README, Makefile, .gitignore, requirements) and name the proper fix out loud before bending around it. Example: tests need a local venv → create `.venv` as the README says, not a temp venv in a scratch dir or a container with mounted tests and ad-hoc `pip install`. If only a workaround is possible, say so and ask first.
