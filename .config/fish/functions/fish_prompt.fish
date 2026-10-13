@@ -1,6 +1,9 @@
 function fish_prompt
     set -l last_status $status
 
+    # Keep one empty line above the prompt, including its transient form.
+    printf '\n'
+
     if test "$argv[1]" = --final-rendering
         if test $last_status -eq 0
             set_color cyan
@@ -13,7 +16,7 @@ function fish_prompt
         return
     end
 
-    set_color brblack
+    set_color brgreen
     printf '%s\n' (prompt_pwd)
 
     if test $last_status -eq 0
