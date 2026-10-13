@@ -13,6 +13,7 @@ function M.setup()
             dim_special = 0.5,
             blur = {
                 enabled = true,
+                special = true,
                 size = 6,
                 passes = 1,
                 noise = 0.1,
