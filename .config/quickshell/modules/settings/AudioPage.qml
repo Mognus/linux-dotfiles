@@ -33,7 +33,7 @@ Column {
         text: Pipewire.ready ? "PIPEWIRE READY" : "PIPEWIRE WAIT"
         color: Pipewire.ready ? Colors.foregroundSoft : Colors.danger
         horizontalAlignment: Text.AlignRight
-        font.family: "Syne, MesloLGS Nerd Font, monospace"
+        font.family: Fonts.family
         font.pixelSize: 10
         font.bold: true
     }

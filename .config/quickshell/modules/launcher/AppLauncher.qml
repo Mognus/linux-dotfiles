@@ -130,7 +130,7 @@ PanelWindow {
                 horizontalAlignment: Text.AlignHCenter
                 elide: Text.ElideRight
                 color: cell.GridView.isCurrentItem ? Colors.foreground : Colors.foregroundSoft
-                font.family: "Syne, MesloLGS Nerd Font, monospace"
+                font.family: Fonts.family
                 font.pixelSize: 13
             }
 

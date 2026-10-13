@@ -21,7 +21,7 @@ Column {
             width: parent.width - 76
             text: control.title
             color: Colors.foreground
-            font.family: "Syne, MesloLGS Nerd Font, monospace"
+            font.family: Fonts.family
             font.pixelSize: 15
             font.bold: true
         }
@@ -36,7 +36,7 @@ Column {
                 anchors.centerIn: parent
                 text: Audio.muted(control.node) ? "MUTED" : "MUTE"
                 color: Audio.muted(control.node) ? Colors.danger : Colors.foreground
-                font.family: "Syne, MesloLGS Nerd Font, monospace"
+                font.family: Fonts.family
                 font.pixelSize: 11
                 font.bold: true
             }
@@ -53,7 +53,7 @@ Column {
         text: Audio.label(control.node)
         color: Colors.foregroundSoft
         elide: Text.ElideRight
-        font.family: "Syne, MesloLGS Nerd Font, monospace"
+        font.family: Fonts.family
         font.pixelSize: 12
     }
 
@@ -94,7 +94,7 @@ Column {
             text: Audio.percent(control.node) + "%"
             color: Colors.foreground
             horizontalAlignment: Text.AlignRight
-            font.family: "Syne, MesloLGS Nerd Font, monospace"
+            font.family: Fonts.family
             font.pixelSize: 13
             font.bold: true
         }
@@ -121,7 +121,7 @@ Column {
                     anchors.centerIn: parent
                     text: modelData
                     color: Colors.foreground
-                    font.family: "Syne, MesloLGS Nerd Font, monospace"
+                    font.family: Fonts.family
                     font.pixelSize: 12
                     font.bold: true
                 }

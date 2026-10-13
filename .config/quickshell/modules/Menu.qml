@@ -140,7 +140,7 @@ FocusScope {
 
                 text: row.modelData.title
                 color: row.ListView.isCurrentItem ? Colors.foreground : Colors.foregroundSoft
-                font.family: "Syne, MesloLGS Nerd Font, monospace"
+                font.family: Fonts.family
                 font.pixelSize: 15
             }
 

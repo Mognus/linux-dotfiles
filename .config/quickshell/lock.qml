@@ -72,7 +72,7 @@ ShellRoot {
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: Qt.formatDateTime(clock.date, "hh:mm")
                     color: Colors.foreground
-                    font.family: "PxPlus IBM VGA 8x16"
+                    font.family: Fonts.family
                     font.pixelSize: 96
                 }
 
@@ -80,7 +80,7 @@ ShellRoot {
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: Qt.formatDateTime(clock.date, "dddd, d. MMMM")
                     color: Colors.muted
-                    font.family: "PxPlus IBM VGA 8x16"
+                    font.family: Fonts.family
                     font.pixelSize: 16
                 }
 
@@ -119,7 +119,7 @@ ShellRoot {
                         horizontalAlignment: TextInput.AlignHCenter
                         verticalAlignment: TextInput.AlignVCenter
                         color: Colors.foreground
-                        font.family: "PxPlus IBM VGA 8x16"
+                        font.family: Fonts.family
                         font.pixelSize: 16
 
                         onTextChanged: field.failed = false
@@ -135,7 +135,7 @@ ShellRoot {
                         visible: input.text === ""
                         text: field.failed ? "Falsch" : "Passwort"
                         color: field.failed ? Colors.danger : Colors.muted
-                        font.family: "PxPlus IBM VGA 8x16"
+                        font.family: Fonts.family
                         font.pixelSize: 16
                     }
                 }

@@ -17,7 +17,7 @@ Row {
         anchors.verticalCenter: parent.verticalCenter
         text: "×"
         color: closeMouse.containsMouse ? Colors.foreground : Colors.muted
-        font.family: "Syne, MesloLGS Nerd Font, monospace"
+        font.family: Fonts.family
         font.pixelSize: 18
 
         MouseArea {
@@ -33,7 +33,7 @@ Row {
         anchors.verticalCenter: parent.verticalCenter
         text: "~"
         color: Colors.foreground
-        font.family: "Syne, MesloLGS Nerd Font, monospace"
+        font.family: Fonts.family
         font.pixelSize: 15
     }
 
@@ -51,14 +51,14 @@ Row {
             Text {
                 text: "/"
                 color: Colors.muted
-                font.family: "Syne, MesloLGS Nerd Font, monospace"
+                font.family: Fonts.family
                 font.pixelSize: 15
             }
 
             Text {
                 text: crumb.modelData
                 color: Colors.foreground
-                font.family: "Syne, MesloLGS Nerd Font, monospace"
+                font.family: Fonts.family
                 font.pixelSize: 15
             }
         }

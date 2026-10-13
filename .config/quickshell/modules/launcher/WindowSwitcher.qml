@@ -137,7 +137,7 @@ PanelWindow {
 
                 text: header.section
                 color: Colors.muted
-                font.family: "Syne, MesloLGS Nerd Font, monospace"
+                font.family: Fonts.family
                 font.pixelSize: 15
             }
         }
@@ -165,7 +165,7 @@ PanelWindow {
                 text: row.modelData.toplevel.title
                 color: row.ListView.isCurrentItem ? Colors.foreground : Colors.foregroundSoft
                 elide: Text.ElideRight
-                font.family: "Syne, MesloLGS Nerd Font, monospace"
+                font.family: Fonts.family
                 font.pixelSize: 15
             }
 

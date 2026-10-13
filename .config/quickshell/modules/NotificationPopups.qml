@@ -71,7 +71,7 @@ PanelWindow {
                         width: parent.width
                         text: popup.modelData.summary
                         color: popup.critical ? Colors.danger : Colors.foregroundSoft
-                        font.family: "Sans"
+                        font.family: Fonts.family
                         font.pointSize: 11
                         font.bold: true
                         elide: Text.ElideRight
@@ -83,7 +83,7 @@ PanelWindow {
                         text: popup.modelData.body
                         textFormat: Text.PlainText
                         color: popup.critical ? Colors.danger : Colors.foregroundSoft
-                        font.family: "Sans"
+                        font.family: Fonts.family
                         font.pointSize: 11
                         wrapMode: Text.Wrap
                     }

@@ -61,7 +61,7 @@ PanelWindow {
                     text: modelData + 1
                     color: Colors.foreground
                     opacity: Workspaces.workspaceActive(modelData + 1) ? 1.0 : Workspaces.workspaceExists(modelData + 1) ? 0.82 : 0.42
-                    font.family: "Syne, MesloLGS Nerd Font, monospace"
+                    font.family: Fonts.family
                     font.pixelSize: 20
                     font.bold: Workspaces.workspaceActive(modelData + 1)
                 }

@@ -87,7 +87,7 @@ PanelWindow {
                     text: modelData + 1
                     color: Colors.foreground
                     opacity: Workspaces.workspaceActive(modelData + 1) ? 1.0 : Workspaces.workspaceExists(modelData + 1) ? 0.82 : 0.42
-                    font.family: "Syne, MesloLGS Nerd Font, monospace"
+                    font.family: Fonts.family
                     font.pixelSize: 20
                     font.bold: Workspaces.workspaceActive(modelData + 1)
                 }
@@ -115,7 +115,7 @@ PanelWindow {
             anchors.verticalCenter: parent.verticalCenter
             text: "●"
             color: Recording.recording ? Colors.danger : "transparent"
-            font.family: "Syne, MesloLGS Nerd Font, monospace"
+            font.family: Fonts.family
             font.pixelSize: 17
             font.bold: true
 
@@ -134,7 +134,7 @@ PanelWindow {
             anchors.horizontalCenter: parent.horizontalCenter
             text: Time.clock
             color: Colors.foreground
-            font.family: "Syne, MesloLGS Nerd Font, monospace"
+            font.family: Fonts.family
             font.pixelSize: 15
             font.bold: true
         }
@@ -158,7 +158,7 @@ PanelWindow {
                 anchors.verticalCenter: parent.verticalCenter
                 text: modelData.label
                 color: Workspaces.specialWorkspaceVisible(modelData.name) ? modelData.accent : Workspaces.specialWorkspaceExists(modelData.name) ? Colors.foreground : Colors.muted
-                font.family: "Syne, MesloLGS Nerd Font, monospace"
+                font.family: Fonts.family
                 font.pixelSize: 23
                 font.bold: true
 
@@ -179,7 +179,7 @@ PanelWindow {
                 anchors.centerIn: parent
                 text: "⚙"
                 color: ShellState.settingsOpen ? Colors.accent : Colors.foreground
-                font.family: "Syne, MesloLGS Nerd Font, monospace"
+                font.family: Fonts.family
                 font.pixelSize: 19
                 font.bold: true
             }
@@ -206,7 +206,7 @@ PanelWindow {
             anchors.verticalCenter: parent.verticalCenter
             text: "VOL " + Audio.percent(Pipewire.defaultAudioSink)
             color: Audio.muted(Pipewire.defaultAudioSink) ? Colors.danger : Colors.foreground
-            font.family: "Syne, MesloLGS Nerd Font, monospace"
+            font.family: Fonts.family
             font.pixelSize: 18
         }
 
@@ -215,7 +215,7 @@ PanelWindow {
             visible: Battery.present
             text: "BAT " + Battery.percent
             color: Battery.percent <= 15 && !Battery.charging ? Colors.danger : Colors.foreground
-            font.family: "Syne, MesloLGS Nerd Font, monospace"
+            font.family: Fonts.family
             font.pixelSize: 18
         }
     }

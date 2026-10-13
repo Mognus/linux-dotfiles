@@ -41,7 +41,7 @@ FocusScope {
 
         text: "/"
         color: Colors.muted
-        font.family: "Syne, MesloLGS Nerd Font, monospace"
+        font.family: Fonts.family
         font.pixelSize: 15
     }
 
@@ -57,7 +57,7 @@ FocusScope {
 
         focus: true
         color: Colors.foreground
-        font.family: "Syne, MesloLGS Nerd Font, monospace"
+        font.family: Fonts.family
         font.pixelSize: 15
         Keys.forwardTo: footer.keyTargets
 

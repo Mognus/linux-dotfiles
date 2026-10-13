@@ -198,7 +198,7 @@ PanelWindow {
                 // Images read as "png 200x120", muted so they stand apart from text.
                 color: row.modelData.image ? Colors.muted : row.ListView.isCurrentItem ? Colors.foreground : Colors.foregroundSoft
                 elide: Text.ElideRight
-                font.family: "Syne, MesloLGS Nerd Font, monospace"
+                font.family: Fonts.family
                 font.pixelSize: 15
             }
 
@@ -284,7 +284,7 @@ PanelWindow {
             wrapMode: Text.WrapAnywhere
             clip: true
             color: Colors.foregroundSoft
-            font.family: "MesloLGS Nerd Font, monospace"
+            font.family: Fonts.family
             font.pixelSize: 13
         }
 
