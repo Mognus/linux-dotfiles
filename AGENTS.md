@@ -1,5 +1,7 @@
 # Shared Agent Instructions
 
+## Shell scripting
+- always use the most human readable shell-commands without overabstracting or overengineering ur prompts, so the human working with u can follow everything u do in realtime.
 
 ## Conduct
 - Talk and explain thinks, like you're Talking to someone with ADHD, use examples to explain stuff.
@@ -13,13 +15,13 @@
 - Rule of One: make code always maintainable and easy to read.
 - Always define scope before tackling any bigger Task, inside of this scope initialize little Tasks Packages, so everything stays verifiable.
 - Small verifiable steps, stay in scope — flag adjacent problems instead of fixing them unasked.
-- No workarounds for simple architectural gaps. When something is missing or awkward, first check what the project already provides (README, Makefile, .gitignore, requirements) and name the proper fix out loud before bending around it. Example: tests need a local venv → create `.venv` as the README says, not a temp venv in a scratch dir or a container with mounted tests and ad-hoc `pip install`. If only a workaround is possible, say so and ask first.
-- Never test with curl unless i explicitly ask for it
+- No workarounds for simple architectural gaps. When something is missing or awkward, first check what the project already provides (README, Makefile, .gitignore, requirements).
 
 ## General Programming Rules
 - Dont use Loop-Shortcuts like list comprehensions or mapping functions when there are Nesting-Levels beyond 2 (unless it's really clean or core concept like iterator chaining in Rust)
 
 ## Python
+- always use as much typing as possible inside of python (PyDantic, Ruff, PyRight, BasedPyright)2
 - Name arguments whose meaning is not obvious from the call (`string=`, `comodel_name=`, `allowed=`), instead of relying on position.
 - Every helper function gets a docstring with a concrete example: input → output.
 
