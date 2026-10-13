@@ -58,6 +58,8 @@
   fonts.packages = with pkgs; [
     # Base fonts picked in .config/fontconfig/fonts.conf: Geist for UI text,
     # the Nerd Font build of Geist Mono for the terminal (icons included).
+    # VGA-style TrueType font used by Alacritty.
+    ultimate-oldschool-pc-font-pack
     geist-font
     nerd-fonts.geist-mono
     nerd-fonts.jetbrains-mono

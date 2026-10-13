@@ -9,11 +9,13 @@ import = [
 TERM = "xterm-256color"
 
 [font]
-size = 16
+# VGA 8x16 proportions at 100% display scaling.
+size = 12
 
-# The base mono font from fontconfig/fonts.conf; bold and italic follow it.
+# Classic console appearance; installed through nix/modules/common.nix.
 [font.normal]
-family = "monospace"
+family = "PxPlus IBM VGA 8x16"
+style = "Regular"
 
 [window]
 decorations = "None"
