@@ -31,8 +31,11 @@ adding one asks for confirmation.
 - `snacks.nvim` - file explorer and pickers (files, grep, git status,
   diagnostics). Opening a directory (`nvim .`) opens the explorer instead of netrw.
 - `gitsigns.nvim` - marks changed lines in the sign column, side-by-side diff
+- `which-key.nvim` - popup after `Space` listing the possible next keys
 - `lualine.nvim` - statusline with mode, git branch, diff, diagnostics, file and
   cursor position; needs a Nerd Font for its icons
+- `render-markdown.nvim` - renders Markdown in the buffer; `:RenderMarkdown toggle`
+  switches back to plain text
 - `claudecode.nvim` - Claude Code IDE integration, see below
 
 ## Language servers
@@ -44,6 +47,7 @@ Enabled in `lua/core/lsp.lua`, one config per server in `lsp/<name>.lua`:
 - Nix `nixd`, Lua `lua_ls`, XML `lemminx` (Odoo views and data)
 - JSON `jsonls`, CSS `cssls`, HTML `html`, Svelte `svelte`
 - Bash `bashls`, Typst `tinymist`, YAML `yamlls`
+- Docker `dockerls` (Compose files go through `yamlls`), QML `qmlls` (Quickshell)
 - Ansible `ansiblels`, only for files under `playbooks/` or `roles/*/tasks|handlers/`
 
 The server binaries come from Nix (`nix/home/packages.nix`). Rust's standard
@@ -61,25 +65,20 @@ server attached. Reference configs for other servers: the `lsp/` folder of
 
 ## Keybinds
 
-Leader is `Space`.
+Leader is `Space`; after pressing it, `which-key` shows the possible next keys.
 
-- `Ctrl+B` - fullscreen file explorer; type to filter the tree, Enter opens
-- `Ctrl+P` - find files in the git repo
-- `Ctrl+/` - grep in the git repo
-- `Ctrl+G` - changed files of the git repo, including new ones
-  - `Enter` on a submodule - open the git status of that submodule
+- `Space+e` - toggle the fullscreen file explorer; type to filter, Enter opens
+- `Space+f+f` - find files across the git repo (dotfiles included)
+- `Space+/` - grep across the git repo
+- `Space+g+s` - changed files of the git repo, including untracked ones
+  - `Enter` on a submodule - open its git status
   - `Ctrl+G` inside the picker - back up to the parent repo
-  - `Tab` - stage, `Ctrl+R` - restore
-- `Space+D` - toggle side-by-side diff of the current file against git
+- `Space+g+d` - toggle side-by-side diff of the current file against git
+- `Space+x+x` - all LSP errors and warnings (like "Problems" in VS Code/Zed)
 - `]c` / `[c` - next/previous git change
-- `F8` - all LSP errors and warnings of open buffers
 
-These replace stock keys: `Ctrl+B` (page up, use `Ctrl+U`), `Ctrl+G` (file
-info, use `:file`) and `Ctrl+P` in Normal mode (line up, use `k`). The tmux
-prefix moved to `Ctrl+Space` so `Ctrl+B` reaches Neovim.
-
-LSP keys are Neovim's defaults: `K` hover, `grn` rename, `gra` code action,
-`grr` references, `Ctrl+]` definition.
+LSP keys are Neovim's defaults (`:h lsp-defaults`): `K` hover, `grn` rename,
+`gra` code action, `grr` references, `gd` definition.
 
 ## Claude Code
 
@@ -98,6 +97,8 @@ finds it there.
 - A block cursor in every mode, including Insert (`guicursor = "a:block"`).
 - Mouse handling disabled so the terminal handles selection (`mouse = ""`).
 - True color rendering enabled (`termguicolors = true`).
+- Yank, delete and put through the system clipboard (`clipboard = "unnamedplus"`).
+- Absolute line numbers in the gutter (`number = true`).
 
 ## Built-in commands
 
