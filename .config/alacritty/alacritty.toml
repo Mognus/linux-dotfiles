@@ -8,7 +8,7 @@ TERM = "xterm-256color"
 
 [font]
 # VGA 8x16 proportions at 100% display scaling.
-size = 12
+size = 20
 
 # Classic console appearance; installed through nix/modules/common.nix.
 [font.normal]
