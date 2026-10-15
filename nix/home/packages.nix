@@ -54,6 +54,14 @@
     ansible
     typst
 
+    # --- Formatters (Conform in .config/nvim/lua/core/format.lua) ---
+    # ruff, rustfmt and gofmt come from the language packages above;
+    # fish_indent comes with Fish, qmlformat with qt6.qtdeclarative below.
+    stylua
+    nixfmt
+    prettier
+    shfmt
+
     # --- Language Servers (configs in .config/nvim/lsp/) ---
     nixd
     lua-language-server

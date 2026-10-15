@@ -4,11 +4,14 @@ vim.pack.add({
     { src = "https://github.com/folke/snacks.nvim" },
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
     { src = "https://github.com/folke/which-key.nvim" },
+    { src = "https://github.com/stevearc/conform.nvim" },
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
     -- Renders Markdown in the buffer; the cursor line stays raw for editing.
     -- `:RenderMarkdown toggle` switches back to plain text.
     { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
 })
+
+require("core.format")
 
 require("snacks").setup({
     explorer = { enabled = true },
@@ -53,6 +56,7 @@ require("gitsigns").setup({
 local which_key = require("which-key")
 which_key.setup()
 which_key.add({
+    { "<leader>c", group = "code" },
     { "<leader>f", group = "find" },
     { "<leader>g", group = "git" },
     { "<leader>x", group = "diagnostics" },

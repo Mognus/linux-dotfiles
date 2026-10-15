@@ -17,6 +17,7 @@ changing the link itself needs `sudo nixos-rebuild switch --flake ~/dotfiles/nix
 - `lua/core/ui.lua` - VSCode-like syntax colors and transparent backgrounds
 - `lua/core/plugins.lua` - plugins and their setup
 - `lua/core/keymaps.lua` - all custom keybinds
+- `lua/core/format.lua` - Conform setup and filetype-to-formatter map
 - `lua/core/lsp.lua` - enables the language servers
 - `lsp/<name>.lua` - one config per language server
 - `nvim-pack-lock.json` - pinned plugin revisions
@@ -32,6 +33,7 @@ adding one asks for confirmation.
   diagnostics). Opening a directory (`nvim .`) opens the explorer instead of netrw.
 - `gitsigns.nvim` - marks changed lines in the sign column, side-by-side diff
 - `which-key.nvim` - popup after `Space` listing the possible next keys
+- `conform.nvim` - formats the current buffer with the formatter for its filetype
 - `lualine.nvim` - statusline with mode, git branch, diff, diagnostics, file and
   cursor position; needs a Nerd Font for its icons
 - `render-markdown.nvim` - renders Markdown in the buffer; `:RenderMarkdown toggle`
@@ -68,6 +70,7 @@ server attached. Reference configs for other servers: the `lsp/` folder of
 Leader is `Space`; after pressing it, `which-key` shows the possible next keys.
 
 - `Space+e` - toggle the fullscreen file explorer; type to filter, Enter opens
+- `Space+c+f` - format the current buffer (Conform, with LSP fallback)
 - `Space+f+f` - find files across the git repo (dotfiles included)
 - `Space+/` - grep across the git repo
 - `Space+g+s` - changed files of the git repo, including untracked ones
@@ -79,6 +82,31 @@ Leader is `Space`; after pressing it, `which-key` shows the possible next keys.
 
 LSP keys are Neovim's defaults (`:h lsp-defaults`): `K` hover, `grn` rename,
 `gra` code action, `grr` references, `gd` definition.
+
+## Formatting and checks
+
+`Space+c+f` formats the current buffer. The central `formatters_by_ft` table is
+in `lua/core/format.lua`:
+
+- Python: Ruff; Rust: rustfmt; Go: gofmt
+- Lua: StyLua; Nix: nixfmt
+- JS/TS (including JSX/TSX), JSON/JSONC, HTML, CSS/SCSS/Less, Markdown and YAML
+  (including Ansible and Compose): Prettier
+- Shell: shfmt; Fish: fish_indent; QML: qmlformat
+- Other filetypes, such as XML, Svelte and Typst: attached LSP, if it supports formatting
+
+Formatter executables are provided by `nix/home/packages.nix` and Fish.
+After adding packages, run `sudo nixos-rebuild switch --flake ~/dotfiles/nix`.
+Conform uses the formatter's project configuration; its Prettier integration
+prefers a project-local executable when available. Run `:ConformInfo` to inspect
+the selected formatter, executable availability and errors.
+
+Linting and type checking are separate from formatting. The existing language
+servers publish diagnostics automatically: for example, Ruff lints Python while
+Pyright checks types. `Space+x+x` lists diagnostics; `gra` opens LSP code actions
+for fixes. Full-project checks and tests still belong in the project's terminal
+commands or CI (for example `ruff check .`, `pyright`, `cargo clippy`,
+`cargo test`, or `tsc --noEmit`, depending on the project).
 
 ## Claude Code
 

@@ -3,7 +3,12 @@
 vim.g.mapleader = " "
 
 -- Every mapping lives under <leader>; which-key shows the options after Space.
--- Groups: f = find, g = git, x = diagnostics (named in plugins.lua).
+-- Groups: c = code, f = find, g = git, x = diagnostics (named in plugins.lua).
+
+-- Space+c+f formats the current buffer using the filetype map in core/format.lua.
+vim.keymap.set("n", "<leader>cf", function()
+    require("conform").format({ async = true })
+end, { desc = "Format buffer" })
 
 -- Space+g+d toggles a side-by-side diff of the current file against git
 -- (built-in diff mode). ]c / [c jump between changes.
