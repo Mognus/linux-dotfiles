@@ -16,7 +16,7 @@ PanelWindow {
         bottom: true
     }
 
-    margins.bottom: mascot.bottomInset
+    margins.bottom: mascot.bottomInset - 5
 
     implicitWidth: sprite.sourceSize.width > 0 ? sprite.sourceSize.width : 100
     implicitHeight: sprite.sourceSize.height > 0 ? sprite.sourceSize.height : 100
