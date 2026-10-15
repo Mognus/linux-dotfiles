@@ -11,7 +11,7 @@ function fish_prompt
             set_color red
         end
 
-        printf '❯ '
+        printf '$ '
         set_color normal
         return
     end
@@ -25,7 +25,7 @@ function fish_prompt
         set_color red
     end
 
-    printf '❯ '
+    printf '$ '
     set_color normal
 end
 
