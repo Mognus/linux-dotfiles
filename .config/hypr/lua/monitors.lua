@@ -1,7 +1,7 @@
--- Shared by laptop and desktop: detect outputs, keep UI scale at 100%.
+-- Shared by laptop and desktop: highest resolution, then refresh rate; 100% UI scale.
 hl.monitor({
     output = "",
-    mode = "preferred",
+    mode = "highres",
     position = "auto",
     scale = 1,
 })
