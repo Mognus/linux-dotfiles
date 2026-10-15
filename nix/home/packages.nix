@@ -91,10 +91,7 @@
     # --- Tools ---
     pass
     curl
-    glow
-    btop
     gh
-    fastfetch
     unzip
     _7zz
     rsync

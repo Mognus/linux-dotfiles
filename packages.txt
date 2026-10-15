@@ -118,12 +118,8 @@ wget                        # File download
 openssh                     # SSH client/server
 man-db                      # Man pages
 ripgrep                     # Fast grep (rg)
-bat                         # Better cat (syntax highlighting)
-glow                        # Terminal Markdown reader
-btop                        # Resource monitor
 stow                        # Dotfiles symlink manager
 github-cli                  # GitHub CLI (gh)
-fastfetch                   # System info (neofetch replacement)
 networkmanager              # Network management
 unzip                       # ZIP extraction
 7zip                        # 7z archives

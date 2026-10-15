@@ -14,7 +14,6 @@ in
     fzf
     ripgrep
     fd
-    bat
     # nvim: nvim-treesitter compiles its parsers locally
     tree-sitter
     gcc
@@ -59,9 +58,6 @@ in
   xdg.configFile."fontconfig/fonts.conf".source = link ".config/fontconfig/fonts.conf";
   home.file.".icons".source = link ".icons";
   xdg.configFile."mimeapps.list".source = link ".config/mimeapps.list";
-  # Single file: other apps add their own launchers to this folder.
-  xdg.dataFile."applications/glow.desktop".source = link ".local/share/applications/glow.desktop";
-  xdg.configFile."glow".source = link ".config/glow";
   xdg.configFile."yt-dlp".source = link ".config/yt-dlp";
   xdg.configFile."ruff".source = link ".config/ruff";
   xdg.configFile."zed".source = link ".config/zed";
