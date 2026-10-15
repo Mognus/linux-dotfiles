@@ -46,10 +46,16 @@ Enabled in `lua/core/lsp.lua`, one config per server in `lsp/<name>.lua`:
 - Bash `bashls`, Typst `tinymist`, YAML `yamlls`
 - Ansible `ansiblels`, only for files under `playbooks/` or `roles/*/tasks|handlers/`
 
-The server binaries come from Nix (`nix/home/packages.nix`). Errors show at
-the end of the line, inlay hints are on. The completion menu opens on the
-server's trigger characters (e.g. `.`); `Ctrl+Y` accepts, `Ctrl+N` / `Ctrl+P`
-move, `Ctrl+E` closes. `:checkhealth vim.lsp` shows which
+The server binaries come from Nix (`nix/home/packages.nix`). Rust's standard
+library sources are provided through `RUST_SRC_PATH` in the same module.
+Errors show at the end of the line, including in Insert mode, and inlay hints
+are on. Rust's full Cargo diagnostics run on save; rust-analyzer also reports
+its own live diagnostics on unsaved changes.
+The completion menu opens while typing identifiers and on the server's trigger
+characters (e.g. `.`); `Ctrl+Y` accepts, `Ctrl+N` / `Ctrl+P` move, `Ctrl+E`
+closes. `Ctrl+X Ctrl+O` requests LSP completion manually. `K` shows documentation
+in Normal mode; `Ctrl+S` shows signature help in Insert mode.
+`:checkhealth vim.lsp` shows which
 server attached. Reference configs for other servers: the `lsp/` folder of
 [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/tree/master/lsp).
 

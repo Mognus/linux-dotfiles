@@ -2,6 +2,9 @@
 # Tools a linked config depends on stay in magnus.nix next to that config.
 { pkgs, ... }:
 {
+  # rust-analyzer needs the standard library sources for completion and navigation.
+  home.sessionVariables.RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
+
   home.packages = with pkgs; [
     # --- Editor ---
     zed-editor

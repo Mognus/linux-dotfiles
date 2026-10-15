@@ -33,9 +33,8 @@ vim.filetype.add({
     },
 })
 
--- Completion menu pops up on the server's trigger characters (e.g. "." in
--- Python), like in Zed. Ctrl+Y accepts, Ctrl+N / Ctrl+P move, Ctrl+E closes.
--- Example: "os." → menu with "path", "environ", ...; Ctrl+Y inserts "path".
+-- Complete while typing identifiers too, not only after server triggers like ".".
+-- Ctrl+Y accepts, Ctrl+N / Ctrl+P move, Ctrl+E closes.
 -- noselect: nothing is preselected, so typing on never inserts an item by accident.
 vim.opt.completeopt = { "menuone", "noselect", "popup" }
 
@@ -43,12 +42,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ev)
         local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
         if client:supports_method("textDocument/completion") then
+            local provider = client.server_capabilities.completionProvider
+            provider.triggerCharacters = provider.triggerCharacters or {}
+            for char in ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"):gmatch(".") do
+                if not vim.list_contains(provider.triggerCharacters, char) then
+                    table.insert(provider.triggerCharacters, char)
+                end
+            end
             vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
         end
     end,
 })
 
 -- Show errors at the end of the line, like diagnostics.inline in Zed.
-vim.diagnostic.config({ virtual_text = true })
+vim.diagnostic.config({ virtual_text = true, update_in_insert = true })
 
 vim.lsp.inlay_hint.enable(true)
