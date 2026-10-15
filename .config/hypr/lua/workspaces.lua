@@ -25,7 +25,7 @@ function M.setup(programs)
 
         hl.window_rule({
             match = { workspace = "special:" .. workspace.name },
-            border_size = 1,
+            border_size = 2,
             border_color = "rgb(888888)",
         })
     end
