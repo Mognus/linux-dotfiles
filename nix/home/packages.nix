@@ -97,6 +97,7 @@
     mpv
 
     # --- Tools ---
+    btop
     pass
     curl
     gh
