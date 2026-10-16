@@ -102,6 +102,15 @@ vim.keymap.set("n", "<leader>ff", function()
     })
 end, { desc = "Find files in repo" })
 
+-- Space+f+s finds LSP symbols in this file; Space+f+S searches the workspace live.
+vim.keymap.set("n", "<leader>fs", function()
+    Snacks.picker.lsp_symbols()
+end, { desc = "Find symbols in file" })
+
+vim.keymap.set("n", "<leader>fS", function()
+    Snacks.picker.lsp_workspace_symbols()
+end, { desc = "Find symbols in workspace" })
+
 -- Space+/ greps across the whole git repo, dotfiles included (.git stays excluded).
 vim.keymap.set("n", "<leader>/", function()
     Snacks.picker.grep({ cwd = Snacks.git.get_root(), hidden = true })

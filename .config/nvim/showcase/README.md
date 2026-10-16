@@ -29,13 +29,13 @@ adding one asks for confirmation.
 
 - `nvim-treesitter` - syntax highlighting and indentation. Parsers are
   compiled locally with `tree-sitter` and `gcc` from `home.packages`.
-- `snacks.nvim` - file explorer and pickers (files, grep, git status,
+- `snacks.nvim` - file explorer and pickers (files, grep, LSP symbols, git status,
   diagnostics). Opening a directory (`nvim .`) opens the explorer instead of netrw.
 - `gitsigns.nvim` - marks changed lines in the sign column, side-by-side diff
 - `which-key.nvim` - popup after `Space` listing the possible next keys
 - `conform.nvim` - formats the current buffer with the formatter for its filetype
 - `lualine.nvim` - statusline with mode, git branch, diff, diagnostics, file and
-  cursor position; needs a Nerd Font for its icons
+  cursor position; font rendering is handled by Alacritty
 - `render-markdown.nvim` - renders Markdown in the buffer; `:RenderMarkdown toggle`
   switches back to plain text
 - `claudecode.nvim` - Claude Code IDE integration, see below
@@ -72,6 +72,8 @@ Leader is `Space`; after pressing it, `which-key` shows the possible next keys.
 - `Space+e` - toggle the fullscreen file explorer; type to filter, Enter opens
 - `Space+c+f` - format the current buffer (Conform, with LSP fallback)
 - `Space+f+f` - find files across the git repo (dotfiles included)
+- `Space+f+s` - find LSP symbols in the current file (functions, structs, methods, etc.)
+- `Space+f+S` - search LSP symbols across the workspace, updated live while typing (`S` = Shift+s)
 - `Space+/` - grep across the git repo
 - `Space+g+s` - changed files of the git repo, including untracked ones
   - `Enter` on a submodule - open its git status
@@ -80,8 +82,13 @@ Leader is `Space`; after pressing it, `which-key` shows the possible next keys.
 - `Space+x+x` - all LSP errors and warnings (like "Problems" in VS Code/Zed)
 - `]c` / `[c` - next/previous git change
 
+Symbol search requires an attached LSP that supports document or workspace
+symbols. `Space+/` remains text search; it also finds comments and strings.
+
 LSP keys are Neovim's defaults (`:h lsp-defaults`): `K` hover, `grn` rename,
-`gra` code action, `grr` references, `gd` definition.
+`gra` code action, `grr` references, `grt` type definition.
+For an LSP definition jump, use `:lua vim.lsp.buf.definition()`; `gd` is Neovim's
+built-in local declaration search, not an LSP mapping in this config.
 
 ## Formatting and checks
 
