@@ -4,15 +4,13 @@ This setup keeps assistant tooling in dotfiles so project defaults stay reproduc
 
 ## Codex
 
-Codex config lives in `.codex/config.toml`. Shared global instructions live in the repository-root `AGENTS.md`.
-`install.sh` links it directly to `~/.codex/AGENTS.md` and `~/.claude/CLAUDE.md`; Stow excludes it.
+Codex config lives in `~/.codex/config.toml`. That file is machine-local and
+gitignored; model, reasoning effort, sandbox permissions and trusted projects
+are not versioned defaults of this repository.
 
-## Does
-
-- Uses `gpt-5.5`
-- Sets reasoning effort to `high`
-- Uses read-only sandboxing by default
-- Marks selected project paths as trusted
+Shared global instructions live in the repository-root `AGENTS.md`.
+Home Manager links it to `~/.codex/AGENTS.md` and `~/.claude/CLAUDE.md` on NixOS;
+`install.sh` creates those links on Arch. Stow excludes the root instruction file.
 
 ## Claude
 

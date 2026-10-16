@@ -1,6 +1,12 @@
 # Packages
 
-The package list lives in `packages.txt` at the repository root.
+On NixOS, packages come from `nix/home/packages.nix`, config-specific dependencies
+in `nix/home/magnus.nix`, and system programs, fonts and services in
+`nix/modules/common.nix`. Apply changes with
+`sudo nixos-rebuild switch --flake ~/dotfiles/nix`.
+
+The groups below summarize the Arch package list in `packages.txt` at the
+repository root, installed by `install.sh`. Package names differ on NixOS.
 
 ## Shell
 
@@ -13,8 +19,9 @@ The package list lives in `packages.txt` at the repository root.
 
 - `neovim` - editor
 - `alacritty` - terminal emulator
-- `ttf-meslo-nerd` - primary Nerd Font
-- `ttf-jetbrains-mono-nerd` - secondary Nerd Font
+
+NixOS supplies IBM VGA for monospace text, Alacritty and Quickshell, and IBM Plex
+Sans for GUI text. The Arch list declares no font packages; see `fonts.md`.
 
 ## Desktop
 
@@ -65,7 +72,7 @@ The package list lives in `packages.txt` at the repository root.
 - `git` and `github-cli` - version control and GitHub workflow
 - `pass` - GPG-backed password storage
 - `curl`, `wget`, `openssh` - network and remote access
-- `ripgrep`, `bat`, `glow`, `btop`, `fastfetch` - CLI quality-of-life tools
+- `ripgrep` - fast text search, also used by Neovim's grep picker
 - `stow` - dotfiles symlink management
 - `base-devel` - build tools used with Arch and the AUR
 - `bind` - DNS diagnostic commands
@@ -73,5 +80,9 @@ The package list lives in `packages.txt` at the repository root.
 - `ufw` - firewall
 - `unzip` and `7zip` - archive extraction
 
-`paru` and `paru-debug` are installed locally but are not in `packages.txt`: they
-are AUR packages, so the pacman-only installer cannot install them directly.
+`paru` and `paru-debug` are not in `packages.txt`: they are AUR packages, so the
+pacman-only installer cannot install them directly. Install an AUR helper
+separately if needed on Arch.
+
+`btop` is declared in the NixOS Home Manager packages, not in the Arch list.
+`bat`, `glow` and `fastfetch` are no longer in either declared package list.

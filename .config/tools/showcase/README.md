@@ -4,19 +4,19 @@ This topic covers supporting tools that are important to the setup but do not ne
 
 ## Does
 
-- Tracks the package list used to rebuild the machine
+- Documents the NixOS package modules and the Arch package list
 - Documents CLI agents and assistant tooling
 - Documents media helpers such as `yt-dlp`
-- Documents Markdown reading through Glow
+- Documents Markdown reading through Neovim and render-markdown.nvim
 - Documents font choices and terminal rendering support
 
 ## Documents
 
-- `packages.md` - package groups from `packages.txt`
+- `packages.md` - NixOS package sources and package groups from Arch's `packages.txt`
 - `cli-agents.md` - Codex and Claude CLI setup
 - `media-tools.md` - download and playback helpers
-- `markdown.md` - rendered project documentation with Glow
-- `fonts.md` - Nerd Fonts and fontconfig notes
+- `markdown.md` - rendered project documentation in Neovim
+- `fonts.md` - IBM VGA, IBM Plex Sans and fontconfig preferences
 
 ## Workflow
 

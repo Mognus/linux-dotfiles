@@ -1,13 +1,13 @@
 # Dotfiles
 
-Personal Linux dotfiles managed with GNU Stow.
+Personal Linux dotfiles linked with Home Manager on NixOS and GNU Stow on Arch.
 
 The repository contains my daily desktop and terminal configuration, including
 Neovim, Fish, Tmux, Alacritty, Hyprland, Quickshell, the desktop
 theme switcher, Git, CLI tooling and package lists for rebuilding a workstation.
 
 A visual showcase of this setup, with screenshots and the matching configs, is
-online at <https://freierfreier23.de/en/personal-setup>.
+online at <https://luxxer23.de/en/personal-setup>.
 
 ## Install
 

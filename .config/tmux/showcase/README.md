@@ -4,7 +4,7 @@ Tmux keeps terminal sessions alive.
 
 ## Keybinds
 
-- `Ctrl+Space` - prefix (moved off `Ctrl+B`, which Neovim uses for its file explorer)
+- `Ctrl+Space` - prefix (moved off `Ctrl+B`, so it reaches Neovim for page-up)
 - `Super+Alt+T/Q` - create/close tmux window
 - `Super+Alt+J/K` - previous/next tmux window
 - `Alt+Shift+J/K` - move current tmux window left/right

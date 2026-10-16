@@ -15,7 +15,7 @@ Media tooling is intentionally small and CLI-first.
 ## Playback
 
 - `mpv` handles video playback
-- `playerctl` exposes media controls to Waybar and keybind scripts
+- `playerctl` handles the media-key commands in Hyprland's Lua keybindings
 
 ## Workflow
 
