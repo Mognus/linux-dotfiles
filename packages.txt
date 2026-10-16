@@ -59,11 +59,6 @@ pavucontrol                 # Audio mixer GUI
 bluez                       # Bluetooth stack
 bluez-utils                 # Bluetooth CLI tools (bluetoothctl)
 
-# --- Fonts ---
-ttf-meslo-nerd              # Nerd Font (Meslo)
-ttf-jetbrains-mono-nerd     # Nerd Font (JetBrains Mono)
-noto-fonts-cjk              # CJK font coverage
-
 # --- Apps ---
 firefox                     # Browser
 chromium                    # Chromium browser

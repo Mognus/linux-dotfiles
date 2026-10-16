@@ -55,21 +55,11 @@
     perf
   ];
 
+  fonts.enableDefaultPackages = false;
   fonts.packages = with pkgs; [
-    # Base fonts picked in .config/fontconfig/fonts.conf: Plex Sans for UI text,
-    # Geist Mono for generic monospace; Alacritty and Quickshell use VGA.
-    # VGA-style TrueType font used by Alacritty.
+    # VGA for monospace, Alacritty and Quickshell; Plex Sans for GUI text.
     ultimate-oldschool-pc-font-pack
     (ibm-plex.override { families = [ "sans" ]; })
-    geist-font
-    nerd-fonts.geist-mono
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.meslo-lg
-    noto-fonts-cjk-sans
-    # Syne (Quickshell) has no package of its own; google-fonts would pull ~1 GB for it.
-    (runCommand "syne-font" { } ''
-      install -Dm644 ${../fonts}/*.ttf -t $out/share/fonts/truetype
-    '')
   ];
 
   programs.fish.enable = true;
