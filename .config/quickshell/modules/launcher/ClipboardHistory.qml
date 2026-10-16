@@ -11,12 +11,9 @@ import "../../lib/Navigation.js" as Navigation
 // full text or image of the highlighted one on the right. The search line is
 // always active: typing filters, Up/Down or Ctrl+j/k move, Enter copies the
 // entry back into the clipboard, Delete removes it, Shift+Delete wipes all.
-PanelWindow {
+OverlayWindow {
     id: window
 
-    readonly property int padding: 12
-    readonly property int rowHeight: 36
-    readonly property int listWidth: 380
     // Parsed `cliphist list` output, refreshed on every opening.
     property var entries: []
     // Entries whose label contains the search: "git" → "git commit -m …".
@@ -97,14 +94,9 @@ PanelWindow {
     onCurrentChanged: window.loadPreview()
 
     visible: ShellState.clipboardOpen
-    // Without anchors the compositor centers the window.
-    implicitWidth: 1100
-    implicitHeight: 560
-    color: "transparent"
+    panelWidth: LauncherStyle.listPanelWidth
+    panelHeight: LauncherStyle.listPanelHeight
 
-    // Overlay sits above fullscreen windows; Exclusive routes the keyboard here.
-    WlrLayershell.layer: WlrLayer.Overlay
-    WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
     // Shares the app launcher's Hyprland layer rule.
     WlrLayershell.namespace: "launcher"
 
@@ -154,13 +146,6 @@ PanelWindow {
         }
     }
 
-    Rectangle {
-        anchors.fill: parent
-        color: Colors.panel
-        border.width: 1
-        border.color: Colors.subtle
-    }
-
     ListView {
         id: list
 
@@ -168,10 +153,10 @@ PanelWindow {
             top: parent.top
             left: parent.left
             bottom: footer.top
-            margins: window.padding
+            margins: LauncherStyle.padding
         }
 
-        width: window.listWidth
+        width: LauncherStyle.listWidth
         clip: true
         model: window.matches
 
@@ -182,15 +167,15 @@ PanelWindow {
             required property int index
 
             width: ListView.view.width
-            height: window.rowHeight
+            height: LauncherStyle.rowHeight
             color: row.ListView.isCurrentItem ? Colors.hoverOverlay : "transparent"
 
             Text {
                 anchors {
                     left: parent.left
-                    leftMargin: 10
+                    leftMargin: LauncherStyle.contentInset
                     right: parent.right
-                    rightMargin: 10
+                    rightMargin: LauncherStyle.contentInset
                     verticalCenter: parent.verticalCenter
                 }
 
@@ -199,7 +184,7 @@ PanelWindow {
                 color: row.modelData.image ? Colors.muted : row.ListView.isCurrentItem ? Colors.accent : Colors.foregroundSoft
                 elide: Text.ElideRight
                 font.family: Fonts.family
-                font.pixelSize: 15
+                font.pixelSize: Fonts.size
             }
 
             MouseArea {
@@ -241,11 +226,11 @@ PanelWindow {
         anchors {
             left: parent.left
             bottom: parent.bottom
-            margins: window.padding
+            margins: LauncherStyle.padding
         }
 
-        width: window.listWidth
-        height: window.rowHeight
+        width: LauncherStyle.listWidth
+        height: LauncherStyle.rowHeight
         focus: true
         keyTargets: [searchKeys]
     }
@@ -257,7 +242,7 @@ PanelWindow {
             top: parent.top
             bottom: parent.bottom
             left: list.right
-            leftMargin: window.padding
+            leftMargin: LauncherStyle.padding
         }
 
         width: 1
@@ -272,7 +257,7 @@ PanelWindow {
             bottom: parent.bottom
             left: divider.right
             right: parent.right
-            margins: window.padding
+            margins: LauncherStyle.padding
         }
 
         Text {
@@ -285,7 +270,7 @@ PanelWindow {
             clip: true
             color: Colors.foregroundSoft
             font.family: Fonts.family
-            font.pixelSize: 13
+            font.pixelSize: Fonts.smallSize
         }
 
         Image {

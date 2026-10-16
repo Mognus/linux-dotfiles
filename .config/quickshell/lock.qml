@@ -73,7 +73,7 @@ ShellRoot {
                     text: Qt.formatDateTime(clock.date, "hh:mm")
                     color: Colors.foreground
                     font.family: Fonts.family
-                    font.pixelSize: 96
+                    font.pixelSize: Fonts.clockSize
                 }
 
                 Text {
@@ -81,7 +81,7 @@ ShellRoot {
                     text: Qt.formatDateTime(clock.date, "dddd, d. MMMM")
                     color: Colors.muted
                     font.family: Fonts.family
-                    font.pixelSize: 16
+                    font.pixelSize: Fonts.smallSize
                 }
 
                 Item {
@@ -120,7 +120,7 @@ ShellRoot {
                         verticalAlignment: TextInput.AlignVCenter
                         color: Colors.foreground
                         font.family: Fonts.family
-                        font.pixelSize: 16
+                        font.pixelSize: Fonts.smallSize
 
                         onTextChanged: field.failed = false
                         onAccepted: {
@@ -136,7 +136,7 @@ ShellRoot {
                         text: field.failed ? "Falsch" : "Passwort"
                         color: field.failed ? Colors.danger : Colors.muted
                         font.family: Fonts.family
-                        font.pixelSize: 16
+                        font.pixelSize: Fonts.smallSize
                     }
                 }
             }

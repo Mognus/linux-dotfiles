@@ -42,7 +42,7 @@ FocusScope {
         text: "/"
         color: Colors.muted
         font.family: Fonts.family
-        font.pixelSize: 15
+        font.pixelSize: Fonts.size
     }
 
     TextInput {
@@ -58,7 +58,7 @@ FocusScope {
         focus: true
         color: Colors.foreground
         font.family: Fonts.family
-        font.pixelSize: 15
+        font.pixelSize: Fonts.size
         Keys.forwardTo: footer.keyTargets
 
         // Ctrl+W deletes the word before the cursor like in a terminal: "fire fox▏" → "fire ▏".

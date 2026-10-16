@@ -24,6 +24,12 @@ function M.setup()
             preserve_split = true,
         },
     })
+
+    hl.layer_rule({
+        match = { namespace = "^(launcher|settings)$" },
+        blur = true,
+        xray = false,
+    })
 end
 
 return M

@@ -62,7 +62,7 @@ PanelWindow {
                     color: Workspaces.workspaceActive(modelData + 1) ? Colors.accent : Colors.foreground
                     opacity: Workspaces.workspaceActive(modelData + 1) ? 1.0 : Workspaces.workspaceExists(modelData + 1) ? 0.82 : 0.42
                     font.family: Fonts.family
-                    font.pixelSize: 20
+                    font.pixelSize: Fonts.largeSize
                     font.bold: Workspaces.workspaceActive(modelData + 1)
                 }
 

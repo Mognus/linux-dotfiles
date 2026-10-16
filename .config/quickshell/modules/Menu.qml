@@ -141,7 +141,7 @@ FocusScope {
                 text: row.modelData.title
                 color: row.ListView.isCurrentItem ? Colors.accent : Colors.foregroundSoft
                 font.family: Fonts.family
-                font.pixelSize: 15
+                font.pixelSize: Fonts.size
             }
 
             MouseArea {

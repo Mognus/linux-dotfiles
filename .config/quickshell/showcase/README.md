@@ -11,6 +11,10 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   (`quickshell-lock` service from the NixOS config).
 - `shell.qml` — composition root: wires `modules/` components together, keeps no
   state of its own beyond the Pipewire object tracker.
+- `Fonts.qml` — shared font family and pixel sizes for all shell text, including
+  the bar, launchers, settings, notifications and lock screen.
+- `LauncherStyle.qml` — shared spacing, icons and panel dimensions for the app
+  launcher, window switcher and clipboard history. Colors come from `Colors.qml`.
 - `services/` — singletons holding all shared state and logic:
   - `ShellState.qml` — panel visibility (bottom bar, workspace HUD, tux) and the
     one open overlay (settings menu, app launcher, window switcher or clipboard
@@ -26,6 +30,8 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   - `Notifications.qml` — notification daemon: owns
     `org.freedesktop.Notifications` on D-Bus and keeps the open notifications.
 - `modules/` — UI panels, purely presentational, bound to the services above:
+  - `OverlayWindow.qml` — shared full-screen backdrop for settings and launchers:
+    50% black with Hyprland background blur, keeping the panel sharp and centered.
   - `BottomBar.qml` — workspace strip, clock, recording indicator, volume text,
     laptop battery percentage, settings menu trigger, special workspace buttons.
   - `WorkspaceHud.qml` — compact workspace-only overlay.

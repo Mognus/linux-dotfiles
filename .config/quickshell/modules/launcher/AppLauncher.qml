@@ -9,14 +9,11 @@ import "../../lib/Navigation.js" as Navigation
 
 // App launcher: a GNOME-style grid of the desktop apps. The search line is
 // always active: typing filters, the arrows or Ctrl+hjkl move, Enter starts.
-PanelWindow {
+OverlayWindow {
     id: window
 
-    readonly property int padding: 12
-    readonly property int cellSize: 120
     readonly property int columns: 6
     readonly property int rows: 4
-    readonly property int footerHeight: 36
     // Apps that fit the search, sorted by name.
     readonly property var matches: Array.from(DesktopEntries.applications.values).filter(app => window.fits(app, footer.text.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name))
 
@@ -45,14 +42,9 @@ PanelWindow {
     }
 
     visible: ShellState.launcherOpen
-    // Without anchors the compositor centers the window.
-    implicitWidth: window.columns * window.cellSize + window.padding * 2
-    implicitHeight: window.rows * window.cellSize + window.footerHeight + window.padding * 2
-    color: "transparent"
+    panelWidth: window.columns * LauncherStyle.gridCellSize + LauncherStyle.padding * 2
+    panelHeight: window.rows * LauncherStyle.gridCellSize + LauncherStyle.rowHeight + LauncherStyle.padding * 2
 
-    // Overlay sits above fullscreen windows; Exclusive routes the keyboard here.
-    WlrLayershell.layer: WlrLayer.Overlay
-    WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
     // Name that Hyprland layer rules can match.
     WlrLayershell.namespace: "launcher"
 
@@ -65,13 +57,6 @@ PanelWindow {
         }
     }
 
-    Rectangle {
-        anchors.fill: parent
-        color: Colors.panel
-        border.width: 1
-        border.color: Colors.subtle
-    }
-
     GridView {
         id: grid
 
@@ -80,11 +65,11 @@ PanelWindow {
             left: parent.left
             right: parent.right
             bottom: footer.top
-            margins: window.padding
+            margins: LauncherStyle.padding
         }
 
-        cellWidth: window.cellSize
-        cellHeight: window.cellSize
+        cellWidth: LauncherStyle.gridCellSize
+        cellHeight: LauncherStyle.gridCellSize
         clip: true
         model: window.matches
 
@@ -109,10 +94,10 @@ PanelWindow {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     top: parent.top
-                    topMargin: 20
+                    topMargin: LauncherStyle.gridIconTopMargin
                 }
 
-                implicitSize: 48
+                implicitSize: LauncherStyle.gridIconSize
                 asynchronous: true
                 source: Quickshell.iconPath(cell.modelData.icon, "application-x-executable")
             }
@@ -122,8 +107,8 @@ PanelWindow {
                     left: parent.left
                     right: parent.right
                     bottom: parent.bottom
-                    margins: 10
-                    bottomMargin: 18
+                    margins: LauncherStyle.contentInset
+                    bottomMargin: LauncherStyle.gridLabelBottomMargin
                 }
 
                 text: cell.modelData.name
@@ -131,7 +116,7 @@ PanelWindow {
                 elide: Text.ElideRight
                 color: cell.GridView.isCurrentItem ? Colors.accent : Colors.foregroundSoft
                 font.family: Fonts.family
-                font.pixelSize: 13
+                font.pixelSize: Fonts.smallSize
             }
 
             MouseArea {
@@ -172,10 +157,10 @@ PanelWindow {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            margins: window.padding
+            margins: LauncherStyle.padding
         }
 
-        height: window.footerHeight
+        height: LauncherStyle.rowHeight
         focus: true
         keyTargets: [searchKeys]
     }

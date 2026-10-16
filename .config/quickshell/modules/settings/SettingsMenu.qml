@@ -8,21 +8,16 @@ import qs.modules.settings.menus
 
 // The settings menu on Super+G: a window around the top Menu, one
 // MenuEntry per settings page.
-PanelWindow {
+OverlayWindow {
     id: window
 
     readonly property int padding: 12
     readonly property int headerHeight: 44
 
     visible: ShellState.settingsOpen
-    // Without anchors the compositor centers the window.
-    implicitWidth: 600
-    implicitHeight: window.headerHeight + divider.height + 340 + window.padding * 2
-    color: "transparent"
+    panelWidth: 600
+    panelHeight: window.headerHeight + divider.height + 340 + window.padding * 2
 
-    // Overlay sits above fullscreen windows; Exclusive routes the keyboard here.
-    WlrLayershell.layer: WlrLayer.Overlay
-    WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
     // Name that Hyprland layer rules can match.
     WlrLayershell.namespace: "settings"
 
@@ -31,13 +26,6 @@ PanelWindow {
         if (window.visible) {
             menu.reset();
         }
-    }
-
-    Rectangle {
-        anchors.fill: parent
-        color: Colors.panel
-        border.width: 1
-        border.color: Colors.subtle
     }
 
     Breadcrumbs {

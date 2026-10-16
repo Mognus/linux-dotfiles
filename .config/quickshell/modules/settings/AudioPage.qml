@@ -34,7 +34,7 @@ Column {
         color: Pipewire.ready ? Colors.foregroundSoft : Colors.danger
         horizontalAlignment: Text.AlignRight
         font.family: Fonts.family
-        font.pixelSize: 10
+        font.pixelSize: Fonts.captionSize
         font.bold: true
     }
 }

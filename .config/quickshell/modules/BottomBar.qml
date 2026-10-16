@@ -88,7 +88,7 @@ PanelWindow {
                     color: Workspaces.workspaceActive(modelData + 1) ? Colors.accent : Colors.foreground
                     opacity: Workspaces.workspaceActive(modelData + 1) ? 1.0 : Workspaces.workspaceExists(modelData + 1) ? 0.82 : 0.42
                     font.family: Fonts.family
-                    font.pixelSize: 20
+                    font.pixelSize: Fonts.largeSize
                     font.bold: Workspaces.workspaceActive(modelData + 1)
                 }
 
@@ -116,7 +116,7 @@ PanelWindow {
             text: "●"
             color: Recording.recording ? Colors.accent : "transparent"
             font.family: Fonts.family
-            font.pixelSize: 17
+            font.pixelSize: Fonts.size
             font.bold: true
 
             MouseArea {
@@ -135,7 +135,7 @@ PanelWindow {
             text: Time.clock
             color: Colors.foreground
             font.family: Fonts.family
-            font.pixelSize: 15
+            font.pixelSize: Fonts.smallSize
             font.bold: true
         }
     }
@@ -159,7 +159,7 @@ PanelWindow {
                 text: modelData.label
                 color: Workspaces.specialWorkspaceVisible(modelData.name) ? modelData.accent : Workspaces.specialWorkspaceExists(modelData.name) ? Colors.foreground : Colors.muted
                 font.family: Fonts.family
-                font.pixelSize: 23
+                font.pixelSize: Fonts.iconSize
                 font.bold: true
 
                 MouseArea {
@@ -180,7 +180,7 @@ PanelWindow {
                 text: "⚙"
                 color: ShellState.settingsOpen ? Colors.accent : Colors.foreground
                 font.family: Fonts.family
-                font.pixelSize: 19
+                font.pixelSize: Fonts.largeSize
                 font.bold: true
             }
 
@@ -207,7 +207,7 @@ PanelWindow {
             text: "VOL " + Audio.percent(Pipewire.defaultAudioSink)
             color: Audio.muted(Pipewire.defaultAudioSink) ? Colors.muted : Colors.foreground
             font.family: Fonts.family
-            font.pixelSize: 18
+            font.pixelSize: Fonts.size
         }
 
         Text {
@@ -216,7 +216,7 @@ PanelWindow {
             text: "BAT " + Battery.percent
             color: Battery.percent <= 15 && !Battery.charging ? Colors.danger : Colors.foreground
             font.family: Fonts.family
-            font.pixelSize: 18
+            font.pixelSize: Fonts.size
         }
     }
 }

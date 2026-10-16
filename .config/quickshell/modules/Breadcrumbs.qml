@@ -18,7 +18,7 @@ Row {
         text: "×"
         color: closeMouse.containsMouse ? Colors.foreground : Colors.muted
         font.family: Fonts.family
-        font.pixelSize: 18
+        font.pixelSize: Fonts.largeSize
 
         MouseArea {
             id: closeMouse
@@ -34,7 +34,7 @@ Row {
         text: "~"
         color: Colors.foreground
         font.family: Fonts.family
-        font.pixelSize: 15
+        font.pixelSize: Fonts.size
     }
 
     Repeater {
@@ -52,14 +52,14 @@ Row {
                 text: "/"
                 color: Colors.muted
                 font.family: Fonts.family
-                font.pixelSize: 15
+                font.pixelSize: Fonts.size
             }
 
             Text {
                 text: crumb.modelData
                 color: Colors.foreground
                 font.family: Fonts.family
-                font.pixelSize: 15
+                font.pixelSize: Fonts.size
             }
         }
     }

@@ -22,7 +22,7 @@ Column {
             text: control.title
             color: Colors.foreground
             font.family: Fonts.family
-            font.pixelSize: 15
+            font.pixelSize: Fonts.size
             font.bold: true
         }
 
@@ -37,7 +37,7 @@ Column {
                 text: Audio.muted(control.node) ? "MUTED" : "MUTE"
                 color: Audio.muted(control.node) ? Colors.muted : Colors.foreground
                 font.family: Fonts.family
-                font.pixelSize: 11
+                font.pixelSize: Fonts.captionSize
                 font.bold: true
             }
 
@@ -54,7 +54,7 @@ Column {
         color: Colors.foregroundSoft
         elide: Text.ElideRight
         font.family: Fonts.family
-        font.pixelSize: 12
+        font.pixelSize: Fonts.smallSize
     }
 
     Row {
@@ -95,7 +95,7 @@ Column {
             color: Colors.foreground
             horizontalAlignment: Text.AlignRight
             font.family: Fonts.family
-            font.pixelSize: 13
+            font.pixelSize: Fonts.smallSize
             font.bold: true
         }
     }
@@ -122,7 +122,7 @@ Column {
                     text: modelData
                     color: Colors.foreground
                     font.family: Fonts.family
-                    font.pixelSize: 12
+                    font.pixelSize: Fonts.smallSize
                     font.bold: true
                 }
 

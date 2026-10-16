@@ -11,12 +11,9 @@ import "../../lib/Navigation.js" as Navigation
 // Window switcher: the open windows of every workspace on the left, a live view
 // of the highlighted one on the right. The search line is always active: typing
 // filters by app and title, Up/Down or Ctrl+j/k move, Enter focuses.
-PanelWindow {
+OverlayWindow {
     id: window
 
-    readonly property int padding: 12
-    readonly property int rowHeight: 36
-    readonly property int listWidth: 380
     // Windows whose app or title contains the search, sorted by app so the list
     // can group them: "wolf" → [{ app: "librewolf", toplevel }, …].
     readonly property var matches: Array.from(Hyprland.toplevels.values)
@@ -61,14 +58,9 @@ PanelWindow {
     }
 
     visible: ShellState.windowSwitcherOpen
-    // Without anchors the compositor centers the window.
-    implicitWidth: 1100
-    implicitHeight: 560
-    color: "transparent"
+    panelWidth: LauncherStyle.listPanelWidth
+    panelHeight: LauncherStyle.listPanelHeight
 
-    // Overlay sits above fullscreen windows; Exclusive routes the keyboard here.
-    WlrLayershell.layer: WlrLayer.Overlay
-    WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
     // Shares the app launcher's Hyprland layer rule.
     WlrLayershell.namespace: "launcher"
 
@@ -82,13 +74,6 @@ PanelWindow {
         }
     }
 
-    Rectangle {
-        anchors.fill: parent
-        color: Colors.panel
-        border.width: 1
-        border.color: Colors.subtle
-    }
-
     ListView {
         id: list
 
@@ -96,10 +81,10 @@ PanelWindow {
             top: parent.top
             left: parent.left
             bottom: footer.top
-            margins: window.padding
+            margins: LauncherStyle.padding
         }
 
-        width: window.listWidth
+        width: LauncherStyle.listWidth
         clip: true
         model: window.matches
 
@@ -112,18 +97,18 @@ PanelWindow {
             required property string section
 
             width: list.width
-            height: window.rowHeight
+            height: LauncherStyle.rowHeight
 
             IconImage {
                 id: icon
 
                 anchors {
                     left: parent.left
-                    leftMargin: 10
+                    leftMargin: LauncherStyle.contentInset
                     verticalCenter: parent.verticalCenter
                 }
 
-                implicitSize: 20
+                implicitSize: LauncherStyle.listIconSize
                 asynchronous: true
                 source: window.iconOf(header.section)
             }
@@ -131,14 +116,14 @@ PanelWindow {
             Text {
                 anchors {
                     left: icon.right
-                    leftMargin: 10
+                    leftMargin: LauncherStyle.contentInset
                     verticalCenter: parent.verticalCenter
                 }
 
                 text: header.section
                 color: Colors.muted
                 font.family: Fonts.family
-                font.pixelSize: 15
+                font.pixelSize: Fonts.size
             }
         }
 
@@ -149,16 +134,16 @@ PanelWindow {
             required property int index
 
             width: ListView.view.width
-            height: window.rowHeight
+            height: LauncherStyle.rowHeight
             color: row.ListView.isCurrentItem ? Colors.hoverOverlay : "transparent"
 
             // Indented under the app name in the header.
             Text {
                 anchors {
                     left: parent.left
-                    leftMargin: 40
+                    leftMargin: LauncherStyle.listIndent
                     right: parent.right
-                    rightMargin: 10
+                    rightMargin: LauncherStyle.contentInset
                     verticalCenter: parent.verticalCenter
                 }
 
@@ -166,7 +151,7 @@ PanelWindow {
                 color: row.ListView.isCurrentItem ? Colors.accent : Colors.foregroundSoft
                 elide: Text.ElideRight
                 font.family: Fonts.family
-                font.pixelSize: 15
+                font.pixelSize: Fonts.size
             }
 
             MouseArea {
@@ -202,11 +187,11 @@ PanelWindow {
         anchors {
             left: parent.left
             bottom: parent.bottom
-            margins: window.padding
+            margins: LauncherStyle.padding
         }
 
-        width: window.listWidth
-        height: window.rowHeight
+        width: LauncherStyle.listWidth
+        height: LauncherStyle.rowHeight
         focus: true
         keyTargets: [searchKeys]
     }
@@ -218,7 +203,7 @@ PanelWindow {
             top: parent.top
             bottom: parent.bottom
             left: list.right
-            leftMargin: window.padding
+            leftMargin: LauncherStyle.padding
         }
 
         width: 1
@@ -233,7 +218,7 @@ PanelWindow {
             bottom: parent.bottom
             left: divider.right
             right: parent.right
-            margins: window.padding
+            margins: LauncherStyle.padding
         }
 
         // Only the highlighted window streams, and only while the switcher is open.
