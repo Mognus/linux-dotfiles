@@ -25,8 +25,8 @@ OverlayWindow {
     }
 
     visible: ShellState.settingsOpen
-    panelWidth: 600
-    panelHeight: window.headerHeight + divider.height + 340 + window.padding * 2
+    panelWidth: window.currentPage === "Theme" ? 960 : 600
+    panelHeight: window.headerHeight + divider.height + (window.currentPage === "Theme" ? 440 : 340) + window.padding * 2
 
     // Name that Hyprland layer rules can match.
     WlrLayershell.namespace: "settings"
@@ -171,7 +171,7 @@ OverlayWindow {
 
     Component {
         id: themePage
-        ColorsMenu {}
+        ThemePage {}
     }
 
     Component {
