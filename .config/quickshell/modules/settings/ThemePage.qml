@@ -3,25 +3,17 @@ import Quickshell.Io
 import QtQuick
 import Qt.labs.folderlistmodel
 import qs
-import "../../lib/Navigation.js" as Navigation
+import qs.modules
 import "theme"
 
 // Highlighting only changes the previews; Enter applies the selected palette.
 FocusScope {
     id: view
 
-    readonly property var selectedRow: list.currentItem
-    readonly property var previewPalette: view.selectedRow ? view.selectedRow.themeColors : null
+    readonly property var previewPalette: list.current ? list.current.themeColors : null
     property string activeTheme: ""
 
     focus: true
-
-    function applyCurrent() {
-        if (view.previewPalette) {
-            const name = view.selectedRow.fileBaseName;
-            Quickshell.execDetached([Quickshell.env("HOME") + "/.config/hypr/scripts/theme-switcher.sh", name]);
-        }
-    }
 
     FolderListModel {
         id: folder
@@ -30,6 +22,42 @@ FocusScope {
         nameFilters: ["*.json"]
         showDirs: false
         sortField: FolderListModel.Name
+    }
+
+    // Keep palette data outside list delegates so search can inspect every name.
+    Variants {
+        id: palettes
+
+        model: Array.from({ length: folder.count }, (_, index) => ({
+            name: folder.get(index, "fileBaseName"),
+            path: folder.get(index, "filePath")
+        }))
+
+        Scope {
+            id: entry
+
+            required property var modelData
+            readonly property string fileBaseName: entry.modelData.name
+            readonly property string name: entry.themeColors ? entry.themeColors.name : entry.fileBaseName
+            property var themeColors: null
+
+            FileView {
+                id: paletteFile
+
+                path: entry.modelData.path
+                watchChanges: true
+                onFileChanged: reload()
+                onLoaded: {
+                    try {
+                        entry.themeColors = JSON.parse(paletteFile.text());
+                    } catch (error) {
+                        entry.themeColors = null;
+                        console.warn("Invalid theme palette:", entry.modelData.path, error);
+                    }
+                }
+                onLoadFailed: entry.themeColors = null
+            }
+        }
     }
 
     FileView {
@@ -42,7 +70,7 @@ FocusScope {
         onLoaded: view.activeTheme = currentTheme.text().trim()
     }
 
-    ListView {
+    SearchableList {
         id: list
 
         anchors.top: parent.top
@@ -50,52 +78,23 @@ FocusScope {
         anchors.bottom: footer.top
         anchors.bottomMargin: 12
         width: 240
-        clip: true
-        focus: true
-        model: folder
-        currentIndex: 0
+        entries: palettes.instances
 
-        Keys.onPressed: event => {
-            if (Navigation.isListDown(event)) {
-                list.incrementCurrentIndex();
-            } else if (Navigation.isListUp(event)) {
-                list.decrementCurrentIndex();
-            } else if (Navigation.isConfirm(event)) {
-                view.applyCurrent();
-            } else {
-                return;
+        onActivated: entry => {
+            if (entry.themeColors) {
+                Quickshell.execDetached([Quickshell.env("HOME") + "/.config/hypr/scripts/theme-switcher.sh", entry.fileBaseName]);
             }
-            event.accepted = true;
         }
 
         delegate: Rectangle {
             id: row
 
-            required property string fileBaseName
-            required property string filePath
+            required property var modelData
             required property int index
-            property var themeColors: null
 
             width: ListView.view.width
             height: 52
             color: row.ListView.isCurrentItem ? Colors.hoverOverlay : "transparent"
-
-            FileView {
-                id: paletteFile
-
-                path: row.filePath
-                watchChanges: true
-                onFileChanged: reload()
-                onLoaded: {
-                    try {
-                        row.themeColors = JSON.parse(paletteFile.text());
-                    } catch (error) {
-                        row.themeColors = null;
-                        console.warn("Invalid theme palette:", row.filePath, error);
-                    }
-                }
-                onLoadFailed: row.themeColors = null
-            }
 
             Column {
                 anchors.left: parent.left
@@ -104,14 +103,15 @@ FocusScope {
                 spacing: 2
 
                 Text {
-                    text: (row.themeColors ? row.themeColors.name : row.fileBaseName) + (view.activeTheme === row.fileBaseName ? " *" : "")
+                    text: row.modelData.name + (view.activeTheme === row.modelData.fileBaseName ? " *" : "")
+                    textFormat: Text.PlainText
                     color: row.ListView.isCurrentItem ? Colors.accent : Colors.foreground
                     font.family: Fonts.family
                     font.pixelSize: Fonts.size
                 }
 
                 Text {
-                    text: row.themeColors ? row.themeColors.mode.toUpperCase() : "LOADING"
+                    text: row.modelData.themeColors ? row.modelData.themeColors.mode.toUpperCase() : "LOADING"
                     color: Colors.muted
                     font.family: Fonts.family
                     font.pixelSize: Fonts.captionSize
@@ -120,11 +120,8 @@ FocusScope {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: {
-                    list.currentIndex = row.index;
-                    list.forceActiveFocus();
-                }
-                onDoubleClicked: view.applyCurrent()
+                onClicked: list.select(row.index)
+                onDoubleClicked: list.activateCurrent()
             }
         }
     }
@@ -155,7 +152,7 @@ FocusScope {
     Text {
         anchors.centerIn: previews
         visible: view.previewPalette === null
-        text: folder.count === 0 ? "No themes found" : "Preview unavailable"
+        text: folder.count === 0 ? "No themes found" : list.matches.length === 0 ? "No matches" : "Preview unavailable"
         color: Colors.muted
         font.family: Fonts.family
         font.pixelSize: Fonts.size
@@ -167,7 +164,7 @@ FocusScope {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        text: "J/K select   ENTER apply   ESC back   * active theme"
+        text: list.helpText + (list.searching ? "" : "   * active theme")
         color: Colors.muted
         font.family: Fonts.family
         font.pixelSize: Fonts.captionSize

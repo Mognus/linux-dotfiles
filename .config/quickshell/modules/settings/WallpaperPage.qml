@@ -3,30 +3,19 @@ import QtQuick
 import Qt.labs.folderlistmodel
 import qs
 import qs.modules
-import "../../lib/Navigation.js" as Navigation
 
 // Selection previews a file; only confirmation hands it to awww.
 FocusScope {
     id: view
 
-    property bool searching: false
     readonly property var entries: Array.from({ length: folder.count }, (_, index) => ({
         name: folder.get(index, "fileBaseName"),
         path: folder.get(index, "filePath"),
         url: folder.get(index, "fileUrl")
     }))
-    readonly property var matches: view.entries.filter(entry => entry.name.toLowerCase().includes(search.text.toLowerCase()))
-    readonly property var current: view.matches[list.currentIndex] ?? null
+    readonly property var current: list.current
 
     focus: true
-
-    function applyCurrent() {
-        if (view.current) {
-            Quickshell.execDetached(["awww", "img", view.current.path, "--transition-type", "any", "--transition-duration", "1", "--transition-fps", "60"]);
-        }
-    }
-
-    onMatchesChanged: list.currentIndex = view.matches.length > 0 ? 0 : -1
 
     FolderListModel {
         id: folder
@@ -38,100 +27,16 @@ FocusScope {
         sortField: FolderListModel.Name
     }
 
-    ListView {
+    SearchableList {
         id: list
 
         anchors.top: parent.top
         anchors.left: parent.left
-        anchors.bottom: view.searching ? search.top : hint.top
-        anchors.bottomMargin: 12
-        width: 310
-        clip: true
-        focus: true
-        model: view.matches
-        currentIndex: 0
-
-        Keys.onPressed: event => {
-            if (Navigation.isListDown(event)) {
-                list.incrementCurrentIndex();
-            } else if (Navigation.isListUp(event)) {
-                list.decrementCurrentIndex();
-            } else if (Navigation.isConfirm(event)) {
-                view.applyCurrent();
-            } else if (event.key === Qt.Key_Slash) {
-                view.searching = true;
-                search.forceActiveFocus();
-            } else {
-                return;
-            }
-            event.accepted = true;
-        }
-
-        delegate: Rectangle {
-            id: row
-
-            required property var modelData
-            required property int index
-
-            width: ListView.view.width
-            height: 36
-            color: row.ListView.isCurrentItem ? Colors.hoverOverlay : "transparent"
-
-            Text {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.margins: 10
-                anchors.verticalCenter: parent.verticalCenter
-                text: row.modelData.name
-                textFormat: Text.PlainText
-                elide: Text.ElideRight
-                color: row.ListView.isCurrentItem ? Colors.accent : Colors.foregroundSoft
-                font.family: Fonts.family
-                font.pixelSize: Fonts.size
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    list.currentIndex = row.index;
-                    list.forceActiveFocus();
-                }
-                onDoubleClicked: view.applyCurrent()
-            }
-        }
-    }
-
-    Item {
-        id: searchKeys
-
-        Keys.onPressed: event => {
-            if (Navigation.isDown(event)) {
-                list.incrementCurrentIndex();
-            } else if (Navigation.isUp(event)) {
-                list.decrementCurrentIndex();
-            } else if (Navigation.isConfirm(event)) {
-                view.applyCurrent();
-            } else if (Navigation.isCancel(event)) {
-                search.clear();
-                view.searching = false;
-                list.forceActiveFocus();
-            } else {
-                return;
-            }
-            event.accepted = true;
-        }
-    }
-
-    SearchFooter {
-        id: search
-
-        anchors.left: parent.left
         anchors.bottom: hint.top
         anchors.bottomMargin: 12
-        width: list.width
-        height: 36
-        visible: view.searching
-        keyTargets: [searchKeys]
+        width: 310
+        entries: view.entries
+        onActivated: entry => Quickshell.execDetached(["awww", "img", entry.path, "--transition-type", "any", "--transition-duration", "1", "--transition-fps", "60"])
     }
 
     Rectangle {
@@ -190,7 +95,7 @@ FocusScope {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        text: view.searching ? "Type to filter   CTRL+J/K select   ENTER apply   ESC clear search" : "J/K select   / search   ENTER apply   ESC back"
+        text: list.helpText
         color: Colors.muted
         font.family: Fonts.family
         font.pixelSize: Fonts.captionSize
