@@ -39,7 +39,8 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
     page; the × reports a close request.
   - `SearchableList.qml` — shared name filtering, selection, keyboard and
     search field for Settings, Theme and Wallpaper. Entries provide `name`; activation
-    passes the original entry to the page. Theme supplies its own two-line row.
+    passes the original entry to the page. Optional section headings group matching
+    entries without adding navigation levels. Theme supplies its own two-line row.
   - `SearchFooter.qml` — `/ cy` search line; it only types and hands every
     key to its `keyTargets` first, so the owner decides what keys drive.
     The settings, wallpaper and theme views open it on `/`.
@@ -51,9 +52,11 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   - `launcher/ClipboardHistory.qml` — cliphist entries, newest first, with
     the full text or image of the highlighted one on the right; same search,
     Enter copies the entry back.
-  - `settings/` — the settings menu (Super+G), with one level of navigation:
-    - `SettingsMenu.qml` — the window and current page; one page list supplies
-      names, components and dimensions to navigation, breadcrumbs and the loader.
+  - `settings/` — the settings menu (Super+G), with all categories visible together:
+    - `SettingsMenu.qml` — General (Audio), Appearance (Theme, Wallpaper), and
+      Launcher (Applications, Windows, Clipboard). One definition supplies names,
+      components, dimensions and actions. Search removes empty categories; launcher
+      actions open the existing overlays through the same functions as their keybinds.
     - `AudioPage.qml` — compact output and microphone cards inside a bounded
       scroll area, with Pipewire status pinned below.
     - `ThemePage.qml` — searchable palette names with terminal and browser

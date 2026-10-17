@@ -9,6 +9,7 @@ FocusScope {
 
     property var entries: []
     property alias delegate: list.delegate
+    property string sectionRole: ""
     property bool searching: false
     readonly property var matches: Array.from(root.entries).filter(entry => entry.name.toLowerCase().includes(search.text.toLowerCase()))
     readonly property var current: root.matches[list.currentIndex] ?? null
@@ -54,6 +55,28 @@ FocusScope {
         focus: true
         model: root.matches
         currentIndex: 0
+
+        // Sections are headings, not selectable rows; empty groups disappear
+        // automatically because the model only contains matching entries.
+        section.property: root.sectionRole
+        section.delegate: Item {
+            required property string section
+
+            width: list.width
+            height: 24
+
+            Text {
+                anchors.left: parent.left
+                anchors.leftMargin: 10
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 4
+                text: section.toUpperCase()
+                textFormat: Text.PlainText
+                color: Colors.muted
+                font.family: Fonts.family
+                font.pixelSize: Fonts.captionSize
+            }
+        }
 
         Keys.onPressed: event => {
             if (Navigation.isListDown(event)) {

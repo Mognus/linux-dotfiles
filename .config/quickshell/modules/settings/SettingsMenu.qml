@@ -6,17 +6,44 @@ import qs.modules
 import qs.services
 import "../../lib/Navigation.js" as Navigation
 
-// Settings owns one level of navigation; each page only supplies its content.
+// Categories group the start list; only content pages change the current page.
 OverlayWindow {
     id: window
 
     readonly property int padding: 12
     readonly property int headerHeight: 44
-    readonly property var pages: [
-        { name: "Theme", component: themePage, panelWidth: 960, contentHeight: 440 },
-        { name: "Wallpaper", component: wallpaperPage, panelWidth: 1100, contentHeight: 520 },
-        { name: "Audio", component: audioPage, panelWidth: 600, contentHeight: 340 }
+    readonly property var sections: [
+        {
+            name: "General",
+            entries: [
+                { name: "Audio", component: audioPage, panelWidth: 600, contentHeight: 340 }
+            ]
+        },
+        {
+            name: "Appearance",
+            entries: [
+                { name: "Theme", component: themePage, panelWidth: 960, contentHeight: 440 },
+                { name: "Wallpaper", component: wallpaperPage, panelWidth: 1100, contentHeight: 520 }
+            ]
+        },
+        {
+            name: "Launcher",
+            entries: [
+                { name: "Applications", action: () => ShellState.toggleLauncher() },
+                { name: "Windows", action: () => ShellState.toggleWindowSwitcher() },
+                { name: "Clipboard", action: () => ShellState.toggleClipboard() }
+            ]
+        }
     ]
+    readonly property var entries: {
+        const result = [];
+        for (const section of window.sections) {
+            for (const entry of section.entries) {
+                result.push(Object.assign({ category: section.name }, entry));
+            }
+        }
+        return result;
+    }
     property var currentPage: null
 
     function back() {
@@ -57,7 +84,7 @@ OverlayWindow {
         }
 
         height: window.headerHeight
-        path: window.currentPage ? [window.currentPage.name] : []
+        path: window.currentPage ? [window.currentPage.category, window.currentPage.name] : []
         onCloseRequested: ShellState.closeSettings()
     }
 
@@ -103,10 +130,15 @@ OverlayWindow {
             anchors.fill: parent
             visible: window.currentPage === null
             focus: visible
-            entries: window.pages
+            entries: window.entries
+            sectionRole: "category"
             onActivated: entry => {
                 start.stopSearch();
-                window.currentPage = entry;
+                if (entry.action) {
+                    entry.action();
+                } else {
+                    window.currentPage = entry;
+                }
             }
         }
 
