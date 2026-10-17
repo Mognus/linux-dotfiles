@@ -170,9 +170,9 @@ OverlayWindow {
                 list.incrementCurrentIndex();
             } else if (Navigation.isUp(event)) {
                 list.decrementCurrentIndex();
-            } else if ([Qt.Key_Return, Qt.Key_Enter].includes(event.key)) {
+            } else if (Navigation.isConfirm(event)) {
                 window.jumpToCurrent();
-            } else if (event.key === Qt.Key_Escape) {
+            } else if (Navigation.isCancel(event)) {
                 ShellState.closeWindowSwitcher();
             } else {
                 return;

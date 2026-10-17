@@ -203,7 +203,7 @@ OverlayWindow {
                 list.incrementCurrentIndex();
             } else if (Navigation.isUp(event)) {
                 list.decrementCurrentIndex();
-            } else if ([Qt.Key_Return, Qt.Key_Enter].includes(event.key)) {
+            } else if (Navigation.isConfirm(event)) {
                 window.copyCurrent();
             } else if (event.key === Qt.Key_Delete && (event.modifiers & Qt.ShiftModifier)) {
                 window.wipe();
@@ -211,7 +211,7 @@ OverlayWindow {
                 if (window.current) {
                     window.remove(window.current);
                 }
-            } else if (event.key === Qt.Key_Escape) {
+            } else if (Navigation.isCancel(event)) {
                 ShellState.closeClipboard();
             } else {
                 return;

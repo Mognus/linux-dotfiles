@@ -4,15 +4,25 @@ import QtQuick
 import qs
 import qs.modules
 import qs.services
-import qs.modules.settings.menus
+import qs.modules.settings.menus.theme
+import "../../lib/Navigation.js" as Navigation
 
-// The settings menu on Super+G: a window around the top Menu, one
-// MenuEntry per settings page.
+// Settings owns one level of navigation; each page only supplies its content.
 OverlayWindow {
     id: window
 
     readonly property int padding: 12
     readonly property int headerHeight: 44
+    property string currentPage: ""
+
+    function back() {
+        if (window.currentPage === "") {
+            ShellState.closeSettings();
+        } else {
+            window.currentPage = "";
+            start.forceActiveFocus();
+        }
+    }
 
     visible: ShellState.settingsOpen
     panelWidth: 600
@@ -24,7 +34,9 @@ OverlayWindow {
     // Every opening starts at the top of the list.
     onVisibleChanged: {
         if (window.visible) {
-            menu.reset();
+            window.currentPage = "";
+            start.currentIndex = 0;
+            start.forceActiveFocus();
         }
     }
 
@@ -41,7 +53,7 @@ OverlayWindow {
         }
 
         height: window.headerHeight
-        path: menu.path
+        path: window.currentPage === "" ? [] : [window.currentPage]
         onCloseRequested: ShellState.closeSettings()
     }
 
@@ -58,8 +70,8 @@ OverlayWindow {
         color: Colors.divider
     }
 
-    Menu {
-        id: menu
+    FocusScope {
+        id: content
 
         anchors {
             top: divider.bottom
@@ -69,21 +81,106 @@ OverlayWindow {
             margins: window.padding
         }
 
-        onCloseRequested: ShellState.closeSettings()
+        focus: true
 
-        entries: [
-            MenuEntry {
-                title: "Audio"
-                page: Component {
-                    AudioPage {}
+        Keys.onPressed: event => {
+            if (Navigation.isBack(event)) {
+                window.back();
+                event.accepted = true;
+            }
+        }
+
+        ListView {
+            id: start
+
+            anchors.fill: parent
+            visible: window.currentPage === ""
+            focus: visible
+            clip: true
+            model: ["Theme", "Wallpaper", "Audio"]
+
+            Keys.onPressed: event => {
+                if (Navigation.isListDown(event)) {
+                    start.incrementCurrentIndex();
+                } else if (Navigation.isListUp(event)) {
+                    start.decrementCurrentIndex();
+                } else if (Navigation.isOpen(event)) {
+                    window.currentPage = start.model[start.currentIndex];
+                } else {
+                    return;
                 }
-            },
-            MenuEntry {
-                title: "Theme"
-                page: Component {
-                    ThemeMenu {}
+                event.accepted = true;
+            }
+
+            delegate: Rectangle {
+                id: row
+
+                required property string modelData
+                required property int index
+
+                width: ListView.view.width
+                height: 36
+                color: row.ListView.isCurrentItem ? Colors.hoverOverlay : "transparent"
+
+                Text {
+                    anchors.left: parent.left
+                    anchors.leftMargin: 10
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: row.modelData
+                    color: row.ListView.isCurrentItem ? Colors.accent : Colors.foregroundSoft
+                    font.family: Fonts.family
+                    font.pixelSize: Fonts.size
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        start.currentIndex = row.index;
+                        window.currentPage = row.modelData;
+                    }
                 }
             }
-        ]
+        }
+
+        Loader {
+            id: page
+
+            anchors.fill: parent
+            active: window.currentPage !== ""
+            focus: active
+            sourceComponent: {
+                switch (window.currentPage) {
+                case "Theme": return themePage;
+                case "Wallpaper": return wallpaperPage;
+                case "Audio": return audioPage;
+                default: return null;
+                }
+            }
+            onLoaded: page.item.forceActiveFocus()
+        }
+
+        Connections {
+            target: page.item
+            ignoreUnknownSignals: true
+
+            function onCloseRequested() {
+                window.back();
+            }
+        }
+    }
+
+    Component {
+        id: themePage
+        ColorsMenu {}
+    }
+
+    Component {
+        id: wallpaperPage
+        WallpaperMenu {}
+    }
+
+    Component {
+        id: audioPage
+        AudioPage {}
     }
 }

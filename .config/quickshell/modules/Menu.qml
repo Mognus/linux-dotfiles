@@ -83,7 +83,7 @@ FocusScope {
 
     // Back keys travel up to here from the list or from a page without keys of its own.
     Keys.onPressed: event => {
-        if ([Qt.Key_Escape, Qt.Key_Left, Qt.Key_H].includes(event.key)) {
+        if (Navigation.isBack(event)) {
             menu.back();
             event.accepted = true;
         }
@@ -106,11 +106,11 @@ FocusScope {
 
         // Each group of keys does one job: move down, move up, open, or search.
         Keys.onPressed: event => {
-            if ([Qt.Key_Down, Qt.Key_J].includes(event.key)) {
+            if (Navigation.isListDown(event)) {
                 list.incrementCurrentIndex();
-            } else if ([Qt.Key_Up, Qt.Key_K].includes(event.key)) {
+            } else if (Navigation.isListUp(event)) {
                 list.decrementCurrentIndex();
-            } else if ([Qt.Key_Return, Qt.Key_Enter, Qt.Key_Right, Qt.Key_L].includes(event.key)) {
+            } else if (Navigation.isOpen(event)) {
                 menu.openCurrent();
             } else if (event.key === Qt.Key_Slash) {
                 menu.startSearch();
@@ -163,9 +163,9 @@ FocusScope {
                 list.incrementCurrentIndex();
             } else if (Navigation.isUp(event)) {
                 list.decrementCurrentIndex();
-            } else if ([Qt.Key_Return, Qt.Key_Enter].includes(event.key)) {
+            } else if (Navigation.isConfirm(event)) {
                 menu.openCurrent();
-            } else if (event.key === Qt.Key_Escape) {
+            } else if (Navigation.isCancel(event)) {
                 menu.stopSearch();
             } else {
                 return;

@@ -139,9 +139,9 @@ OverlayWindow {
                 grid.moveCurrentIndexUp();
             } else if (Navigation.isDown(event)) {
                 grid.moveCurrentIndexDown();
-            } else if ([Qt.Key_Return, Qt.Key_Enter].includes(event.key)) {
+            } else if (Navigation.isConfirm(event)) {
                 window.launchCurrent();
-            } else if (event.key === Qt.Key_Escape) {
+            } else if (Navigation.isCancel(event)) {
                 ShellState.closeLauncher();
             } else {
                 return;
