@@ -9,9 +9,9 @@ announce=true
 requested="${1:-}"
 if [[ "$requested" == "--apply" ]]; then
     announce=false
-    requested="$(cat "$state_dir/current" 2>/dev/null || printf black)"
+    requested="$(cat "$state_dir/current" 2>/dev/null || printf retro-dark)"
 elif [[ -z "$requested" ]]; then
-    # Picking happens in Quickshell's settings menu (Theme > Colors).
+    # Picking happens in Quickshell's settings menu (Theme).
     printf 'Usage: %s <theme> | --apply\n' "$0" >&2
     exit 1
 fi

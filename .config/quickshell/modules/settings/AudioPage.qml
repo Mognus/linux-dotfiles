@@ -3,38 +3,78 @@ import Quickshell.Services.Pipewire
 import qs
 import qs.modules
 
-Column {
-    width: parent.width
-    spacing: 18
+Item {
+    id: page
 
-    AudioControl {
-        width: parent.width
-        title: "Output"
-        node: Pipewire.defaultAudioSink
-        accent: Colors.accent
-        showPresets: true
+    Flickable {
+        id: scroll
+
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: status.top
+        anchors.bottomMargin: 12
+        contentWidth: width
+        contentHeight: controls.implicitHeight
+        clip: true
+        boundsBehavior: Flickable.StopAtBounds
+
+        Column {
+            id: controls
+
+            width: scroll.width
+            spacing: 12
+
+            AudioControl {
+                width: parent.width
+                title: "OUTPUT"
+                node: Pipewire.defaultAudioSink
+                showPresets: true
+            }
+
+            AudioControl {
+                width: parent.width
+                title: "MICROPHONE"
+                node: Pipewire.defaultAudioSource
+            }
+        }
     }
 
-    Rectangle {
-        width: parent.width
-        height: 1
-        color: Colors.divider
-    }
+    Item {
+        id: status
 
-    AudioControl {
-        width: parent.width
-        title: "Microphone"
-        node: Pipewire.defaultAudioSource
-        accent: Colors.accent
-    }
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        height: 18
 
-    Text {
-        width: parent.width
-        text: Pipewire.ready ? "PIPEWIRE READY" : "PIPEWIRE WAIT"
-        color: Pipewire.ready ? Colors.foregroundSoft : Colors.danger
-        horizontalAlignment: Text.AlignRight
-        font.family: Fonts.family
-        font.pixelSize: Fonts.captionSize
-        font.bold: true
+        Rectangle {
+            id: indicator
+
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            width: 6
+            height: 6
+            color: Pipewire.ready ? Colors.accent : Colors.danger
+        }
+
+        Text {
+            anchors.left: indicator.right
+            anchors.leftMargin: 8
+            anchors.verticalCenter: parent.verticalCenter
+            text: Pipewire.ready ? "PIPEWIRE READY" : "PIPEWIRE WAIT"
+            color: Pipewire.ready ? Colors.muted : Colors.danger
+            font.family: Fonts.family
+            font.pixelSize: Fonts.captionSize
+        }
+
+        Text {
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            text: "SCROLL ON SLIDER: +/- 2%"
+            color: Colors.muted
+            font.family: Fonts.family
+            font.pixelSize: Fonts.captionSize
+        }
     }
 }

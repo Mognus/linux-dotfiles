@@ -4,7 +4,6 @@ import QtQuick
 import qs
 import qs.modules
 import qs.services
-import qs.modules.settings.menus.theme
 import "../../lib/Navigation.js" as Navigation
 
 // Settings owns one level of navigation; each page only supplies its content.
@@ -25,8 +24,8 @@ OverlayWindow {
     }
 
     visible: ShellState.settingsOpen
-    panelWidth: window.currentPage === "Theme" ? 960 : 600
-    panelHeight: window.headerHeight + divider.height + (window.currentPage === "Theme" ? 440 : 340) + window.padding * 2
+    panelWidth: window.currentPage === "Wallpaper" ? 1100 : window.currentPage === "Theme" ? 960 : 600
+    panelHeight: window.headerHeight + divider.height + (window.currentPage === "Wallpaper" ? 520 : window.currentPage === "Theme" ? 440 : 340) + window.padding * 2
 
     // Name that Hyprland layer rules can match.
     WlrLayershell.namespace: "settings"
@@ -158,15 +157,6 @@ OverlayWindow {
             }
             onLoaded: page.item.forceActiveFocus()
         }
-
-        Connections {
-            target: page.item
-            ignoreUnknownSignals: true
-
-            function onCloseRequested() {
-                window.back();
-            }
-        }
     }
 
     Component {
@@ -176,7 +166,7 @@ OverlayWindow {
 
     Component {
         id: wallpaperPage
-        WallpaperMenu {}
+        WallpaperPage {}
     }
 
     Component {
