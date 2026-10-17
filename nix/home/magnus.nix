@@ -72,6 +72,8 @@ in
   # Only the file: LibreWolf keeps its profiles in the same folder.
   xdg.configFile."librewolf/librewolf/librewolf.overrides.cfg".source =
     link ".config/librewolf/librewolf/librewolf.overrides.cfg";
+  xdg.configFile."librewolf/librewolf/ceavjfra.default/chrome".source =
+    link ".config/librewolf/librewolf/chrome";
 
   # Both agents share one instruction file; their folders also hold local state.
   home.file.".claude/CLAUDE.md".source = link "AGENTS.md";

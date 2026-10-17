@@ -1,0 +1,44 @@
+/* Square corners around the web content, next to the vertical tabs. */
+#tabbrowser-tabpanels .browserContainer {
+  border-radius: 0 !important;
+}
+
+/* Square tab backgrounds, including selected and hovered tabs. */
+#vertical-tabs .tab-background {
+  border-radius: 0 !important;
+}
+
+/* Follow the web-content color scheme, not the installed toolbar theme. */
+#sidebar-container,
+#sidebar-main {
+  font-family: "PxPlus IBM VGA 8x16", monospace !important;
+  color-scheme: light !important;
+  background-color: light-dark(#f0f0f4, #1c1b22) !important;
+  color: light-dark(#15141a, #fbfbfe) !important;
+  --sidebar-text-color: light-dark(#15141a, #fbfbfe) !important;
+  --toolbarbutton-icon-fill: currentColor !important;
+}
+
+@media (-moz-content-prefers-color-scheme: dark) {
+  #sidebar-container,
+  #sidebar-main {
+    color-scheme: dark !important;
+  }
+}
+
+#vertical-tabs .tabbrowser-tab,
+#vertical-tabs-newtab-button {
+  font-family: "PxPlus IBM VGA 8x16", monospace !important;
+  color: light-dark(#15141a, #fbfbfe) !important;
+}
+
+/* Theme rules can set the tab content color separately from its parent. */
+#vertical-tabs .tab-content,
+#vertical-tabs .tab-label,
+#vertical-tabs .tab-close-button {
+  color: inherit !important;
+}
+
+#vertical-tabs .tabbrowser-tab[selected] .tab-background {
+  background: light-dark(#ffffff, #42414d) !important;
+}
