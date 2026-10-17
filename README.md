@@ -1,51 +1,12 @@
 # Dotfiles
 
-Personal Linux dotfiles linked with Home Manager on NixOS and GNU Stow on Arch.
+Personal dotfiles for a more or less bloat-free Linux desktop and terminal setup.
+Includes [NixOS configurations](nix/) ([installation](Install-Nix.md)), but the
+dotfiles can also be used without Nix, for example with GNU Stow.
 
-The repository contains my daily desktop and terminal configuration, including
-Neovim, Fish, Tmux, Alacritty, Hyprland, Quickshell, the desktop
-theme switcher, Git, CLI tooling and package lists for rebuilding a workstation.
+## Showcases
 
-A visual showcase of this setup, with screenshots and the matching configs, is
-online at <https://luxxer23.de/en/personal-setup>.
-
-## Install
-
-NixOS machines are described by the flake in `nix/`; see
-[Install-Nix.md](Install-Nix.md). The steps below are for Arch.
-
-Clone the repository into your home directory:
-
-```sh
-git clone https://github.com/Mognus/linux-dotfiles.git ~/dotfiles
-cd ~/dotfiles
-```
-
-Run the installer on an Arch based system:
-
-```sh
-./install.sh
-```
-
-The installer checks for Stow conflicts, installs the packages from
-`packages.txt`, links the dotfiles into `$HOME`, applies the saved theme palette
-and cursor defaults.
-
-## Link Only
-
-If packages are already installed, only create the symlinks:
-
-```sh
-stow --dir="$PWD" --target="$HOME" .
-```
-
-Local machine files and generated state are ignored through `.gitignore` and
-`.stow-local-ignore`.
-
-## Documentation
-
-Every topic is documented next to its own config, in a `showcase/` folder that
-also holds the screenshots used on the website:
+Screenshots and details for each part of the setup:
 
 - [Alacritty](.config/alacritty/showcase/README.md)
 - [Fish](.config/fish/showcase/README.md)
@@ -54,6 +15,3 @@ also holds the screenshots used on the website:
 - [Quickshell](.config/quickshell/showcase/README.md)
 - [Tmux](.config/tmux/showcase/README.md)
 - [Tools and packages](.config/tools/showcase/README.md)
-
-The GPG private key, `~/.password-store`, system services, and other mutable
-data need a separate backup and restore process.

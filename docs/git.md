@@ -1,1 +1,0 @@
-../.config/git/showcase/README.md

@@ -1,1 +1,0 @@
-../.config/tools/showcase/README.md

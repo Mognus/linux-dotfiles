@@ -1,1 +1,0 @@
-../.config/quickshell/showcase/README.md

@@ -1,1 +1,0 @@
-../.config/alacritty/showcase/README.md

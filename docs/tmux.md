@@ -1,1 +1,0 @@
-../.config/tmux/showcase/README.md
