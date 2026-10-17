@@ -12,20 +12,25 @@ OverlayWindow {
 
     readonly property int padding: 12
     readonly property int headerHeight: 44
-    property string currentPage: ""
+    readonly property var pages: [
+        { name: "Theme", component: themePage, panelWidth: 960, contentHeight: 440 },
+        { name: "Wallpaper", component: wallpaperPage, panelWidth: 1100, contentHeight: 520 },
+        { name: "Audio", component: audioPage, panelWidth: 600, contentHeight: 340 }
+    ]
+    property var currentPage: null
 
     function back() {
-        if (window.currentPage === "") {
+        if (window.currentPage === null) {
             ShellState.closeSettings();
         } else {
-            window.currentPage = "";
+            window.currentPage = null;
             start.forceActiveFocus();
         }
     }
 
     visible: ShellState.settingsOpen
-    panelWidth: window.currentPage === "Wallpaper" ? 1100 : window.currentPage === "Theme" ? 960 : 600
-    panelHeight: window.headerHeight + divider.height + (window.currentPage === "Wallpaper" ? 520 : window.currentPage === "Theme" ? 440 : 340) + window.padding * 2
+    panelWidth: window.currentPage ? window.currentPage.panelWidth : 600
+    panelHeight: window.headerHeight + divider.height + (window.currentPage ? window.currentPage.contentHeight : 340) + window.padding * 2
 
     // Name that Hyprland layer rules can match.
     WlrLayershell.namespace: "settings"
@@ -33,9 +38,9 @@ OverlayWindow {
     // Every opening starts at the top of the list.
     onVisibleChanged: {
         if (window.visible) {
-            window.currentPage = "";
-            start.currentIndex = 0;
-            start.forceActiveFocus();
+            window.currentPage = null;
+            start.stopSearch();
+            start.select(0);
         }
     }
 
@@ -52,7 +57,7 @@ OverlayWindow {
         }
 
         height: window.headerHeight
-        path: window.currentPage === "" ? [] : [window.currentPage]
+        path: window.currentPage ? [window.currentPage.name] : []
         onCloseRequested: ShellState.closeSettings()
     }
 
@@ -86,58 +91,22 @@ OverlayWindow {
             if (Navigation.isBack(event)) {
                 window.back();
                 event.accepted = true;
+            } else if (window.currentPage === null && Navigation.isOpen(event)) {
+                start.activateCurrent();
+                event.accepted = true;
             }
         }
 
-        ListView {
+        SearchableList {
             id: start
 
             anchors.fill: parent
-            visible: window.currentPage === ""
+            visible: window.currentPage === null
             focus: visible
-            clip: true
-            model: ["Theme", "Wallpaper", "Audio"]
-
-            Keys.onPressed: event => {
-                if (Navigation.isListDown(event)) {
-                    start.incrementCurrentIndex();
-                } else if (Navigation.isListUp(event)) {
-                    start.decrementCurrentIndex();
-                } else if (Navigation.isOpen(event)) {
-                    window.currentPage = start.model[start.currentIndex];
-                } else {
-                    return;
-                }
-                event.accepted = true;
-            }
-
-            delegate: Rectangle {
-                id: row
-
-                required property string modelData
-                required property int index
-
-                width: ListView.view.width
-                height: 36
-                color: row.ListView.isCurrentItem ? Colors.hoverOverlay : "transparent"
-
-                Text {
-                    anchors.left: parent.left
-                    anchors.leftMargin: 10
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: row.modelData
-                    color: row.ListView.isCurrentItem ? Colors.accent : Colors.foregroundSoft
-                    font.family: Fonts.family
-                    font.pixelSize: Fonts.size
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        start.currentIndex = row.index;
-                        window.currentPage = row.modelData;
-                    }
-                }
+            entries: window.pages
+            onActivated: entry => {
+                start.stopSearch();
+                window.currentPage = entry;
             }
         }
 
@@ -145,16 +114,9 @@ OverlayWindow {
             id: page
 
             anchors.fill: parent
-            active: window.currentPage !== ""
+            active: window.currentPage !== null
             focus: active
-            sourceComponent: {
-                switch (window.currentPage) {
-                case "Theme": return themePage;
-                case "Wallpaper": return wallpaperPage;
-                case "Audio": return audioPage;
-                default: return null;
-                }
-            }
+            sourceComponent: window.currentPage ? window.currentPage.component : null
             onLoaded: page.item.forceActiveFocus()
         }
     }
