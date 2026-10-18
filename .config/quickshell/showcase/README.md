@@ -81,8 +81,10 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
       highlighted image through `awww`.
   - `AudioControl.qml` — output/input card with mute, volume percentage,
     a draggable slider, wheel adjustment in 2% steps and optional presets.
-  - `NotificationPopups.qml` — notification popups top right; normal ones
-    expire after 5s, critical ones stay, a click closes one.
+  - `NotificationPopups.qml` — retro notification popups top right: square
+    borders, an inverted app-name header and VGA text. Titles use up to two
+    lines, bodies up to four with ellipsis. Normal ones expire after 5s,
+    critical ones have a red `!` header and stay; a click closes one.
   - `TuxMascot.qml` — left/right mascot panel.
 - `lib/Audio.js` — Pipewire audio helper functions.
 - `services/Appearance.qml` — watches the shared terminal TOML, reads the current
@@ -110,7 +112,8 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 - **Recording indicator** — shows when a screen recording is active.
 - **Notifications** — replaces Dunst, colored by the current theme. General >
   Notifications controls do-not-disturb and the default popup duration; app-specified
-  timeouts still take precedence, and critical messages remain until dismissed.
+  timeouts still take precedence (in milliseconds; zero disables expiry), and
+  critical messages remain until dismissed.
 - **Session** — General > Session offers locking, logout, restart and shutdown.
 - **Tux mascot** — animated, can be toggled.
 

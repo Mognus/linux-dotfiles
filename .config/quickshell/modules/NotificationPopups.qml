@@ -8,7 +8,7 @@ import qs.services
 PanelWindow {
     id: popups
 
-    readonly property int popupWidth: 300
+    readonly property int popupWidth: 340
     readonly property int defaultTimeout: Notifications.popupTimeout
 
     anchors {
@@ -43,31 +43,68 @@ PanelWindow {
 
                 required property Notification modelData
                 readonly property bool critical: popup.modelData.urgency === NotificationUrgency.Critical
+                readonly property int padding: 12
 
                 width: popups.popupWidth
-                // At most 100px high; long bodies get cut.
-                height: Math.min(content.implicitHeight + 20, 100)
-                radius: 6
-                color: Colors.surface
+                height: header.height + content.implicitHeight + popup.padding * 2 + 2
+                color: Colors.background
                 border.width: 1
-                border.color: popup.critical ? Colors.danger : Colors.borderMuted
-                clip: true
+                border.color: popup.critical ? Colors.danger : mouse.containsMouse ? Colors.accent : Colors.border
+
+                // An inverted title bar, matching the settings menu's selection.
+                Rectangle {
+                    id: header
+
+                    x: 1
+                    y: 1
+                    width: parent.width - 2
+                    height: 28
+                    color: popup.critical ? Colors.danger : Colors.foreground
+
+                    Text {
+                        anchors.left: parent.left
+                        anchors.leftMargin: popup.padding
+                        anchors.right: close.left
+                        anchors.rightMargin: popup.padding
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: (popup.critical ? "! " : "> ") + (popup.modelData.appName || "NOTIFICATION").toUpperCase()
+                        textFormat: Text.PlainText
+                        elide: Text.ElideRight
+                        color: Colors.background
+                        font.family: Fonts.family
+                        font.pixelSize: Fonts.smallSize
+                    }
+
+                    Text {
+                        id: close
+
+                        anchors.right: parent.right
+                        anchors.rightMargin: popup.padding
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "×"
+                        color: Colors.background
+                        font.family: Fonts.family
+                        font.pixelSize: Fonts.smallSize
+                    }
+                }
 
                 Column {
                     id: content
 
-                    x: 12
-                    y: 10
-                    width: parent.width - 24
-                    spacing: 2
+                    x: popup.padding
+                    y: header.y + header.height + popup.padding
+                    width: parent.width - popup.padding * 2
+                    spacing: 8
 
                     Text {
                         width: parent.width
                         text: popup.modelData.summary
-                        color: popup.critical ? Colors.danger : Colors.foregroundSoft
+                        textFormat: Text.PlainText
+                        color: popup.critical ? Colors.danger : Colors.foreground
                         font.family: Fonts.family
-                        font.pixelSize: Fonts.smallSize
-                        font.bold: true
+                        font.pixelSize: Fonts.size
+                        wrapMode: Text.WordWrap
+                        maximumLineCount: 2
                         elide: Text.ElideRight
                     }
 
@@ -79,20 +116,29 @@ PanelWindow {
                         color: popup.critical ? Colors.danger : Colors.foregroundSoft
                         font.family: Fonts.family
                         font.pixelSize: Fonts.smallSize
-                        wrapMode: Text.Wrap
+                        wrapMode: Text.WordWrap
+                        maximumLineCount: 4
+                        elide: Text.ElideRight
                     }
                 }
 
-                // Critical ones stay until clicked. The app's timeout wins over the default;
-                // it is <= 0 when the app sent none.
+                // QS 0.3.2 passes the D-Bus timeout through in milliseconds.
+                // -1 uses our default in seconds; 0 requests no automatic expiry.
+                // Critical messages also stay until dismissed.
                 Timer {
-                    running: !popup.critical
-                    interval: (popup.modelData.expireTimeout > 0 ? popup.modelData.expireTimeout : popups.defaultTimeout) * 1000
+                    running: !popup.critical && popup.modelData.expireTimeout !== 0
+                    interval: popup.modelData.expireTimeout > 0
+                        ? popup.modelData.expireTimeout
+                        : popups.defaultTimeout * 1000
                     onTriggered: popup.modelData.expire()
                 }
 
                 MouseArea {
+                    id: mouse
+
                     anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: popup.modelData.dismiss()
                 }
             }
