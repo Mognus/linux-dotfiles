@@ -61,6 +61,7 @@ in
   xdg.configFile."yt-dlp".source = link ".config/yt-dlp";
   xdg.configFile."ruff".source = link ".config/ruff";
   xdg.configFile."zed".source = link ".config/zed";
+  xdg.configFile."opencode/tui.json".source = link ".config/opencode/tui.json";
 
   # A named profile gives user.js a fixed path; install.sh had to look it up.
   programs.firefox = {
