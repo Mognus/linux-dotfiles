@@ -63,18 +63,40 @@ FocusScope {
             required property string section
 
             width: list.width
-            height: 24
+            height: 28
 
-            Text {
+            Rectangle {
+                id: lead
+
                 anchors.left: parent.left
                 anchors.leftMargin: 10
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: 4
+                anchors.verticalCenter: parent.verticalCenter
+                width: 12
+                height: 1
+                color: Colors.borderMuted
+            }
+
+            Text {
+                id: sectionLabel
+
+                anchors.left: lead.right
+                anchors.leftMargin: 8
+                anchors.verticalCenter: parent.verticalCenter
                 text: section.toUpperCase()
                 textFormat: Text.PlainText
                 color: Colors.muted
                 font.family: Fonts.family
-                font.pixelSize: Fonts.captionSize
+                font.pixelSize: Fonts.smallSize
+            }
+
+            Rectangle {
+                anchors.left: sectionLabel.right
+                anchors.leftMargin: 8
+                anchors.right: parent.right
+                anchors.rightMargin: 10
+                anchors.verticalCenter: parent.verticalCenter
+                height: 1
+                color: Colors.borderMuted
             }
         }
 

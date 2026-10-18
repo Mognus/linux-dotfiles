@@ -9,6 +9,9 @@ PanelWindow {
 
     required property int panelWidth
     required property int panelHeight
+    property color panelColor: Colors.panel
+    property color panelBorderColor: "#888888"
+    property int panelBorderWidth: 2
     default property alias panelContent: panel.data
 
     anchors {
@@ -31,9 +34,9 @@ PanelWindow {
         anchors.centerIn: parent
         width: window.panelWidth
         height: window.panelHeight
-        color: Colors.panel
+        color: window.panelColor
         // Match the special-workspace borders in hypr/lua/workspaces.lua.
-        border.width: 2
-        border.color: "#888888"
+        border.width: window.panelBorderWidth
+        border.color: window.panelBorderColor
     }
 }

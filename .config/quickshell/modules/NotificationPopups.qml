@@ -9,7 +9,7 @@ PanelWindow {
     id: popups
 
     readonly property int popupWidth: 300
-    readonly property int defaultTimeout: 5
+    readonly property int defaultTimeout: Notifications.popupTimeout
 
     anchors {
         top: true

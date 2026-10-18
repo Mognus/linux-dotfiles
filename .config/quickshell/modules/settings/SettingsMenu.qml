@@ -12,11 +12,14 @@ OverlayWindow {
 
     readonly property int padding: 12
     readonly property int headerHeight: 44
+    readonly property int footerHeight: 36
     readonly property var sections: [
         {
             name: "General",
             entries: [
-                { name: "Audio", component: audioPage, panelWidth: 600, contentHeight: 340 }
+                { name: "Audio", component: audioPage, panelWidth: 600, contentHeight: 340 },
+                { name: "Notifications", component: notificationsPage, panelWidth: 600, contentHeight: 340 },
+                { name: "Session", component: sessionPage, panelWidth: 600, contentHeight: 340 }
             ]
         },
         {
@@ -29,9 +32,9 @@ OverlayWindow {
         {
             name: "Launcher",
             entries: [
-                { name: "Applications", action: () => ShellState.toggleLauncher() },
-                { name: "Windows", action: () => ShellState.toggleWindowSwitcher() },
-                { name: "Clipboard", action: () => ShellState.toggleClipboard() }
+                { name: "Applications", shortcut: "Super+Space", action: () => ShellState.toggleLauncher() },
+                { name: "Windows", shortcut: "Super+Ctrl+Space", action: () => ShellState.toggleWindowSwitcher() },
+                { name: "Clipboard", shortcut: "Super+V", action: () => ShellState.toggleClipboard() }
             ]
         }
     ]
@@ -57,7 +60,10 @@ OverlayWindow {
 
     visible: ShellState.settingsOpen
     panelWidth: window.currentPage ? window.currentPage.panelWidth : 600
-    panelHeight: window.headerHeight + divider.height + (window.currentPage ? window.currentPage.contentHeight : 340) + window.padding * 2
+    panelHeight: window.headerHeight + divider.height + (window.currentPage ? window.currentPage.contentHeight : 420 + window.footerHeight) + window.padding * 2
+    panelColor: Colors.background
+    panelBorderColor: Colors.border
+    panelBorderWidth: 1
 
     // Name that Hyprland layer rules can match.
     WlrLayershell.namespace: "settings"
@@ -84,6 +90,7 @@ OverlayWindow {
         }
 
         height: window.headerHeight
+        rootLabel: "SETTINGS"
         path: window.currentPage ? [window.currentPage.category, window.currentPage.name] : []
         onCloseRequested: ShellState.closeSettings()
     }
@@ -98,7 +105,7 @@ OverlayWindow {
         }
 
         height: 1
-        color: Colors.divider
+        color: Colors.borderMuted
     }
 
     FocusScope {
@@ -108,7 +115,7 @@ OverlayWindow {
             top: divider.bottom
             left: parent.left
             right: parent.right
-            bottom: parent.bottom
+            bottom: help.visible ? help.top : parent.bottom
             margins: window.padding
         }
 
@@ -132,6 +139,61 @@ OverlayWindow {
             focus: visible
             entries: window.entries
             sectionRole: "category"
+
+            delegate: Rectangle {
+                id: row
+
+                required property var modelData
+                required property int index
+                readonly property bool selected: row.ListView.isCurrentItem
+
+                width: ListView.view.width
+                height: 36
+                color: row.selected ? Colors.foreground : "transparent"
+
+                Text {
+                    anchors.left: parent.left
+                    anchors.leftMargin: 12
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: row.selected ? ">" : ""
+                    color: Colors.background
+                    font.family: Fonts.family
+                    font.pixelSize: Fonts.size
+                }
+
+                Text {
+                    anchors.left: parent.left
+                    anchors.leftMargin: 36
+                    anchors.right: shortcut.left
+                    anchors.rightMargin: 12
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: row.modelData.name
+                    textFormat: Text.PlainText
+                    elide: Text.ElideRight
+                    color: row.selected ? Colors.background : Colors.foreground
+                    font.family: Fonts.family
+                    font.pixelSize: Fonts.size
+                }
+
+                Text {
+                    id: shortcut
+
+                    anchors.right: parent.right
+                    anchors.rightMargin: 12
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: row.modelData.shortcut ?? ""
+                    color: row.selected ? Colors.background : Colors.muted
+                    font.family: Fonts.family
+                    font.pixelSize: Fonts.smallSize
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: start.select(row.index)
+                    onDoubleClicked: start.activateCurrent()
+                }
+            }
+
             onActivated: entry => {
                 start.stopSearch();
                 if (entry.action) {
@@ -153,6 +215,32 @@ OverlayWindow {
         }
     }
 
+    Item {
+        id: help
+
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        height: window.footerHeight
+        visible: window.currentPage === null
+
+        Rectangle {
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: 1
+            color: Colors.borderMuted
+        }
+
+        Text {
+            anchors.centerIn: parent
+            text: start.searching ? "↑↓ / CTRL+JK  SELECT    ENTER  OPEN    ESC  CLEAR" : "↑↓ / JK  MOVE    ENTER  OPEN    /  FIND    ESC  BACK"
+            color: Colors.foregroundSoft
+            font.family: Fonts.family
+            font.pixelSize: Fonts.captionSize
+        }
+    }
+
     Component {
         id: themePage
         ThemePage {}
@@ -166,5 +254,15 @@ OverlayWindow {
     Component {
         id: audioPage
         AudioPage {}
+    }
+
+    Component {
+        id: notificationsPage
+        NotificationsPage {}
+    }
+
+    Component {
+        id: sessionPage
+        SessionPage {}
     }
 }

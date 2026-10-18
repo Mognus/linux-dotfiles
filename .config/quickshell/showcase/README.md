@@ -35,12 +35,12 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   - `BottomBar.qml` — workspace strip, clock, recording indicator, volume text,
     laptop battery percentage, settings menu trigger, special workspace buttons.
   - `WorkspaceHud.qml` — compact workspace-only overlay.
-  - `Breadcrumbs.qml` — `× ~ / Theme` header showing the current settings
-    page; the × reports a close request.
+  - `Breadcrumbs.qml` — location header with a configurable root label, e.g.
+    `× SETTINGS / Appearance / Theme`; the × reports a close request.
   - `SearchableList.qml` — shared name filtering, selection, keyboard and
     search field for Settings, Theme and Wallpaper. Entries provide `name`; activation
-    passes the original entry to the page. Optional section headings group matching
-    entries without adding navigation levels. Theme supplies its own two-line row.
+    passes the original entry to the page. Optional ruled section headings group
+    matching entries without adding navigation levels. Theme supplies its own two-line row.
   - `SearchFooter.qml` — `/ cy` search line; it only types and hands every
     key to its `keyTargets` first, so the owner decides what keys drive.
     The settings, wallpaper and theme views open it on `/`.
@@ -53,12 +53,20 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
     the full text or image of the highlighted one on the right; same search,
     Enter copies the entry back.
   - `settings/` — the settings menu (Super+G), with all categories visible together:
-    - `SettingsMenu.qml` — General (Audio), Appearance (Theme, Wallpaper), and
+    - `SettingsMenu.qml` — General (Audio, Notifications, Session), Appearance (Theme, Wallpaper), and
       Launcher (Applications, Windows, Clipboard). One definition supplies names,
       components, dimensions and actions. Search removes empty categories; launcher
       actions open the existing overlays through the same functions as their keybinds.
+      The TUI-style start view has an opaque theme-colored frame, an inverted
+      selection bar with a `>` marker, launcher key hints and a pinned keyboard legend.
     - `AudioPage.qml` — compact output and microphone cards inside a bounded
       scroll area, with Pipewire status pinned below.
+    - `NotificationsPage.qml` — do-not-disturb, default timeout (3/5/10 seconds),
+      active count and dismiss-all controls. Critical notifications bypass DND.
+      These preferences apply to the current shell session.
+    - `SessionPage.qml` — searchable lock, logout, restart and shutdown actions.
+      Locking uses `loginctl lock-session` and the existing Hypridle handler.
+    - `SettingsButton.qml` — square buttons with Tab focus and Enter/Space activation.
     - `ThemePage.qml` — searchable palette names with terminal and browser
       color previews; highlighting previews a palette, Enter applies it.
     - `theme/TerminalPreview.qml` / `theme/BrowserPreview.qml` — illustrative
@@ -93,7 +101,10 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 - **Battery** — percentage in the bar when a laptop battery is present; low charge
   is red unless charging.
 - **Recording indicator** — shows when a screen recording is active.
-- **Notifications** — replaces Dunst, colored by the current theme.
+- **Notifications** — replaces Dunst, colored by the current theme. General >
+  Notifications controls do-not-disturb and the default popup duration; app-specified
+  timeouts still take precedence, and critical messages remain until dismissed.
+- **Session** — General > Session offers locking, logout, restart and shutdown.
 - **Tux mascot** — animated, can be toggled.
 
 ## Requirements

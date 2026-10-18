@@ -1,13 +1,14 @@
 import QtQuick
 import qs
 
-// Where a Menu is: × ~ / Theme / Colors. The × only reports the click;
+// Current location: × SETTINGS / Appearance / Theme. The × reports the click;
 // whoever uses it decides what closing means.
 Row {
     id: breadcrumbs
 
     // Titles below the root, outermost first, e.g. a Menu's path.
     property var path: []
+    property string rootLabel: "~"
 
     signal closeRequested
 
@@ -31,7 +32,7 @@ Row {
 
     Text {
         anchors.verticalCenter: parent.verticalCenter
-        text: "~"
+        text: breadcrumbs.rootLabel
         color: Colors.foreground
         font.family: Fonts.family
         font.pixelSize: Fonts.size
