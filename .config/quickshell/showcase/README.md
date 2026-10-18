@@ -53,7 +53,7 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
     the full text or image of the highlighted one on the right; same search,
     Enter copies the entry back.
   - `settings/` — the settings menu (Super+G), with all categories visible together:
-    - `SettingsMenu.qml` — General (Audio, Notifications, Session), Appearance (Theme, Wallpaper), and
+    - `SettingsMenu.qml` — General (Audio, Notifications, Session), Appearance (Theme, Wallpaper, Adjustments), and
       Launcher (Applications, Windows, Clipboard). One definition supplies names,
       components, dimensions and actions. Search removes empty categories; launcher
       actions open the existing overlays through the same functions as their keybinds.
@@ -67,6 +67,9 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
     - `SessionPage.qml` — searchable lock, logout, restart and shutdown actions.
       Locking uses `loginctl lock-session` and the existing Hypridle handler.
     - `SettingsButton.qml` — square buttons with Tab focus and Enter/Space activation.
+    - `AdjustmentsPage.qml` / `SettingSlider.qml` — terminal opacity, font size
+      and padding, saved on release through the local Rust writer. Reset restores
+      their defaults without changing the theme.
     - `ThemePage.qml` — searchable palette names with terminal and browser
       color previews; highlighting previews a palette, Enter applies it.
     - `theme/TerminalPreview.qml` / `theme/BrowserPreview.qml` — illustrative
@@ -80,6 +83,8 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
     expire after 5s, critical ones stay, a click closes one.
   - `TuxMascot.qml` — left/right mascot panel.
 - `lib/Audio.js` — Pipewire audio helper functions.
+- `services/Appearance.qml` — watches the shared terminal TOML, reads the current
+  values through `appearancectl get` and queues writes to its local binary.
 - `lib/Navigation.js` — shared keyboard recognition: arrows or Ctrl+hjkl in
   search fields, arrows or plain hjkl in lists, plus confirm and back keys.
 - `assets/` — animated angel/devil Tux sprites.
@@ -108,6 +113,10 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 - **Tux mascot** — animated, can be toggled.
 
 ## Requirements
+
+Build the local appearance writer once with
+`make -C ~/dotfiles/tools/appearancectl` (Rust 1.89+, Cargo and Make). It is used
+by both the theme switcher and the terminal adjustment sliders.
 
 - `quickshell`
 - Hyprland (uses `Quickshell.Hyprland`)

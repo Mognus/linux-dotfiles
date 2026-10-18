@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-state_dir="${THEME_STATE_DIR:-$HOME/.local/state/dotfiles-theme}"
+state_dir="${THEME_STATE_DIR:-${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles-theme}"
 script_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 palette_dir="$(readlink -f "$script_dir/../../themes/palettes")"
+writer="$script_dir/../../../tools/appearancectl/bin/appearancectl"
 announce=true
 
 requested="${1:-}"
@@ -19,30 +20,16 @@ fi
 theme="$(printf '%s' "$requested" | tr '[:upper:]' '[:lower:]')"
 palette="$palette_dir/$theme.json"
 [[ -f "$palette" ]] || { printf 'Unknown theme: %s\n' "$requested" >&2; exit 1; }
+[[ -x "$writer" ]] || { printf 'Build appearancectl first: make -C %s/../../../tools/appearancectl\n' "$script_dir" >&2; exit 1; }
 
 mkdir -p "$state_dir"
 tmp_dir="$(mktemp -d "$state_dir/.generate.XXXXXX")"
 trap 'rm -rf "$tmp_dir"' EXIT
 
 value() { jq -er ".$1" "$palette"; }
-value_or() { jq -er ".$1 // .$2" "$palette"; }
 
 # Quickshell watches this file, while other apps import their generated format.
 cp "$palette" "$tmp_dir/colors.json"
-
-cat > "$tmp_dir/alacritty.toml" <<EOF
-[colors.primary]
-background = "$(value_or terminalBackground background)"
-foreground = "$(value_or terminalForeground foregroundSoft)"
-
-[colors.cursor]
-cursor = "$(value accent)"
-text = "$(value_or terminalBackground background)"
-
-[colors.selection]
-background = "$(value accent)"
-text = "$(value_or terminalForeground foregroundSoft)"
-EOF
 
 cat > "$tmp_dir/gtk.css" <<EOF
 @define-color theme_bg_color $(value background);
@@ -58,8 +45,11 @@ cat > "$tmp_dir/gtk.css" <<EOF
 @define-color window_fg_color $(value foreground);
 EOF
 
+# The shared writer preserves terminal adjustments while replacing colors.
+THEME_STATE_DIR="$state_dir" "$writer" theme "$palette" >/dev/null
+
 # Atomic replacement prevents file watchers from reading half-written configs.
-for file in colors.json alacritty.toml gtk.css; do
+for file in colors.json gtk.css; do
     mv "$tmp_dir/$file" "$state_dir/$file"
 done
 printf '%s\n' "$theme" > "$state_dir/current"

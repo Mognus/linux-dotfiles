@@ -26,7 +26,8 @@ OverlayWindow {
             name: "Appearance",
             entries: [
                 { name: "Theme", component: themePage, panelWidth: 960, contentHeight: 440 },
-                { name: "Wallpaper", component: wallpaperPage, panelWidth: 1100, contentHeight: 520 }
+                { name: "Wallpaper", component: wallpaperPage, panelWidth: 1100, contentHeight: 520 },
+                { name: "Adjustments", component: adjustmentsPage, panelWidth: 600, contentHeight: 340 }
             ]
         },
         {
@@ -60,7 +61,7 @@ OverlayWindow {
 
     visible: ShellState.settingsOpen
     panelWidth: window.currentPage ? window.currentPage.panelWidth : 600
-    panelHeight: window.headerHeight + divider.height + (window.currentPage ? window.currentPage.contentHeight : 420 + window.footerHeight) + window.padding * 2
+    panelHeight: window.headerHeight + divider.height + (window.currentPage ? window.currentPage.contentHeight : 456 + window.footerHeight) + window.padding * 2
     panelColor: Colors.background
     panelBorderColor: Colors.border
     panelBorderWidth: 1
@@ -264,5 +265,10 @@ OverlayWindow {
     Component {
         id: sessionPage
         SessionPage {}
+    }
+
+    Component {
+        id: adjustmentsPage
+        AdjustmentsPage {}
     }
 }

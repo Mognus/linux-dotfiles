@@ -6,19 +6,14 @@ import = [
 [env]
 TERM = "xterm-256color"
 
-[font]
-# VGA 8x16 proportions at 100% display scaling.
-size = 20
-
 # Classic console appearance; installed through nix/modules/common.nix.
+# Size is loaded from the shared state file and adjustable in Settings.
 [font.normal]
 family = "PxPlus IBM VGA 8x16"
 style = "Regular"
 
 [window]
-opacity = 0.93
 decorations = "None"
-padding = { x = 12, y = 12 }
 
 # Vim-style buffer search. Gated to ~Vi so these stay out of the way once Vi
 # mode is active — there you already get native /, ?, n, N.

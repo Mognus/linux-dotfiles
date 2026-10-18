@@ -7,3 +7,4 @@
 ^/\.config/firefox$
 ^/nix$
 ^/Install-Nix\.md$
+^/tools$

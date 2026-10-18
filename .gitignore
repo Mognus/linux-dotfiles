@@ -12,3 +12,7 @@ result
 
 # Quickshell fills this for qmlls on every start; its paths differ per machine
 .qmlls.ini
+
+# Local Rust tools: source and Cargo.lock are tracked, build output is not.
+/tools/appearancectl/target/
+/tools/appearancectl/bin/
