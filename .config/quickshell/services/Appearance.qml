@@ -3,13 +3,12 @@ pragma Singleton
 import Quickshell
 import Quickshell.Io
 import QtQuick
+import qs
 
 // The TOML is the saved state. These properties are just its current UI snapshot.
 Singleton {
     id: root
 
-    readonly property string binary: Quickshell.env("HOME") + "/dotfiles/tools/appearancectl/bin/appearancectl"
-    readonly property string stateDir: Quickshell.env("THEME_STATE_DIR") || (Quickshell.env("XDG_STATE_HOME") || Quickshell.env("HOME") + "/.local/state") + "/dotfiles-theme"
     property real opacity: 0.93
     property real fontSize: 20
     property int padding: 12
@@ -28,11 +27,11 @@ Singleton {
     }
 
     function save(setting, value) {
-        root.enqueue([root.binary, "terminal", setting, String(value)]);
+        root.enqueue([ThemePaths.binary, "terminal", setting, String(value)]);
     }
 
     function resetTerminal() {
-        root.enqueue([root.binary, "terminal", "reset"]);
+        root.enqueue([ThemePaths.binary, "terminal", "reset"]);
     }
 
     function enqueue(command) {
@@ -49,7 +48,7 @@ Singleton {
     }
 
     FileView {
-        path: root.stateDir + "/alacritty.toml"
+        path: ThemePaths.stateDir + "/alacritty.toml"
         watchChanges: true
         printErrors: false
         onLoaded: refresh.restart()
@@ -73,7 +72,7 @@ Singleton {
     }
 
     Process {
-        command: [root.binary, "init"]
+        command: [ThemePaths.binary, "init"]
         running: true
         stderr: StdioCollector { id: initError }
         stdout: StdioCollector { onStreamFinished: root.readState(text) }
@@ -85,7 +84,7 @@ Singleton {
     Process {
         id: reader
 
-        command: [root.binary, "get"]
+        command: [ThemePaths.binary, "get"]
         stdout: StdioCollector { onStreamFinished: root.readState(text) }
         stderr: StdioCollector { id: readError }
         onExited: (exitCode, exitStatus) => {

@@ -38,7 +38,7 @@ fi
 # Materialize the saved palette before themed applications launch.
 rustup toolchain install stable --profile minimal
 RUSTUP_TOOLCHAIN=stable make -C "$repo_dir/tools/appearancectl"
-"$HOME/.config/hypr/scripts/theme-switcher.sh" --apply
+"$repo_dir/tools/appearancectl/bin/appearancectl" restore
 
 # Cursor settings are best-effort because TTY installs may have no D-Bus session.
 if command -v gsettings >/dev/null 2>&1; then

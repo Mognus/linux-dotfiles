@@ -21,7 +21,7 @@ in
     # hyprland: terminal bound in hypr/lua/programs.lua
     alacritty
     adwaita-icon-theme
-    # theme-switcher.sh reads the palettes with jq
+    # JSON command-line utilities
     jq
     # hyprland binds and scripts: clipboard, screenshots, recording, media keys
     wl-clipboard

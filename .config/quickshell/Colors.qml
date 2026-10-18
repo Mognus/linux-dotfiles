@@ -31,7 +31,7 @@ Singleton {
     readonly property color divider: palette.divider
 
     FileView {
-        path: Quickshell.env("HOME") + "/.local/state/dotfiles-theme/colors.json"
+        path: ThemePaths.stateDir + "/colors.json"
         watchChanges: true
         onFileChanged: reload()
 

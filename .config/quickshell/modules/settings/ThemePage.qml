@@ -38,13 +38,14 @@ FocusScope {
 
             required property var modelData
             readonly property string fileBaseName: entry.modelData.name
+            readonly property string palettePath: entry.modelData.path
             readonly property string name: entry.themeColors ? entry.themeColors.name : entry.fileBaseName
             property var themeColors: null
 
             FileView {
                 id: paletteFile
 
-                path: entry.modelData.path
+                path: entry.palettePath
                 watchChanges: true
                 onFileChanged: reload()
                 onLoaded: {
@@ -52,7 +53,7 @@ FocusScope {
                         entry.themeColors = JSON.parse(paletteFile.text());
                     } catch (error) {
                         entry.themeColors = null;
-                        console.warn("Invalid theme palette:", entry.modelData.path, error);
+                        console.warn("Invalid theme palette:", entry.palettePath, error);
                     }
                 }
                 onLoadFailed: entry.themeColors = null
@@ -63,7 +64,7 @@ FocusScope {
     FileView {
         id: currentTheme
 
-        path: Quickshell.env("HOME") + "/.local/state/dotfiles-theme/current"
+        path: ThemePaths.stateDir + "/current"
         watchChanges: true
         printErrors: false
         onFileChanged: reload()
@@ -82,7 +83,7 @@ FocusScope {
 
         onActivated: entry => {
             if (entry.themeColors) {
-                Quickshell.execDetached([Quickshell.env("HOME") + "/.config/hypr/scripts/theme-switcher.sh", entry.fileBaseName]);
+                Quickshell.execDetached([ThemePaths.binary, "theme", entry.palettePath]);
             }
         }
 
