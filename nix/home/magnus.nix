@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   dotfiles = "${config.home.homeDirectory}/dotfiles";
-  # Link straight into the repo, like Stow did, so edits apply without a rebuild.
+  # Link straight into the repo so edits apply without a rebuild.
   link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
 in
 {
@@ -63,8 +63,12 @@ in
   xdg.configFile."ruff".source = link ".config/ruff";
   xdg.configFile."zed".source = link ".config/zed";
   xdg.configFile."opencode/tui.json".source = link ".config/opencode/tui.json";
+  # Hyprland and Quickshell call appearancectl by this fixed location, not by
+  # the repository path, so the clone may live anywhere.
+  home.file.".local/bin/appearancectl".source =
+    link "tools/appearancectl/bin/appearancectl";
 
-  # A named profile gives user.js a fixed path; install.sh had to look it up.
+  # A named profile gives user.js a fixed path.
   programs.firefox = {
     enable = true;
     profiles.default.isDefault = true;
@@ -91,7 +95,7 @@ in
   # Screenshots are throwaway: anything untouched for a week gets deleted.
   systemd.user.tmpfiles.rules = [ "d %h/Pictures/screenshots - - - 7d" ];
 
-  # GTK apps read the cursor from dconf; install.sh set this through gsettings.
+  # GTK apps read the cursor from dconf.
   # The fonts name no font: "Sans"/"Monospace" resolve through fontconfig/fonts.conf.
   dconf.settings."org/gnome/desktop/interface" = {
     cursor-theme = "macOS";

@@ -77,7 +77,7 @@ Singleton {
         stderr: StdioCollector { id: initError }
         stdout: StdioCollector { onStreamFinished: root.readState(text) }
         onExited: (exitCode, exitStatus) => {
-            if (exitCode !== 0) root.error = initError.text || "Build the writer with make -C ~/dotfiles/tools/appearancectl";
+            if (exitCode !== 0) root.error = initError.text || "Build the writer with make -C tools/appearancectl";
         }
     }
 

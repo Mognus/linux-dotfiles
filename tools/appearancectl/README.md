@@ -5,23 +5,26 @@ and Make are needed to build it. Theme changes use `dconf` for GTK preferences
 and optionally `notify-send` to announce the selected theme.
 
 ```sh
-make -C ~/dotfiles/tools/appearancectl
-make -C ~/dotfiles/tools/appearancectl check
+make -C tools/appearancectl
+make -C tools/appearancectl check
 ```
 
 The executable lives at `tools/appearancectl/bin/appearancectl`, beside its
 source project. `bin/` and `target/` are ignored by Git. Rebuild after source
 changes, and build once on each new machine. `Cargo.lock` is tracked.
 
+Home Manager links the built binary to `~/.local/bin/appearancectl`. Hyprland
+and Quickshell call it through that path, so the repository may live anywhere.
+
 ```sh
-tools/appearancectl/bin/appearancectl init
-tools/appearancectl/bin/appearancectl get
-tools/appearancectl/bin/appearancectl restore
-tools/appearancectl/bin/appearancectl theme .config/themes/palettes/light-gray.json
-tools/appearancectl/bin/appearancectl terminal opacity 0.85
-tools/appearancectl/bin/appearancectl terminal font-size 20
-tools/appearancectl/bin/appearancectl terminal padding 12
-tools/appearancectl/bin/appearancectl terminal reset
+appearancectl init
+appearancectl get
+appearancectl restore
+appearancectl theme .config/themes/palettes/light-gray.json
+appearancectl terminal opacity 0.85
+appearancectl terminal font-size 20
+appearancectl terminal padding 12
+appearancectl terminal reset
 ```
 
 All state lives in `~/.local/state/dotfiles-theme`, matching Quickshell's shared
@@ -35,8 +38,8 @@ through `dconf`, then saves the palette's filename stem in `current`. A failed
 `restore` reads `current` and loads that palette from `~/.config/themes/palettes`
 without announcing it. On a fresh setup it uses `retro-dark.json`.
 
-Quickshell calls `theme` directly; Hyprland autostart and `install.sh` call
-`restore`. The former `theme-switcher.sh` is no longer needed.
+Quickshell calls `theme` directly; Hyprland autostart calls `restore`. The former
+`theme-switcher.sh` is no longer needed.
 
 After applying a theme, attached tmux terminals are queried for their actual
 foreground/background colors after 250 ms and again after one second. This

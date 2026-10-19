@@ -27,4 +27,4 @@ Run tmux inside Alacritty for sessions, tabs, and splits. Alacritty forwards the
 Use Vi mode to navigate scrollback without reaching for the mouse.
 
 Settings > Appearance > Adjustments changes opacity, font size and padding
-live. Build the local writer once with `make -C ~/dotfiles/tools/appearancectl`.
+live. Build the local writer once with `make -C tools/appearancectl`.

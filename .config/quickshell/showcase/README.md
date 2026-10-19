@@ -13,7 +13,7 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   state of its own beyond the Pipewire object tracker.
 - `Fonts.qml` — shared font family and pixel sizes for all shell text, including
   the bar, launchers, settings, notifications and lock screen.
-- `ThemePaths.qml` — shared QML paths to the local `appearancectl` binary and
+- `ThemePaths.qml` — shared QML paths to `~/.local/bin/appearancectl` and
   `~/.local/state/dotfiles-theme`, the writer's fixed state directory.
 - `LauncherStyle.qml` — shared spacing, icons and panel dimensions for the app
   launcher, window switcher and clipboard history. Colors come from `Colors.qml`.
@@ -120,8 +120,10 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 ## Requirements
 
 Build the local appearance writer once with
-`make -C ~/dotfiles/tools/appearancectl` (Rust 1.89+, Cargo and Make). It is used
-for theme changes, login restoration and the terminal adjustment sliders.
+`make -C tools/appearancectl` (Rust 1.89+, Cargo and Make). Home Manager links
+the built binary to `~/.local/bin/appearancectl`, which Hyprland and Quickshell
+call. It is used for theme changes, login restoration and the terminal
+adjustment sliders.
 
 - `quickshell`
 - Hyprland (uses `Quickshell.Hyprland`)

@@ -105,7 +105,12 @@ as `magnus`, then:
 ```sh
 nmtui                       # Wi-Fi, the live session's connection is gone
 git clone https://github.com/Mognus/linux-dotfiles.git ~/dotfiles
+make -C ~/dotfiles/tools/appearancectl   # writer linked to ~/.local/bin
 ```
+
+The clone must stay at `~/dotfiles`: `nix/home/magnus.nix` uses that path for
+every config link. The built writer is reached through `~/.local/bin/appearancectl`,
+so Hyprland and Quickshell do not depend on the repository location.
 
 **Ctrl+Alt+F1** returns to the greeter; logging in now starts Hyprland.
 
