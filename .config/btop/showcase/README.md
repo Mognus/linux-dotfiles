@@ -1,7 +1,7 @@
 # btop
 
 Retro system monitor using btop's built-in TTY mode. Configuration lives in
-`../btop.conf` and is linked to `~/.config/btop/btop.conf` by Home Manager or Stow.
+`../btop.conf` and is linked to `~/.config/btop/btop.conf` by Home Manager.
 
 ## Settings
 

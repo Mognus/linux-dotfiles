@@ -4,8 +4,7 @@ if not status is-interactive; or not set -q WAYLAND_DISPLAY
 end
 
 # Use the per-user SSH agent socket for this shell session.
-# Arch's systemd unit names it ssh-agent.socket, NixOS names it ssh-agent.
-for socket in "$XDG_RUNTIME_DIR/ssh-agent.socket" "$XDG_RUNTIME_DIR/ssh-agent"
+for socket in "$XDG_RUNTIME_DIR/ssh-agent"
     if test -S $socket
         set -gx SSH_AUTH_SOCK $socket
         break

@@ -1,12 +1,12 @@
 # Packages
 
-On NixOS, packages come from `nix/home/packages.nix`, config-specific dependencies
-in `nix/home/magnus.nix`, and system programs, fonts and services in
-`nix/modules/common.nix`. Apply changes with
-`sudo nixos-rebuild switch --flake ~/dotfiles/nix`.
+Packages come from three NixOS modules:
 
-The groups below summarize the Arch package list in `packages.txt` at the
-repository root, installed by `install.sh`. Package names differ on NixOS.
+- `nix/home/packages.nix` - general programs, grouped by purpose.
+- `nix/home/magnus.nix` - tools a linked config depends on, next to that config.
+- `nix/modules/common.nix` - system programs, fonts and services.
+
+Apply changes with `sudo nixos-rebuild switch --flake ~/dotfiles/nix`.
 
 ## Shell
 
@@ -21,7 +21,7 @@ repository root, installed by `install.sh`. Package names differ on NixOS.
 - `alacritty` - terminal emulator
 
 NixOS supplies IBM VGA for monospace text, Alacritty and Quickshell, and IBM Plex
-Sans for GUI text. The Arch list declares no font packages; see `fonts.md`.
+Sans for GUI text. See `fonts.md`.
 
 ## Desktop
 
@@ -73,16 +73,5 @@ Sans for GUI text. The Arch list declares no font packages; see `fonts.md`.
 - `pass` - GPG-backed password storage
 - `curl`, `wget`, `openssh` - network and remote access
 - `ripgrep` - fast text search, also used by Neovim's grep picker
-- `stow` - dotfiles symlink management
-- `base-devel` - build tools used with Arch and the AUR
 - `bind` - DNS diagnostic commands
-- `reflector` - pacman mirror updates
-- `ufw` - firewall
 - `unzip` and `7zip` - archive extraction
-
-`paru` and `paru-debug` are not in `packages.txt`: they are AUR packages, so the
-pacman-only installer cannot install them directly. Install an AUR helper
-separately if needed on Arch.
-
-`btop` is declared in the NixOS Home Manager packages, not in the Arch list.
-`bat`, `glow` and `fastfetch` are no longer in either declared package list.

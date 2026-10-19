@@ -11,8 +11,7 @@ Fonts are part of the terminal and desktop experience.
 
 NixOS declares two font packages in `nix/modules/common.nix`: the PC font pack
 providing IBM VGA, and IBM Plex restricted to Sans. NixOS's default font package
-set is disabled. The Arch package list declares no font packages; install the
-two chosen fonts separately there.
+set is disabled.
 
 Neovim and tmux use the terminal's font; they do not select a font themselves.
 

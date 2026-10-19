@@ -1,8 +1,8 @@
 # Dotfiles
 
 Personal dotfiles for a more or less bloat-free Linux desktop and terminal setup.
-Includes [NixOS configurations](nix/) ([installation](Install-Nix.md)), but the
-dotfiles can also be used without Nix, for example with GNU Stow.
+The setup is managed with [NixOS and Home Manager](nix/)
+([installation](Install-Nix.md)).
 
 ## Showcases
 

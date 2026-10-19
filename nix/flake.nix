@@ -2,7 +2,7 @@
   description = "NixOS configuration for my machines";
 
   inputs = {
-    # Rolling like Arch, so Hyprland and Quickshell match the desktop's versions.
+    # Rolling, so Hyprland and Quickshell track the desktop's versions.
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
       # The main branch tracks nixos-unstable.

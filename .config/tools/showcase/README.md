@@ -4,7 +4,7 @@ This topic covers supporting tools that are important to the setup but do not ne
 
 ## Does
 
-- Documents the NixOS package modules and the Arch package list
+- Documents the NixOS package modules
 - Documents CLI agents and assistant tooling
 - Documents media helpers such as `yt-dlp`
 - Documents Markdown reading through Neovim and render-markdown.nvim
@@ -12,7 +12,7 @@ This topic covers supporting tools that are important to the setup but do not ne
 
 ## Documents
 
-- `packages.md` - NixOS package sources and package groups from Arch's `packages.txt`
+- `packages.md` - NixOS package sources and package groups
 - `cli-agents.md` - Codex and Claude CLI setup
 - `media-tools.md` - download and playback helpers
 - `markdown.md` - rendered project documentation in Neovim

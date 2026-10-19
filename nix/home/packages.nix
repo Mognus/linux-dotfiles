@@ -1,4 +1,4 @@
-# General programs, grouped like the Arch packages.txt they replace.
+# General programs, grouped by purpose.
 # Tools a linked config depends on stay in magnus.nix next to that config.
 { pkgs, ... }:
 {

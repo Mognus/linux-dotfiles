@@ -9,8 +9,7 @@ gitignored; model, reasoning effort, sandbox permissions and trusted projects
 are not versioned defaults of this repository.
 
 Shared global instructions live in the repository-root `AGENTS.md`.
-Home Manager links it to `~/.codex/AGENTS.md` and `~/.claude/CLAUDE.md` on NixOS;
-`install.sh` creates those links on Arch. Stow excludes the root instruction file.
+Home Manager links it to `~/.codex/AGENTS.md` and `~/.claude/CLAUDE.md`.
 
 ## Claude
 
