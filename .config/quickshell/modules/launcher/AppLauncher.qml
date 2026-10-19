@@ -1,5 +1,4 @@
 import Quickshell
-import Quickshell.Wayland
 import Quickshell.Widgets
 import QtQuick
 import qs
@@ -9,7 +8,7 @@ import "../../lib/Navigation.js" as Navigation
 
 // App launcher: a GNOME-style grid of the desktop apps. The search line is
 // always active: typing filters, the arrows or Ctrl+hjkl move, Enter starts.
-OverlayWindow {
+OverlayPage {
     id: window
 
     readonly property int columns: 6
@@ -41,22 +40,18 @@ OverlayWindow {
         }
     }
 
-    visible: ShellState.launcherOpen
-    title: ShellState.overlayFromSettings ? "SETTINGS / Launcher / Applications" : "APPS"
+    title: "APPS"
+    settingsTitle: "Launcher / Applications"
     panelWidth: window.columns * LauncherStyle.gridCellSize + LauncherStyle.padding * 2
-    panelHeight: window.headerHeight + window.dividerHeight + window.rows * LauncherStyle.gridCellSize + LauncherStyle.rowHeight + LauncherStyle.padding * 2
-    onCloseRequested: ShellState.closeLauncher()
+    contentHeight: window.rows * LauncherStyle.gridCellSize + LauncherStyle.rowHeight + LauncherStyle.padding
+    padding: LauncherStyle.padding
+    searchEnabled: true
+    searchAlwaysActive: true
+    gridNavigation: true
+    confirmLabel: "LAUNCH"
 
-    // Name that Hyprland layer rules can match.
-    WlrLayershell.namespace: "launcher"
-
-    // Every opening starts with an empty search on the first app.
-    onVisibleChanged: {
-        if (window.visible) {
-            footer.clear();
-            grid.currentIndex = 0;
-            footer.forceActiveFocus();
-        }
+    function activate() {
+        footer.forceActiveFocus();
     }
 
     GridView {
@@ -67,7 +62,7 @@ OverlayWindow {
             left: parent.left
             right: parent.right
             bottom: footer.top
-            margins: LauncherStyle.padding
+            bottomMargin: LauncherStyle.padding
         }
 
         cellWidth: LauncherStyle.gridCellSize
@@ -144,7 +139,7 @@ OverlayWindow {
             } else if (Navigation.isConfirm(event)) {
                 window.launchCurrent();
             } else if (Navigation.isCancel(event)) {
-                ShellState.closeLauncher();
+                ShellState.backOverlay();
             } else {
                 return;
             }
@@ -159,7 +154,6 @@ OverlayWindow {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            margins: LauncherStyle.padding
         }
 
         height: LauncherStyle.rowHeight

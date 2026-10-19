@@ -11,7 +11,7 @@ import "../../lib/Navigation.js" as Navigation
 // Window switcher: the open windows of every workspace on the left, a live view
 // of the highlighted one on the right. The search line is always active: typing
 // filters by app and title, Up/Down or Ctrl+j/k move, Enter focuses.
-OverlayWindow {
+OverlayPage {
     id: window
 
     // Windows whose app or title contains the search, sorted by app so the list
@@ -57,23 +57,18 @@ OverlayWindow {
         }
     }
 
-    visible: ShellState.windowSwitcherOpen
-    title: ShellState.overlayFromSettings ? "SETTINGS / Launcher / Windows" : "WINDOWS"
+    title: "WINDOWS"
+    settingsTitle: "Launcher / Windows"
     panelWidth: LauncherStyle.listPanelWidth
-    panelHeight: window.headerHeight + window.dividerHeight + LauncherStyle.listPanelHeight
-    onCloseRequested: ShellState.closeWindowSwitcher()
+    contentHeight: LauncherStyle.listPanelHeight - LauncherStyle.padding * 2
+    padding: LauncherStyle.padding
+    searchEnabled: true
+    searchAlwaysActive: true
+    confirmLabel: "FOCUS"
 
-    // Shares the app launcher's Hyprland layer rule.
-    WlrLayershell.namespace: "launcher"
-
-    // Every opening reads the windows afresh and starts with an empty search.
-    onVisibleChanged: {
-        if (window.visible) {
-            Hyprland.refreshToplevels();
-            footer.clear();
-            list.currentIndex = 0;
-            footer.forceActiveFocus();
-        }
+    function activate() {
+        Hyprland.refreshToplevels();
+        footer.forceActiveFocus();
     }
 
     ListView {
@@ -83,7 +78,7 @@ OverlayWindow {
             top: parent.top
             left: parent.left
             bottom: footer.top
-            margins: LauncherStyle.padding
+            bottomMargin: LauncherStyle.padding
         }
 
         width: LauncherStyle.listWidth
@@ -175,7 +170,7 @@ OverlayWindow {
             } else if (Navigation.isConfirm(event)) {
                 window.jumpToCurrent();
             } else if (Navigation.isCancel(event)) {
-                ShellState.closeWindowSwitcher();
+                ShellState.backOverlay();
             } else {
                 return;
             }
@@ -189,7 +184,6 @@ OverlayWindow {
         anchors {
             left: parent.left
             bottom: parent.bottom
-            margins: LauncherStyle.padding
         }
 
         width: LauncherStyle.listWidth
@@ -220,7 +214,7 @@ OverlayWindow {
             bottom: parent.bottom
             left: divider.right
             right: parent.right
-            margins: LauncherStyle.padding
+            leftMargin: LauncherStyle.padding
         }
 
         // Only the highlighted window streams, and only while the switcher is open.

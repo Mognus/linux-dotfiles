@@ -13,7 +13,6 @@ FocusScope {
     property bool searching: false
     readonly property var matches: Array.from(root.entries).filter(entry => entry.name.toLowerCase().includes(search.text.toLowerCase()))
     readonly property var current: root.matches[list.currentIndex] ?? null
-    readonly property string helpText: root.searching ? "Type to filter   CTRL+J/K select   ENTER apply   ESC clear search" : "J/K select   / search   ENTER apply   ESC back"
 
     signal activated(var entry)
 

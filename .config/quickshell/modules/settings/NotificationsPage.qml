@@ -1,9 +1,13 @@
 import QtQuick
 import qs
+import qs.modules
 import qs.services
 
-FocusScope {
-    focus: true
+OverlayPage {
+    title: "General / Notifications"
+    navigationHint: "TAB  SELECT"
+    confirmKeys: "ENTER/SPACE"
+    confirmLabel: "ACTIVATE"
 
     Column {
         width: parent.width
@@ -108,7 +112,7 @@ FocusScope {
 
         Text {
             width: parent.width
-            text: "Apps may request their own timeout. Critical messages stay until dismissed.\nTAB selects a control; ENTER or SPACE activates it. ESC goes back."
+            text: "Apps may request their own timeout. Critical messages stay until dismissed."
             wrapMode: Text.WordWrap
             color: Colors.muted
             font.family: Fonts.family

@@ -7,13 +7,19 @@ import qs.modules
 import "theme"
 
 // Highlighting only changes the previews; Enter applies the selected palette.
-FocusScope {
+OverlayPage {
     id: view
+
+    title: "Appearance / Theme"
+    panelWidth: 960
+    contentHeight: 440
+    searchEnabled: true
+    searching: list.searching
+    confirmLabel: "APPLY"
+    extraHint: list.searching ? "" : "* ACTIVE THEME"
 
     readonly property var previewPalette: list.current ? list.current.themeColors : null
     property string activeTheme: ""
-
-    focus: true
 
     FolderListModel {
         id: folder
@@ -76,8 +82,7 @@ FocusScope {
 
         anchors.top: parent.top
         anchors.left: parent.left
-        anchors.bottom: footer.top
-        anchors.bottomMargin: 12
+        anchors.bottom: parent.bottom
         width: 240
         entries: palettes.instances
 
@@ -157,17 +162,5 @@ FocusScope {
         color: Colors.muted
         font.family: Fonts.family
         font.pixelSize: Fonts.size
-    }
-
-    Text {
-        id: footer
-
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        text: list.helpText + (list.searching ? "" : "   * active theme")
-        color: Colors.muted
-        font.family: Fonts.family
-        font.pixelSize: Fonts.captionSize
     }
 }

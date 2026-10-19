@@ -11,11 +11,10 @@ Singleton {
     property bool workspaceHudVisible: false
     property bool tuxVisible: true
 
-    // Overlays pop up centered and take the keyboard, so only one is open at a
-    // time: "settings", "launcher", "windowSwitcher", "clipboard", or "" for none.
+    // Route shown in the shared overlay; empty means closed.
     property string overlay: ""
     property bool overlayFromSettings: false
-    readonly property bool settingsOpen: root.overlay === "settings"
+    readonly property bool settingsOpen: root.overlay === "settings" || root.overlayFromSettings
     readonly property bool launcherOpen: root.overlay === "launcher"
     readonly property bool windowSwitcherOpen: root.overlay === "windowSwitcher"
     readonly property bool clipboardOpen: root.overlay === "clipboard"
@@ -39,44 +38,68 @@ Singleton {
     }
 
     // Opens the overlay, closing whichever was open; toggling the open one closes it.
-    function toggleOverlay(name, fromSettings = false) {
-        root.overlayFromSettings = root.overlay !== name && fromSettings;
+    function toggleOverlay(name) {
+        root.overlayFromSettings = false;
         root.overlay = root.overlay === name ? "" : name;
     }
 
     function closeOverlay(name) {
         if (root.overlay === name) {
-            root.overlay = "";
-            root.overlayFromSettings = false;
+            root.dismissOverlay();
         }
     }
 
+    function openSettingsPage(name) {
+        root.overlayFromSettings = true;
+        root.overlay = name;
+    }
+
+    function backOverlay() {
+        if (root.overlayFromSettings) {
+            root.overlayFromSettings = false;
+            root.overlay = "settings";
+        } else {
+            root.dismissOverlay();
+        }
+    }
+
+    function dismissOverlay() {
+        root.overlay = "";
+        root.overlayFromSettings = false;
+    }
+
     function toggleSettings() {
-        root.toggleOverlay("settings");
+        if (root.settingsOpen) {
+            root.dismissOverlay();
+        } else {
+            root.toggleOverlay("settings");
+        }
     }
 
     function closeSettings() {
-        root.closeOverlay("settings");
+        if (root.settingsOpen) {
+            root.dismissOverlay();
+        }
     }
 
-    function toggleLauncher(fromSettings = false) {
-        root.toggleOverlay("launcher", fromSettings);
+    function toggleLauncher() {
+        root.toggleOverlay("launcher");
     }
 
     function closeLauncher() {
         root.closeOverlay("launcher");
     }
 
-    function toggleWindowSwitcher(fromSettings = false) {
-        root.toggleOverlay("windowSwitcher", fromSettings);
+    function toggleWindowSwitcher() {
+        root.toggleOverlay("windowSwitcher");
     }
 
     function closeWindowSwitcher() {
         root.closeOverlay("windowSwitcher");
     }
 
-    function toggleClipboard(fromSettings = false) {
-        root.toggleOverlay("clipboard", fromSettings);
+    function toggleClipboard() {
+        root.toggleOverlay("clipboard");
     }
 
     function closeClipboard() {

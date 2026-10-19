@@ -1,241 +1,125 @@
-import Quickshell
-import Quickshell.Wayland
 import QtQuick
 import qs
 import qs.modules
 import qs.services
 import "../../lib/Navigation.js" as Navigation
 
-// Categories group the start list; only content pages change the current page.
-OverlayWindow {
-    id: window
+// Categories only group entries; every entry opens a page in the shared overlay.
+OverlayPage {
+    id: menu
 
-    readonly property int padding: 12
-    readonly property int footerHeight: 36
+    title: "SETTINGS"
+    contentHeight: 456
+    searchEnabled: true
+    searching: start.searching
+    confirmLabel: "OPEN"
+
     readonly property var sections: [
         {
             name: "General",
             entries: [
-                { name: "Audio", component: audioPage, panelWidth: 600, contentHeight: 340 },
-                { name: "Notifications", component: notificationsPage, panelWidth: 600, contentHeight: 340 },
-                { name: "Session", component: sessionPage, panelWidth: 600, contentHeight: 340 }
+                { name: "Audio", page: "audio" },
+                { name: "Notifications", page: "notifications" },
+                { name: "Session", page: "session" }
             ]
         },
         {
             name: "Appearance",
             entries: [
-                { name: "Theme", component: themePage, panelWidth: 960, contentHeight: 440 },
-                { name: "Wallpaper", component: wallpaperPage, panelWidth: 1100, contentHeight: 520 },
-                { name: "Adjustments", component: adjustmentsPage, panelWidth: 600, contentHeight: 340 }
+                { name: "Theme", page: "theme" },
+                { name: "Wallpaper", page: "wallpaper" },
+                { name: "Adjustments", page: "adjustments" }
             ]
         },
         {
             name: "Launcher",
             entries: [
-                { name: "Applications", shortcut: "Super+Space", action: () => ShellState.toggleLauncher(true) },
-                { name: "Windows", shortcut: "Super+Ctrl+Space", action: () => ShellState.toggleWindowSwitcher(true) },
-                { name: "Clipboard", shortcut: "Super+V", action: () => ShellState.toggleClipboard(true) }
+                { name: "Applications", page: "launcher", shortcut: "Super+Space" },
+                { name: "Windows", page: "windowSwitcher", shortcut: "Super+Ctrl+Space" },
+                { name: "Clipboard", page: "clipboard", shortcut: "Super+V" }
             ]
         }
     ]
     readonly property var entries: {
         const result = [];
-        for (const section of window.sections) {
+        for (const section of menu.sections) {
             for (const entry of section.entries) {
                 result.push(Object.assign({ category: section.name }, entry));
             }
         }
         return result;
     }
-    property var currentPage: null
 
-    function back() {
-        if (window.currentPage === null) {
-            ShellState.closeSettings();
-        } else {
-            window.currentPage = null;
-            start.forceActiveFocus();
-        }
+    function activate() {
+        start.select(0);
     }
 
-    visible: ShellState.settingsOpen
-    title: window.currentPage ? "SETTINGS / " + window.currentPage.category + " / " + window.currentPage.name : "SETTINGS"
-    panelWidth: window.currentPage ? window.currentPage.panelWidth : 600
-    panelHeight: window.headerHeight + window.dividerHeight + (window.currentPage ? window.currentPage.contentHeight : 456 + window.footerHeight) + window.padding * 2
-    onCloseRequested: ShellState.closeSettings()
+    SearchableList {
+        id: start
 
-    // Name that Hyprland layer rules can match.
-    WlrLayershell.namespace: "settings"
-
-    // Every opening starts at the top of the list.
-    onVisibleChanged: {
-        if (window.visible) {
-            window.currentPage = null;
-            start.stopSearch();
-            start.select(0);
-        }
-    }
-
-    FocusScope {
-        id: content
-
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-            bottom: help.visible ? help.top : parent.bottom
-            margins: window.padding
-        }
-
-        focus: true
-
+        anchors.fill: parent
+        entries: menu.entries
+        sectionRole: "category"
         Keys.onPressed: event => {
-            if (Navigation.isBack(event)) {
-                window.back();
-                event.accepted = true;
-            } else if (window.currentPage === null && Navigation.isOpen(event)) {
+            if (Navigation.isOpen(event)) {
                 start.activateCurrent();
                 event.accepted = true;
             }
         }
+        onActivated: entry => ShellState.openSettingsPage(entry.page)
 
-        SearchableList {
-            id: start
+        delegate: Rectangle {
+            id: row
 
-            anchors.fill: parent
-            visible: window.currentPage === null
-            focus: visible
-            entries: window.entries
-            sectionRole: "category"
+            required property var modelData
+            required property int index
+            readonly property bool selected: row.ListView.isCurrentItem
 
-            delegate: Rectangle {
-                id: row
+            width: ListView.view.width
+            height: 36
+            color: row.selected ? Colors.foreground : "transparent"
 
-                required property var modelData
-                required property int index
-                readonly property bool selected: row.ListView.isCurrentItem
-
-                width: ListView.view.width
-                height: 36
-                color: row.selected ? Colors.foreground : "transparent"
-
-                Text {
-                    anchors.left: parent.left
-                    anchors.leftMargin: 12
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: row.selected ? ">" : ""
-                    color: Colors.background
-                    font.family: Fonts.family
-                    font.pixelSize: Fonts.size
-                }
-
-                Text {
-                    anchors.left: parent.left
-                    anchors.leftMargin: 36
-                    anchors.right: shortcut.left
-                    anchors.rightMargin: 12
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: row.modelData.name
-                    textFormat: Text.PlainText
-                    elide: Text.ElideRight
-                    color: row.selected ? Colors.background : Colors.foreground
-                    font.family: Fonts.family
-                    font.pixelSize: Fonts.size
-                }
-
-                Text {
-                    id: shortcut
-
-                    anchors.right: parent.right
-                    anchors.rightMargin: 12
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: row.modelData.shortcut ?? ""
-                    color: row.selected ? Colors.background : Colors.muted
-                    font.family: Fonts.family
-                    font.pixelSize: Fonts.smallSize
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: start.select(row.index)
-                    onDoubleClicked: start.activateCurrent()
-                }
+            Text {
+                anchors.left: parent.left
+                anchors.leftMargin: 12
+                anchors.verticalCenter: parent.verticalCenter
+                text: row.selected ? ">" : ""
+                color: Colors.background
+                font.family: Fonts.family
+                font.pixelSize: Fonts.size
             }
 
-            onActivated: entry => {
-                start.stopSearch();
-                if (entry.action) {
-                    entry.action();
-                } else {
-                    window.currentPage = entry;
-                }
+            Text {
+                anchors.left: parent.left
+                anchors.leftMargin: 36
+                anchors.right: shortcut.left
+                anchors.rightMargin: 12
+                anchors.verticalCenter: parent.verticalCenter
+                text: row.modelData.name
+                textFormat: Text.PlainText
+                elide: Text.ElideRight
+                color: row.selected ? Colors.background : Colors.foreground
+                font.family: Fonts.family
+                font.pixelSize: Fonts.size
+            }
+
+            Text {
+                id: shortcut
+
+                anchors.right: parent.right
+                anchors.rightMargin: 12
+                anchors.verticalCenter: parent.verticalCenter
+                text: row.modelData.shortcut ?? ""
+                color: row.selected ? Colors.background : Colors.muted
+                font.family: Fonts.family
+                font.pixelSize: Fonts.smallSize
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: start.select(row.index)
+                onDoubleClicked: start.activateCurrent()
             }
         }
-
-        Loader {
-            id: page
-
-            anchors.fill: parent
-            active: window.currentPage !== null
-            focus: active
-            sourceComponent: window.currentPage ? window.currentPage.component : null
-            onLoaded: page.item.forceActiveFocus()
-        }
-    }
-
-    Item {
-        id: help
-
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        height: window.footerHeight
-        visible: window.currentPage === null
-
-        Rectangle {
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: 1
-            color: Colors.borderMuted
-        }
-
-        Text {
-            anchors.centerIn: parent
-            text: start.searching ? "↑↓ / CTRL+JK  SELECT    ENTER  OPEN    ESC  CLEAR" : "↑↓ / JK  MOVE    ENTER  OPEN    /  FIND    ESC  BACK"
-            color: Colors.foregroundSoft
-            font.family: Fonts.family
-            font.pixelSize: Fonts.captionSize
-        }
-    }
-
-    Component {
-        id: themePage
-        ThemePage {}
-    }
-
-    Component {
-        id: wallpaperPage
-        WallpaperPage {}
-    }
-
-    Component {
-        id: audioPage
-        AudioPage {}
-    }
-
-    Component {
-        id: notificationsPage
-        NotificationsPage {}
-    }
-
-    Component {
-        id: sessionPage
-        SessionPage {}
-    }
-
-    Component {
-        id: adjustmentsPage
-        AdjustmentsPage {}
     }
 }

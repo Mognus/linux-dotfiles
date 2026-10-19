@@ -1,6 +1,5 @@
 import Quickshell
 import Quickshell.Io
-import Quickshell.Wayland
 import QtQuick
 import qs
 import qs.modules
@@ -11,7 +10,7 @@ import "../../lib/Navigation.js" as Navigation
 // full text or image of the highlighted one on the right. The search line is
 // always active: typing filters, Up/Down or Ctrl+j/k move, Enter copies the
 // entry back into the clipboard, Delete removes it, Shift+Delete wipes all.
-OverlayWindow {
+OverlayPage {
     id: window
 
     // Parsed `cliphist list` output, refreshed on every opening.
@@ -93,23 +92,19 @@ OverlayWindow {
 
     onCurrentChanged: window.loadPreview()
 
-    visible: ShellState.clipboardOpen
-    title: ShellState.overlayFromSettings ? "SETTINGS / Launcher / Clipboard" : "CLIPBOARD"
+    title: "CLIPBOARD"
+    settingsTitle: "Launcher / Clipboard"
     panelWidth: LauncherStyle.listPanelWidth
-    panelHeight: window.headerHeight + window.dividerHeight + LauncherStyle.listPanelHeight
-    onCloseRequested: ShellState.closeClipboard()
+    contentHeight: LauncherStyle.listPanelHeight - LauncherStyle.padding * 2
+    padding: LauncherStyle.padding
+    searchEnabled: true
+    searchAlwaysActive: true
+    confirmLabel: "COPY"
+    extraHint: "DEL  DELETE    SHIFT+DEL  WIPE ALL"
 
-    // Shares the app launcher's Hyprland layer rule.
-    WlrLayershell.namespace: "launcher"
-
-    // Every opening reads the history afresh and starts with an empty search.
-    onVisibleChanged: {
-        if (window.visible) {
-            history.running = true;
-            footer.clear();
-            list.currentIndex = 0;
-            footer.forceActiveFocus();
-        }
+    function activate() {
+        history.running = true;
+        footer.forceActiveFocus();
     }
 
     Process {
@@ -155,7 +150,7 @@ OverlayWindow {
             top: parent.top
             left: parent.left
             bottom: footer.top
-            margins: LauncherStyle.padding
+            bottomMargin: LauncherStyle.padding
         }
 
         width: LauncherStyle.listWidth
@@ -214,7 +209,7 @@ OverlayWindow {
                     window.remove(window.current);
                 }
             } else if (Navigation.isCancel(event)) {
-                ShellState.closeClipboard();
+                ShellState.backOverlay();
             } else {
                 return;
             }
@@ -228,7 +223,6 @@ OverlayWindow {
         anchors {
             left: parent.left
             bottom: parent.bottom
-            margins: LauncherStyle.padding
         }
 
         width: LauncherStyle.listWidth
@@ -259,7 +253,7 @@ OverlayWindow {
             bottom: parent.bottom
             left: divider.right
             right: parent.right
-            margins: LauncherStyle.padding
+            leftMargin: LauncherStyle.padding
         }
 
         Text {

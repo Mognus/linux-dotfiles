@@ -18,10 +18,9 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 - `LauncherStyle.qml` — shared spacing, icons and panel dimensions for the app
   launcher, window switcher and clipboard history. Colors come from `Colors.qml`.
 - `services/` — singletons holding all shared state and logic:
-  - `ShellState.qml` — panel visibility (bottom bar, workspace HUD, tux) and the
-    one open overlay (settings menu, app launcher, window switcher or clipboard
-    history; opening one closes the other), plus the IPC handlers that toggle
-    them.
+  - `ShellState.qml` — panel visibility (bottom bar, workspace HUD, tux), the
+    current overlay page and its Settings origin, plus IPC toggles. Back returns
+    to Settings when opened there, otherwise closes; dismiss always closes.
   - `Workspaces.qml` — Hyprland workspace/special-workspace queries and the
     active-special-workspace tracking (seeded from `Hyprland.monitors`, kept
     live via `rawEvent`).
@@ -34,6 +33,11 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
 - `modules/` — UI panels, purely presentational, bound to the services above:
   - `OverlayWindow.qml` — shared full-screen backdrop for settings and launchers:
     50% black with Hyprland background blur, keeping the panel sharp and centered.
+  - `ShellOverlay.qml` — the single overlay window: loads the current page and
+    owns its title, content padding, dimensions and bottom keyboard legend.
+  - `OverlayPage.qml` — focus scope for page content, with presentation properties
+    for the shared frame and a common back-key handler. Pages handle their own
+    search and actions; they do not create windows or footers.
   - `BottomBar.qml` — workspace strip, clock, recording indicator, volume text,
     laptop battery percentage, settings menu trigger, special workspace buttons.
   - `WorkspaceHud.qml` — compact workspace-only overlay.
@@ -46,8 +50,12 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   - `SearchFooter.qml` — `/ cy` search line; it only types and hands every
     key to its `keyTargets` first, so the owner decides what keys drive.
     The settings, wallpaper and theme views open it on `/`.
+  - `KeyboardHints.qml` — display-only keyboard legend in the shared frame.
+    The page supplies search/control state, action labels and extra hints;
+    the frame supplies BACK/CLOSE, or CLEAR during a list's search mode.
   - `launcher/AppLauncher.qml` — GNOME-style grid of the desktop apps with an
-    always active search; arrows or Ctrl+hjkl move, Enter starts, Esc closes.
+    always active search; arrows or Ctrl+hjkl move, Enter starts. Esc returns to
+    Settings when opened there, otherwise closes. The × always closes everything.
   - `launcher/WindowSwitcher.qml` — open windows of every workspace on the
     left, grouped by app under an icon header, a live view of the highlighted
     one on the right; same search.
@@ -57,10 +65,9 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   - `settings/` — the settings menu (Super+G), with all categories visible together:
     - `SettingsMenu.qml` — General (Audio, Notifications, Session), Appearance (Theme, Wallpaper, Adjustments), and
       Launcher (Applications, Windows, Clipboard). One definition supplies names,
-      components, dimensions and actions. Search removes empty categories; launcher
-      actions open the existing overlays through the same functions as their keybinds.
-      The TUI-style start view has an opaque theme-colored frame, an inverted
-      selection bar with a `>` marker, launcher key hints and a pinned keyboard legend.
+      routes and shortcut hints. Search removes empty categories; every entry
+      opens a page in the shared overlay with Settings as its one-level parent.
+      The TUI-style start list uses an inverted selection bar with a `>` marker.
     - `AudioPage.qml` — compact output and microphone cards inside a bounded
       scroll area, with Pipewire status pinned below.
     - `NotificationsPage.qml` — do-not-disturb, default timeout (3/5/10 seconds),

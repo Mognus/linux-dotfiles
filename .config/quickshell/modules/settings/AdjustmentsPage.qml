@@ -1,9 +1,11 @@
 import QtQuick
 import qs
+import qs.modules
 import qs.services
 
-FocusScope {
-    focus: true
+OverlayPage {
+    title: "Appearance / Adjustments"
+    navigationHint: "TAB  SELECT    ←→  ADJUST"
 
     Column {
         width: parent.width
@@ -49,7 +51,7 @@ FocusScope {
 
         Text {
             width: parent.width
-            text: Appearance.error || "Release to save. TAB selects a slider; arrows adjust it.\nTheme changes preserve these values. Alacritty reloads them live."
+            text: Appearance.error || "Release to save. Theme changes preserve these values.\nAlacritty reloads them live."
             wrapMode: Text.WordWrap
             color: Appearance.error ? Colors.danger : Colors.muted
             font.family: Fonts.family

@@ -3,8 +3,11 @@ import Quickshell.Services.Pipewire
 import qs
 import qs.modules
 
-Item {
+OverlayPage {
     id: page
+
+    title: "General / Audio"
+    navigationHint: "SCROLL ON SLIDER  +/- 2%"
 
     Flickable {
         id: scroll
@@ -64,15 +67,6 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             text: Pipewire.ready ? "PIPEWIRE READY" : "PIPEWIRE WAIT"
             color: Pipewire.ready ? Colors.muted : Colors.danger
-            font.family: Fonts.family
-            font.pixelSize: Fonts.captionSize
-        }
-
-        Text {
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            text: "SCROLL ON SLIDER: +/- 2%"
-            color: Colors.muted
             font.family: Fonts.family
             font.pixelSize: Fonts.captionSize
         }

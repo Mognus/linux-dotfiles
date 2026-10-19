@@ -5,8 +5,15 @@ import qs
 import qs.modules
 
 // Selection previews a file; only confirmation hands it to awww.
-FocusScope {
+OverlayPage {
     id: view
+
+    title: "Appearance / Wallpaper"
+    panelWidth: 1100
+    contentHeight: 520
+    searchEnabled: true
+    searching: list.searching
+    confirmLabel: "APPLY"
 
     readonly property var entries: Array.from({ length: folder.count }, (_, index) => ({
         name: folder.get(index, "fileBaseName"),
@@ -14,8 +21,6 @@ FocusScope {
         url: folder.get(index, "fileUrl")
     }))
     readonly property var current: list.current
-
-    focus: true
 
     FolderListModel {
         id: folder
@@ -32,8 +37,7 @@ FocusScope {
 
         anchors.top: parent.top
         anchors.left: parent.left
-        anchors.bottom: hint.top
-        anchors.bottomMargin: 12
+        anchors.bottom: parent.bottom
         width: 310
         entries: view.entries
         onActivated: entry => Quickshell.execDetached(["awww", "img", entry.path, "--transition-type", "any", "--transition-duration", "1", "--transition-fps", "60"])
@@ -79,24 +83,11 @@ FocusScope {
 
         anchors.left: preview.left
         anchors.right: parent.right
-        anchors.bottom: hint.top
-        anchors.bottomMargin: 12
+        anchors.bottom: parent.bottom
         text: view.current ? view.current.path.split("/").pop() : ""
         textFormat: Text.PlainText
         elide: Text.ElideMiddle
         color: Colors.foregroundSoft
-        font.family: Fonts.family
-        font.pixelSize: Fonts.captionSize
-    }
-
-    Text {
-        id: hint
-
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        text: list.helpText
-        color: Colors.muted
         font.family: Fonts.family
         font.pixelSize: Fonts.captionSize
     }
