@@ -23,6 +23,12 @@ pub struct Palette {
     pub foreground: String,
     pub foreground_soft: String,
     pub accent: String,
+    pub secondary: String,
+    pub success: String,
+    pub danger: String,
+    pub warning: String,
+    pub violet: String,
+    pub muted: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub terminal_background: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -48,6 +54,12 @@ impl Palette {
             &self.foreground,
             &self.foreground_soft,
             &self.accent,
+            &self.secondary,
+            &self.success,
+            &self.danger,
+            &self.warning,
+            &self.violet,
+            &self.muted,
         ] {
             validate_color(color)?;
         }

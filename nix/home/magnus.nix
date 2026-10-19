@@ -49,6 +49,7 @@ in
   xdg.configFile."hypr".source = link ".config/hypr";
   xdg.configFile."xkb".source = link ".config/xkb";
   xdg.configFile."alacritty".source = link ".config/alacritty";
+  xdg.configFile."btop/btop.conf".source = link ".config/btop/btop.conf";
   xdg.configFile."quickshell".source = link ".config/quickshell";
   xdg.configFile."wallpapers".source = link ".config/wallpapers";
   xdg.configFile."themes".source = link ".config/themes";

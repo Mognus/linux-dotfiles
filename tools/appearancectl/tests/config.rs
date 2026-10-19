@@ -86,7 +86,18 @@ fn initializes_old_color_only_files_without_losing_existing_data() {
 fn theme_and_terminal_changes_preserve_each_others_fields() {
     let state = test_home();
     let palette = state.path().join("palette.json");
-    fs::write(&palette, r##"{"name":"Test Light","mode":"light","background":"#ffffff","surface":"#eeeeee","foreground":"#111111","foregroundSoft":"#333333","accent":"#007aff","terminalBackground":"#222222"}"##).unwrap();
+    fs::write(
+        &palette,
+        serde_json::to_string_pretty(&serde_json::json!({
+            "name": "Test Light", "mode": "light", "background": "#ffffff",
+            "surface": "#eeeeee", "foreground": "#111111", "foregroundSoft": "#333333",
+            "accent": "#007aff", "terminalBackground": "#222222",
+            "secondary": "#5856d6", "success": "#248a3d", "danger": "#d70015",
+            "warning": "#b25000", "violet": "#8944ab", "muted": "#6e6e73"
+        }))
+        .unwrap(),
+    )
+    .unwrap();
     run(&state, &["terminal", "opacity", "0.6"]);
     run(&state, &["terminal", "font-size", "23.5"]);
     run(&state, &["terminal", "padding", "8"]);
@@ -166,7 +177,14 @@ fn concurrent_theme_and_slider_writes_do_not_lose_settings() {
     let palette = state.path().join("palette.json");
     fs::write(
         &palette,
-        r##"{"name":"Test Dark","mode":"dark","background":"#ffffff","surface":"#111111","foreground":"#eeeeee","foregroundSoft":"#333333","accent":"#007aff"}"##,
+        serde_json::to_string_pretty(&serde_json::json!({
+            "name": "Test Dark", "mode": "dark", "background": "#ffffff",
+            "surface": "#111111", "foreground": "#eeeeee", "foregroundSoft": "#333333",
+            "accent": "#007aff", "secondary": "#5856d6", "success": "#248a3d",
+            "danger": "#d70015", "warning": "#b25000", "violet": "#8944ab",
+            "muted": "#6e6e73"
+        }))
+        .unwrap(),
     )
     .unwrap();
     let mut children = Vec::new();
@@ -246,6 +264,34 @@ fn every_repository_palette_generates_shell_gtk_and_terminal_files() {
         assert_eq!(
             terminal["colors"]["primary"]["foreground"].as_str(),
             foreground.as_str()
+        );
+        // btop's TTY theme uses ANSI 0 for its background and 7/15 for text.
+        assert_eq!(
+            terminal["colors"]["normal"]["black"].as_str(),
+            background.as_str()
+        );
+        for section in ["normal", "bright"] {
+            assert_eq!(
+                terminal["colors"][section]["white"].as_str(),
+                foreground.as_str()
+            );
+            for (slot, role) in [
+                ("red", "danger"),
+                ("green", "success"),
+                ("yellow", "warning"),
+                ("blue", "secondary"),
+                ("magenta", "violet"),
+                ("cyan", "accent"),
+            ] {
+                assert_eq!(
+                    terminal["colors"][section][slot].as_str(),
+                    palette[role].as_str()
+                );
+            }
+        }
+        assert_eq!(
+            terminal["colors"]["bright"]["black"].as_str(),
+            palette["muted"].as_str()
         );
         assert_eq!(
             fs::read_to_string(state_dir.join("current"))

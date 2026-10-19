@@ -9,6 +9,7 @@ dotfiles can also be used without Nix, for example with GNU Stow.
 Screenshots and details for each part of the setup:
 
 - [Alacritty](.config/alacritty/showcase/README.md)
+- [btop](.config/btop/showcase/README.md)
 - [Fish](.config/fish/showcase/README.md)
 - [Hyprland](.config/hypr/showcase/README.md)
 - [Neovim](.config/nvim/showcase/README.md)

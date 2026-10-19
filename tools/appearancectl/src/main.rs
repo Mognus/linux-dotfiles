@@ -1,4 +1,5 @@
 mod alacritty;
+mod ansi_colors;
 mod gtk;
 mod palette;
 mod paths;

@@ -4,6 +4,7 @@ use anyhow::{Context, Result};
 use serde::Serialize;
 use toml_edit::{DocumentMut, Item, value};
 
+use crate::ansi_colors;
 use crate::palette::Palette;
 use crate::paths::Paths;
 
@@ -68,6 +69,7 @@ pub fn apply_palette(paths: &Paths, palette: &Palette) -> Result<TerminalSetting
     document["colors"]["cursor"]["text"] = value(background);
     document["colors"]["selection"]["background"] = value(&palette.accent);
     document["colors"]["selection"]["text"] = value(foreground);
+    ansi_colors::apply(&mut document, palette, background, foreground);
 
     save_document(paths, &document)
 }

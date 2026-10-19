@@ -54,6 +54,12 @@ Theme changes preserve opacity, font size and padding;
 terminal changes preserve the colors. Defaults are 0.93 opacity, 20 pt and
 12 px padding. Reset changes only those three settings.
 
+Theme changes also generate Alacritty's normal/bright ANSI palette. btop runs
+with `force_tty = true` and uses these 16 terminal colors directly, so it follows
+theme changes without a separate btop theme file or a process restart. Other
+ANSI-colored terminal applications use the same palette. See
+[`btop` settings](../../.config/btop/showcase/README.md) for the color mapping.
+
 Alacritty imports the shared file and reloads changes live. Its main config
 must not override these imported fields. Sliders save on release; keyboard
 and wheel changes save through the same writer. Values remain saved across
@@ -67,6 +73,7 @@ shell restarts and theme changes.
 - `palette.rs` — read and validate palette JSON.
 - `theme.rs` — coordinate a complete theme change or restore the saved theme.
 - `alacritty.rs` — preserve and update terminal TOML, including slider defaults.
+- `ansi_colors.rs` — map palette roles to the 16 ANSI colors used by terminal apps.
 - `gtk.rs` — generate GTK CSS and set GTK preferences through `dconf`.
 
 Integration tests use a temporary `HOME` and fake `dconf`/`notify-send` programs,
