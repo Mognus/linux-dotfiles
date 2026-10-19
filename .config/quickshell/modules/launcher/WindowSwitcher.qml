@@ -58,8 +58,10 @@ OverlayWindow {
     }
 
     visible: ShellState.windowSwitcherOpen
+    title: ShellState.overlayFromSettings ? "SETTINGS / Launcher / Windows" : "WINDOWS"
     panelWidth: LauncherStyle.listPanelWidth
-    panelHeight: LauncherStyle.listPanelHeight
+    panelHeight: window.headerHeight + window.dividerHeight + LauncherStyle.listPanelHeight
+    onCloseRequested: ShellState.closeWindowSwitcher()
 
     // Shares the app launcher's Hyprland layer rule.
     WlrLayershell.namespace: "launcher"

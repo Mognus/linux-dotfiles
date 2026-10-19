@@ -42,8 +42,10 @@ OverlayWindow {
     }
 
     visible: ShellState.launcherOpen
+    title: ShellState.overlayFromSettings ? "SETTINGS / Launcher / Applications" : "APPS"
     panelWidth: window.columns * LauncherStyle.gridCellSize + LauncherStyle.padding * 2
-    panelHeight: window.rows * LauncherStyle.gridCellSize + LauncherStyle.rowHeight + LauncherStyle.padding * 2
+    panelHeight: window.headerHeight + window.dividerHeight + window.rows * LauncherStyle.gridCellSize + LauncherStyle.rowHeight + LauncherStyle.padding * 2
+    onCloseRequested: ShellState.closeLauncher()
 
     // Name that Hyprland layer rules can match.
     WlrLayershell.namespace: "launcher"

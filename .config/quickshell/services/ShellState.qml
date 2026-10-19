@@ -14,6 +14,7 @@ Singleton {
     // Overlays pop up centered and take the keyboard, so only one is open at a
     // time: "settings", "launcher", "windowSwitcher", "clipboard", or "" for none.
     property string overlay: ""
+    property bool overlayFromSettings: false
     readonly property bool settingsOpen: root.overlay === "settings"
     readonly property bool launcherOpen: root.overlay === "launcher"
     readonly property bool windowSwitcherOpen: root.overlay === "windowSwitcher"
@@ -38,13 +39,15 @@ Singleton {
     }
 
     // Opens the overlay, closing whichever was open; toggling the open one closes it.
-    function toggleOverlay(name) {
+    function toggleOverlay(name, fromSettings = false) {
+        root.overlayFromSettings = root.overlay !== name && fromSettings;
         root.overlay = root.overlay === name ? "" : name;
     }
 
     function closeOverlay(name) {
         if (root.overlay === name) {
             root.overlay = "";
+            root.overlayFromSettings = false;
         }
     }
 
@@ -56,24 +59,24 @@ Singleton {
         root.closeOverlay("settings");
     }
 
-    function toggleLauncher() {
-        root.toggleOverlay("launcher");
+    function toggleLauncher(fromSettings = false) {
+        root.toggleOverlay("launcher", fromSettings);
     }
 
     function closeLauncher() {
         root.closeOverlay("launcher");
     }
 
-    function toggleWindowSwitcher() {
-        root.toggleOverlay("windowSwitcher");
+    function toggleWindowSwitcher(fromSettings = false) {
+        root.toggleOverlay("windowSwitcher", fromSettings);
     }
 
     function closeWindowSwitcher() {
         root.closeOverlay("windowSwitcher");
     }
 
-    function toggleClipboard() {
-        root.toggleOverlay("clipboard");
+    function toggleClipboard(fromSettings = false) {
+        root.toggleOverlay("clipboard", fromSettings);
     }
 
     function closeClipboard() {

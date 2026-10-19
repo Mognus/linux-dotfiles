@@ -37,7 +37,7 @@ My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfox
   - `BottomBar.qml` — workspace strip, clock, recording indicator, volume text,
     laptop battery percentage, settings menu trigger, special workspace buttons.
   - `WorkspaceHud.qml` — compact workspace-only overlay.
-  - `Breadcrumbs.qml` — location header with a configurable root label, e.g.
+  - `Breadcrumbs.qml` — display-only header with a single title string, e.g.
     `× SETTINGS / Appearance / Theme`; the × reports a close request.
   - `SearchableList.qml` — shared name filtering, selection, keyboard and
     search field for Settings, Theme and Wallpaper. Entries provide `name`; activation

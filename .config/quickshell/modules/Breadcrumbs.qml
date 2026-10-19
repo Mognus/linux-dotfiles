@@ -1,14 +1,11 @@
 import QtQuick
 import qs
 
-// Current location: × SETTINGS / Appearance / Theme. The × reports the click;
-// whoever uses it decides what closing means.
+// Display-only title with a close button; the owner decides what closing means.
 Row {
     id: breadcrumbs
 
-    // Titles below the root, outermost first, e.g. a Menu's path.
-    property var path: []
-    property string rootLabel: "~"
+    property string title: ""
 
     signal closeRequested
 
@@ -32,36 +29,10 @@ Row {
 
     Text {
         anchors.verticalCenter: parent.verticalCenter
-        text: breadcrumbs.rootLabel
+        text: breadcrumbs.title
+        textFormat: Text.PlainText
         color: Colors.foreground
         font.family: Fonts.family
         font.pixelSize: Fonts.size
-    }
-
-    Repeater {
-        model: breadcrumbs.path
-
-        Row {
-            id: crumb
-
-            required property string modelData
-
-            anchors.verticalCenter: parent.verticalCenter
-            spacing: 12
-
-            Text {
-                text: "/"
-                color: Colors.muted
-                font.family: Fonts.family
-                font.pixelSize: Fonts.size
-            }
-
-            Text {
-                text: crumb.modelData
-                color: Colors.foreground
-                font.family: Fonts.family
-                font.pixelSize: Fonts.size
-            }
-        }
     }
 }

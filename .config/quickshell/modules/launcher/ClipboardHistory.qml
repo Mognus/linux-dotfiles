@@ -94,8 +94,10 @@ OverlayWindow {
     onCurrentChanged: window.loadPreview()
 
     visible: ShellState.clipboardOpen
+    title: ShellState.overlayFromSettings ? "SETTINGS / Launcher / Clipboard" : "CLIPBOARD"
     panelWidth: LauncherStyle.listPanelWidth
-    panelHeight: LauncherStyle.listPanelHeight
+    panelHeight: window.headerHeight + window.dividerHeight + LauncherStyle.listPanelHeight
+    onCloseRequested: ShellState.closeClipboard()
 
     // Shares the app launcher's Hyprland layer rule.
     WlrLayershell.namespace: "launcher"

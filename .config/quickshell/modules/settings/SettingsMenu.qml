@@ -11,7 +11,6 @@ OverlayWindow {
     id: window
 
     readonly property int padding: 12
-    readonly property int headerHeight: 44
     readonly property int footerHeight: 36
     readonly property var sections: [
         {
@@ -33,9 +32,9 @@ OverlayWindow {
         {
             name: "Launcher",
             entries: [
-                { name: "Applications", shortcut: "Super+Space", action: () => ShellState.toggleLauncher() },
-                { name: "Windows", shortcut: "Super+Ctrl+Space", action: () => ShellState.toggleWindowSwitcher() },
-                { name: "Clipboard", shortcut: "Super+V", action: () => ShellState.toggleClipboard() }
+                { name: "Applications", shortcut: "Super+Space", action: () => ShellState.toggleLauncher(true) },
+                { name: "Windows", shortcut: "Super+Ctrl+Space", action: () => ShellState.toggleWindowSwitcher(true) },
+                { name: "Clipboard", shortcut: "Super+V", action: () => ShellState.toggleClipboard(true) }
             ]
         }
     ]
@@ -60,11 +59,10 @@ OverlayWindow {
     }
 
     visible: ShellState.settingsOpen
+    title: window.currentPage ? "SETTINGS / " + window.currentPage.category + " / " + window.currentPage.name : "SETTINGS"
     panelWidth: window.currentPage ? window.currentPage.panelWidth : 600
-    panelHeight: window.headerHeight + divider.height + (window.currentPage ? window.currentPage.contentHeight : 456 + window.footerHeight) + window.padding * 2
-    panelColor: Colors.background
-    panelBorderColor: Colors.border
-    panelBorderWidth: 1
+    panelHeight: window.headerHeight + window.dividerHeight + (window.currentPage ? window.currentPage.contentHeight : 456 + window.footerHeight) + window.padding * 2
+    onCloseRequested: ShellState.closeSettings()
 
     // Name that Hyprland layer rules can match.
     WlrLayershell.namespace: "settings"
@@ -78,42 +76,11 @@ OverlayWindow {
         }
     }
 
-    Breadcrumbs {
-        id: header
-
-        // No top margin: the header's own height centers the crumbs between edge and divider.
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-            leftMargin: window.padding
-            rightMargin: window.padding
-        }
-
-        height: window.headerHeight
-        rootLabel: "SETTINGS"
-        path: window.currentPage ? [window.currentPage.category, window.currentPage.name] : []
-        onCloseRequested: ShellState.closeSettings()
-    }
-
-    Rectangle {
-        id: divider
-
-        anchors {
-            top: header.bottom
-            left: parent.left
-            right: parent.right
-        }
-
-        height: 1
-        color: Colors.borderMuted
-    }
-
     FocusScope {
         id: content
 
         anchors {
-            top: divider.bottom
+            top: parent.top
             left: parent.left
             right: parent.right
             bottom: help.visible ? help.top : parent.bottom
