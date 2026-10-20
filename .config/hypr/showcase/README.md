@@ -32,9 +32,32 @@ idle minutes, turns the monitor off five minutes later, and locks before suspend
 ## Apps
 
 - `SUPER+Shift+Return` - Alacritty terminal
-- `SUPER+B` - LibreWolf
-- `SUPER+Space` - Quickshell app launcher
-- `SUPER+Ctrl+Space` - Quickshell window switcher with a live preview
+
+## Leader
+
+Press `SUPER+A`, release both keys, then press one of the keys below
+without modifiers. Each action returns to normal bindings automatically.
+
+| Key | Action |
+| --- | --- |
+| `Space` | Quickshell app launcher |
+| `w` | Quickshell window switcher with a live preview |
+| `g` | Quickshell settings menu |
+| `v` | Quickshell clipboard history |
+| `t` | Terminal scratchpad |
+| `b` | Browser scratchpad (LibreWolf) |
+| `d` | Discord scratchpad |
+| `n` | Notes scratchpad |
+| `f` | File manager scratchpad |
+| `m` | YouTube Music scratchpad |
+| `Escape` | Cancel |
+
+Unknown keys also cancel the leader mode. For example, `SUPER+A`, then
+`n` toggles Notes; `SUPER+A`, then `Space` toggles the app launcher.
+
+The command entry keys are `SUPER+A` for Hyprland, `Alt+A` for tmux, and
+`Space` for Neovim. The normal terminal launch remains `SUPER+Shift+Return`;
+the browser is accessed through its scratchpad or the app launcher.
 
 The app launcher and window switcher are Quickshell windows that open without
 compositor animations.
@@ -49,7 +72,7 @@ compositor animations.
 
 ## Clipboard
 
-- `SUPER+V` - Quickshell clipboard history
+- Leader, then `v` - Quickshell clipboard history
 
 Every clipboard change is stored by cliphist. The history shows the full text
 or image of the highlighted entry; inside it, `Delete` removes an entry and
@@ -87,21 +110,18 @@ Shift unless it is explicitly shown.
 
 ## Scratchpads
 
-- `SUPER+Ctrl+Return` - Terminal scratchpad
-- `SUPER+Ctrl+B` - Browser scratchpad (LibreWolf)
-- `SUPER+Ctrl+D` - Discord scratchpad
-- `SUPER+Ctrl+N` - Notes scratchpad
-- `SUPER+Ctrl+F` - File manager scratchpad
+Use the leader followed by `t/b/d/n/f` for the terminal, browser, Discord,
+Notes, or file manager. The same sequence opens or hides the scratchpad.
 
 ## Desktop Widgets
 
 - `SUPER+Ctrl+T` - Toggle both Quickshell Tux widgets
-- `SUPER+G` - Toggle Quickshell settings menu
+- Leader, then `g` - Toggle Quickshell settings menu
 - `SUPER+Ctrl+P`, then `B/P` - Toggle bottom bar/workspace HUD
 
 ## Music
 
-- `SUPER+Ctrl+M` - Toggle YouTube Music
+- Leader, then `m` - Toggle YouTube Music
 
 ## Workflow
 

@@ -18,6 +18,32 @@ local function toggle_special(name)
 end
 
 function M.setup(programs)
+    -- Press Super+A, release it, then choose an action.
+    mod_bind("A", hl.dsp.submap("leader"))
+    hl.define_submap("leader", function()
+        local function leader_bind(key, dispatcher)
+            bind(key, function()
+                hl.dispatch(hl.dsp.submap("reset"))
+                hl.dispatch(dispatcher)
+            end)
+        end
+
+        leader_bind("Space", exec("qs -p $HOME/.config/quickshell ipc call launcher toggle"))
+        leader_bind("W", exec("qs -p $HOME/.config/quickshell ipc call windowswitcher toggle"))
+        leader_bind("G", exec("qs -p $HOME/.config/quickshell ipc call settings toggle"))
+        leader_bind("V", exec("qs -p $HOME/.config/quickshell ipc call clipboard toggle"))
+
+        leader_bind("T", toggle_special("term"))
+        leader_bind("B", toggle_special("firefox"))
+        leader_bind("D", toggle_special("discord"))
+        leader_bind("N", toggle_special("notes"))
+        leader_bind("F", toggle_special("files"))
+        leader_bind("M", toggle_special("music"))
+
+        bind("escape", hl.dsp.submap("reset"))
+        bind("catchall", hl.dsp.submap("reset"))
+    end)
+
     mod_bind("CTRL + P", hl.dsp.submap("panels"))
     hl.define_submap("panels", function()
         bind("B", function()
@@ -33,26 +59,13 @@ function M.setup(programs)
     end)
 
     mod_bind("CTRL + T", exec("qs -p $HOME/.config/quickshell ipc call tux toggle"))
-    mod_bind("G", exec("qs -p $HOME/.config/quickshell ipc call settings toggle"))
     mod_bind("SHIFT + Return", exec(programs.terminal))
-    mod_bind("B", exec(programs.browser))
-    mod_bind("Space", exec("qs -p $HOME/.config/quickshell ipc call launcher toggle"))
-    mod_bind("CTRL + Space", exec("qs -p $HOME/.config/quickshell ipc call windowswitcher toggle"))
     mod_bind("Escape", exec(programs.lock))
     mod_bind("F1", exec("systemctl suspend"))
-
-    mod_bind("CTRL + B", toggle_special("firefox"))
-    mod_bind("CTRL + D", toggle_special("discord"))
-    mod_bind("CTRL + N", toggle_special("notes"))
-    mod_bind("CTRL + F", toggle_special("files"))
-    mod_bind("CTRL + Return", toggle_special("term"))
-
-    mod_bind("CTRL + M", toggle_special("music"))
 
     mod_bind("S", exec([[grim -g "$(slurp)" ~/Pictures/screenshots/$(date +%F_%T).png]]))
     mod_bind("CTRL + S", exec([[grim -g "$(slurp)" -t png - | wl-copy --type image/png]]))
     mod_bind("CTRL + v", exec(os.getenv("HOME") .. "/.config/hypr/scripts/record-toggle.sh"))
-    mod_bind("V", exec("qs -p $HOME/.config/quickshell ipc call clipboard toggle"))
 
 
     -- Audio keeps working on the lock screen; the Quickshell bar shows the level.
