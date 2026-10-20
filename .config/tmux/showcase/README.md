@@ -6,16 +6,38 @@ Tmux keeps terminal sessions alive.
 
 ## Keybinds
 
-- `Ctrl+Space` - prefix (moved off `Ctrl+B`, so it reaches Neovim for page-up)
-- `Super+Alt+T/Q` - create/close tmux window
-- `Super+Alt+J/K` - previous/next tmux window
-- `Alt+Shift+J/K` - move current tmux window left/right
-- `Super+Alt+S` - session chooser
-- `Super+Alt+N/R/X` - create/rename/close session
-- `Alt+T/V/Q` - split right/split down/close pane
-- `Alt+H/J/K/L` - focus pane left/down/up/right
-- `Super+Alt+Shift+H/J/K/L` - resize pane left/down/up/right
+- `Ctrl+Space` - prefix; press and release it before the next key (`Ctrl+B` reaches Neovim)
+
+### Sessions and tabs
+
+- Prefix, then `n` - create a named session
+- Prefix, then `s` - session chooser
+- Prefix, then `r` - rename the current session
+- Prefix, then `x` - close the current session after confirmation
+- Prefix, then `d` - detach; sessions keep running
+- Prefix, then `c` - create a window (tab)
+- Prefix, then `,` - rename the current tab
+- `Alt+1..9` - select a tab directly (also available with prefix, then `1..9`)
+- `Alt+Tab` - last-used tab (also available with prefix, then `Tab`)
+- `Alt+N/P` - next/previous tab
+
+The single letters after the prefix are lowercase and do not require Shift.
+Closing a session switches to another existing session instead of detaching,
+as long as another session remains.
+
+### Panes
+
+- `Alt+Shift+Enter` - create a pane in the current directory and apply the master layout
+- `Alt+J/K` - focus next/previous pane, wrapping at the ends
+- `Alt+Shift+J/K` - swap the current pane with the next/previous pane
+- `Alt+H/L` - shrink/grow the left master pane by five columns
+- `Alt+Q` - close the current pane
+- `Alt+F` - toggle pane zoom
 - `Alt+/` - copy mode
+
+The master layout (`main-vertical`) places one large pane on the left and the
+remaining panes in a stack on the right. Creating a pane reapplies this layout.
+Except where Shift is shown explicitly, letter bindings do not require Shift.
 
 ### Copy mode
 
@@ -34,3 +56,7 @@ Tmux keeps terminal sessions alive.
 ## Workflow
 
 Use named sessions for separate projects or services, and attach back to long-running work instead of rebuilding terminal state.
+
+`Alt` controls tmux panes and tabs, mirroring `Super` for Hyprland windows and
+workspaces. Bindings live directly in tmux; no custom Alacritty key sequences
+are required. Tab navigation cycles through existing tabs.

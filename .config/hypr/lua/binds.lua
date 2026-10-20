@@ -91,6 +91,8 @@ function M.setup(programs)
 
     -- dwm tags: Tab jumps to the last tag, digits pick a tag directly.
     mod_bind("Tab", hl.dsp.focus({ workspace = "previous" }))
+    mod_bind("N", hl.dsp.focus({ workspace = "r+1" }))
+    mod_bind("P", hl.dsp.focus({ workspace = "r-1" }))
 
     mod_bind("ALT + bracketleft", hl.dsp.window.move({ workspace = "r-1" }))
     mod_bind("ALT + bracketright", hl.dsp.window.move({ workspace = "r+1" }))

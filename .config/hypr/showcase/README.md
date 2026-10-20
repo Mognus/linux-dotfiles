@@ -31,7 +31,7 @@ idle minutes, turns the monitor off five minutes later, and locks before suspend
 
 ## Apps
 
-- `SUPER+Return` - Alacritty terminal
+- `SUPER+Shift+Return` - Alacritty terminal
 - `SUPER+B` - LibreWolf
 - `SUPER+Space` - Quickshell app launcher
 - `SUPER+Ctrl+Space` - Quickshell window switcher with a live preview
@@ -68,17 +68,22 @@ Audio bindings also work on the lock screen. The Quickshell bar shows the level.
 - `SUPER+Q` - Close window
 - `SUPER+F` - Fullscreen
 - `SUPER+Shift+Space` - Toggle floating
-- `SUPER+H/J/K/L` - Focus left/down/up/right
-- `SUPER+Ctrl+Shift+H/J/K/L` - Move window left/down/up/right
-- `SUPER+Shift+H/J/K/L` - Resize window left/down/up/right
+- `SUPER+J/K` - Focus next/previous window in the master stack, without wrapping
+- `SUPER+Shift+J/K` - Swap with the next/previous window in the master stack
+- `SUPER+H/L` - Shrink/grow the master area by five percentage points
+- `SUPER+Return` - Swap the focused window with the master
 
 ## Workspaces
 
-- `SUPER+Ctrl+J/K` - Previous/next workspace
+- `SUPER+N/P` - Next/previous workspace number, including empty workspaces
+- `SUPER+Tab` - Last-used workspace
 - `SUPER+1..9` - Go to workspace
-- `SUPER+Ctrl+1..9` - Go to workspace
-- `SUPER+Ctrl+Shift+1..9` - Move window to workspace
+- `SUPER+Shift+1..9` - Move window to workspace
 - `SUPER+Alt+[/]` - Move window to previous/next workspace
+
+Workspace selection mirrors tmux tab selection: `SUPER` here, `Alt` in tmux,
+with the same `1..9`, `Tab`, and `N/P` keys. Letter bindings do not require
+Shift unless it is explicitly shown.
 
 ## Scratchpads
 
@@ -100,4 +105,6 @@ Audio bindings also work on the lock screen. The Quickshell bar shows the level.
 
 ## Workflow
 
-Start from the launcher or terminal, keep long-running work on workspaces, pull scratchpads in only when needed, and move focus with `H/J/K/L`.
+Start from the launcher or terminal, keep long-running work on workspaces, pull
+scratchpads in only when needed, and walk the master stack with `SUPER+J/K`.
+Use `SUPER+H/L` to adjust the space given to the master window.

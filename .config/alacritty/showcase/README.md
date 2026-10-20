@@ -18,14 +18,14 @@ Alacritty is the terminal emulator — GPU-accelerated and minimal, configured i
 
 - `Ctrl+Alt+/` - search forward, `Ctrl+Alt+?` - search backward (only outside Vi mode)
 - `Ctrl+Shift+Space` - toggle Vi mode; inside it use `/` `?` `n` `N` natively
-- `Super+Alt+T/Q/J/K` - create/close/switch tmux windows
-- `Super+Alt+S/N/R/X` - choose/create/rename/close tmux sessions
-- `Super+Alt+Shift+H/J/K/L` - resize tmux panes
+- `Shift+Enter` - send Escape followed by Return
 
 ## Workflow
 
-Run tmux inside Alacritty for sessions, tabs, and splits. Alacritty forwards the
-`Super+Alt` combinations as terminal sequences understood by the tmux config.
+Run tmux inside Alacritty for sessions, tabs, and splits. Its bindings are defined
+directly in the [tmux config](../../tmux/showcase/README.md), using `Alt` for
+panes and tabs and `Ctrl+Space` as the prefix for sessions and other commands.
+Alacritty has no tmux-specific key remaps or custom tmux escape sequences.
 Use Vi mode to navigate scrollback without reaching for the mouse.
 
 Settings > Appearance > Adjustments changes opacity, font size and padding
