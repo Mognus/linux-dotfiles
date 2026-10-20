@@ -6,7 +6,12 @@ Tmux keeps terminal sessions alive.
 
 ## Keybinds
 
-- `Ctrl+Space` - prefix; press and release it before the next key (`Ctrl+B` reaches Neovim)
+- `Alt+A` - prefix; press and release it before the next key
+- `Alt+A`, then `Alt+A` - send Alt+A to the application
+- `Ctrl+A` reaches the application directly (for example, shell line start or incrementing a number in Neovim)
+
+Hyprland uses `Super+A` as its leader, tmux uses `Alt+A`, and Neovim uses
+`Space`, keeping each layer's command entry separate.
 
 ### Sessions and tabs
 

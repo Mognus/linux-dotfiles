@@ -24,7 +24,7 @@ Alacritty is the terminal emulator — GPU-accelerated and minimal, configured i
 
 Run tmux inside Alacritty for sessions, tabs, and splits. Its bindings are defined
 directly in the [tmux config](../../tmux/showcase/README.md), using `Alt` for
-panes and tabs and `Ctrl+Space` as the prefix for sessions and other commands.
+panes and tabs and `Alt+A` as the prefix for sessions and other commands.
 Alacritty has no tmux-specific key remaps or custom tmux escape sequences.
 Use Vi mode to navigate scrollback without reaching for the mouse.
 
