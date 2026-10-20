@@ -2,6 +2,8 @@
 
 `SUPER` is the main desktop modifier.
 
+![Hyprland desktop with the Quickshell bottom bar and Tank Girl wallpaper](desktop-overview.png)
+
 ## Does
 
 - Keyboard-first window control

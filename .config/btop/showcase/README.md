@@ -3,10 +3,12 @@
 Retro system monitor using btop's built-in TTY mode. Configuration lives in
 `../btop.conf` and is linked to `~/.config/btop/btop.conf` by Home Manager.
 
+![btop with Retro Pink colors and a transparent terminal background over the Edward Scissorhands wallpaper](btop-showcase.png)
+
 ## Settings
 
 - `force_tty = true` forces 16 colors, TTY graph symbols and square corners.
-- `theme_background = true` uses ANSI black for the background.
+- `theme_background = false` leaves the terminal background visible.
 - `proc_sorting = "memory"` keeps the existing process sorting preference.
 - `save_config_on_exit = false` keeps temporary menu changes out of the dotfiles.
 

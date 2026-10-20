@@ -3,6 +3,52 @@
 My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfoxxed.me/)
 (QtQuick/QML). Replaces the previous EWW setup.
 
+## Screenshots
+
+Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for each view.
+
+### Settings
+
+![Settings menu with grouped categories over the Tiger and Dragon wallpaper](settings-menu.png)
+
+### Applications
+
+![Application launcher over Die göttliche Natur by Dean Seville](app-launcher.png)
+
+### Window switcher — Retro Cyan
+
+![Retro Cyan window switcher with grouped applications and a live Neovim preview over the Mountain Goat wallpaper](window-switcher.png)
+
+### Clipboard
+
+![Filtered clipboard history with a screenshot preview over the Akira wallpaper](clipboard-history.png)
+
+### Theme selection
+
+![Gruvbox Light terminal and browser previews over the Earth from Moon wallpaper](theme-picker.png)
+
+### Wallpaper selection
+
+![Wallpaper list and Geese Picture preview over the matching desktop wallpaper](wallpaper-picker.png)
+
+### Audio — Dark Gray
+
+![Dark Gray output and microphone controls over the Bird wallpaper](audio-controls.png)
+
+### Terminal adjustments — Dark Gray
+
+![Dark Gray terminal opacity, font size and padding controls over the Lynx wallpaper](terminal-adjustments.png)
+
+### Notifications — Retro Dark
+
+![Black notification settings with do-not-disturb and timeout controls over the Saturn wallpaper](notifications.png)
+
+![Black notification popups over the Shiva wallpaper](notification-popups.png)
+
+### Session — Retro Dark
+
+![Black session menu with lock, logout, restart and power-off actions over the White Enso wallpaper](session-menu.png)
+
 ## Structure
 
 - `lock.qml` — lock screen, run as its own process (`qs -n -d -p

@@ -1,5 +1,7 @@
 # Neovim Setup
 
+![Neovim editing the Quickshell bottom bar beside OpenCode in a tmux split, with syntax highlighting, inline diagnostics and a transparent terminal background](nvim-showcase.png)
+
 Configuration lives in `~/dotfiles/.config/nvim/init.lua`. Home Manager links
 it to `~/.config/nvim` with `mkOutOfStoreSymlink` (`nix/home/magnus.nix`), so
 the link chain ends in the repo:

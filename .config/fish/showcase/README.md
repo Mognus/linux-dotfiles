@@ -2,6 +2,8 @@
 
 Fish is the daily shell.
 
+![Fish showing Git option completions with descriptions over the Chibi Vampire Karin wallpaper](fish-showcase.png)
+
 ## Does
 
 - Loads local user binaries into `PATH`

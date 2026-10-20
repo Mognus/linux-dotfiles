@@ -2,6 +2,8 @@
 
 Alacritty is the terminal emulator — GPU-accelerated and minimal, configured in TOML (`alacritty.toml`). Tabs and splits are left to tmux; the terminal stays a thin, fast layer.
 
+![Alacritty running Fish with White colors and a home directory listing over the Peregrine Falcon wallpaper](alacritty-showcase.png)
+
 ## Does
 
 - GPU-accelerated rendering with low input latency

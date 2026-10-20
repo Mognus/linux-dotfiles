@@ -2,6 +2,8 @@
 
 Tmux keeps terminal sessions alive.
 
+![Tmux with system information, the config directory and Hyprland Lua in Neovim over the Hatsune Miku wallpaper](tmux-showcase.png)
+
 ## Keybinds
 
 - `Ctrl+Space` - prefix (moved off `Ctrl+B`, so it reaches Neovim for page-up)
