@@ -6,7 +6,7 @@ function M.setup()
             gaps_in = 0,
             gaps_out = 0,
             border_size = 0,
-            layout = "dwindle",
+            layout = "master",
         },
         decoration = {
             rounding = 0,
@@ -20,8 +20,10 @@ function M.setup()
             },
         },
         animations = { enabled = false },
-        dwindle = {
-            preserve_split = true,
+        master = {
+            mfact = 0.55,
+            orientation = "left",
+            new_status = "slave",
         },
     })
 

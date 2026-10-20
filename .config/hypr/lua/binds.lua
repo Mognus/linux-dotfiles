@@ -34,7 +34,7 @@ function M.setup(programs)
 
     mod_bind("CTRL + T", exec("qs -p $HOME/.config/quickshell ipc call tux toggle"))
     mod_bind("G", exec("qs -p $HOME/.config/quickshell ipc call settings toggle"))
-    mod_bind("Return", exec(programs.terminal))
+    mod_bind("SHIFT + Return", exec(programs.terminal))
     mod_bind("B", exec(programs.browser))
     mod_bind("Space", exec("qs -p $HOME/.config/quickshell ipc call launcher toggle"))
     mod_bind("CTRL + Space", exec("qs -p $HOME/.config/quickshell ipc call windowswitcher toggle"))
@@ -77,33 +77,29 @@ function M.setup(programs)
     mod_bind("F", hl.dsp.window.fullscreen())
     mod_bind("SHIFT + Space", hl.dsp.window.float({ action = "toggle" }))
 
-    mod_bind("h", hl.dsp.focus({ direction = "left" }))
-    mod_bind("l", hl.dsp.focus({ direction = "right" }))
-    mod_bind("k", hl.dsp.focus({ direction = "up" }))
-    mod_bind("j", hl.dsp.focus({ direction = "down" }))
+    -- dwm: j/k walk the master stack, h/l move the master split (mfact).
+    mod_bind("j", hl.dsp.layout("cyclenext noloop"))
+    mod_bind("k", hl.dsp.layout("cycleprev noloop"))
+    mod_bind("SHIFT + j", hl.dsp.layout("swapnext noloop"))
+    mod_bind("SHIFT + k", hl.dsp.layout("swapprev noloop"))
 
-    mod_bind("CTRL + j", hl.dsp.focus({ workspace = "r-1" }))
-    mod_bind("CTRL + k", hl.dsp.focus({ workspace = "r+1" }))
+    mod_bind("h", hl.dsp.layout("mfact -0.05"), { repeating = true })
+    mod_bind("l", hl.dsp.layout("mfact +0.05"), { repeating = true })
 
-    mod_bind("CTRL + SHIFT + h", hl.dsp.window.move({ direction = "left" }))
-    mod_bind("CTRL + SHIFT + l", hl.dsp.window.move({ direction = "right" }))
-    mod_bind("CTRL + SHIFT + k", hl.dsp.window.move({ direction = "up" }))
-    mod_bind("CTRL + SHIFT + j", hl.dsp.window.move({ direction = "down" }))
+    -- dwm zoom: promote the focused window to master.
+    mod_bind("Return", hl.dsp.layout("swapwithmaster auto"))
+
+    -- dwm tags: Tab jumps to the last tag, digits pick a tag directly.
+    mod_bind("Tab", hl.dsp.focus({ workspace = "previous" }))
 
     mod_bind("ALT + bracketleft", hl.dsp.window.move({ workspace = "r-1" }))
     mod_bind("ALT + bracketright", hl.dsp.window.move({ workspace = "r+1" }))
-
-    mod_bind("SHIFT + h", hl.dsp.window.resize({ x = -40, y = 0, relative = true }), { repeating = true })
-    mod_bind("SHIFT + l", hl.dsp.window.resize({ x = 40, y = 0, relative = true }), { repeating = true })
-    mod_bind("SHIFT + k", hl.dsp.window.resize({ x = 0, y = -40, relative = true }), { repeating = true })
-    mod_bind("SHIFT + j", hl.dsp.window.resize({ x = 0, y = 40, relative = true }), { repeating = true })
 
     for i = 1, 9 do
         local key = tostring(i)
 
         mod_bind(key, hl.dsp.focus({ workspace = i }))
-        mod_bind("CTRL + " .. key, hl.dsp.focus({ workspace = i }))
-        mod_bind("CTRL + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+        mod_bind("SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
     end
 end
 
