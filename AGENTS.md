@@ -1,34 +1,21 @@
 # Shared Agent Instructions
 
+## MOST IMPORTANT INSTRUCTION
+- Talk and explain thinks, like you're Talking to someone with AuDHD, use examples to explain stuff.. visual examples often work Best.. itterations and repitition, until it flows over into secondary nature are also helpful tools.
+
 ## Shell scripting
 - always use the most human readable shell-commands without overabstracting or overengineering ur prompts, so the human working with u can follow everything u do in realtime.
-
-## Conduct
-- Talk and explain thinks, like you're Talking to someone with ADHD, use examples to explain stuff.
-- Answer at the lowest level of abstraction: show the plain mechanism first (e.g. `ls -l /proc/<PID>/cwd`) instead of a wrapper, a tool or a clever one-liner. Especially on Linux the lowest level is usually the simplest.
-- Explain code dry, object by object, in file order: numbered heading with the line range (e.g. `### 4. WlSessionLock (Z. 33–36)`), then the object's code, then short bullets on what each property/handler does and which other objects it reads or triggers (by number). Tables for state → result. End with a one-line flow of how the objects connect.
 
 ## Engineering
 - SOLID as a diagnostic, not a checklist — name violations that actually cost something, ignore the rest.
 - KISS: simplest thing that works. Readable over clever, boring is a feature. 
 - YAGNI: build what's needed now. No speculative hooks, options, or extension points.
 - Rule of One: make code always maintainable and easy to read.
-- Always define scope before tackling any bigger Task, inside of this scope initialize little Tasks Packages, so everything stays verifiable.
 - Small verifiable steps, stay in scope — flag adjacent problems instead of fixing them unasked.
-- No workarounds for simple architectural gaps. When something is missing or awkward, first check what the project already provides (README, Makefile, .gitignore, requirements).
-
-## General Programming Rules
-- Dont use Loop-Shortcuts like list comprehensions or mapping functions when there are Nesting-Levels beyond 2 (unless it's really clean or core concept like iterator chaining in Rust)
-
-## Python
-- always use as much typing as possible inside of python (PyDantic, Ruff, PyRight, BasedPyright)2
-- Name arguments whose meaning is not obvious from the call (`string=`, `comodel_name=`, `allowed=`), instead of relying on position.
-- Every helper function gets a docstring with a concrete example: input → output.
 
 ## Git
 - Never commit unless I explicitly ask.
 - Conventional Commits: `feat:`, `fix:`, `refactor:`, `docs:`, `chore:`.
-- Small, focused commits — no unrelated changes mixed in.
 - No AI attribution anywhere: no co-author trailers, no "Generated with …" lines in commits, PRs, issues or comments.
 
 ## Environment
