@@ -23,9 +23,11 @@ QtObject {
     }
 
     function handle(event) {
+        // Keypad Enter carries KeypadModifier, but is still an ordinary Enter action.
+        const modifiers = event.modifiers & ~Qt.KeypadModifier;
         for (const action of bindings.actions) {
             if (action.enabled === false) continue;
-            if (action.keys.includes(event.key) && event.modifiers === (action.modifiers ?? Qt.NoModifier)) {
+            if (action.keys.includes(event.key) && modifiers === (action.modifiers ?? Qt.NoModifier)) {
                 action.run();
                 event.accepted = true;
                 return;

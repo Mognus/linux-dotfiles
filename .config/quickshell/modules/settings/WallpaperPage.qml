@@ -15,9 +15,8 @@ OverlayPage {
     title: "Appearance / Wallpaper"
     panelWidth: 1100
     contentHeight: 520
-    searchEnabled: true
-    confirmLabel: "APPLY"
     keyBindings: keys
+    property bool searching: false
 
     readonly property var entries: Array.from({ length: folder.count }, (_, index) => ({
         name: folder.get(index, "fileBaseName"),

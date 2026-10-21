@@ -1,13 +1,13 @@
 import Quickshell
 import Quickshell.Hyprland
-import Quickshell.Wayland
 import Quickshell.Widgets
 import QtQuick
 import qs
 import qs.modules
 import qs.modules.search
 import qs.services
-import "../../lib/Navigation.js" as Navigation
+import qs.modules.keyboard
+import "windows"
 
 // Window switcher: the open windows of every workspace on the left, a live view
 // of the highlighted one on the right. The search line is always active: typing
@@ -15,13 +15,11 @@ import "../../lib/Navigation.js" as Navigation
 OverlayPage {
     id: window
 
-    // Windows whose app or title contains the search, sorted by app so the list
-    // can group them: "wolf" → [{ app: "librewolf", toplevel }, …].
-    readonly property var matches: Array.from(Hyprland.toplevels.values)
+    // Sort by app so the native list can group the filtered results.
+    readonly property var entries: Array.from(Hyprland.toplevels.values)
         .map(toplevel => ({ app: window.appOf(toplevel), toplevel: toplevel }))
-        .filter(item => window.label(item.toplevel).toLowerCase().includes(footer.text.toLowerCase()))
         .sort((a, b) => a.app.localeCompare(b.app))
-    readonly property var current: window.matches[list.currentIndex]?.toplevel ?? null
+    readonly property var current: filter.matches[list.currentIndex]?.toplevel ?? null
 
     // "librewolf" for a LibreWolf window; empty until Wayland reports it.
     function appOf(toplevel) {
@@ -63,9 +61,27 @@ OverlayPage {
     panelWidth: LauncherStyle.listPanelWidth
     contentHeight: LauncherStyle.listPanelHeight - LauncherStyle.padding * 2
     padding: LauncherStyle.padding
-    searchEnabled: true
-    searchAlwaysActive: true
-    confirmLabel: "FOCUS"
+    keyBindings: keys
+
+    SearchFilter {
+        id: filter
+        entries: window.entries
+        query: footer.text
+        textFor: entry => window.label(entry.toplevel)
+        onMatchesChanged: list.currentIndex = filter.matches.length ? 0 : -1
+    }
+
+    KeyBindings {
+        id: keys
+        actions: [
+            { keys: [Qt.Key_Up], label: "SELECT", run: () => list.decrementCurrentIndex() },
+            { keys: [Qt.Key_Down], label: "SELECT", run: () => list.incrementCurrentIndex() },
+            { keys: [Qt.Key_K], modifiers: Qt.ControlModifier, label: "SELECT", run: () => list.decrementCurrentIndex() },
+            { keys: [Qt.Key_J], modifiers: Qt.ControlModifier, label: "SELECT", run: () => list.incrementCurrentIndex() },
+            { keys: [Qt.Key_Return, Qt.Key_Enter], label: "FOCUS", enabled: window.current !== null, run: () => window.jumpToCurrent() },
+            { keys: [Qt.Key_Escape], label: ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => ShellState.backOverlay() }
+        ]
+    }
 
     function activate() {
         Hyprland.refreshToplevels();
@@ -84,7 +100,7 @@ OverlayPage {
 
         width: LauncherStyle.listWidth
         clip: true
-        model: window.matches
+        model: filter.matches
 
         // A header with icon and app name above each app's windows; the model is
         // sorted by app, so each app gets one.
@@ -163,20 +179,7 @@ OverlayPage {
     Item {
         id: searchKeys
 
-        Keys.onPressed: event => {
-            if (Navigation.isDown(event)) {
-                list.incrementCurrentIndex();
-            } else if (Navigation.isUp(event)) {
-                list.decrementCurrentIndex();
-            } else if (Navigation.isConfirm(event)) {
-                window.jumpToCurrent();
-            } else if (Navigation.isCancel(event)) {
-                ShellState.backOverlay();
-            } else {
-                return;
-            }
-            event.accepted = true;
-        }
+        Keys.onPressed: event => keys.handle(event)
     }
 
     SearchField {
@@ -207,7 +210,7 @@ OverlayPage {
         color: Colors.divider
     }
 
-    Item {
+    WindowPreview {
         id: preview
 
         anchors {
@@ -218,12 +221,7 @@ OverlayPage {
             leftMargin: LauncherStyle.padding
         }
 
-        // Only the highlighted window streams, and only while the switcher is open.
-        ScreencopyView {
-            anchors.centerIn: parent
-            captureSource: window.visible && window.current ? window.current.wayland : null
-            live: true
-            constraintSize: Qt.size(preview.width, preview.height)
-        }
+        toplevel: window.current
+        active: window.visible
     }
 }

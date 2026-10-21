@@ -1,19 +1,13 @@
 import QtQuick
 import qs
 
-// Display only: the view supplies state and action labels, and handles the keys.
+// Display only: pages and focused controls supply their actual action definitions.
 Text {
     id: hints
 
-    property bool searching: false
-    property bool searchEnabled: true
-    property bool gridNavigation: false
-    property string navigationHint: ""
-    property string confirmKeys: "ENTER"
-    property string confirmLabel: "APPLY"
-    property string cancelLabel: searching ? "CLEAR" : "BACK"
     property string extraHint: ""
     property var bindings: null
+    property var controlBindings: null
 
     anchors.left: parent.left
     anchors.right: parent.right
@@ -25,11 +19,8 @@ Text {
     horizontalAlignment: Text.AlignHCenter
     wrapMode: Text.WordWrap
     textFormat: Text.PlainText
-    text: hints.bindings ? hints.bindings.hints : ((hints.navigationHint || (hints.searchEnabled ? (hints.gridNavigation ? "↑↓←→ / CTRL+HJKL" : hints.searching ? "↑↓ / CTRL+JK" : "↑↓ / JK") + "  SELECT" : ""))
-        + (hints.confirmLabel ? "    " + hints.confirmKeys + "  " + hints.confirmLabel : "")
-        + (hints.searchEnabled && !hints.searching ? "    /  FIND" : "")
-        + "    ESC  " + hints.cancelLabel
-        + (hints.extraHint ? "    " + hints.extraHint : ""))
+    text: [hints.extraHint, hints.controlBindings ? hints.controlBindings.hints : "",
+        hints.bindings ? hints.bindings.hints : ""].filter(text => text.length > 0).join("    ")
     color: Colors.muted
     font.family: Fonts.family
     font.pixelSize: Fonts.captionSize

@@ -4,9 +4,9 @@ import QtQuick
 import qs
 import qs.modules
 import qs.modules.search
-import qs.modules.preview
+import "clipboard"
 import qs.services
-import "../../lib/Navigation.js" as Navigation
+import qs.modules.keyboard
 
 // Clipboard history from cliphist: the entries on the left, newest first, the
 // full text or image of the highlighted one on the right. The search line is
@@ -17,9 +17,8 @@ OverlayPage {
 
     // Parsed `cliphist list` output, refreshed on every opening.
     property var entries: []
-    // Entries whose label contains the search: "git" → "git commit -m …".
-    readonly property var matches: window.entries.filter(entry => entry.label.toLowerCase().includes(footer.text.toLowerCase()))
-    readonly property var current: window.matches[list.currentIndex] ?? null
+    // The selected filtered entry drives decoding and preview display.
+    readonly property var current: filter.matches[list.currentIndex] ?? null
     // What the right side shows for the current entry: its full text, or the file of its image.
     property string previewText: ""
     property string previewImage: ""
@@ -99,10 +98,29 @@ OverlayPage {
     panelWidth: LauncherStyle.listPanelWidth
     contentHeight: LauncherStyle.listPanelHeight - LauncherStyle.padding * 2
     padding: LauncherStyle.padding
-    searchEnabled: true
-    searchAlwaysActive: true
-    confirmLabel: "COPY"
-    extraHint: "DEL  DELETE    SHIFT+DEL  WIPE ALL"
+    keyBindings: keys
+
+    SearchFilter {
+        id: filter
+        entries: window.entries
+        query: footer.text
+        textFor: entry => entry.label
+        onMatchesChanged: list.currentIndex = filter.matches.length ? 0 : -1
+    }
+
+    KeyBindings {
+        id: keys
+        actions: [
+            { keys: [Qt.Key_Up], label: "SELECT", run: () => list.decrementCurrentIndex() },
+            { keys: [Qt.Key_Down], label: "SELECT", run: () => list.incrementCurrentIndex() },
+            { keys: [Qt.Key_K], modifiers: Qt.ControlModifier, label: "SELECT", run: () => list.decrementCurrentIndex() },
+            { keys: [Qt.Key_J], modifiers: Qt.ControlModifier, label: "SELECT", run: () => list.incrementCurrentIndex() },
+            { keys: [Qt.Key_Return, Qt.Key_Enter], label: "COPY", enabled: window.current !== null, run: () => window.copyCurrent() },
+            { keys: [Qt.Key_Delete], label: "DELETE", enabled: window.current !== null, run: () => window.remove(window.current) },
+            { keys: [Qt.Key_Delete], modifiers: Qt.ShiftModifier, label: "WIPE ALL", run: () => window.wipe() },
+            { keys: [Qt.Key_Escape], label: ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => ShellState.backOverlay() }
+        ]
+    }
 
     function activate() {
         history.running = true;
@@ -157,7 +175,7 @@ OverlayPage {
 
         width: LauncherStyle.listWidth
         clip: true
-        model: window.matches
+        model: filter.matches
 
         delegate: Rectangle {
             id: row
@@ -197,26 +215,7 @@ OverlayPage {
     Item {
         id: searchKeys
 
-        Keys.onPressed: event => {
-            if (Navigation.isDown(event)) {
-                list.incrementCurrentIndex();
-            } else if (Navigation.isUp(event)) {
-                list.decrementCurrentIndex();
-            } else if (Navigation.isConfirm(event)) {
-                window.copyCurrent();
-            } else if (event.key === Qt.Key_Delete && (event.modifiers & Qt.ShiftModifier)) {
-                window.wipe();
-            } else if (event.key === Qt.Key_Delete) {
-                if (window.current) {
-                    window.remove(window.current);
-                }
-            } else if (Navigation.isCancel(event)) {
-                ShellState.backOverlay();
-            } else {
-                return;
-            }
-            event.accepted = true;
-        }
+        Keys.onPressed: event => keys.handle(event)
     }
 
     SearchField {
@@ -247,7 +246,7 @@ OverlayPage {
         color: Colors.divider
     }
 
-    Item {
+    ClipboardPreview {
         id: preview
 
         anchors {
@@ -258,23 +257,7 @@ OverlayPage {
             leftMargin: LauncherStyle.padding
         }
 
-        Text {
-            anchors.fill: parent
-            visible: window.previewImage === ""
-            text: window.previewText
-            // Plain, so copied HTML or markup shows as the characters it is.
-            textFormat: Text.PlainText
-            wrapMode: Text.WrapAnywhere
-            clip: true
-            color: Colors.foregroundSoft
-            font.family: Fonts.family
-            font.pixelSize: Fonts.smallSize
-        }
-
-        ImagePreview {
-            anchors.fill: parent
-            visible: window.previewImage !== ""
-            source: window.previewImage
-        }
+        text: window.previewText
+        image: window.previewImage
     }
 }

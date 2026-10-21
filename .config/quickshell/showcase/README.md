@@ -89,10 +89,6 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
   - `WorkspaceHud.qml` — compact workspace-only overlay.
   - `Breadcrumbs.qml` — display-only header with a single title string, e.g.
     `× SETTINGS / Appearance / Theme`; the × reports a close request.
-  - `SearchableList.qml` — shared name filtering, selection, keyboard and
-    search field for Settings, Theme and Session. Entries provide `name`; activation
-    passes the original entry to the page. Optional ruled section headings group
-    matching entries without adding navigation levels. Theme supplies its own two-line row.
   - `search/SearchField.qml` — `/ cy` search line; it only types and hands every
     key to its `keyTargets` first, so the owner decides what keys drive.
     The settings, wallpaper and theme views open it on `/`.
@@ -102,11 +98,19 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
     `modifiers`, `label`, optional `enabled`, and `run()` callbacks. `handle(event)`
     executes an enabled matching action; `hints` describes the same enabled actions.
   - `keyboard/KeyboardHints.qml` — display-only keyboard legend in the shared frame.
-    The page supplies search/control state, action labels and extra hints;
-    the frame supplies BACK/CLOSE, or CLEAR during a list's search mode.
-    Pages may instead supply `keyBindings` to derive the legend from their actions.
-    Wallpaper composes a filter, native ListView, search field and key bindings
-    directly; the page owns their connections, current entry and preview.
+    Each page supplies `keyBindings`; the focused settings button supplies its
+    activation bindings. The legend is generated from the same enabled actions
+    used for keyboard handling. Extra text describes native controls or state.
+    All searchable pages compose a filter, native ListView/GridView, search field
+    and key bindings directly. Pages own their connections, current entry and
+    previews; there is no combined searchable-view wrapper or global key registry.
+  - `preview/ImagePreview.qml` — shared aspect-preserving image display with
+    asynchronous loading, empty text and loading/error states.
+  - `settings/wallpaper/WallpaperPreview.qml` — image preview, frame and filename.
+  - `settings/theme/ThemePreview.qml` — terminal/browser previews and empty state.
+  - `launcher/clipboard/ClipboardPreview.qml` — plain text or the shared image preview.
+  - `launcher/windows/WindowPreview.qml` — live capture of the selected window;
+    receives the toplevel and active state from the switcher page.
   - `launcher/AppLauncher.qml` — GNOME-style grid of the desktop apps with an
     always active search; arrows or Ctrl+hjkl move, Enter starts. Esc returns to
     Settings when opened there, otherwise closes. The × always closes everything.
@@ -150,8 +154,6 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
 - `lib/Audio.js` — Pipewire audio helper functions.
 - `services/Appearance.qml` — watches the shared terminal TOML, reads the current
   values through `appearancectl get` and queues writes to its local binary.
-- `lib/Navigation.js` — shared keyboard recognition: arrows or Ctrl+hjkl in
-  search fields, arrows or plain hjkl in lists, plus confirm and back keys.
 - `assets/` — animated angel/devil Tux sprites.
 
 ## What it does

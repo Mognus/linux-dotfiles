@@ -1,6 +1,6 @@
 import QtQuick
 import qs
-import "../../lib/Navigation.js" as Navigation
+import qs.modules.keyboard
 
 // A keyboard-focusable, square button for the settings pages.
 Rectangle {
@@ -8,6 +8,7 @@ Rectangle {
 
     property string text: ""
     property bool checked: false
+    readonly property alias keyBindings: keys
     signal clicked
 
     implicitWidth: label.implicitWidth + 24
@@ -18,12 +19,14 @@ Rectangle {
     border.width: 1
     border.color: activeFocus ? Colors.accent : Colors.borderMuted
 
-    Keys.onPressed: event => {
-        if (event.key === Qt.Key_Space || Navigation.isConfirm(event)) {
-            button.clicked();
-            event.accepted = true;
-        }
+    KeyBindings {
+        id: keys
+        actions: [
+            { keys: [Qt.Key_Return, Qt.Key_Enter, Qt.Key_Space], label: "ACTIVATE", enabled: button.enabled, run: () => button.clicked() }
+        ]
     }
+
+    Keys.onPressed: event => keys.handle(event)
 
     Text {
         id: label

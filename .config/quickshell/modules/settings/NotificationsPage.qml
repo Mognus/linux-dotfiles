@@ -5,9 +5,7 @@ import qs.services
 
 OverlayPage {
     title: "General / Notifications"
-    navigationHint: "TAB  SELECT"
-    confirmKeys: "ENTER/SPACE"
-    confirmLabel: "ACTIVATE"
+    extraHint: "TAB  SELECT"
 
     Column {
         width: parent.width

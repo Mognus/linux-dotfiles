@@ -5,7 +5,7 @@ import qs
 import qs.modules
 import qs.modules.search
 import qs.services
-import "../../lib/Navigation.js" as Navigation
+import qs.modules.keyboard
 
 // App launcher: a GNOME-style grid of the desktop apps. The search line is
 // always active: typing filters, the arrows or Ctrl+hjkl move, Enter starts.
@@ -14,20 +14,9 @@ OverlayPage {
 
     readonly property int columns: 6
     readonly property int rows: 4
-    // Apps that fit the search, sorted by name.
-    readonly property var matches: Array.from(DesktopEntries.applications.values).filter(app => window.fits(app, footer.text.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name))
-
-    // True if the app's name, description or a keyword contains the query:
-    // "browser" → LibreWolf, "term" → Alacritty.
-    function fits(app, query) {
-        const words = [app.name, app.genericName].concat(Array.from(app.keywords));
-        for (const word of words) {
-            if (word.toLowerCase().includes(query)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    // The page supplies sorted data; SearchFilter handles the query.
+    readonly property var entries: Array.from(DesktopEntries.applications.values).sort((a, b) => a.name.localeCompare(b.name))
+    readonly property var current: filter.matches[grid.currentIndex] ?? null
 
     function launch(app) {
         app.execute();
@@ -35,7 +24,7 @@ OverlayPage {
     }
 
     function launchCurrent() {
-        const app = window.matches[grid.currentIndex];
+        const app = window.current;
         if (app) {
             window.launch(app);
         }
@@ -46,10 +35,31 @@ OverlayPage {
     panelWidth: window.columns * LauncherStyle.gridCellSize + LauncherStyle.padding * 2
     contentHeight: window.rows * LauncherStyle.gridCellSize + LauncherStyle.rowHeight + LauncherStyle.padding
     padding: LauncherStyle.padding
-    searchEnabled: true
-    searchAlwaysActive: true
-    gridNavigation: true
-    confirmLabel: "LAUNCH"
+    keyBindings: keys
+
+    SearchFilter {
+        id: filter
+        entries: window.entries
+        query: footer.text
+        textFor: app => [app.name, app.genericName].concat(Array.from(app.keywords)).join("\n")
+        onMatchesChanged: grid.currentIndex = filter.matches.length ? 0 : -1
+    }
+
+    KeyBindings {
+        id: keys
+        actions: [
+            { keys: [Qt.Key_Left], label: "SELECT", run: () => grid.moveCurrentIndexLeft() },
+            { keys: [Qt.Key_Right], label: "SELECT", run: () => grid.moveCurrentIndexRight() },
+            { keys: [Qt.Key_Up], label: "SELECT", run: () => grid.moveCurrentIndexUp() },
+            { keys: [Qt.Key_Down], label: "SELECT", run: () => grid.moveCurrentIndexDown() },
+            { keys: [Qt.Key_H], modifiers: Qt.ControlModifier, label: "SELECT", run: () => grid.moveCurrentIndexLeft() },
+            { keys: [Qt.Key_L], modifiers: Qt.ControlModifier, label: "SELECT", run: () => grid.moveCurrentIndexRight() },
+            { keys: [Qt.Key_K], modifiers: Qt.ControlModifier, label: "SELECT", run: () => grid.moveCurrentIndexUp() },
+            { keys: [Qt.Key_J], modifiers: Qt.ControlModifier, label: "SELECT", run: () => grid.moveCurrentIndexDown() },
+            { keys: [Qt.Key_Return, Qt.Key_Enter], label: "LAUNCH", enabled: window.current !== null, run: () => window.launchCurrent() },
+            { keys: [Qt.Key_Escape], label: ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => ShellState.backOverlay() }
+        ]
+    }
 
     function activate() {
         footer.forceActiveFocus();
@@ -69,7 +79,7 @@ OverlayPage {
         cellWidth: LauncherStyle.gridCellSize
         cellHeight: LauncherStyle.gridCellSize
         clip: true
-        model: window.matches
+        model: filter.matches
 
         delegate: Item {
             id: cell
@@ -128,24 +138,7 @@ OverlayPage {
     Item {
         id: searchKeys
 
-        Keys.onPressed: event => {
-            if (Navigation.isLeft(event)) {
-                grid.moveCurrentIndexLeft();
-            } else if (Navigation.isRight(event)) {
-                grid.moveCurrentIndexRight();
-            } else if (Navigation.isUp(event)) {
-                grid.moveCurrentIndexUp();
-            } else if (Navigation.isDown(event)) {
-                grid.moveCurrentIndexDown();
-            } else if (Navigation.isConfirm(event)) {
-                window.launchCurrent();
-            } else if (Navigation.isCancel(event)) {
-                ShellState.backOverlay();
-            } else {
-                return;
-            }
-            event.accepted = true;
-        }
+        Keys.onPressed: event => keys.handle(event)
     }
 
     SearchField {

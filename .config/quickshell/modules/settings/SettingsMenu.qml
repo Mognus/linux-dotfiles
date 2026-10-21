@@ -2,7 +2,8 @@ import QtQuick
 import qs
 import qs.modules
 import qs.services
-import "../../lib/Navigation.js" as Navigation
+import qs.modules.search
+import qs.modules.keyboard
 
 // Categories only group entries; every entry opens a page in the shared overlay.
 OverlayPage {
@@ -10,9 +11,46 @@ OverlayPage {
 
     title: "SETTINGS"
     contentHeight: 456
-    searchEnabled: true
-    searching: start.searching
-    confirmLabel: "OPEN"
+    keyBindings: keys
+    property bool searching: false
+    readonly property var current: filter.matches[start.currentIndex] ?? null
+
+    function openCurrent() {
+        if (menu.current) ShellState.openSettingsPage(menu.current.page);
+    }
+
+    function startSearch() {
+        menu.searching = true;
+        search.forceActiveFocus();
+    }
+
+    function stopSearch() {
+        search.clear();
+        menu.searching = false;
+        start.forceActiveFocus();
+    }
+
+    SearchFilter {
+        id: filter
+        entries: menu.entries
+        query: search.text
+        onMatchesChanged: start.currentIndex = filter.matches.length ? 0 : -1
+    }
+
+    KeyBindings {
+        id: keys
+        actions: [
+            { keys: [Qt.Key_Up], label: "SELECT", run: () => start.decrementCurrentIndex() },
+            { keys: [Qt.Key_Down], label: "SELECT", run: () => start.incrementCurrentIndex() },
+            { keys: [Qt.Key_K], modifiers: menu.searching ? Qt.ControlModifier : Qt.NoModifier, label: "SELECT", run: () => start.decrementCurrentIndex() },
+            { keys: [Qt.Key_J], modifiers: menu.searching ? Qt.ControlModifier : Qt.NoModifier, label: "SELECT", run: () => start.incrementCurrentIndex() },
+            { keys: [Qt.Key_Return, Qt.Key_Enter], label: "OPEN", enabled: menu.current !== null, run: () => menu.openCurrent() },
+            { keys: [Qt.Key_Right, Qt.Key_L], label: "OPEN", enabled: !menu.searching && menu.current !== null, run: () => menu.openCurrent() },
+            { keys: [Qt.Key_Slash], label: "FIND", enabled: !menu.searching, run: () => menu.startSearch() },
+            { keys: [Qt.Key_Left, Qt.Key_H], label: "CLOSE", enabled: !menu.searching, run: () => ShellState.backOverlay() },
+            { keys: [Qt.Key_Escape], label: menu.searching ? "CLEAR" : "CLOSE", run: () => menu.searching ? menu.stopSearch() : ShellState.backOverlay() }
+        ]
+    }
 
     readonly property var sections: [
         {
@@ -51,22 +89,57 @@ OverlayPage {
     }
 
     function activate() {
-        start.select(0);
+        if (menu.searching) search.forceActiveFocus();
+        else start.forceActiveFocus();
     }
 
-    SearchableList {
+    ListView {
         id: start
 
-        anchors.fill: parent
-        entries: menu.entries
-        sectionRole: "category"
-        Keys.onPressed: event => {
-            if (Navigation.isOpen(event)) {
-                start.activateCurrent();
-                event.accepted = true;
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: menu.searching ? search.top : parent.bottom
+        anchors.bottomMargin: menu.searching ? 12 : 0
+        clip: true
+        focus: true
+        model: filter.matches
+        section.property: "category"
+        section.delegate: Item {
+            required property string section
+            width: start.width
+            height: 28
+            Rectangle {
+                id: lead
+                anchors.left: parent.left
+                anchors.leftMargin: 10
+                anchors.verticalCenter: parent.verticalCenter
+                width: 12
+                height: 1
+                color: Colors.borderMuted
+            }
+            Text {
+                id: sectionLabel
+                anchors.left: lead.right
+                anchors.leftMargin: 8
+                anchors.verticalCenter: parent.verticalCenter
+                text: section.toUpperCase()
+                textFormat: Text.PlainText
+                color: Colors.muted
+                font.family: Fonts.family
+                font.pixelSize: Fonts.smallSize
+            }
+            Rectangle {
+                anchors.left: sectionLabel.right
+                anchors.leftMargin: 8
+                anchors.right: parent.right
+                anchors.rightMargin: 10
+                anchors.verticalCenter: parent.verticalCenter
+                height: 1
+                color: Colors.borderMuted
             }
         }
-        onActivated: entry => ShellState.openSettingsPage(entry.page)
+        Keys.onPressed: event => keys.handle(event)
 
         delegate: Rectangle {
             id: row
@@ -117,9 +190,27 @@ OverlayPage {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: start.select(row.index)
-                onDoubleClicked: start.activateCurrent()
+                onClicked: {
+                    start.currentIndex = row.index;
+                    menu.activate();
+                }
+                onDoubleClicked: menu.openCurrent()
             }
         }
+    }
+
+    Item {
+        id: searchKeys
+        Keys.onPressed: event => keys.handle(event)
+    }
+
+    SearchField {
+        id: search
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        height: 36
+        visible: menu.searching
+        keyTargets: [searchKeys]
     }
 }

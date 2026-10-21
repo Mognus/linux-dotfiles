@@ -5,7 +5,7 @@ import qs.services
 
 OverlayPage {
     title: "Appearance / Adjustments"
-    navigationHint: "TAB  SELECT    ←→  ADJUST"
+    extraHint: "TAB  SELECT    ←→  ADJUST"
 
     Column {
         width: parent.width

@@ -51,15 +51,8 @@ OverlayWindow {
         id: hints
         bindings: window.currentPage ? window.currentPage.keyBindings : null
 
-        searchEnabled: window.currentPage ? window.currentPage.searchEnabled : false
-        searching: window.currentPage ? window.currentPage.searching : false
-        gridNavigation: window.currentPage ? window.currentPage.gridNavigation : false
-        navigationHint: window.currentPage ? window.currentPage.navigationHint : ""
-        confirmKeys: window.currentPage ? window.currentPage.confirmKeys : "ENTER"
-        confirmLabel: window.currentPage ? window.currentPage.confirmLabel : ""
+        controlBindings: window.currentPage ? window.currentPage.controlKeyBindings : null
         extraHint: window.currentPage ? window.currentPage.extraHint : ""
-        cancelLabel: window.currentPage && window.currentPage.searching && !window.currentPage.searchAlwaysActive
-            ? "CLEAR" : ShellState.overlayFromSettings ? "BACK" : "CLOSE"
     }
 
     Component { id: settingsPage; SettingsMenu {} }

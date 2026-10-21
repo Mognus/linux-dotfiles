@@ -7,7 +7,7 @@ OverlayPage {
     id: page
 
     title: "General / Audio"
-    navigationHint: "SCROLL ON SLIDER  +/- 2%"
+    extraHint: "SCROLL ON SLIDER  +/- 2%"
 
     Flickable {
         id: scroll
