@@ -60,6 +60,9 @@
     # VGA for monospace, Alacritty and Quickshell; Plex Sans for GUI text.
     ultimate-oldschool-pc-font-pack
     (ibm-plex.override { families = [ "sans" ]; })
+    # Unicode terminal glyphs and Nerd Font icons missing from the VGA font.
+    dejavu_fonts
+    nerd-fonts.symbols-only
   ];
 
   programs.fish.enable = true;
