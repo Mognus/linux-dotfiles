@@ -1,5 +1,7 @@
 vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+    { src = "https://github.com/windwp/nvim-ts-autotag" },
+    { src = "https://github.com/dmmulroy/tsc.nvim" },
     { src = "https://github.com/coder/claudecode.nvim" },
     { src = "https://github.com/folke/snacks.nvim" },
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
@@ -12,8 +14,15 @@ vim.pack.add({
 })
 
 require("core.format")
+require("nvim-ts-autotag").setup()
+require("tsc").setup({
+    -- Follow project references as well as checking a single tsconfig.
+    flags = "--build --noEmit",
+    use_diagnostics = true,
+})
 
 require("snacks").setup({
+    indent = { enabled = true },
     explorer = { enabled = true },
     picker = {
         -- Alt+. (dot = dotfiles) toggles hidden files in every picker while typing in the
@@ -54,7 +63,13 @@ require("gitsigns").setup({
 -- Popup after Space (and other prefixes) listing the possible next keys. The entries come
 -- from the `desc` of each vim.keymap.set; only the group names are given here.
 local which_key = require("which-key")
-which_key.setup()
+which_key.setup({
+    triggers = {
+        { "<auto>", mode = "niotc" },
+        -- Keep leader help in Visual mode without opening it on v / V / Ctrl+V.
+        { "<leader>", mode = "x" },
+    },
+})
 which_key.add({
     { "<leader>c", group = "code" },
     { "<leader>f", group = "find" },

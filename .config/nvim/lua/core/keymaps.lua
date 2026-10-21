@@ -6,9 +6,19 @@ vim.g.mapleader = " "
 -- which-key reads each mapping's description for its help popup.
 -- Groups: c = code, f = find, g = git, x = diagnostics (named in plugins.lua).
 
+vim.keymap.set("n", "<leader>?", function()
+    require("which-key").show({ keys = "", mode = "n" })
+end, { desc = "Show key help" })
+
+vim.keymap.set("x", "<leader>?", function()
+    require("which-key").show({ keys = "", mode = "x" })
+end, { desc = "Show visual key help" })
+
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Find references" })
 vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename symbol" })
+vim.keymap.set("n", "<leader>cl", "<cmd>lsp restart<CR>", { desc = "Restart buffer language servers" })
+vim.keymap.set("n", "<leader>ct", "<cmd>TSC<CR>", { desc = "Type-check TypeScript project" })
 vim.keymap.set({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
 
 -- Space+c+f formats the current buffer using the filetype map in core/format.lua.

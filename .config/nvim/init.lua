@@ -15,6 +15,12 @@ vim.opt.clipboard = "unnamedplus"
 -- Show the absolute line number in the gutter.
 vim.opt.number = true
 
+-- Default indentation; filetype settings and project .editorconfig can override it.
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = -1
+
 require("core.ui")
 require("core.plugins")
 require("core.keymaps")

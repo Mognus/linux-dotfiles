@@ -31,8 +31,13 @@ adding one asks for confirmation.
 
 - `nvim-treesitter` - syntax highlighting and indentation. Parsers are
   compiled locally with `tree-sitter` and `gcc` from `home.packages`.
+- `nvim-ts-autotag` - automatically closes HTML/JSX/TSX tags and renames matching
+  tag pairs. Tag and prop suggestions still come from the language server.
+- `tsc.nvim` - asynchronous TypeScript project checks, with results in Quickfix
+  and Neovim diagnostics.
 - `snacks.nvim` - file explorer and pickers (files, grep, LSP symbols, git status,
-  diagnostics). Opening a directory (`nvim .`) opens the explorer instead of netrw.
+  diagnostics), plus indentation guides with the current scope highlighted.
+  Opening a directory (`nvim .`) opens the explorer instead of netrw.
 - `gitsigns.nvim` - marks changed lines in the sign column, side-by-side diff
 - `which-key.nvim` - popup after `Space` listing the possible next keys
 - `conform.nvim` - formats the current buffer with the formatter for its filetype
@@ -71,10 +76,15 @@ server attached. Reference configs for other servers: the `lsp/` folder of
 ## Keybinds
 
 Leader is `Space`; after pressing it, `which-key` shows the possible next keys.
+Entering Visual mode with `v`, `V` or `Ctrl+V` does not open help automatically.
+Press `Space+?` in Normal or Visual mode to open the current mode's key overview
+on demand; leader help remains available in Visual mode.
 
 - `Space+e` - toggle the fullscreen file explorer; type to filter, Enter opens
 - `Space+c+f` - format the current buffer (Conform, with LSP fallback)
 - `Space+c+r` - rename the symbol under the cursor
+- `Space+c+l` - restart the language servers attached to the current buffer
+- `Space+c+t` - type-check the TypeScript project (`:TSC`)
 - `Space+c+a` - code actions for the cursor or visual selection
 - `Space+f+f` - find files across the git repo (dotfiles included)
 - `Space+f+s` - find LSP symbols in the current file (functions, structs, methods, etc.)
@@ -118,12 +128,38 @@ Conform uses the formatter's project configuration; its Prettier integration
 prefers a project-local executable when available. Run `:ConformInfo` to inspect
 the selected formatter, executable availability and errors.
 
+Editor indentation defaults to four spaces (`expandtab`, `tabstop = 4`,
+`shiftwidth = 4`, `softtabstop = -1`). Filetype settings can override these;
+Neovim's built-in EditorConfig support applies project `.editorconfig` settings.
+Prettier also defaults to four spaces, with project Prettier/EditorConfig settings
+taking precedence. Other formatters keep their own configuration and language
+conventions (for example, gofmt uses tabs). A Prettier config controls formatting,
+not the editor's Tab key; use `.editorconfig` to keep both consistent.
+
 Linting and type checking are separate from formatting. The existing language
 servers publish diagnostics automatically: for example, Ruff lints Python while
 Pyright checks types. `Space+x+x` lists diagnostics; `gra` opens LSP code actions
 for fixes. Full-project checks and tests still belong in the project's terminal
 commands or CI (for example `ruff check .`, `pyright`, `cargo clippy`,
 `cargo test`, or `tsc --noEmit`, depending on the project).
+
+`Space+c+l` (built-in `:lsp restart`) restarts attached servers when they get
+stuck; it is not a full-project check. Use `:checkhealth vim.lsp` to inspect
+attachment and `:lsp enable vtsls` / `:lsp enable eslint` if a server is disabled.
+
+### TypeScript project checks
+
+Save files, then press `Space+c+t` (`:TSC`) from the TypeScript project root.
+`tsc.nvim` prefers the project's `node_modules/.bin/tsc`, falling back to PATH.
+It runs `--build --noEmit` to include referenced TypeScript projects without
+emitting JavaScript. TypeScript may still write incremental build metadata.
+Results populate Quickfix and diagnostics (`Space+x+x`), including errors in
+unopened files. Results reflect the last check; rerun after fixing errors.
+The plugin currently replaces diagnostics per file while processing errors,
+so only the last error per file may appear in diagnostics; Quickfix contains
+the complete results.
+The Quickfix window opens on errors; `:copen`, `:cnext` and `:cprev` navigate it.
+`:TSCStop` stops a running check. Checks are manual, not automatically run on save.
 
 ### ESLint for JavaScript and React
 

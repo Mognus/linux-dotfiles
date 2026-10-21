@@ -1,6 +1,12 @@
 -- Conform reads the current buffer's filetype and uses the matching formatter.
 -- Example: a Python buffer → ruff_format → `ruff format` on the buffer contents.
 require("conform").setup({
+    formatters = {
+        prettier = {
+            -- Project Prettier/EditorConfig settings win over these defaults.
+            prepend_args = { "--tab-width", "4", "--use-tabs", "false", "--config-precedence", "file-override" },
+        },
+    },
     formatters_by_ft = {
         python = { "ruff_format" },
         rust = { "rustfmt" },
