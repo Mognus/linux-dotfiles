@@ -91,8 +91,8 @@ Audio bindings also work on the lock screen. The Quickshell bar shows the level.
 - `SUPER+Q` - Close window
 - `SUPER+F` - Fullscreen
 - `SUPER+Shift+Space` - Toggle floating
-- `SUPER+J/K` - Focus next/previous window in the master stack, without wrapping
-- `SUPER+Shift+J/K` - Swap with the next/previous window in the master stack
+- `SUPER+J/K` - Focus next/previous window in the master stack, wrapping at the ends
+- `SUPER+Shift+J/K` - Swap with the next/previous window in the master stack, wrapping at the ends
 - `SUPER+H/L` - Shrink/grow the master area by five percentage points
 - `SUPER+Return` - Swap the focused window with the master
 

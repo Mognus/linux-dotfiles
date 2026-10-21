@@ -33,6 +33,7 @@ as long as another session remains.
 ### Panes
 
 - `Alt+Shift+Enter` - create a pane in the current directory and apply the master layout
+- `Alt+Enter` - swap the current pane with the left master pane and focus the master
 - `Alt+J/K` - focus next/previous pane, wrapping at the ends
 - `Alt+Shift+J/K` - swap the current pane with the next/previous pane
 - `Alt+H/L` - shrink/grow the left master pane by five columns
@@ -44,6 +45,8 @@ remaining panes in a stack on the right. Creating a pane reapplies this layout.
 Except where Shift is shown explicitly, letter bindings do not require Shift.
 
 ### Copy mode
+
+Pane history keeps up to 100,000 lines; the history limit applies to newly created panes.
 
 - `Alt+V` (without Shift) or prefix, then `[` - enter copy mode
 - `Alt+/` / `Alt+?` - enter copy mode and search down/up directly
