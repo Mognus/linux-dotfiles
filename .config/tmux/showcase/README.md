@@ -38,7 +38,6 @@ as long as another session remains.
 - `Alt+H/L` - shrink/grow the left master pane by five columns
 - `Alt+Q` - close the current pane
 - `Alt+F` - toggle pane zoom
-- `Alt+/` - copy mode
 
 The master layout (`main-vertical`) places one large pane on the left and the
 remaining panes in a stack on the right. Creating a pane reapplies this layout.
@@ -46,6 +45,8 @@ Except where Shift is shown explicitly, letter bindings do not require Shift.
 
 ### Copy mode
 
+- `Alt+V` (without Shift) or prefix, then `[` - enter copy mode
+- `Alt+/` / `Alt+?` - enter copy mode and search down/up directly
 - `j/k`, `Ctrl+U/D`, `g/G` - move, half page, top/bottom
 - `/` `?` then `n/N` - search down/up, next/previous match
 - `v` / `V` / `Ctrl+V` - select characters / lines / a block

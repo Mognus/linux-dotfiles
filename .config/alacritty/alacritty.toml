@@ -15,20 +15,6 @@ style = "Regular"
 [window]
 decorations = "None"
 
-# Vim-style buffer search. Gated to ~Vi so these stay out of the way once Vi
-# mode is active — there you already get native /, ?, n, N.
-[[keyboard.bindings]]
-key = "/"
-mods = "Control|Alt"
-mode = "~Vi"
-action = "SearchForward"
-
-[[keyboard.bindings]]
-key = "/"
-mods = "Control|Alt|Shift"
-mode = "~Vi"
-action = "SearchBackward"
-
 [[keyboard.bindings]]
 key = "Return"
 mods = "Shift"
