@@ -14,8 +14,23 @@ vim.keymap.set("x", "<leader>?", function()
     require("which-key").show({ keys = "", mode = "x" })
 end, { desc = "Show visual key help" })
 
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Find references" })
+vim.keymap.set("n", "gd", function()
+    Snacks.picker.lsp_definitions()
+end, { desc = "Go to definition" })
+
+-- Keep both the short mapping and Neovim's familiar grr spelling.
+local function find_references()
+    Snacks.picker.lsp_references()
+end
+
+vim.keymap.set("n", "gr", find_references, { desc = "Find references" })
+vim.keymap.set("n", "grr", find_references, { desc = "Find references" })
+vim.keymap.set("n", "grt", function()
+    Snacks.picker.lsp_type_definitions()
+end, { desc = "Go to type definition" })
+vim.keymap.set("n", "gri", function()
+    Snacks.picker.lsp_implementations()
+end, { desc = "Find implementations" })
 vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename symbol" })
 vim.keymap.set("n", "<leader>cl", "<cmd>lsp restart<CR>", { desc = "Restart buffer language servers" })
 vim.keymap.set("n", "<leader>ct", "<cmd>TSC<CR>", { desc = "Type-check TypeScript project" })
