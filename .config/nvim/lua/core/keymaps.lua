@@ -2,8 +2,14 @@
 -- no plugin loaded before this file defines one.
 vim.g.mapleader = " "
 
--- Every mapping lives under <leader>; which-key shows the options after Space.
+-- Code actions live under <leader>; navigation uses short g mappings.
+-- which-key reads each mapping's description for its help popup.
 -- Groups: c = code, f = find, g = git, x = diagnostics (named in plugins.lua).
+
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Find references" })
+vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename symbol" })
+vim.keymap.set({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
 
 -- Space+c+f formats the current buffer using the filetype map in core/format.lua.
 vim.keymap.set("n", "<leader>cf", function()

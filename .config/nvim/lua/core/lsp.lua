@@ -3,6 +3,7 @@ vim.lsp.enable({
     "gopls",
     "rust_analyzer",
     "vtsls",
+    "eslint",
     "pyright",
     "ruff",
     "nixd",

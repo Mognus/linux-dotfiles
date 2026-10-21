@@ -47,6 +47,7 @@ adding one asks for confirmation.
 Enabled in `lua/core/lsp.lua`, one config per server in `lsp/<name>.lua`:
 
 - Go `gopls`, Rust `rust_analyzer`, TypeScript/JavaScript `vtsls`
+- JavaScript/TypeScript (including JSX/TSX) `eslint` for project lint rules
 - Python `pyright` (types) and `ruff` (lint, format)
 - Nix `nixd`, Lua `lua_ls`, XML `lemminx` (Odoo views and data)
 - JSON `jsonls`, CSS `cssls`, HTML `html`, Svelte `svelte`
@@ -73,6 +74,8 @@ Leader is `Space`; after pressing it, `which-key` shows the possible next keys.
 
 - `Space+e` - toggle the fullscreen file explorer; type to filter, Enter opens
 - `Space+c+f` - format the current buffer (Conform, with LSP fallback)
+- `Space+c+r` - rename the symbol under the cursor
+- `Space+c+a` - code actions for the cursor or visual selection
 - `Space+f+f` - find files across the git repo (dotfiles included)
 - `Space+f+s` - find LSP symbols in the current file (functions, structs, methods, etc.)
 - `Space+f+S` - search LSP symbols across the workspace, updated live while typing (`S` = Shift+s)
@@ -87,10 +90,15 @@ Leader is `Space`; after pressing it, `which-key` shows the possible next keys.
 Symbol search requires an attached LSP that supports document or workspace
 symbols. `Space+/` remains text search; it also finds comments and strings.
 
-LSP keys are Neovim's defaults (`:h lsp-defaults`): `K` hover, `grn` rename,
-`gra` code action, `grr` references, `grt` type definition.
-For an LSP definition jump, use `:lua vim.lsp.buf.definition()`; `gd` is Neovim's
-built-in local declaration search, not an LSP mapping in this config.
+LSP navigation: `gd` jumps to the definition, `gr` lists references, and
+`Ctrl+O` returns after a jump. These mappings replace Vim's local declaration
+search (`gd`) and virtual replace character (`gr`). Neovim's LSP defaults
+remain available (`:h lsp-defaults`): `K` hover, `grt` type definition,
+`gri` implementations, `grn` rename, `gra` code action and `grr` references.
+The `gr` mapping also prefixes the built-in `gr…` mappings, so it waits briefly
+for another key; `grr` requests references without that prefix wait.
+which-key reads mapping descriptions automatically; only group names are
+configured separately in `lua/core/plugins.lua`.
 
 ## Formatting and checks
 
@@ -116,6 +124,19 @@ Pyright checks types. `Space+x+x` lists diagnostics; `gra` opens LSP code action
 for fixes. Full-project checks and tests still belong in the project's terminal
 commands or CI (for example `ruff check .`, `pyright`, `cargo clippy`,
 `cargo test`, or `tsc --noEmit`, depending on the project).
+
+### ESLint for JavaScript and React
+
+`vtsls` checks types; `eslint` reports the project's lint rules while typing.
+The project needs its own ESLint dependency and configuration. React Hooks
+rules require the corresponding plugin and rules in that project configuration.
+Both flat config (`eslint.config.*`) and legacy `.eslintrc*` files are recognized;
+`package.json` and `.git` are fallback workspace markers.
+
+Use `Space+c+a` (or `gra`) for fixes and `Space+x+x` to inspect diagnostics. Fixes do not run
+automatically on save, and Prettier remains the formatter for `Space+c+f`.
+The server comes from the existing `vscode-langservers-extracted` Nix package,
+so this editor configuration change needs no rebuild. Restart Neovim to load it.
 
 ## Claude Code
 
