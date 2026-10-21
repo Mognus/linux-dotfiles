@@ -44,7 +44,7 @@ without modifiers. Each action returns to normal bindings automatically.
 | `w` | Quickshell window switcher with a live preview |
 | `g` | Quickshell settings menu |
 | `v` | Quickshell clipboard history |
-| `t` | Terminal scratchpad |
+| `Enter` | Terminal scratchpad |
 | `b` | Browser scratchpad (LibreWolf) |
 | `d` | Discord scratchpad |
 | `n` | Notes scratchpad |
@@ -110,7 +110,7 @@ Shift unless it is explicitly shown.
 
 ## Scratchpads
 
-Use the leader followed by `t/b/d/n/f` for the terminal, browser, Discord,
+Use the leader followed by `Enter/b/d/n/f` for the terminal, browser, Discord,
 Notes, or file manager. The same sequence opens or hides the scratchpad.
 
 ## Desktop Widgets

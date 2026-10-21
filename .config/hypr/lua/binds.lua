@@ -33,7 +33,7 @@ function M.setup(programs)
         leader_bind("G", exec("qs -p $HOME/.config/quickshell ipc call settings toggle"))
         leader_bind("V", exec("qs -p $HOME/.config/quickshell ipc call clipboard toggle"))
 
-        leader_bind("T", toggle_special("term"))
+        leader_bind("Return", toggle_special("term"))
         leader_bind("B", toggle_special("firefox"))
         leader_bind("D", toggle_special("discord"))
         leader_bind("N", toggle_special("notes"))
