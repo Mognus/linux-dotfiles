@@ -1,4 +1,8 @@
 -- Server configs live in lsp/<name>.lua; Neovim picks them up by name.
+vim.lsp.config("*", {
+    capabilities = require("blink.cmp").get_lsp_capabilities(),
+})
+
 vim.lsp.enable({
     "gopls",
     "rust_analyzer",
@@ -34,26 +38,7 @@ vim.filetype.add({
     },
 })
 
--- Complete while typing identifiers too, not only after server triggers like ".".
--- Ctrl+Y accepts, Ctrl+N / Ctrl+P move, Ctrl+E closes.
--- noselect: nothing is preselected, so typing on never inserts an item by accident.
-vim.opt.completeopt = { "menuone", "noselect", "popup" }
-
-vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(ev)
-        local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
-        if client:supports_method("textDocument/completion") then
-            local provider = client.server_capabilities.completionProvider
-            provider.triggerCharacters = provider.triggerCharacters or {}
-            for char in ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"):gmatch(".") do
-                if not vim.list_contains(provider.triggerCharacters, char) then
-                    table.insert(provider.triggerCharacters, char)
-                end
-            end
-            vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-        end
-    end,
-})
+-- Blink owns completion; do not also enable vim.lsp.completion autotrigger.
 
 -- Show errors at the end of the line, like diagnostics.inline in Zed.
 vim.diagnostic.config({ virtual_text = true, update_in_insert = true })

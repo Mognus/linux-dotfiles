@@ -29,6 +29,11 @@ changing the link itself needs `sudo nixos-rebuild switch --flake ~/dotfiles/nix
 Plugins are installed by Neovim's built-in `vim.pack`; the first start after
 adding one asks for confirmation.
 
+- `blink.cmp` - completion from LSP, paths, snippets and buffer words, with
+  automatic documentation. Pinned to stable v1; uses the Lua fuzzy matcher
+  without a native binary. Snippets use Neovim's built-in snippet engine;
+  no additional snippet collection is installed. Command-line completion stays stock.
+
 - `nvim-treesitter` - syntax highlighting and indentation. Parsers are
   compiled locally with `tree-sitter` and `gcc` from `home.packages`.
 - `nvim-ts-autotag` - automatically closes HTML/JSX/TSX tags and renames matching
@@ -65,9 +70,14 @@ library sources are provided through `RUST_SRC_PATH` in the same module.
 Errors show at the end of the line, including in Insert mode, and inlay hints
 are on. Rust's full Cargo diagnostics run on save; rust-analyzer also reports
 its own live diagnostics on unsaved changes.
-The completion menu opens while typing identifiers and on the server's trigger
-characters (e.g. `.`); `Ctrl+Y` accepts, `Ctrl+N` / `Ctrl+P` move, `Ctrl+E`
-closes. `Ctrl+X Ctrl+O` requests LSP completion manually. `K` shows documentation
+Blink's completion menu opens automatically while typing; `Ctrl+Space` requests
+suggestions manually (and toggles documentation when the menu is already open).
+Nothing is preselected or inserted automatically. `Ctrl+N` / `Ctrl+P` select,
+`Ctrl+Y` accepts the selected item or the first item if none is selected, and
+`Ctrl+E` closes. `Tab` / `Shift+Tab` jump between snippet placeholders, otherwise
+keep their usual behavior. `Enter` remains a newline. `Ctrl+B` / `Ctrl+F` scroll
+the completion documentation in Insert mode. Native `Ctrl+X Ctrl+O` remains a
+separate Omni-completion path; use `Ctrl+Space` for Blink. `K` shows documentation
 in Normal mode; `Ctrl+S` shows signature help in Insert mode.
 `:checkhealth vim.lsp` shows which
 server attached. Reference configs for other servers: the `lsp/` folder of

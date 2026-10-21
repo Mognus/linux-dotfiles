@@ -1,4 +1,5 @@
 vim.pack.add({
+    { src = "https://github.com/Saghen/blink.cmp", version = "v1.10.2" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     { src = "https://github.com/windwp/nvim-ts-autotag" },
     { src = "https://github.com/dmmulroy/tsc.nvim" },
@@ -14,6 +15,17 @@ vim.pack.add({
 })
 
 require("core.format")
+require("blink.cmp").setup({
+    keymap = { preset = "default" },
+    completion = {
+        list = { selection = { preselect = false, auto_insert = false } },
+        documentation = { auto_show = true },
+    },
+    sources = { default = { "lsp", "path", "snippets", "buffer" } },
+    -- No downloaded native binary or build step needed on NixOS.
+    fuzzy = { implementation = "lua" },
+    cmdline = { enabled = false },
+})
 require("nvim-ts-autotag").setup()
 require("tsc").setup({
     -- Follow project references as well as checking a single tsconfig.
