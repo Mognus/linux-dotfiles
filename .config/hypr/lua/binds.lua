@@ -91,10 +91,10 @@ function M.setup(programs)
     mod_bind("SHIFT + Space", hl.dsp.window.float({ action = "toggle" }))
 
     -- dwm: j/k walk the master stack, h/l move the master split (mfact).
-    mod_bind("j", hl.dsp.layout("cyclenext noloop"))
-    mod_bind("k", hl.dsp.layout("cycleprev noloop"))
-    mod_bind("SHIFT + j", hl.dsp.layout("swapnext noloop"))
-    mod_bind("SHIFT + k", hl.dsp.layout("swapprev noloop"))
+    mod_bind("j", hl.dsp.layout("cyclenext"))
+    mod_bind("k", hl.dsp.layout("cycleprev"))
+    mod_bind("SHIFT + j", hl.dsp.layout("swapnext"))
+    mod_bind("SHIFT + k", hl.dsp.layout("swapprev"))
 
     mod_bind("h", hl.dsp.layout("mfact -0.05"), { repeating = true })
     mod_bind("l", hl.dsp.layout("mfact +0.05"), { repeating = true })
