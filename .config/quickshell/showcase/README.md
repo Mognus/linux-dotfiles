@@ -90,15 +90,23 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
   - `Breadcrumbs.qml` — display-only header with a single title string, e.g.
     `× SETTINGS / Appearance / Theme`; the × reports a close request.
   - `SearchableList.qml` — shared name filtering, selection, keyboard and
-    search field for Settings, Theme and Wallpaper. Entries provide `name`; activation
+    search field for Settings, Theme and Session. Entries provide `name`; activation
     passes the original entry to the page. Optional ruled section headings group
     matching entries without adding navigation levels. Theme supplies its own two-line row.
-  - `SearchFooter.qml` — `/ cy` search line; it only types and hands every
+  - `search/SearchField.qml` — `/ cy` search line; it only types and hands every
     key to its `keyTargets` first, so the owner decides what keys drive.
     The settings, wallpaper and theme views open it on `/`.
-  - `KeyboardHints.qml` — display-only keyboard legend in the shared frame.
+  - `search/SearchFilter.qml` — local `entries` + `query` + `textFor(entry)` →
+    `matches`. It owns no selection, focus or UI.
+  - `keyboard/KeyBindings.qml` — local `actions` with `keys`, optional exact
+    `modifiers`, `label`, optional `enabled`, and `run()` callbacks. `handle(event)`
+    executes an enabled matching action; `hints` describes the same enabled actions.
+  - `keyboard/KeyboardHints.qml` — display-only keyboard legend in the shared frame.
     The page supplies search/control state, action labels and extra hints;
     the frame supplies BACK/CLOSE, or CLEAR during a list's search mode.
+    Pages may instead supply `keyBindings` to derive the legend from their actions.
+    Wallpaper composes a filter, native ListView, search field and key bindings
+    directly; the page owns their connections, current entry and preview.
   - `launcher/AppLauncher.qml` — GNOME-style grid of the desktop apps with an
     always active search; arrows or Ctrl+hjkl move, Enter starts. Esc returns to
     Settings when opened there, otherwise closes. The × always closes everything.

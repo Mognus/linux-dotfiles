@@ -4,7 +4,7 @@ import qs
 // Search line under a list: / cy▏. It only types; every key goes to
 // keyTargets first, so whoever uses it can still drive a list with it.
 FocusScope {
-    id: footer
+    id: search
 
     readonly property alias text: field.text
     // Items that see each key before the field types it.
@@ -59,7 +59,7 @@ FocusScope {
         color: Colors.foreground
         font.family: Fonts.family
         font.pixelSize: Fonts.size
-        Keys.forwardTo: footer.keyTargets
+        Keys.forwardTo: search.keyTargets
 
         // Ctrl+W deletes the word before the cursor like in a terminal: "fire fox▏" → "fire ▏".
         Keys.onPressed: event => {

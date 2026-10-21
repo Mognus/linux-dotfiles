@@ -13,6 +13,7 @@ Text {
     property string confirmLabel: "APPLY"
     property string cancelLabel: searching ? "CLEAR" : "BACK"
     property string extraHint: ""
+    property var bindings: null
 
     anchors.left: parent.left
     anchors.right: parent.right
@@ -24,11 +25,11 @@ Text {
     horizontalAlignment: Text.AlignHCenter
     wrapMode: Text.WordWrap
     textFormat: Text.PlainText
-    text: (hints.navigationHint || (hints.searchEnabled ? (hints.gridNavigation ? "↑↓←→ / CTRL+HJKL" : hints.searching ? "↑↓ / CTRL+JK" : "↑↓ / JK") + "  SELECT" : ""))
+    text: hints.bindings ? hints.bindings.hints : ((hints.navigationHint || (hints.searchEnabled ? (hints.gridNavigation ? "↑↓←→ / CTRL+HJKL" : hints.searching ? "↑↓ / CTRL+JK" : "↑↓ / JK") + "  SELECT" : ""))
         + (hints.confirmLabel ? "    " + hints.confirmKeys + "  " + hints.confirmLabel : "")
         + (hints.searchEnabled && !hints.searching ? "    /  FIND" : "")
         + "    ESC  " + hints.cancelLabel
-        + (hints.extraHint ? "    " + hints.extraHint : "")
+        + (hints.extraHint ? "    " + hints.extraHint : ""))
     color: Colors.muted
     font.family: Fonts.family
     font.pixelSize: Fonts.captionSize

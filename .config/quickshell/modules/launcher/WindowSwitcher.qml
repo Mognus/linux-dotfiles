@@ -5,6 +5,7 @@ import Quickshell.Widgets
 import QtQuick
 import qs
 import qs.modules
+import qs.modules.search
 import qs.services
 import "../../lib/Navigation.js" as Navigation
 
@@ -178,7 +179,7 @@ OverlayPage {
         }
     }
 
-    SearchFooter {
+    SearchField {
         id: footer
 
         anchors {

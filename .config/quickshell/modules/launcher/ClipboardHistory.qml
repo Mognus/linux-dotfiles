@@ -3,6 +3,8 @@ import Quickshell.Io
 import QtQuick
 import qs
 import qs.modules
+import qs.modules.search
+import qs.modules.preview
 import qs.services
 import "../../lib/Navigation.js" as Navigation
 
@@ -217,7 +219,7 @@ OverlayPage {
         }
     }
 
-    SearchFooter {
+    SearchField {
         id: footer
 
         anchors {
@@ -269,12 +271,10 @@ OverlayPage {
             font.pixelSize: Fonts.smallSize
         }
 
-        Image {
+        ImagePreview {
             anchors.fill: parent
             visible: window.previewImage !== ""
             source: window.previewImage
-            fillMode: Image.PreserveAspectFit
-            asynchronous: true
         }
     }
 }

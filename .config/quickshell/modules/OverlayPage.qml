@@ -17,6 +17,7 @@ FocusScope {
     property string confirmKeys: "ENTER"
     property string confirmLabel: ""
     property string extraHint: ""
+    property var keyBindings: null
 
     focus: true
 

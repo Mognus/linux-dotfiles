@@ -1,5 +1,6 @@
 import QtQuick
 import qs
+import qs.modules.search
 import "../lib/Navigation.js" as Navigation
 
 // Entries provide a name; all other fields are passed through to the caller.
@@ -164,7 +165,7 @@ FocusScope {
         }
     }
 
-    SearchFooter {
+    SearchField {
         id: search
 
         anchors.left: parent.left

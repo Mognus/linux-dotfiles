@@ -3,6 +3,7 @@ import QtQuick
 import qs.modules.launcher
 import qs.modules.settings
 import qs.services
+import qs.modules.keyboard
 
 // One window, one loaded page, one footer. Routes have at most one parent: Settings.
 OverlayWindow {
@@ -48,6 +49,7 @@ OverlayWindow {
 
     KeyboardHints {
         id: hints
+        bindings: window.currentPage ? window.currentPage.keyBindings : null
 
         searchEnabled: window.currentPage ? window.currentPage.searchEnabled : false
         searching: window.currentPage ? window.currentPage.searching : false
