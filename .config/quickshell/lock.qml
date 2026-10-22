@@ -133,7 +133,7 @@ ShellRoot {
                     Text {
                         anchors.centerIn: parent
                         visible: input.text === ""
-                        text: field.failed ? "Falsch" : "Passwort"
+                        text: field.failed ? "Incorrect" : "Password"
                         color: field.failed ? Colors.danger : Colors.muted
                         font.family: Fonts.family
                         font.pixelSize: Fonts.smallSize

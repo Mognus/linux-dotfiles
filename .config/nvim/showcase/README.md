@@ -33,6 +33,8 @@ adding one asks for confirmation.
   automatic documentation. Pinned to stable v1; uses the Lua fuzzy matcher
   without a native binary. Snippets use Neovim's built-in snippet engine;
   no additional snippet collection is installed. Command-line completion stays stock.
+- `opencode.nvim` - on-demand editor context and actions for OpenCode in tmux,
+  pinned to v1.0.2 for OpenCode v1. Uses Snacks input and picker interfaces.
 
 - `nvim-treesitter` - syntax highlighting and indentation. Parsers are
   compiled locally with `tree-sitter` and `gcc` from `home.packages`.
@@ -50,7 +52,6 @@ adding one asks for confirmation.
   cursor position; font rendering is handled by Alacritty
 - `render-markdown.nvim` - renders Markdown in the buffer; `:RenderMarkdown toggle`
   switches back to plain text
-- `claudecode.nvim` - Claude Code IDE integration, see below
 
 ## Language servers
 
@@ -91,6 +92,8 @@ Press `Space+?` in Normal or Visual mode to open the current mode's key overview
 on demand; leader help remains available in Visual mode.
 
 - `Space+e` - toggle the fullscreen file explorer; type to filter, Enter opens
+- `Space+a+a` - ask OpenCode about the cursor position or visual selection
+- `Space+a+s` - select an OpenCode prompt, command or server action
 - `Space+c+f` - format the current buffer (Conform, with LSP fallback)
 - `Space+c+r` - rename the symbol under the cursor
 - `Space+c+l` - restart the language servers attached to the current buffer
@@ -186,17 +189,24 @@ automatically on save, and Prettier remains the formatter for `Space+c+f`.
 The server comes from the existing `vscode-langservers-extracted` Nix package,
 so this editor configuration change needs no rebuild. Restart Neovim to load it.
 
-## Claude Code
+## OpenCode
 
-`claudecode.nvim` speaks the same protocol as the VS Code extension. Neovim
-starts a WebSocket server and writes `~/.claude/ide/<port>.lock`; `claude`
-finds it there.
+Start Neovim and `opencode --port 0` in the same project directory, in separate
+tmux panes. The port flag exposes OpenCode's local server on a dynamically
+assigned port so the plugin can discover it. Restart an existing OpenCode TUI
+with that flag if it was started without a server port.
+Discovery requires `pgrep` and `lsof`; `lsof` is provided alongside the Neovim
+dependencies in `nix/home/magnus.nix`. Rebuild after adding that package.
 
-1. Start `nvim` and `claude` in the same project folder (any tmux pane or window).
-2. Type `/ide` in Claude and pick Neovim, or start with `claude --ide`.
-3. Proposed edits open as a diff split in Neovim: `:w` accepts, `:q` rejects.
+Save files before asking: OpenCode reads referenced files from disk.
+`Space+a+a` opens a Snacks input with `@this` (the selection or cursor location).
+`Space+a+s` opens the Snacks action picker, including explain, review and
+diagnostics prompts. Context placeholders also include `@buffer`, `@buffers`,
+`@diagnostics` and `@quickfix`. Both mappings work in Normal and Visual mode.
 
-`cat ~/.claude/ide/*.lock` shows which folder Neovim announced.
+The plugin connects on demand and can reload buffers after OpenCode edits.
+If no server is found, it asks you to start OpenCode in tmux instead of creating
+an embedded terminal. `:checkhealth opencode` checks dependencies and discovery.
 
 ## Editor options
 

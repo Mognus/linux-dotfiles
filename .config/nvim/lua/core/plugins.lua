@@ -1,9 +1,9 @@
 vim.pack.add({
     { src = "https://github.com/Saghen/blink.cmp", version = "v1.10.2" },
+    { src = "https://github.com/nickjvandyke/opencode.nvim", version = "v1.0.2" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     { src = "https://github.com/windwp/nvim-ts-autotag" },
     { src = "https://github.com/dmmulroy/tsc.nvim" },
-    { src = "https://github.com/coder/claudecode.nvim" },
     { src = "https://github.com/folke/snacks.nvim" },
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
     { src = "https://github.com/folke/which-key.nvim" },
@@ -33,7 +33,17 @@ require("tsc").setup({
     use_diagnostics = true,
 })
 
+-- Connect on demand to OpenCode in tmux; do not create another embedded terminal.
+vim.g.opencode_opts = {
+    server = {
+        start = function()
+            vim.notify("Start opencode --port 0 in a tmux pane in this project", vim.log.levels.INFO)
+        end,
+    },
+}
+
 require("snacks").setup({
+    input = { enabled = true },
     indent = { enabled = true },
     explorer = { enabled = true },
     picker = {
@@ -50,7 +60,7 @@ require("snacks").setup({
                 -- Exact substring match, ignoring case. Fuzzy matches letters spread over the
                 -- whole path, e.g. "readme" hits "tRaEno_project_ADMin.../ir.ModEl..." too.
                 matcher = { fuzzy = false, smartcase = false, ignorecase = true },
-                -- Show dotfiles by default; Alt+H / H still toggles them off.
+                -- Show dotfiles by default; Alt+. toggles them while typing.
                 hidden = true,
             },
         },
@@ -83,6 +93,7 @@ which_key.setup({
     },
 })
 which_key.add({
+    { "<leader>a", group = "OpenCode", mode = { "n", "x" } },
     { "<leader>c", group = "code" },
     { "<leader>f", group = "find" },
     { "<leader>g", group = "git" },
@@ -92,9 +103,6 @@ which_key.add({
 -- Statusline: mode, git branch, diff, diagnostics, file, cursor position. The stock
 -- defaults already cover that, the colors follow the active color scheme (theme = "auto").
 require("lualine").setup()
-
--- Starts the WebSocket server that `claude` finds via ~/.claude/ide/<port>.lock.
-require("claudecode").setup()
 
 local treesitter_languages = {
     "css",

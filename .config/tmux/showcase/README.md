@@ -67,5 +67,6 @@ Pane history keeps up to 100,000 lines; the history limit applies to newly creat
 Use named sessions for separate projects or services, and attach back to long-running work instead of rebuilding terminal state.
 
 `Alt` controls tmux panes and tabs, mirroring `Super` for Hyprland windows and
-workspaces. Bindings live directly in tmux; no custom Alacritty key sequences
-are required. Tab navigation cycles through existing tabs.
+workspaces. Bindings live directly in tmux; Alacritty sends a distinct sequence
+for `Alt+Shift+Enter` so it does not collide with `Alt+Enter`.
+Tab navigation cycles through existing tabs.

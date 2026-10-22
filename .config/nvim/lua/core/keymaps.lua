@@ -14,6 +14,14 @@ vim.keymap.set("x", "<leader>?", function()
     require("which-key").show({ keys = "", mode = "x" })
 end, { desc = "Show visual key help" })
 
+vim.keymap.set({ "n", "x" }, "<leader>aa", function()
+    require("opencode").ask("@this: ")
+end, { desc = "Ask OpenCode about cursor or selection" })
+
+vim.keymap.set({ "n", "x" }, "<leader>as", function()
+    require("opencode").select()
+end, { desc = "Select OpenCode action" })
+
 vim.keymap.set("n", "gd", function()
     Snacks.picker.lsp_definitions()
 end, { desc = "Go to definition" })
@@ -147,8 +155,7 @@ vim.keymap.set("n", "<leader>/", function()
     Snacks.picker.grep({ cwd = Snacks.git.get_root(), hidden = true })
 end, { desc = "Grep in repo" })
 
--- Space+x+x lists all LSP errors and warnings, like "Problems" in VS Code/Zed.
--- Only covers files the LSP has seen, i.e. opened buffers.
+-- Space+x+x lists published diagnostics from LSPs and project checks (tsc.nvim).
 vim.keymap.set("n", "<leader>xx", function()
     Snacks.picker.diagnostics()
 end, { desc = "Diagnostics" })

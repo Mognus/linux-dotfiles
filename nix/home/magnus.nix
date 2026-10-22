@@ -17,6 +17,8 @@ in
     # nvim: nvim-treesitter compiles its parsers locally
     tree-sitter
     gcc
+    # opencode.nvim: discover the local OpenCode server's listening port
+    lsof
     tmux
     # hyprland: terminal bound in hypr/lua/programs.lua
     alacritty
