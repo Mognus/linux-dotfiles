@@ -8,21 +8,44 @@ OverlayPage {
     id: page
 
     title: "General / Notifications"
-    extraHint: "TAB  SELECT"
     keyBindings: keys
     Keys.onPressed: event => keys.handle(event)
 
-    property var selectedButton: doNotDisturbButton
+    property int selectedIndex: 0
+    readonly property var controls: [doNotDisturbButton, timeoutSlider, dismissButton]
+    readonly property var selectedButton: selectedIndex === 1 ? null : controls[selectedIndex]
 
     function activate() {
-        doNotDisturbButton.forceActiveFocus();
+        if (controls[selectedIndex].enabled) controls[selectedIndex].forceActiveFocus();
+        else moveSelection(1);
+    }
+
+    function moveSelection(direction) {
+        for (let step = 1; step <= controls.length; step++) {
+            const index = (selectedIndex + direction * step + controls.length) % controls.length;
+            if (controls[index].enabled) {
+                selectedIndex = index;
+                controls[index].forceActiveFocus();
+                return;
+            }
+        }
+    }
+
+    function adjustTimeout(direction) {
+        Notifications.popupTimeout = Math.max(timeoutSlider.from, Math.min(timeoutSlider.to,
+            timeoutSlider.value + direction * timeoutSlider.stepSize));
     }
 
     KeyBindings {
         id: keys
         actions: [
-            { keys: [Qt.Key_Return, Qt.Key_Enter, Qt.Key_Space], label: "ACTIVATE", enabled: page.selectedButton.enabled, run: () => page.selectedButton.clicked() },
-            { keys: [Qt.Key_Escape, Qt.Key_Left, Qt.Key_H], label: ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => ShellState.backOverlay() }
+            { keys: [Qt.Key_J, Qt.Key_Down, Qt.Key_Tab], label: "NEXT", run: () => page.moveSelection(1) },
+            { keys: [Qt.Key_K, Qt.Key_Up], label: "PREVIOUS", run: () => page.moveSelection(-1) },
+            { keys: [Qt.Key_Backtab], modifiers: Qt.ShiftModifier, run: () => page.moveSelection(-1) },
+            { keys: [Qt.Key_H, Qt.Key_Left], label: "DECREASE", enabled: page.selectedIndex === 1, run: () => page.adjustTimeout(-1) },
+            { keys: [Qt.Key_L, Qt.Key_Right], label: "INCREASE", enabled: page.selectedIndex === 1, run: () => page.adjustTimeout(1) },
+            { keys: [Qt.Key_Return, Qt.Key_Enter, Qt.Key_Space], label: page.selectedIndex === 0 ? "TOGGLE" : "DISMISS ALL", enabled: page.selectedButton !== null && page.selectedButton.enabled, run: () => page.selectedButton.clicked() },
+            { keys: [Qt.Key_Escape], label: ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => ShellState.backOverlay() }
         ]
     }
 
@@ -61,7 +84,7 @@ OverlayPage {
                 id: doNotDisturbButton
 
                 Keys.forwardTo: [page]
-                onActiveFocusChanged: if (activeFocus) page.selectedButton = doNotDisturbButton
+                onActiveFocusChanged: if (activeFocus) page.selectedIndex = 0
                 anchors.right: parent.right
                 anchors.rightMargin: 12
                 anchors.verticalCenter: parent.verticalCenter
@@ -73,49 +96,19 @@ OverlayPage {
             }
         }
 
-        Rectangle {
+        SettingSlider {
+            id: timeoutSlider
+
             width: parent.width
-            height: 92
-            color: Colors.surface
-            border.width: 1
-            border.color: Colors.borderMuted
-
-            Text {
-                x: 12
-                y: 12
-                text: "DEFAULT POPUP TIMEOUT"
-                color: Colors.foreground
-                font.family: Fonts.family
-                font.pixelSize: Fonts.size
-            }
-
-            Row {
-                id: durations
-
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.margins: 12
-                spacing: 8
-
-                Repeater {
-                    model: [3, 5, 10]
-
-                    SettingsButton {
-                        id: durationButton
-
-                        required property int modelData
-
-                        Keys.forwardTo: [page]
-                        onActiveFocusChanged: if (activeFocus) page.selectedButton = durationButton
-
-                        width: (durations.width - 16) / 3
-                        text: modelData + " SEC"
-                        checked: Notifications.popupTimeout === modelData
-                        onClicked: Notifications.popupTimeout = modelData
-                    }
-                }
-            }
+            title: "DEFAULT POPUP TIMEOUT"
+            unit: "SEC"
+            from: 1
+            to: 10
+            stepSize: 1
+            value: Notifications.popupTimeout
+            keyTarget: page
+            onActiveFocusChanged: if (activeFocus) page.selectedIndex = 1
+            onCommitted: value => Notifications.popupTimeout = Math.round(value)
         }
 
         Row {
@@ -125,7 +118,7 @@ OverlayPage {
                 id: dismissButton
 
                 Keys.forwardTo: [page]
-                onActiveFocusChanged: if (activeFocus) page.selectedButton = dismissButton
+                onActiveFocusChanged: if (activeFocus) page.selectedIndex = 2
                 text: "DISMISS ALL"
                 enabled: Notifications.list.values.length > 0
                 onClicked: Notifications.dismissAll()

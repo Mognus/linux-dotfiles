@@ -131,8 +131,10 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
       The page owns keyboard handling: j/k, up/down or Tab select a slider;
       h/l or left/right adjust it in 1% steps. Dragging commits on release.
       Device names and Pipewire status remain visible; unavailable devices are disabled.
-    - `NotificationsPage.qml` — do-not-disturb, default timeout (3/5/10 seconds),
-      active count and dismiss-all controls. Critical notifications bypass DND.
+    - `NotificationsPage.qml` — focusable do-not-disturb button, a shared timeout
+      slider (1–10 seconds in 1-second steps), active count and dismiss-all controls.
+      j/k, arrows and Tab select controls; h/l or left/right adjust the timeout;
+      Enter/Space activates buttons. Critical notifications bypass DND.
       These preferences apply to the current shell session.
     - `SessionPage.qml` — searchable lock, logout, restart and shutdown actions.
       Locking uses `loginctl lock-session` and the existing Hypridle handler.
