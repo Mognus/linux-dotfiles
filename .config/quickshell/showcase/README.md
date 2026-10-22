@@ -127,8 +127,10 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
       routes and shortcut hints. Search removes empty categories; every entry
       opens a page in the shared overlay with Settings as its one-level parent.
       The TUI-style start list uses an inverted selection bar with a `>` marker.
-    - `AudioPage.qml` — compact output and microphone cards inside a bounded
-      scroll area, with Pipewire status pinned below.
+    - `AudioPage.qml` — output and microphone volume using the shared `SettingSlider`.
+      The page owns keyboard handling: j/k, up/down or Tab select a slider;
+      h/l or left/right adjust it in 1% steps. Dragging commits on release.
+      Device names and Pipewire status remain visible; unavailable devices are disabled.
     - `NotificationsPage.qml` — do-not-disturb, default timeout (3/5/10 seconds),
       active count and dismiss-all controls. Critical notifications bypass DND.
       These preferences apply to the current shell session.
@@ -148,8 +150,6 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
     - `WallpaperPage.qml` — searchable files from `~/.config/wallpapers` on
       the left, an aspect-preserving preview on the right; Enter sets the
       highlighted image through `awww`.
-  - `AudioControl.qml` — output/input card with mute, volume percentage,
-    a draggable slider, wheel adjustment in 2% steps and optional presets.
   - `NotificationPopups.qml` — retro notification popups top right: square
     borders, an inverted app-name header and VGA text. Titles use up to two
     lines, bodies up to four with ellipsis. Normal ones expire after 5s,
