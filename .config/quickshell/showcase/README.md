@@ -82,8 +82,9 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
   - `ShellOverlay.qml` — the single overlay window: loads the current page and
     owns its title, content padding, dimensions and bottom keyboard legend.
   - `OverlayPage.qml` — focus scope for page content, with presentation properties
-    for the shared frame and a common back-key handler. Pages handle their own
-    search and actions; they do not create windows or footers.
+    for the shared frame and a required `keyBindings` reference. Each page explicitly
+    defines its actions, key handler and initial focus, including back navigation;
+    pages do not create windows or footers.
   - `BottomBar.qml` — workspace strip, clock, recording indicator, volume text,
     laptop battery percentage, settings menu trigger, special workspace buttons.
   - `WorkspaceHud.qml` — compact workspace-only overlay.
@@ -98,8 +99,8 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
     `modifiers`, `label`, optional `enabled`, and `run()` callbacks. `handle(event)`
     executes an enabled matching action; `hints` describes the same enabled actions.
   - `keyboard/KeyboardHints.qml` — display-only keyboard legend in the shared frame.
-    Each page supplies `keyBindings`; the focused settings button supplies its
-    activation bindings. The legend is generated from the same enabled actions
+    Each page supplies its own `keyBindings`, including control activation actions.
+    The legend is generated from the same enabled actions
     used for keyboard handling. Extra text describes native controls or state.
     All searchable pages compose a filter, native ListView/GridView, search field
     and key bindings directly. Pages own their connections, current entry and
@@ -133,10 +134,13 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
       These preferences apply to the current shell session.
     - `SessionPage.qml` — searchable lock, logout, restart and shutdown actions.
       Locking uses `loginctl lock-session` and the existing Hypridle handler.
-    - `SettingsButton.qml` — square buttons with Tab focus and Enter/Space activation.
+    - `SettingsButton.qml` — square buttons with Tab focus and a clicked signal;
+      the owning page defines keyboard activation.
     - `AdjustmentsPage.qml` / `SettingSlider.qml` — terminal opacity, font size
-      and padding, saved on release through the local Rust writer. Reset restores
-      their defaults without changing the theme.
+      and padding. The page owns selection and keyboard actions: j/k or arrows
+      select controls, h/l or left/right adjust values, and Enter/Space activates
+      reset. Keyboard changes save immediately; dragging saves on release through
+      the local Rust writer. Reset restores defaults without changing the theme.
     - `ThemePage.qml` — searchable palette names with terminal and browser
       color previews; highlighting previews a palette, Enter applies it.
     - `theme/TerminalPreview.qml` / `theme/BrowserPreview.qml` — illustrative

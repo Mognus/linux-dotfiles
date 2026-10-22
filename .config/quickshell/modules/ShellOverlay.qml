@@ -51,7 +51,6 @@ OverlayWindow {
         id: hints
         bindings: window.currentPage ? window.currentPage.keyBindings : null
 
-        controlBindings: window.currentPage ? window.currentPage.controlKeyBindings : null
         extraHint: window.currentPage ? window.currentPage.extraHint : ""
     }
 

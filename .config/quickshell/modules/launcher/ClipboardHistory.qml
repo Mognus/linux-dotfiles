@@ -99,6 +99,7 @@ OverlayPage {
     contentHeight: LauncherStyle.listPanelHeight - LauncherStyle.padding * 2
     padding: LauncherStyle.padding
     keyBindings: keys
+    Keys.onPressed: event => keys.handle(event)
 
     SearchFilter {
         id: filter
@@ -211,13 +212,6 @@ OverlayPage {
         }
     }
 
-    // Keys the search field hands over before typing: they drive the list.
-    Item {
-        id: searchKeys
-
-        Keys.onPressed: event => keys.handle(event)
-    }
-
     SearchField {
         id: footer
 
@@ -229,7 +223,7 @@ OverlayPage {
         width: LauncherStyle.listWidth
         height: LauncherStyle.rowHeight
         focus: true
-        keyTargets: [searchKeys]
+        keyTargets: [window]
     }
 
     Rectangle {

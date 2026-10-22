@@ -1,13 +1,12 @@
 import QtQuick
 import qs
 
-// Display only: pages and focused controls supply their actual action definitions.
+// Display only: the current page supplies its action definitions and extra hint.
 Text {
     id: hints
 
     property string extraHint: ""
     property var bindings: null
-    property var controlBindings: null
 
     anchors.left: parent.left
     anchors.right: parent.right
@@ -19,8 +18,8 @@ Text {
     horizontalAlignment: Text.AlignHCenter
     wrapMode: Text.WordWrap
     textFormat: Text.PlainText
-    text: [hints.extraHint, hints.controlBindings ? hints.controlBindings.hints : "",
-        hints.bindings ? hints.bindings.hints : ""].filter(text => text.length > 0).join("    ")
+    text: [hints.extraHint, hints.bindings ? hints.bindings.hints : ""]
+        .filter(text => text.length > 0).join("    ")
     color: Colors.muted
     font.family: Fonts.family
     font.pixelSize: Fonts.captionSize

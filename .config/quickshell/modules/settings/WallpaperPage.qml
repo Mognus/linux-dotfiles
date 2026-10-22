@@ -16,6 +16,7 @@ OverlayPage {
     panelWidth: 1100
     contentHeight: 520
     keyBindings: keys
+    Keys.onPressed: event => keys.handle(event)
     property bool searching: false
 
     readonly property var entries: Array.from({ length: folder.count }, (_, index) => ({
@@ -91,7 +92,7 @@ OverlayPage {
         focus: true
         model: filter.matches
         currentIndex: 0
-        Keys.onPressed: event => keys.handle(event)
+        Keys.forwardTo: [view]
 
         delegate: Rectangle {
             id: row
@@ -123,11 +124,6 @@ OverlayPage {
         }
     }
 
-    Item {
-        id: searchKeys
-        Keys.onPressed: event => keys.handle(event)
-    }
-
     SearchField {
         id: search
         anchors.left: parent.left
@@ -135,7 +131,7 @@ OverlayPage {
         width: list.width
         height: 36
         visible: view.searching
-        keyTargets: [searchKeys]
+        keyTargets: [view]
     }
 
     WallpaperPreview {

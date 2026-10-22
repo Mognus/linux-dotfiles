@@ -2,10 +2,29 @@ import QtQuick
 import qs
 import qs.modules
 import qs.services
+import qs.modules.keyboard
 
 OverlayPage {
+    id: page
+
     title: "General / Notifications"
     extraHint: "TAB  SELECT"
+    keyBindings: keys
+    Keys.onPressed: event => keys.handle(event)
+
+    property var selectedButton: doNotDisturbButton
+
+    function activate() {
+        doNotDisturbButton.forceActiveFocus();
+    }
+
+    KeyBindings {
+        id: keys
+        actions: [
+            { keys: [Qt.Key_Return, Qt.Key_Enter, Qt.Key_Space], label: "ACTIVATE", enabled: page.selectedButton.enabled, run: () => page.selectedButton.clicked() },
+            { keys: [Qt.Key_Escape, Qt.Key_Left, Qt.Key_H], label: ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => ShellState.backOverlay() }
+        ]
+    }
 
     Column {
         width: parent.width
@@ -39,6 +58,10 @@ OverlayPage {
             }
 
             SettingsButton {
+                id: doNotDisturbButton
+
+                Keys.forwardTo: [page]
+                onActiveFocusChanged: if (activeFocus) page.selectedButton = doNotDisturbButton
                 anchors.right: parent.right
                 anchors.rightMargin: 12
                 anchors.verticalCenter: parent.verticalCenter
@@ -79,7 +102,12 @@ OverlayPage {
                     model: [3, 5, 10]
 
                     SettingsButton {
+                        id: durationButton
+
                         required property int modelData
+
+                        Keys.forwardTo: [page]
+                        onActiveFocusChanged: if (activeFocus) page.selectedButton = durationButton
 
                         width: (durations.width - 16) / 3
                         text: modelData + " SEC"
@@ -94,6 +122,10 @@ OverlayPage {
             spacing: 12
 
             SettingsButton {
+                id: dismissButton
+
+                Keys.forwardTo: [page]
+                onActiveFocusChanged: if (activeFocus) page.selectedButton = dismissButton
                 text: "DISMISS ALL"
                 enabled: Notifications.list.values.length > 0
                 onClicked: Notifications.dismissAll()

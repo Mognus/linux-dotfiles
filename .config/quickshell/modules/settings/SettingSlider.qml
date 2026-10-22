@@ -3,7 +3,7 @@ import QtQuick.Controls
 import qs
 
 // Dragging previews the value locally; releasing commits it once.
-Item {
+FocusScope {
     id: control
 
     property string title: ""
@@ -11,16 +11,18 @@ Item {
     property alias from: slider.from
     property alias to: slider.to
     property alias stepSize: slider.stepSize
-    property alias value: slider.value
+    property real value: 0
+    property Item keyTarget: null
     signal committed(real value)
 
     implicitHeight: 60
+    activeFocusOnTab: true
 
     Text {
         anchors.left: parent.left
         anchors.top: parent.top
         text: control.title
-        color: Colors.foreground
+        color: control.activeFocus ? Colors.accent : Colors.foreground
         font.family: Fonts.family
         font.pixelSize: Fonts.size
     }
@@ -37,17 +39,31 @@ Item {
     Slider {
         id: slider
 
+        property real dragValue: 0
+
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: 28
+        focus: true
+        Keys.forwardTo: control.keyTarget ? [control.keyTarget] : []
         wheelEnabled: true
         snapMode: Slider.SnapAlways
         onPressedChanged: {
-            if (!pressed) control.committed(value);
+            if (pressed) dragValue = value;
+            else control.committed(dragValue);
         }
         onMoved: {
+            dragValue = value;
             if (!pressed) control.committed(value);
+        }
+
+        Binding {
+            target: slider
+            property: "value"
+            value: control.value
+            when: !slider.pressed
+            restoreMode: Binding.RestoreNone
         }
 
         background: Rectangle {

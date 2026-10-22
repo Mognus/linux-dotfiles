@@ -14,6 +14,7 @@ Singleton {
     property int padding: 12
     property string error: ""
     property var pending: []
+    signal terminalReset()
 
     function readState(text) {
         try {
@@ -21,8 +22,10 @@ Singleton {
             root.opacity = state.opacity;
             root.fontSize = state.font_size;
             root.padding = state.padding;
+            return true;
         } catch (error) {
             root.error = "Could not read terminal settings: " + error;
+            return false;
         }
     }
 
@@ -43,6 +46,7 @@ Singleton {
         if (!writer.running && root.pending.length > 0) {
             const command = root.pending[0];
             root.pending = root.pending.slice(1);
+            writer.resetsTerminal = command[1] === "terminal" && command[2] === "reset";
             writer.exec(command);
         }
     }
@@ -95,10 +99,14 @@ Singleton {
     Process {
         id: writer
 
-        stdout: StdioCollector { onStreamFinished: root.readState(text) }
+        property bool resetsTerminal: false
+
+        stdout: StdioCollector { id: writeOutput }
         stderr: StdioCollector { id: writeError }
         onExited: (exitCode, exitStatus) => {
             root.error = exitCode === 0 ? "" : writeError.text;
+            if (exitCode === 0 && root.readState(writeOutput.text) && writer.resetsTerminal)
+                root.terminalReset();
             refresh.restart();
             root.runNext();
         }

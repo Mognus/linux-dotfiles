@@ -17,6 +17,7 @@ OverlayPage {
     panelWidth: 960
     contentHeight: 440
     keyBindings: keys
+    Keys.onPressed: event => keys.handle(event)
     extraHint: view.searching ? "" : "* ACTIVE THEME"
     property bool searching: false
 
@@ -135,7 +136,7 @@ OverlayPage {
         clip: true
         focus: true
         model: filter.matches
-        Keys.onPressed: event => keys.handle(event)
+        Keys.forwardTo: [view]
 
         delegate: Rectangle {
             id: row
@@ -180,11 +181,6 @@ OverlayPage {
         }
     }
 
-    Item {
-        id: searchKeys
-        Keys.onPressed: event => keys.handle(event)
-    }
-
     SearchField {
         id: search
         anchors.left: parent.left
@@ -192,7 +188,7 @@ OverlayPage {
         width: list.width
         height: 36
         visible: view.searching
-        keyTargets: [searchKeys]
+        keyTargets: [view]
     }
 
     ThemePreview {

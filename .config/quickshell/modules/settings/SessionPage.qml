@@ -11,6 +11,7 @@ OverlayPage {
 
     title: "General / Session"
     keyBindings: keys
+    Keys.onPressed: event => keys.handle(event)
     property bool searching: false
     readonly property var current: filter.matches[list.currentIndex] ?? null
 
@@ -77,7 +78,7 @@ OverlayPage {
         clip: true
         focus: true
         model: filter.matches
-        Keys.onPressed: event => keys.handle(event)
+        Keys.forwardTo: [page]
 
         delegate: Rectangle {
             id: row
@@ -109,11 +110,6 @@ OverlayPage {
         }
     }
 
-    Item {
-        id: searchKeys
-        Keys.onPressed: event => keys.handle(event)
-    }
-
     SearchField {
         id: search
         anchors.left: parent.left
@@ -122,7 +118,7 @@ OverlayPage {
         anchors.bottomMargin: 16
         height: 36
         visible: page.searching
-        keyTargets: [searchKeys]
+        keyTargets: [page]
     }
 
     Text {

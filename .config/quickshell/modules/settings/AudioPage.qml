@@ -2,12 +2,27 @@ import QtQuick
 import Quickshell.Services.Pipewire
 import qs
 import qs.modules
+import qs.services
+import qs.modules.keyboard
 
 OverlayPage {
     id: page
 
     title: "General / Audio"
     extraHint: "SCROLL ON SLIDER  +/- 2%"
+    keyBindings: keys
+    Keys.onPressed: event => keys.handle(event)
+
+    function activate() {
+        page.forceActiveFocus();
+    }
+
+    KeyBindings {
+        id: keys
+        actions: [
+            { keys: [Qt.Key_Escape, Qt.Key_Left, Qt.Key_H], label: ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => ShellState.backOverlay() }
+        ]
+    }
 
     Flickable {
         id: scroll

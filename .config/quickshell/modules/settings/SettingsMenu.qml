@@ -12,6 +12,7 @@ OverlayPage {
     title: "SETTINGS"
     contentHeight: 456
     keyBindings: keys
+    Keys.onPressed: event => keys.handle(event)
     property bool searching: false
     readonly property var current: filter.matches[start.currentIndex] ?? null
 
@@ -139,7 +140,7 @@ OverlayPage {
                 color: Colors.borderMuted
             }
         }
-        Keys.onPressed: event => keys.handle(event)
+        Keys.forwardTo: [menu]
 
         delegate: Rectangle {
             id: row
@@ -199,11 +200,6 @@ OverlayPage {
         }
     }
 
-    Item {
-        id: searchKeys
-        Keys.onPressed: event => keys.handle(event)
-    }
-
     SearchField {
         id: search
         anchors.left: parent.left
@@ -211,6 +207,6 @@ OverlayPage {
         anchors.bottom: parent.bottom
         height: 36
         visible: menu.searching
-        keyTargets: [searchKeys]
+        keyTargets: [menu]
     }
 }

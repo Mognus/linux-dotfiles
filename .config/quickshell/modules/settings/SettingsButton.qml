@@ -1,14 +1,12 @@
 import QtQuick
 import qs
-import qs.modules.keyboard
 
-// A keyboard-focusable, square button for the settings pages.
+// A focusable, square button; the owning page defines its keyboard actions.
 Rectangle {
     id: button
 
     property string text: ""
     property bool checked: false
-    readonly property alias keyBindings: keys
     signal clicked
 
     implicitWidth: label.implicitWidth + 24
@@ -18,15 +16,6 @@ Rectangle {
     color: button.checked ? Colors.foreground : mouse.containsMouse ? Colors.hoverOverlay : Colors.lowOverlay
     border.width: 1
     border.color: activeFocus ? Colors.accent : Colors.borderMuted
-
-    KeyBindings {
-        id: keys
-        actions: [
-            { keys: [Qt.Key_Return, Qt.Key_Enter, Qt.Key_Space], label: "ACTIVATE", enabled: button.enabled, run: () => button.clicked() }
-        ]
-    }
-
-    Keys.onPressed: event => keys.handle(event)
 
     Text {
         id: label
