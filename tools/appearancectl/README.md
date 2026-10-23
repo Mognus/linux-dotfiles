@@ -49,6 +49,11 @@ without announcing it. On a fresh setup it uses `retro-dark.json`.
 Quickshell calls `theme` directly; Hyprland autostart calls `restore`. The former
 `theme-switcher.sh` is no longer needed.
 
+Quickshell's bottom bar uses the palette's `bar` color (`#AARRGGBB`): darker on
+light themes and lighter on dark themes, with its existing transparency kept.
+The tmux status background follows the terminal directly (`bg=default`); it has
+no separate generated style. OpenCode keeps its terminal-derived `system` theme.
+
 After applying a theme, attached tmux terminals are queried for their actual
 foreground/background colors after 250 ms and again after one second. This
 refreshes tmux's cached colors after Alacritty reloads, allowing OpenCode's

@@ -46,7 +46,7 @@ Singleton {
             property string border: "#d8d8d8"
             property string borderMuted: "#2a2a30"
             property string panel: "#e6111111"
-            property string bar: "#b8000000"
+            property string bar: "#b8323234"
             property string faint: "#59ffffff"
             property string subtle: "#24ffffff"
             property string hoverOverlay: "#28ffffff"
