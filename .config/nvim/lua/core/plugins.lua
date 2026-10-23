@@ -11,6 +11,7 @@ vim.pack.add({
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
     { src = "https://github.com/MunifTanjim/nui.nvim" },
     { src = "https://github.com/folke/noice.nvim" },
+    { src = "https://github.com/folke/flash.nvim" },
     -- Renders Markdown in the buffer; the cursor line stays raw for editing.
     -- `:RenderMarkdown toggle` switches back to plain text.
     { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
@@ -29,6 +30,13 @@ require("blink.cmp").setup({
     cmdline = { enabled = false },
 })
 require("nvim-ts-autotag").setup()
+-- Use explicit Flash mappings; keep native character motions and searches.
+require("flash").setup({
+    modes = {
+        char = { enabled = false },
+        search = { enabled = false },
+    },
+})
 require("tsc").setup({
     -- Follow project references as well as checking a single tsconfig.
     flags = "--build --noEmit",

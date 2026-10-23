@@ -55,6 +55,8 @@ adding one asks for confirmation.
   complements Lualine rather than replacing the statusline
 - `nui.nvim` - required UI library for Noice's popups, menus and layouts;
   no separate user-facing commands or configuration needed
+- `flash.nvim` - labeled jumps, Treesitter selections and remote operator actions;
+  native `/`, `?`, `f`, `F`, `t`, `T`, `;` and `,` stay unchanged
 - `render-markdown.nvim` - renders Markdown in the buffer; `:RenderMarkdown toggle`
   switches back to plain text
 
@@ -160,6 +162,21 @@ The `gr` mapping also prefixes the built-in `gr…` mappings, so it waits briefl
 for another key; `grr` requests references without that prefix wait.
 which-key reads mapping descriptions automatically; only group names are
 configured separately in `lua/core/plugins.lua`.
+
+## Flash navigation
+
+- `s` - type part of the target text, then press its displayed label to jump
+- `S` - select a labeled Treesitter node (requires a parser for the buffer)
+- `r` after an operator - remote action: `yr`, find/select a target, then `iw`
+  copies that word and returns to the original position
+- `R` in Operator-pending or Visual mode - search and select a Treesitter range
+- `Esc` - cancel Flash
+
+`s` and `S` work in Normal, Visual and Operator-pending modes, so `ds` deletes
+to a Flash target. These follow Flash's recommended mappings; they replace the
+native `s`/`S` substitute commands (use `cl`/`cc` in Normal mode instead).
+Normal-mode `r` (replace character) and `R` (Replace mode) remain unchanged.
+Mappings live in `lua/core/keymaps.lua`; setup lives in `lua/core/plugins.lua`.
 
 ## Formatting and checks
 

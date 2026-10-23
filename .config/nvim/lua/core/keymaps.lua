@@ -6,6 +6,23 @@ vim.g.mapleader = " "
 -- which-key reads each mapping's description for its help popup.
 -- Groups: c = code, f = find, g = git, x = diagnostics (named in plugins.lua).
 
+-- Flash's recommended mappings; r/R only replace keys in the modes below.
+vim.keymap.set({ "n", "x", "o" }, "s", function()
+    require("flash").jump()
+end, { desc = "Flash jump" })
+
+vim.keymap.set({ "n", "x", "o" }, "S", function()
+    require("flash").treesitter()
+end, { desc = "Flash Treesitter selection" })
+
+vim.keymap.set("o", "r", function()
+    require("flash").remote()
+end, { desc = "Flash remote action" })
+
+vim.keymap.set({ "o", "x" }, "R", function()
+    require("flash").treesitter_search()
+end, { desc = "Flash Treesitter search" })
+
 vim.keymap.set("n", "<leader>?", function()
     require("which-key").show({ keys = "", mode = "n" })
 end, { desc = "Show key help" })
