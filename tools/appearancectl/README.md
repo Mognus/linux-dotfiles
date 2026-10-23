@@ -1,20 +1,28 @@
 # appearancectl
 
-Local Rust tool for desktop themes and terminal adjustments. Rust 1.89+, Cargo
-and Make are needed to build it. Theme changes use `dconf` for GTK preferences
-and optionally `notify-send` to announce the selected theme.
+Local Rust tool for desktop themes and terminal adjustments. Nix builds and tests
+it automatically as part of the shared Home Manager configuration on both hosts:
+
+```sh
+sudo nixos-rebuild switch --flake ~/dotfiles/nix
+```
+
+Home Manager installs the package and links `~/.local/bin/appearancectl` directly
+to its binary in the Nix store. Hyprland and Quickshell keep using that fixed
+path. No manual build is needed after cloning or pulling source changes; apply
+the Nix configuration instead. `Cargo.lock` pins the Rust dependencies, and the
+package supplies `dconf`, `notify-send` and `tmux` on its runtime PATH.
+
+For development outside the Nix build, Rust 1.89+, Cargo and Make are needed:
 
 ```sh
 make -C tools/appearancectl
 make -C tools/appearancectl check
 ```
 
-The executable lives at `tools/appearancectl/bin/appearancectl`, beside its
-source project. `bin/` and `target/` are ignored by Git. Rebuild after source
-changes, and build once on each new machine. `Cargo.lock` is tracked.
-
-Home Manager links the built binary to `~/.local/bin/appearancectl`. Hyprland
-and Quickshell call it through that path, so the repository may live anywhere.
+The manual build writes `tools/appearancectl/bin/appearancectl`; `bin/` and
+`target/` are ignored by Git. This development binary does not replace the
+Nix-managed one; run it explicitly to test local source changes.
 
 ```sh
 appearancectl init

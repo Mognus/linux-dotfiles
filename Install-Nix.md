@@ -105,12 +105,12 @@ as `magnus`, then:
 ```sh
 nmtui                       # Wi-Fi, the live session's connection is gone
 git clone https://github.com/Mognus/linux-dotfiles.git ~/dotfiles
-make -C ~/dotfiles/tools/appearancectl   # writer linked to ~/.local/bin
 ```
 
 The clone must stay at `~/dotfiles`: `nix/home/magnus.nix` uses that path for
-every config link. The built writer is reached through `~/.local/bin/appearancectl`,
-so Hyprland and Quickshell do not depend on the repository location.
+every config link. Nix already builds and installs `appearancectl` during the
+system installation; Home Manager links `~/.local/bin/appearancectl` to that
+package in the Nix store. No separate `make` step is needed.
 
 **Ctrl+Alt+F1** returns to the greeter; logging in now starts Hyprland.
 

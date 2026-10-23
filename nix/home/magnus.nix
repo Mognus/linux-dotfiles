@@ -1,8 +1,14 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   dotfiles = "${config.home.homeDirectory}/dotfiles";
   # Link straight into the repo so edits apply without a rebuild.
   link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
+  appearancectl = pkgs.callPackage ../packages/appearancectl.nix { };
 in
 {
   imports = [ ./packages.nix ];
@@ -10,6 +16,7 @@ in
   home.stateVersion = "26.05";
 
   home.packages = with pkgs; [
+    appearancectl
     # fish: frg, fco, fkill and the fzf key bindings
     fzf
     ripgrep
@@ -65,10 +72,9 @@ in
   xdg.configFile."ruff".source = link ".config/ruff";
   xdg.configFile."zed".source = link ".config/zed";
   xdg.configFile."opencode/tui.json".source = link ".config/opencode/tui.json";
-  # Hyprland and Quickshell call appearancectl by this fixed location, not by
-  # the repository path, so the clone may live anywhere.
-  home.file.".local/bin/appearancectl".source =
-    link "tools/appearancectl/bin/appearancectl";
+  # Keep the fixed path used by Hyprland and Quickshell, but point into the
+  # Nix-built package instead of an untracked, manually compiled binary.
+  home.file.".local/bin/appearancectl".source = "${appearancectl}/bin/appearancectl";
 
   # A named profile gives user.js a fixed path.
   programs.firefox = {

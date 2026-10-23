@@ -188,11 +188,11 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
 
 ## Requirements
 
-Build the local appearance writer once with
-`make -C tools/appearancectl` (Rust 1.89+, Cargo and Make). Home Manager links
-the built binary to `~/.local/bin/appearancectl`, which Hyprland and Quickshell
-call. It is used for theme changes, login restoration and the terminal
-adjustment sliders.
+Nix builds and tests the local appearance writer as part of the shared Home
+Manager configuration. Apply source changes with
+`sudo nixos-rebuild switch --flake ~/dotfiles/nix`. Home Manager links the package
+to `~/.local/bin/appearancectl`, which Hyprland and Quickshell call for theme
+changes, login restoration and the terminal adjustment sliders.
 
 - `quickshell`
 - Hyprland (uses `Quickshell.Hyprland`)

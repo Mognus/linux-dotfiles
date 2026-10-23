@@ -30,4 +30,5 @@ tmux can distinguish creating a pane from swapping it with the master.
 Use Vi mode to navigate scrollback without reaching for the mouse.
 
 Settings > Appearance > Adjustments changes opacity, font size and padding
-live. Build the local writer once with `make -C tools/appearancectl`.
+live. Nix builds and installs the appearance writer with the shared Home Manager
+configuration; no separate manual build is needed.
