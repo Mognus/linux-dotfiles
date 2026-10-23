@@ -32,7 +32,8 @@ adding one asks for confirmation.
 - `blink.cmp` - completion from LSP, paths, snippets and buffer words, with
   automatic documentation. Pinned to stable v1; uses the Lua fuzzy matcher
   without a native binary. Snippets use Neovim's built-in snippet engine;
-  no additional snippet collection is installed. Command-line completion stays stock.
+  no additional snippet collection is installed. Blink's command-line completion
+  is disabled; Noice displays Neovim's command-line completion menu.
 - `opencode.nvim` - on-demand editor context and actions for OpenCode in tmux,
   pinned to v1.0.2 for OpenCode v1. Uses Snacks input and picker interfaces.
 
@@ -50,8 +51,35 @@ adding one asks for confirmation.
 - `conform.nvim` - formats the current buffer with the formatter for its filetype
 - `lualine.nvim` - statusline with mode, git branch, diff, diagnostics, file and
   cursor position; font rendering is handled by Alacritty
+- `noice.nvim` - popup command/search input, message history and LSP UI;
+  complements Lualine rather than replacing the statusline
+- `nui.nvim` - required UI library for Noice's popups, menus and layouts;
+  no separate user-facing commands or configuration needed
 - `render-markdown.nvim` - renders Markdown in the buffer; `:RenderMarkdown toggle`
   switches back to plain text
+
+## Command line and messages (Noice)
+
+`:` commands and `/` / `?` searches open in a popup. Command-line completion
+appears alongside it (`command_palette` preset); long messages open in a split
+(`long_message_to_split` preset). Lualine keeps its existing statusline setup.
+No additional notification plugin is installed: Noice can use the existing
+Snacks notification backend, with its built-in mini view as a fallback.
+
+- `:Noice` or `:Noice history` - message history
+- `:Noice last` - last message in a popup
+- `:Noice errors` - error history
+- `:Noice dismiss` - dismiss visible messages
+- `:Noice disable` / `:Noice enable` - temporarily switch Noice off/on
+- `:checkhealth noice` - check dependencies and parser availability
+
+Setup lives in `lua/core/plugins.lua`; `nui.nvim` and `noice.nvim` are installed
+through `vim.pack` and pinned in `nvim-pack-lock.json`. The additional `vim`,
+`regex` and `bash` Treesitter parsers highlight command and search input.
+Restart Neovim after configuration changes; no NixOS rebuild is needed.
+
+Showing the pending operator while searching (for example, keeping `d` visible
+during `d/pattern`) has not been customized yet.
 
 ## Language servers
 

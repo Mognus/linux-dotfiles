@@ -9,6 +9,8 @@ vim.pack.add({
     { src = "https://github.com/folke/which-key.nvim" },
     { src = "https://github.com/stevearc/conform.nvim" },
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
+    { src = "https://github.com/MunifTanjim/nui.nvim" },
+    { src = "https://github.com/folke/noice.nvim" },
     -- Renders Markdown in the buffer; the cursor line stays raw for editing.
     -- `:RenderMarkdown toggle` switches back to plain text.
     { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
@@ -104,7 +106,17 @@ which_key.add({
 -- defaults already cover that, the colors follow the active color scheme (theme = "auto").
 require("lualine").setup()
 
+-- Popup command/search input and message history (:Noice).
+-- Notifications use Noice's built-in mini view; no extra notification plugin needed.
+require("noice").setup({
+    presets = {
+        command_palette = true,
+        long_message_to_split = true,
+    },
+})
+
 local treesitter_languages = {
+    "bash",
     "css",
     "dockerfile",
     "go",
@@ -118,10 +130,12 @@ local treesitter_languages = {
     "markdown_inline",
     "python",
     "qmljs",
+    "regex",
     "sql",
     "svelte",
     "tsx",
     "typescript",
+    "vim",
     "yaml",
 }
 
