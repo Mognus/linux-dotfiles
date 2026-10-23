@@ -32,6 +32,7 @@ function M.setup(programs)
         leader_bind("W", exec("qs -p $HOME/.config/quickshell ipc call windowswitcher toggle"))
         leader_bind("G", exec("qs -p $HOME/.config/quickshell ipc call settings toggle"))
         leader_bind("V", exec("qs -p $HOME/.config/quickshell ipc call clipboard toggle"))
+        bind("P", hl.dsp.submap("panels"))
 
         leader_bind("Return", toggle_special("term"))
         leader_bind("B", toggle_special("firefox"))
@@ -43,10 +44,15 @@ function M.setup(programs)
         leader_bind("R", toggle_special("reader"))
 
         bind("escape", hl.dsp.submap("reset"))
-        bind("catchall", hl.dsp.submap("reset"))
+        bind("catchall", function()
+            -- Lua catchall callbacks can also run after a matching keybind.
+            -- Keep an explicit switch to the panels submap intact.
+            if hl.get_current_submap() == "leader" then
+                hl.dispatch(hl.dsp.submap("reset"))
+            end
+        end)
     end)
 
-    mod_bind("CTRL + P", hl.dsp.submap("panels"))
     hl.define_submap("panels", function()
         bind("B", function()
             hl.dispatch(exec("qs -p $HOME/.config/quickshell ipc call bottombar toggle"))

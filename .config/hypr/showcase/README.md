@@ -118,7 +118,7 @@ SimpleX, Notes, or file manager. The same sequence opens or hides the scratchpad
 
 - `SUPER+Ctrl+T` - Toggle both Quickshell Tux widgets
 - Leader, then `g` - Toggle Quickshell settings menu
-- `SUPER+Ctrl+P`, then `B/P` - Toggle bottom bar/workspace HUD
+- Leader, then `P`, then `B/P` - Toggle bottom bar/workspace HUD
 
 ## Music
 
