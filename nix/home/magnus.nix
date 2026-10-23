@@ -83,11 +83,14 @@ in
   };
   home.file."${config.programs.firefox.configPath}/default/user.js".source =
     link ".config/firefox/user.js";
-  # Only the file: LibreWolf keeps its profiles in the same folder.
+  # Manage only these files, not the profile's browser data. A shared
+  # profiles.ini gives both machines the stable profile directory "default".
+  xdg.configFile."librewolf/librewolf/profiles.ini".source =
+    link ".config/librewolf/librewolf/profiles.ini";
   xdg.configFile."librewolf/librewolf/librewolf.overrides.cfg".source =
     link ".config/librewolf/librewolf/librewolf.overrides.cfg";
-  xdg.configFile."librewolf/librewolf/ceavjfra.default/chrome".source =
-    link ".config/librewolf/librewolf/chrome";
+  xdg.configFile."librewolf/librewolf/default/chrome/userChrome.css".source =
+    link ".config/librewolf/librewolf/chrome/userChrome.css";
 
   # Both agents share one instruction file; their folders also hold local state.
   home.file.".claude/CLAUDE.md".source = link "AGENTS.md";
