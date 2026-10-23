@@ -165,7 +165,7 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
 ## What it does
 
 - **Workspaces** — live Hyprland workspaces plus named *special* workspaces
-  (term, files, music, notes, discord, firefox), highlighted with the shared accent.
+  (term, files, music, notes, reader, discord, chat, firefox), highlighted with the shared accent.
 - **Clock** — `hh:mm`, centered in the bottom bar.
 - **Settings menu** — centered keyboard-driven menu on Super+G.
 - **Themes** — White, Light Gray, Dark Gray, Gruvbox Light, Retro Dark,

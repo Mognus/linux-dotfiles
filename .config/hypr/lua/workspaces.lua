@@ -4,6 +4,7 @@ local special_workspaces = {
     { name = "term", command = function(programs) return programs.terminal end },
     { name = "firefox", command = function(programs) return programs.browser end },
     { name = "discord", command = "discord" },
+    { name = "chat", command = "simplex-chat-desktop" },
     { name = "notes", command = "obsidian" },
     { name = "files", command = "thunar" },
     { name = "music", command = "chromium --app=https://music.youtube.com" },

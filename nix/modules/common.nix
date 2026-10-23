@@ -37,7 +37,7 @@
   users.users."magnus" = {
     isNormalUser = true;
     description = "Magnus";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     shell = pkgs.fish;
   };
 
@@ -99,6 +99,10 @@
   # Thunar: mounts, trash and remote locations, plus thumbnails.
   services.gvfs.enable = true;
   services.tumbler.enable = true;
+
+  # KVM/QEMU virtual machines, managed through libvirt and virt-manager.
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
   # Rootless containers; the user socket lets compose tools reach Podman.
   virtualisation.podman.enable = true;

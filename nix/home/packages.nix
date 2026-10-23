@@ -30,6 +30,7 @@
     foliate
     loupe
     discord
+    simplex-chat-desktop
     obsidian
     gimp
 

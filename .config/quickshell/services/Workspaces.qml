@@ -16,6 +16,7 @@ Singleton {
         { name: "notes", label: "N", accent: Colors.accent },
         { name: "reader", label: "R", accent: Colors.accent },
         { name: "discord", label: "D", accent: Colors.accent },
+        { name: "chat", label: "C", accent: Colors.accent },
         { name: "firefox", label: "F", accent: Colors.accent },
     ]
 

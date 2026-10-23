@@ -47,6 +47,7 @@ without modifiers. Each action returns to normal bindings automatically.
 | `Enter` | Terminal scratchpad |
 | `b` | Browser scratchpad (LibreWolf) |
 | `d` | Discord scratchpad |
+| `c` | Chat scratchpad (SimpleX) |
 | `n` | Notes scratchpad |
 | `f` | File manager scratchpad |
 | `m` | YouTube Music scratchpad |
@@ -110,8 +111,8 @@ Shift unless it is explicitly shown.
 
 ## Scratchpads
 
-Use the leader followed by `Enter/b/d/n/f` for the terminal, browser, Discord,
-Notes, or file manager. The same sequence opens or hides the scratchpad.
+Use the leader followed by `Enter/b/d/c/n/f` for the terminal, browser, Discord,
+SimpleX, Notes, or file manager. The same sequence opens or hides the scratchpad.
 
 ## Desktop Widgets
 
