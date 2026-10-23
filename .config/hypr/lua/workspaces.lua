@@ -7,6 +7,7 @@ local special_workspaces = {
     { name = "notes", command = "obsidian" },
     { name = "files", command = "thunar" },
     { name = "music", command = "chromium --app=https://music.youtube.com" },
+    { name = "reader", command = "foliate" },
 }
 
 function M.setup(programs)

@@ -102,17 +102,52 @@ which_key.add({
     { "<leader>x", group = "diagnostics" },
 })
 
--- Statusline: mode, git branch, diff, diagnostics, file, cursor position. The stock
--- defaults already cover that, the colors follow the active color scheme (theme = "auto").
-require("lualine").setup()
+-- Keep Neovim's partial-command display in the statusline, separate from Noice.
+vim.opt.showcmd = true
+vim.opt.showcmdloc = "statusline"
+-- Keep Lualine's defaults and add the native showcmd placeholder (%S).
+require("lualine").setup({
+    sections = {
+        lualine_x = { "%S", "encoding", "fileformat", "filetype" },
+    },
+})
 
 -- Popup command/search input and message history (:Noice).
--- Notifications use Noice's built-in mini view; no extra notification plugin needed.
+-- Uses the existing Snacks notification backend, with Noice's mini view as fallback.
 require("noice").setup({
+    cmdline = {
+        format = {
+            search_down = { icon = "/" },
+            search_up = { icon = "?" },
+        },
+    },
     presets = {
         command_palette = true,
         long_message_to_split = true,
     },
+})
+
+-- Noice has no built-in operator prefix for searches; replace only the icon.
+-- Check the previous mode: v:operator also retains actions after they finish.
+vim.api.nvim_create_autocmd("ModeChanged", {
+    group = vim.api.nvim_create_augroup("SearchOperator", { clear = true }),
+    pattern = "*:c",
+    callback = function()
+        local direction = vim.fn.getcmdtype()
+        if direction ~= "/" and direction ~= "?" then
+            return
+        end
+
+        -- Noice initializes on VimEnter, after this configuration is loaded.
+        local cmdline = require("noice.config").options.cmdline
+        if not cmdline then
+            return
+        end
+        local name = direction == "/" and "search_down" or "search_up"
+        local format = cmdline.format[name]
+        local operator_pending = vim.v.event.old_mode:match("^no") ~= nil
+        format.icon = operator_pending and (vim.v.operator .. direction) or direction
+    end,
 })
 
 local treesitter_languages = {

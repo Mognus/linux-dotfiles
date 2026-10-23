@@ -78,8 +78,16 @@ through `vim.pack` and pinned in `nvim-pack-lock.json`. The additional `vim`,
 `regex` and `bash` Treesitter parsers highlight command and search input.
 Restart Neovim after configuration changes; no NixOS rebuild is needed.
 
-Showing the pending operator while searching (for example, keeping `d` visible
-during `d/pattern`) has not been customized yet.
+Neovim's native partial-command display is enabled with `showcmd = true` and
+`showcmdloc = "statusline"`. Lualine's right-hand section includes `%S` before
+encoding, file format and filetype; its other default sections stay unchanged.
+The Noice search popup also shows `d/`, `y/`, `c?`, etc. in place of its search
+icon when an operator is pending. Plain searches show `/` (forward) or `?`
+(backward) instead of magnifying-glass and arrow icons.
+Noice has no built-in option for this; the small `SearchOperator` autocmd in
+`lua/core/plugins.lua` changes only the displayed icon, not the search text or
+keybindings. Counts and register prefixes remain in Lualine's native display;
+the popup prefix shows only the operator and search direction.
 
 ## Language servers
 

@@ -39,6 +39,7 @@ function M.setup(programs)
         leader_bind("N", toggle_special("notes"))
         leader_bind("F", toggle_special("files"))
         leader_bind("M", toggle_special("music"))
+        leader_bind("R", toggle_special("reader"))
 
         bind("escape", hl.dsp.submap("reset"))
         bind("catchall", hl.dsp.submap("reset"))

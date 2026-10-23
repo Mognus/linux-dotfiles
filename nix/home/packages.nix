@@ -27,6 +27,7 @@
     tor-browser
     libreoffice
     papers
+    foliate
     loupe
     discord
     obsidian

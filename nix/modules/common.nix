@@ -106,7 +106,7 @@
   # NetBird's resolver is unreachable from containers; give them Quad9.
   virtualisation.containers.containersConf.settings.containers.dns_servers = [ "9.9.9.9" "149.112.112.112" ];
   # Resolve short image names like "postgres:16" against Docker Hub, as Docker does.
-  virtualisation.containers.registries.search = [ "docker.io" ];
+  virtualisation.containers.registries.settings.unqualified-search-registries = [ "docker.io" ];
 
   # VPN configurations
   services.netbird.enable = true;
