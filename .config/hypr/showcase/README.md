@@ -36,7 +36,7 @@ idle minutes, turns the monitor off five minutes later, and locks before suspend
 ## Leader
 
 Press `SUPER+A`, release both keys, then press one of the keys below
-without modifiers. Each action returns to normal bindings automatically.
+without modifiers unless noted. Each action returns to normal bindings automatically.
 
 | Key | Action |
 | --- | --- |
@@ -44,6 +44,8 @@ without modifiers. Each action returns to normal bindings automatically.
 | `w` | Quickshell window switcher with a live preview |
 | `g` | Quickshell settings menu |
 | `v` | Quickshell clipboard history |
+| `s` | Area screenshot to clipboard |
+| `Shift+v` | Toggle recording |
 | `Enter` | Terminal scratchpad |
 | `b` | Browser scratchpad (LibreWolf) |
 | `d` | Discord scratchpad |
@@ -68,8 +70,8 @@ compositor animations.
 - `SUPER+Escape` - Lock
 - `SUPER+F1` - Suspend
 - `SUPER+S` - Area screenshot to file
-- `SUPER+Ctrl+S` - Area screenshot to clipboard
-- `SUPER+Ctrl+V` - Toggle recording
+- Leader, then `s` - Area screenshot to clipboard
+- Leader, then `Shift+v` - Toggle recording
 
 ## Clipboard
 
@@ -116,7 +118,7 @@ SimpleX, Notes, or file manager. The same sequence opens or hides the scratchpad
 
 ## Desktop Widgets
 
-- `SUPER+Ctrl+T` - Toggle both Quickshell Tux widgets
+- Leader, then `T` - Toggle both Quickshell Tux widgets
 - Leader, then `g` - Toggle Quickshell settings menu
 - Leader, then `P`, then `B/P` - Toggle bottom bar/workspace HUD
 

@@ -32,6 +32,9 @@ function M.setup(programs)
         leader_bind("W", exec("qs -p $HOME/.config/quickshell ipc call windowswitcher toggle"))
         leader_bind("G", exec("qs -p $HOME/.config/quickshell ipc call settings toggle"))
         leader_bind("V", exec("qs -p $HOME/.config/quickshell ipc call clipboard toggle"))
+        leader_bind("T", exec("qs -p $HOME/.config/quickshell ipc call tux toggle"))
+        leader_bind("S", exec([[grim -g "$(slurp)" -t png - | wl-copy --type image/png]]))
+        leader_bind("SHIFT + V", exec(os.getenv("HOME") .. "/.config/hypr/scripts/record-toggle.sh"))
         bind("P", hl.dsp.submap("panels"))
 
         leader_bind("Return", toggle_special("term"))
@@ -66,14 +69,11 @@ function M.setup(programs)
         bind("catchall", hl.dsp.submap("reset"))
     end)
 
-    mod_bind("CTRL + T", exec("qs -p $HOME/.config/quickshell ipc call tux toggle"))
     mod_bind("SHIFT + Return", exec(programs.terminal))
     mod_bind("Escape", exec(programs.lock))
     mod_bind("F1", exec("systemctl suspend"))
 
     mod_bind("S", exec([[grim -g "$(slurp)" ~/Pictures/screenshots/$(date +%F_%T).png]]))
-    mod_bind("CTRL + S", exec([[grim -g "$(slurp)" -t png - | wl-copy --type image/png]]))
-    mod_bind("CTRL + v", exec(os.getenv("HOME") .. "/.config/hypr/scripts/record-toggle.sh"))
 
 
     -- Audio keeps working on the lock screen; the Quickshell bar shows the level.
