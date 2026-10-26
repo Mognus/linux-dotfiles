@@ -129,7 +129,7 @@ Entering Visual mode with `v`, `V` or `Ctrl+V` does not open help automatically.
 Press `Space+?` in Normal or Visual mode to open the current mode's key overview
 on demand; leader help remains available in Visual mode.
 
-- `Space+e` - toggle the fullscreen file explorer; type to filter, Enter opens
+- `Space+e` - toggle the fullscreen Snacks explorer; `a` adds a file, Enter opens
 - `Space+a+a` - ask OpenCode about the cursor position or visual selection
 - `Space+a+s` - select an OpenCode prompt, command or server action
 - `Space+c+f` - format the current buffer (Conform, with LSP fallback)

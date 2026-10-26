@@ -57,21 +57,9 @@ require("snacks").setup({
     indent = { enabled = true },
     explorer = { enabled = true },
     picker = {
-        -- Alt+. (dot = dotfiles) toggles hidden files in every picker while typing in the
-        -- search field. The stock Alt+H is swallowed by tmux (select-pane -L).
-        win = { input = { keys = { ["<A-.>"] = { "toggle_hidden", mode = { "i", "n" } } } } },
         sources = {
             explorer = {
-                -- Fullscreen overview with the search field on top; typing filters the tree.
-                layout = { preset = "vertical", preview = false, fullscreen = true },
-                focus = "input",
-                -- Close after opening a file, so it works like a quick overlay.
-                auto_close = true,
-                -- Exact substring match, ignoring case. Fuzzy matches letters spread over the
-                -- whole path, e.g. "readme" hits "tRaEno_project_ADMin.../ir.ModEl..." too.
-                matcher = { fuzzy = false, smartcase = false, ignorecase = true },
-                -- Show dotfiles by default; Alt+. toggles them while typing.
-                hidden = true,
+                layout = { fullscreen = true },
             },
         },
     },

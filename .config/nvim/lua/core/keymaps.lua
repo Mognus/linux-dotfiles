@@ -6,6 +6,13 @@ vim.g.mapleader = " "
 -- which-key reads each mapping's description for its help popup.
 -- Groups: c = code, f = find, g = git, x = diagnostics (named in plugins.lua).
 
+-- Hold Ctrl+n/p to switch tab pages; leader actions create or close them.
+-- Insert-mode completion stays unchanged; Alt+n/p remains reserved for tmux.
+vim.keymap.set("n", "<C-n>", "<cmd>tabnext<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "<C-p>", "<cmd>tabprevious<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "<leader>n", "<cmd>tabnew<CR>", { desc = "New tab" })
+vim.keymap.set("n", "<leader>q", "<cmd>tabclose<CR>", { desc = "Close tab" })
+
 -- Flash's recommended mappings; r/R only replace keys in the modes below.
 vim.keymap.set({ "n", "x", "o" }, "s", function()
     require("flash").jump()
@@ -92,7 +99,7 @@ end
 
 vim.keymap.set("n", "<leader>gd", toggle_git_diff, { desc = "Toggle git diff of current file" })
 
--- Space+e toggles the fullscreen file explorer.
+-- Space+e toggles the Snacks file explorer in fullscreen.
 vim.keymap.set("n", "<leader>e", function()
     Snacks.explorer()
 end, { desc = "File explorer" })
@@ -176,3 +183,10 @@ end, { desc = "Grep in repo" })
 vim.keymap.set("n", "<leader>xx", function()
     Snacks.picker.diagnostics()
 end, { desc = "Diagnostics" })
+
+-- Space+x+d toggles inline diagnostic text; signs and other diagnostics stay active.
+vim.keymap.set("n", "<leader>xd", function()
+    local enabled = not vim.diagnostic.config().virtual_text
+    vim.diagnostic.config({ virtual_text = enabled })
+    vim.notify("Inline diagnostics " .. (enabled and "enabled" or "disabled"))
+end, { desc = "Toggle inline diagnostics" })
