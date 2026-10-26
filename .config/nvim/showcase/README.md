@@ -130,6 +130,11 @@ Press `Space+?` in Normal or Visual mode to open the current mode's key overview
 on demand; leader help remains available in Visual mode.
 
 - `Space+e` - toggle the fullscreen Snacks explorer; `a` adds a file, Enter opens
+- `Ctrl+n/p` - next/previous tab page (Normal mode)
+- `Space+n` - new tab page
+- `Space+q` - close the current tab page without discarding unsaved changes
+- `Ctrl+Shift+Enter` - new vertical split to the right (Normal mode)
+- `Ctrl+j/k` - next/previous window, wrapping at the ends (Normal mode)
 - `Space+a+a` - ask OpenCode about the cursor position or visual selection
 - `Space+a+s` - select an OpenCode prompt, command or server action
 - `Space+c+f` - format the current buffer (Conform, with LSP fallback)
@@ -146,6 +151,7 @@ on demand; leader help remains available in Visual mode.
   - `Ctrl+G` inside the picker - back up to the parent repo
 - `Space+g+d` - toggle side-by-side diff of the current file against git
 - `Space+x+x` - all LSP errors and warnings (like "Problems" in VS Code/Zed)
+- `Space+x+d` - toggle inline diagnostic text; other diagnostics remain active
 - `]c` / `[c` - next/previous git change
 
 Symbol search requires an attached LSP that supports document or workspace

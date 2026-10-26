@@ -15,18 +15,20 @@ Hyprland uses `Super+A` as its leader, tmux uses `Alt+A`, and Neovim uses
 
 ### Sessions and tabs
 
-- Prefix, then `n` - create a named session
+- Prefix, then `Shift+n` - create a named session
 - Prefix, then `s` - session chooser
 - Prefix, then `r` - rename the current session
 - Prefix, then `x` - close the current session after confirmation
 - Prefix, then `d` - detach; sessions keep running
 - Prefix, then `c` - create a window (tab)
+- Prefix, then `n` - create a window (tab) in the current directory
+- Prefix, then `q` - close the current window and all its panes after confirmation
 - Prefix, then `,` - rename the current tab
 - `Alt+1..9` - select a tab directly (also available with prefix, then `1..9`)
 - `Alt+Tab` - last-used tab (also available with prefix, then `Tab`)
 - `Alt+N/P` - next/previous tab
 
-The single letters after the prefix are lowercase and do not require Shift.
+Except where Shift is shown explicitly, letters after the prefix are lowercase.
 Closing a session switches to another existing session instead of detaching,
 as long as another session remains.
 
@@ -70,4 +72,6 @@ Use named sessions for separate projects or services, and attach back to long-ru
 `Alt` controls tmux panes and tabs, mirroring `Super` for Hyprland windows and
 workspaces. Bindings live directly in tmux; Alacritty sends a distinct sequence
 for `Alt+Shift+Enter` so it does not collide with `Alt+Enter`.
+It also sends a distinct `Ctrl+Shift+Enter` for Neovim splits; tmux forwards
+extended keys to applications requesting them.
 Tab navigation cycles through existing tabs.

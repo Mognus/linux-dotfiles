@@ -13,6 +13,11 @@ vim.keymap.set("n", "<C-p>", "<cmd>tabprevious<CR>", { desc = "Previous tab" })
 vim.keymap.set("n", "<leader>n", "<cmd>tabnew<CR>", { desc = "New tab" })
 vim.keymap.set("n", "<leader>q", "<cmd>tabclose<CR>", { desc = "Close tab" })
 
+-- Mirror Super/Alt+Shift+Enter and j/k for desktop windows and tmux panes.
+vim.keymap.set("n", "<C-S-CR>", "<cmd>rightbelow vsplit<CR>", { desc = "New split" })
+vim.keymap.set("n", "<C-j>", "<C-w>w", { desc = "Next window" })
+vim.keymap.set("n", "<C-k>", "<C-w>W", { desc = "Previous window" })
+
 -- Flash's recommended mappings; r/R only replace keys in the modes below.
 vim.keymap.set({ "n", "x", "o" }, "s", function()
     require("flash").jump()

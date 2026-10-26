@@ -24,3 +24,9 @@ chars = "\u001B\r"
 key = "Return"
 mods = "Alt|Shift"
 chars = "\u001B[13;4u"
+
+# Keep Ctrl+Shift+Enter distinct from plain Enter for Neovim splits.
+[[keyboard.bindings]]
+key = "Return"
+mods = "Control|Shift"
+chars = "\u001B[13;6u"
