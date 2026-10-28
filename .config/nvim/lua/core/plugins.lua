@@ -1,3 +1,6 @@
+-- Only expose visual wrapping via our own mapping; keep Flash's s/S untouched.
+vim.g.nvim_surround_no_mappings = true
+
 vim.pack.add({
     { src = "https://github.com/Saghen/blink.cmp", version = "v1.10.2" },
     { src = "https://github.com/nickjvandyke/opencode.nvim", version = "v1.0.2" },
@@ -12,6 +15,7 @@ vim.pack.add({
     { src = "https://github.com/MunifTanjim/nui.nvim" },
     { src = "https://github.com/folke/noice.nvim" },
     { src = "https://github.com/folke/flash.nvim" },
+    { src = "https://github.com/kylechui/nvim-surround" },
     -- Renders Markdown in the buffer; the cursor line stays raw for editing.
     -- `:RenderMarkdown toggle` switches back to plain text.
     { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },

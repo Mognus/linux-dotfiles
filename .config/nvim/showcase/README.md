@@ -135,6 +135,11 @@ on demand; leader help remains available in Visual mode.
 - `Space+q` - close the current tab page without discarding unsaved changes
 - `Ctrl+Shift+Enter` - new vertical split to the right (Normal mode)
 - `Ctrl+j/k` - next/previous window, wrapping at the ends (Normal mode)
+- In Visual mode, `Space+c+w` wraps the selection using nvim-surround:
+  - `}` / `)` / `]` / `"` / `'` adds the corresponding pair without extra spaces.
+  - `t`, then `span`, then Enter wraps in `<span>...</span>` (JSX attributes work too).
+  - Opening delimiters such as `{` add spaces: `{ selection }`.
+  - Default surround keymaps are disabled so Flash's `s` / `S` stay unchanged.
 - `Space+a+a` - ask OpenCode about the cursor position or visual selection
 - `Space+a+s` - select an OpenCode prompt, command or server action
 - `Space+c+f` - format the current buffer (Conform, with LSP fallback)
@@ -151,6 +156,7 @@ on demand; leader help remains available in Visual mode.
   - `Ctrl+G` inside the picker - back up to the parent repo
 - `Space+g+d` - toggle side-by-side diff of the current file against git
 - `Space+x+x` - all LSP errors and warnings (like "Problems" in VS Code/Zed)
+- `Space+x+e` - full diagnostics for the current line in a focused, scrollable popup
 - `Space+x+d` - toggle inline diagnostic text; other diagnostics remain active
 - `]c` / `[c` - next/previous git change
 

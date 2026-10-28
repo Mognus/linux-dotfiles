@@ -18,6 +18,9 @@ vim.keymap.set("n", "<C-S-CR>", "<cmd>rightbelow vsplit<CR>", { desc = "New spli
 vim.keymap.set("n", "<C-j>", "<C-w>w", { desc = "Next window" })
 vim.keymap.set("n", "<C-k>", "<C-w>W", { desc = "Previous window" })
 
+-- Mark text, Space+c+w, then a delimiter or t + tag name + Enter.
+vim.keymap.set("x", "<leader>cw", "<Plug>(nvim-surround-visual)", { desc = "Wrap selection" })
+
 -- Flash's recommended mappings; r/R only replace keys in the modes below.
 vim.keymap.set({ "n", "x", "o" }, "s", function()
     require("flash").jump()
@@ -188,6 +191,14 @@ end, { desc = "Grep in repo" })
 vim.keymap.set("n", "<leader>xx", function()
     Snacks.picker.diagnostics()
 end, { desc = "Diagnostics" })
+
+-- Space+x+e shows full diagnostics for this line and focuses the scrollable float.
+vim.keymap.set("n", "<leader>xe", function()
+    local _, win = vim.diagnostic.open_float({ scope = "line", source = true })
+    if win then
+        vim.api.nvim_set_current_win(win)
+    end
+end, { desc = "Explain diagnostic" })
 
 -- Space+x+d toggles inline diagnostic text; signs and other diagnostics stay active.
 vim.keymap.set("n", "<leader>xd", function()
