@@ -56,11 +56,19 @@ vim.g.opencode_opts = {
     },
 }
 
+local picker_keys = { ["H"] = "toggle_hidden" }
+
 require("snacks").setup({
     input = { enabled = true },
     indent = { enabled = true },
     explorer = { enabled = true },
     picker = {
+        -- Start in the result list; i focuses the search input.
+        focus = "list",
+        win = {
+            input = { keys = picker_keys },
+            list = { keys = picker_keys },
+        },
         sources = {
             explorer = {
                 layout = { fullscreen = true },
