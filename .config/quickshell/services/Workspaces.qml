@@ -10,14 +10,14 @@ Singleton {
 
     property string activeSpecialWorkspace: ""
     property var specialWorkspaces: [
-        { name: "alacritty", label: "RETURN", accent: Colors.accent },
+        { name: "term", label: "RETURN", accent: Colors.accent },
         { name: "files", label: "F", accent: Colors.accent },
         { name: "music", label: "M", accent: Colors.accent },
         { name: "notes", label: "N", accent: Colors.accent },
         { name: "reader", label: "R", accent: Colors.accent },
         { name: "discord", label: "D", accent: Colors.accent },
         { name: "chat", label: "C", accent: Colors.accent },
-        { name: "librewolf", label: "B", accent: Colors.accent },
+        { name: "browser", label: "B", accent: Colors.accent },
     ]
 
     function workspaceFor(id) {

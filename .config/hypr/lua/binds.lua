@@ -37,14 +37,11 @@ function M.setup(programs)
 		leader_bind("SHIFT + V", exec(os.getenv("HOME") .. "/.config/hypr/scripts/record-toggle.sh"))
 		bind("P", hl.dsp.submap("panels"))
 
-		leader_bind("Return", toggle_special("alacritty"))
-		leader_bind("B", toggle_special("librewolf"))
-		leader_bind("D", toggle_special("discord"))
-		leader_bind("C", toggle_special("chat"))
-		leader_bind("N", toggle_special("notes"))
-		leader_bind("F", toggle_special("files"))
-		leader_bind("M", toggle_special("music"))
-		leader_bind("R", toggle_special("reader"))
+		for _, program in pairs(programs) do
+			if program.workspace and program.key then
+				leader_bind(program.key, toggle_special(program.workspace))
+			end
+		end
 
 		bind("escape", hl.dsp.submap("reset"))
 		bind("catchall", function()
@@ -69,8 +66,8 @@ function M.setup(programs)
 		bind("catchall", hl.dsp.submap("reset"))
 	end)
 
-	mod_bind("SHIFT + Return", exec(programs.terminal))
-	mod_bind("Escape", exec(programs.lock))
+	mod_bind("SHIFT + Return", exec(programs.terminal.command))
+	mod_bind("Escape", exec(programs.lock.command))
 	mod_bind("F1", exec("systemctl suspend"))
 
 	mod_bind("S", exec([[grim -g "$(slurp)" ~/Pictures/screenshots/$(date +%F_%T).png]]))
