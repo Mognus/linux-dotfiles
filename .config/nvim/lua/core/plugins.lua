@@ -3,7 +3,7 @@ vim.g.nvim_surround_no_mappings = true
 
 vim.pack.add({
     { src = "https://github.com/Saghen/blink.cmp", version = "v1.10.2" },
-    { src = "https://github.com/nickjvandyke/opencode.nvim", version = "v1.0.2" },
+    { src = "https://github.com/nickjvandyke/opencode.nvim", version = "main" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     { src = "https://github.com/windwp/nvim-ts-autotag" },
     { src = "https://github.com/dmmulroy/tsc.nvim" },
@@ -51,7 +51,7 @@ require("tsc").setup({
 vim.g.opencode_opts = {
     server = {
         start = function()
-            vim.notify("Start opencode --port 0 in a tmux pane in this project", vim.log.levels.INFO)
+            vim.notify("Start opencode in a tmux pane in this project", vim.log.levels.INFO)
         end,
     },
 }

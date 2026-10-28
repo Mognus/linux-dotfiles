@@ -35,7 +35,7 @@ adding one asks for confirmation.
   no additional snippet collection is installed. Blink's command-line completion
   is disabled; Noice displays Neovim's command-line completion menu.
 - `opencode.nvim` - on-demand editor context and actions for OpenCode in tmux,
-  pinned to v1.0.2 for OpenCode v1. Uses Snacks input and picker interfaces.
+  using the main branch for OpenCode v2. Uses Snacks input and picker interfaces.
 
 - `nvim-treesitter` - syntax highlighting and indentation. Parsers are
   compiled locally with `tree-sitter` and `gcc` from `home.packages`.
@@ -256,12 +256,10 @@ so this editor configuration change needs no rebuild. Restart Neovim to load it.
 
 ## OpenCode
 
-Start Neovim and `opencode --port 0` in the same project directory, in separate
-tmux panes. The port flag exposes OpenCode's local server on a dynamically
-assigned port so the plugin can discover it. Restart an existing OpenCode TUI
-with that flag if it was started without a server port.
-Discovery requires `pgrep` and `lsof`; `lsof` is provided alongside the Neovim
-dependencies in `nix/home/magnus.nix`. Rebuild after adding that package.
+Start Neovim and `opencode` in the same project directory, in separate tmux
+panes. The plugin discovers OpenCode v2's shared background service automatically;
+no `--port` flag is needed. The plugin follows its `main` branch for v2 support,
+with the installed revision recorded in `nvim-pack-lock.json`.
 
 Save files before asking: OpenCode reads referenced files from disk.
 `Space+a+a` opens a Snacks input with `@this` (the selection or cursor location).
