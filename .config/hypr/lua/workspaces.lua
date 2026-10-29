@@ -6,13 +6,17 @@ function M.setup(programs)
 			hl.workspace_rule({
 				workspace = "special:" .. program.workspace,
 				on_created_empty = program.command,
-				gaps_out = 24,
+				gaps_out = {
+					top = 0,
+					bottom = 0,
+					left = 24,
+					right = 24,
+				},
 			})
 
 			hl.window_rule({
 				match = { workspace = "special:" .. program.workspace },
-				border_size = 2,
-				border_color = "rgb(888888)",
+				border_size = 0,
 			})
 		end
 	end
