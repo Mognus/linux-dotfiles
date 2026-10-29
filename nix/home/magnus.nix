@@ -53,12 +53,10 @@ in
   ];
 
   home.file.".zshenv".source = link ".config/zsh/.zshenv";
-  xdg.configFile."zsh/.zshenv".source = link ".config/zsh/.zshenv";
-  xdg.configFile."zsh/.zshrc".source = link ".config/zsh/.zshrc";
-  xdg.configFile."zsh/plugins/personal".source = link ".config/zsh/plugins/personal";
-  xdg.configFile."zsh/plugins/autosuggestions.zsh".source =
+  xdg.configFile."zsh".source = link ".config/zsh";
+  xdg.dataFile."zsh/plugins/autosuggestions.zsh".source =
     "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh";
-  xdg.configFile."zsh/plugins/syntax-highlighting.zsh".source =
+  xdg.dataFile."zsh/plugins/syntax-highlighting.zsh".source =
     "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
   xdg.configFile."nvim".source = link ".config/nvim";
   xdg.configFile."tmux".source = link ".config/tmux";

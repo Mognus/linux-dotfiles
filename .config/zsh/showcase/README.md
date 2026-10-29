@@ -1,10 +1,13 @@
 # Shell
 
-Zsh is the daily shell, without a framework or custom prompt.
+Zsh is the daily shell, without a framework.
 
 Native completion provides grouped descriptions and menu selection.
 Standalone `zsh-autosuggestions` and `zsh-syntax-highlighting` add history
 suggestions and command highlighting; Home Manager links the Nix-built plugins.
+The entire `~/.config/zsh` directory links into the dotfiles repository; external
+plugins live separately in `~/.local/share/zsh/plugins`. The bootstrap file
+`~/.zshenv` is linked separately so Zsh can discover `ZDOTDIR`.
 
 ## Does
 
@@ -22,6 +25,10 @@ suggestions and command highlighting; Home Manager links the Nix-built plugins.
 History is stored in `~/.local/state/zsh/history` and shared between shells.
 `~/.zshenv` sets `ZDOTDIR` to `~/.config/zsh` and exports the editor and PATH;
 `.zshrc` handles interactive configuration. Fish history is not imported.
+
+`prompt.zsh` keeps the former Fish appearance: an empty line, an abbreviated
+bright-green path, then a cyan `$` (red after a failed command). Accepted commands
+are redrawn without the path, with their submission time on the right.
 
 ### Personal plugins
 

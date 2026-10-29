@@ -23,6 +23,7 @@ if [[ -n $WAYLAND_DISPLAY && -S $XDG_RUNTIME_DIR/ssh-agent ]]; then
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
 fi
 
-source "$ZDOTDIR/plugins/autosuggestions.zsh"
+source "$ZDOTDIR/prompt.zsh"
+source "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/autosuggestions.zsh"
 # Load last so highlighting sees all widgets, including FZF's bindings.
-source "$ZDOTDIR/plugins/syntax-highlighting.zsh"
+source "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/syntax-highlighting.zsh"
