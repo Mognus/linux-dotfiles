@@ -27,7 +27,7 @@ idle minutes, turns the monitor off five minutes later, and locks before suspend
 - `hyprland.lua` - Main Hyprland config
 - `lua/` - Split Lua modules for monitors, binds, workspaces, and appearance
 - `hypridle.conf` - Idle timeouts and suspend hooks
-- `scripts/` - Theme switcher, recording, and polkit helpers
+- `scripts/` - Recording and polkit helpers
 
 ## Apps
 
@@ -44,6 +44,8 @@ without modifiers unless noted. Each action returns to normal bindings automatic
 | `w` | Quickshell window switcher with a live preview |
 | `g` | Quickshell settings menu |
 | `v` | Quickshell clipboard history |
+| `p` | Toggle Quickshell bottom bar |
+| `t` | Toggle both Quickshell Tux widgets |
 | `s` | Area screenshot to clipboard |
 | `Shift+v` | Toggle recording |
 | `Enter` | Terminal scratchpad |
@@ -53,10 +55,11 @@ without modifiers unless noted. Each action returns to normal bindings automatic
 | `n` | Notes scratchpad |
 | `f` | File manager scratchpad |
 | `m` | YouTube Music scratchpad |
+| `r` | Reader scratchpad (Foliate) |
 | `Escape` | Cancel |
 
 Unknown keys also cancel the leader mode. For example, `SUPER+A`, then
-`n` toggles Notes; `SUPER+A`, then `Space` toggles the app launcher.
+`p` toggles the bottom bar. Scratchpad actions show or hide the corresponding app.
 
 The command entry keys are `SUPER+A` for Hyprland, `Alt+A` for tmux, and
 `Space` for Neovim. The normal terminal launch remains `SUPER+Shift+Return`;
@@ -70,12 +73,8 @@ compositor animations.
 - `SUPER+Escape` - Lock
 - `SUPER+F1` - Suspend
 - `SUPER+S` - Area screenshot to file
-- Leader, then `s` - Area screenshot to clipboard
-- Leader, then `Shift+v` - Toggle recording
 
 ## Clipboard
-
-- Leader, then `v` - Quickshell clipboard history
 
 Every clipboard change is stored by cliphist. The history shows the full text
 or image of the highlighted entry; inside it, `Delete` removes an entry and
@@ -110,21 +109,6 @@ Audio bindings also work on the lock screen. The Quickshell bar shows the level.
 Workspace selection mirrors tmux tab selection: `SUPER` here, `Alt` in tmux,
 with the same `1..9`, `Tab`, and `N/P` keys. Letter bindings do not require
 Shift unless it is explicitly shown.
-
-## Scratchpads
-
-Use the leader followed by `Enter/b/d/c/n/f` for the terminal, browser, Discord,
-SimpleX, Notes, or file manager. The same sequence opens or hides the scratchpad.
-
-## Desktop Widgets
-
-- Leader, then `T` - Toggle both Quickshell Tux widgets
-- Leader, then `g` - Toggle Quickshell settings menu
-- Leader, then `P`, then `B/P` - Toggle bottom bar/workspace HUD
-
-## Music
-
-- Leader, then `m` - Toggle YouTube Music
 
 ## Workflow
 

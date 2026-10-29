@@ -4,11 +4,8 @@ if not status is-interactive; or not set -q WAYLAND_DISPLAY
 end
 
 # Use the per-user SSH agent socket for this shell session.
-for socket in "$XDG_RUNTIME_DIR/ssh-agent"
-    if test -S $socket
-        set -gx SSH_AUTH_SOCK $socket
-        break
-    end
+if test -S "$XDG_RUNTIME_DIR/ssh-agent"
+    set -gx SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent"
 end
 
 function sc

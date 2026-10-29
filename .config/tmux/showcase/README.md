@@ -1,6 +1,7 @@
 # Tmux
 
-Tmux keeps terminal sessions alive.
+Tmux keeps terminal sessions alive. Use named sessions for separate projects or
+services, and reattach to resume long-running work.
 
 ![Tmux with system information, the config directory and Hyprland Lua in Neovim over the Hatsune Miku wallpaper](tmux-showcase.png)
 
@@ -28,7 +29,8 @@ Hyprland uses `Super+A` as its leader, tmux uses `Alt+A`, and Neovim uses
 - `Alt+Tab` - last-used tab (also available with prefix, then `Tab`)
 - `Alt+N/P` - next/previous tab
 
-Except where Shift is shown explicitly, letters after the prefix are lowercase.
+Except where Shift is shown explicitly, letter bindings do not require Shift.
+Tab navigation cycles through existing tabs.
 Closing a session switches to another existing session instead of detaching,
 as long as another session remains.
 
@@ -45,7 +47,6 @@ as long as another session remains.
 The master layout (`main-vertical`) gives the left master pane 55% of the width,
 matching Hyprland, and places the remaining panes in a stack on the right.
 Creating a pane reapplies this layout.
-Except where Shift is shown explicitly, letter bindings do not require Shift.
 
 ### Copy mode
 
@@ -59,19 +60,10 @@ Pane history keeps up to 100,000 lines; the history limit applies to newly creat
 - `y` - copy the selection to the clipboard and leave
 - `q` - leave without copying
 
-## Does
-
-- Persistent terminal sessions
-- Named workspaces for projects or services
-- Vi-style copy mode
-
-## Workflow
-
-Use named sessions for separate projects or services, and attach back to long-running work instead of rebuilding terminal state.
+## Terminal integration
 
 `Alt` controls tmux panes and tabs, mirroring `Super` for Hyprland windows and
 workspaces. Bindings live directly in tmux; Alacritty sends a distinct sequence
 for `Alt+Shift+Enter` so it does not collide with `Alt+Enter`.
 It also sends a distinct `Ctrl+Shift+Enter` for Neovim splits; tmux forwards
 extended keys to applications requesting them.
-Tab navigation cycles through existing tabs.

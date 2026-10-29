@@ -13,8 +13,6 @@ ShellRoot {
 
     BottomBar {}
 
-    WorkspaceHud {}
-
     ShellOverlay {}
 
     NotificationPopups {}
@@ -23,6 +21,5 @@ ShellRoot {
 
     TuxMascot {
         angel: true
-        bottomInset: ShellState.workspaceHudVisible ? 34 : 0
     }
 }

@@ -1,12 +1,8 @@
 local M = {}
 local mod = "SUPER"
 
-local function bind(keys, dispatcher, opts)
-	hl.bind(keys, dispatcher, opts)
-end
-
 local function mod_bind(keys, dispatcher, opts)
-	bind(mod .. " + " .. keys, dispatcher, opts)
+	hl.bind(mod .. " + " .. keys, dispatcher, opts)
 end
 
 local function exec(command)
@@ -22,7 +18,7 @@ function M.setup(programs)
 	mod_bind("A", hl.dsp.submap("leader"))
 	hl.define_submap("leader", function()
 		local function leader_bind(key, dispatcher)
-			bind(key, function()
+			hl.bind(key, function()
 				hl.dispatch(hl.dsp.submap("reset"))
 				hl.dispatch(dispatcher)
 			end)
@@ -35,7 +31,7 @@ function M.setup(programs)
 		leader_bind("T", exec("qs -p $HOME/.config/quickshell ipc call tux toggle"))
 		leader_bind("S", exec([[grim -g "$(slurp)" -t png - | wl-copy --type image/png]]))
 		leader_bind("SHIFT + V", exec(os.getenv("HOME") .. "/.config/hypr/scripts/record-toggle.sh"))
-		bind("P", hl.dsp.submap("panels"))
+		leader_bind("P", exec("qs -p $HOME/.config/quickshell ipc call bottombar toggle"))
 
 		for _, program in pairs(programs) do
 			if program.workspace and program.key then
@@ -43,27 +39,8 @@ function M.setup(programs)
 			end
 		end
 
-		bind("escape", hl.dsp.submap("reset"))
-		bind("catchall", function()
-			-- Lua catchall callbacks can also run after a matching keybind.
-			-- Keep an explicit switch to the panels submap intact.
-			if hl.get_current_submap() == "leader" then
-				hl.dispatch(hl.dsp.submap("reset"))
-			end
-		end)
-	end)
-
-	hl.define_submap("panels", function()
-		bind("B", function()
-			hl.dispatch(exec("qs -p $HOME/.config/quickshell ipc call bottombar toggle"))
-			hl.dispatch(hl.dsp.submap("reset"))
-		end)
-		bind("P", function()
-			hl.dispatch(exec("qs -p $HOME/.config/quickshell ipc call workspacehud toggle"))
-			hl.dispatch(hl.dsp.submap("reset"))
-		end)
-		bind("escape", hl.dsp.submap("reset"))
-		bind("catchall", hl.dsp.submap("reset"))
+		hl.bind("escape", hl.dsp.submap("reset"))
+		hl.bind("catchall", hl.dsp.submap("reset"))
 	end)
 
 	mod_bind("SHIFT + Return", exec(programs.terminal.command))
@@ -79,16 +56,16 @@ function M.setup(programs)
 	mod_bind("equal", volume_up, { repeating = true, locked = true })
 	mod_bind("minus", volume_down, { repeating = true, locked = true })
 	mod_bind("0", volume_mute, { locked = true })
-	bind("XF86AudioRaiseVolume", volume_up, { repeating = true, locked = true })
-	bind("XF86AudioLowerVolume", volume_down, { repeating = true, locked = true })
-	bind("XF86AudioMute", volume_mute, { locked = true })
-	bind("XF86AudioMicMute", exec("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
-	bind("XF86AudioPlay", exec("playerctl play-pause"), { locked = true })
-	bind("XF86AudioPause", exec("playerctl play-pause"), { locked = true })
-	bind("XF86AudioNext", exec("playerctl next"), { locked = true })
-	bind("XF86AudioPrev", exec("playerctl previous"), { locked = true })
-	bind("XF86MonBrightnessUp", exec("brightnessctl set 5%+"), { repeating = true, locked = true })
-	bind("XF86MonBrightnessDown", exec("brightnessctl set 5%-"), { repeating = true, locked = true })
+	hl.bind("XF86AudioRaiseVolume", volume_up, { repeating = true, locked = true })
+	hl.bind("XF86AudioLowerVolume", volume_down, { repeating = true, locked = true })
+	hl.bind("XF86AudioMute", volume_mute, { locked = true })
+	hl.bind("XF86AudioMicMute", exec("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
+	hl.bind("XF86AudioPlay", exec("playerctl play-pause"), { locked = true })
+	hl.bind("XF86AudioPause", exec("playerctl play-pause"), { locked = true })
+	hl.bind("XF86AudioNext", exec("playerctl next"), { locked = true })
+	hl.bind("XF86AudioPrev", exec("playerctl previous"), { locked = true })
+	hl.bind("XF86MonBrightnessUp", exec("brightnessctl set 5%+"), { repeating = true, locked = true })
+	hl.bind("XF86MonBrightnessDown", exec("brightnessctl set 5%-"), { repeating = true, locked = true })
 
 	mod_bind("Q", hl.dsp.window.close())
 	mod_bind("F", hl.dsp.window.fullscreen())

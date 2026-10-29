@@ -17,7 +17,6 @@ Alacritty is the terminal emulator — GPU-accelerated and minimal, configured i
 ## Keybinds
 
 - `Ctrl+Shift+Space` - toggle Vi mode; inside it use `/` `?` `n` `N` natively
-- `Shift+Enter` - send Escape followed by Return
 - `Alt+Shift+Enter` - send a distinct key sequence for tmux's create-pane binding
 
 ## Workflow

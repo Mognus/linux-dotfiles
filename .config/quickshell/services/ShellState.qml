@@ -8,7 +8,6 @@ Singleton {
     id: root
 
     property bool bottomBarVisible: true
-    property bool workspaceHudVisible: false
     property bool tuxVisible: true
 
     // Route shown in the shared overlay; empty means closed.
@@ -21,16 +20,6 @@ Singleton {
 
     function toggleBottomBar() {
         root.bottomBarVisible = !root.bottomBarVisible;
-        if (root.bottomBarVisible) {
-            root.workspaceHudVisible = false;
-        }
-    }
-
-    function toggleWorkspaceHud() {
-        root.workspaceHudVisible = !root.workspaceHudVisible;
-        if (root.workspaceHudVisible) {
-            root.bottomBarVisible = false;
-        }
     }
 
     function toggleTux() {
@@ -111,14 +100,6 @@ Singleton {
 
         function toggle(): void {
             root.toggleBottomBar()
-        }
-    }
-
-    IpcHandler {
-        target: "workspacehud"
-
-        function toggle(): void {
-            root.toggleWorkspaceHud()
         }
     }
 

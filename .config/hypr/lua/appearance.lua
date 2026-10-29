@@ -28,7 +28,7 @@ function M.setup()
     })
 
     hl.layer_rule({
-        match = { namespace = "^(launcher|settings)$" },
+        match = { namespace = "^settings$" },
         blur = true,
         xray = false,
     })

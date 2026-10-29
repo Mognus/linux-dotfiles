@@ -163,15 +163,13 @@ on demand; leader help remains available in Visual mode.
 Symbol search requires an attached LSP that supports document or workspace
 symbols. `Space+/` remains text search; it also finds comments and strings.
 
-LSP navigation uses Snacks pickers: `gd` definitions, `gr` / `grr` references,
+LSP navigation uses Snacks pickers: `gd` definitions, `grr` references,
 `grt` type definitions and `gri` implementations. A single result jumps directly;
 multiple results open a picker with preview. `Ctrl+O` returns after a jump and
-`Ctrl+I` moves forward in the jump history. These mappings replace Vim's local
-declaration search (`gd`) and virtual replace character (`gr`). Neovim's other
+`Ctrl+I` moves forward in the jump history. The `gd` mapping replaces Vim's local
+declaration search. Neovim's other
 LSP defaults remain available (`:h lsp-defaults`): `K` hover, `grn` rename and
 `gra` code action.
-The `gr` mapping also prefixes the built-in `gr…` mappings, so it waits briefly
-for another key; `grr` requests references without that prefix wait.
 which-key reads mapping descriptions automatically; only group names are
 configured separately in `lua/core/plugins.lua`.
 

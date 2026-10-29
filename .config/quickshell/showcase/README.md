@@ -64,7 +64,7 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
 - `LauncherStyle.qml` — shared spacing, icons and panel dimensions for the app
   launcher, window switcher and clipboard history. Colors come from `Colors.qml`.
 - `services/` — singletons holding all shared state and logic:
-  - `ShellState.qml` — panel visibility (bottom bar, workspace HUD, tux), the
+  - `ShellState.qml` — panel visibility (bottom bar, tux), the
     current overlay page and its Settings origin, plus IPC toggles. Back returns
     to Settings when opened there, otherwise closes; dismiss always closes.
   - `Workspaces.qml` — Hyprland workspace/special-workspace queries and the
@@ -87,7 +87,6 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
     pages do not create windows or footers.
   - `BottomBar.qml` — workspace strip, clock, recording indicator, volume text,
     laptop battery percentage, settings menu trigger, special workspace buttons.
-  - `WorkspaceHud.qml` — compact workspace-only overlay.
   - `Breadcrumbs.qml` — display-only header with a single title string, e.g.
     `× SETTINGS / Appearance / Theme`; the × reports a close request.
   - `search/SearchField.qml` — `/ cy` search line; it only types and hands every

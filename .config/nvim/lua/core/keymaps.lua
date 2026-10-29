@@ -58,12 +58,10 @@ vim.keymap.set("n", "gd", function()
     Snacks.picker.lsp_definitions()
 end, { desc = "Go to definition" })
 
--- Keep both the short mapping and Neovim's familiar grr spelling.
 local function find_references()
     Snacks.picker.lsp_references()
 end
 
-vim.keymap.set("n", "gr", find_references, { desc = "Find references" })
 vim.keymap.set("n", "grr", find_references, { desc = "Find references" })
 vim.keymap.set("n", "grt", function()
     Snacks.picker.lsp_type_definitions()
@@ -133,7 +131,8 @@ local function open_git_status(root)
                 local result = vim.system(
                     { "git", "rev-parse", "--show-superproject-working-tree" },
                     { cwd = root, text = true }
-                ):wait()
+                )
+                    :wait()
                 local parent = vim.trim(result.stdout or "")
                 if parent == "" then
                     vim.notify("Already in the top-level repository", vim.log.levels.INFO)

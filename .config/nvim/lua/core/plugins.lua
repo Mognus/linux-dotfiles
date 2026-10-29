@@ -111,7 +111,6 @@ which_key.add({
 })
 
 -- Keep Neovim's partial-command display in the statusline, separate from Noice.
-vim.opt.showcmd = true
 vim.opt.showcmdloc = "statusline"
 -- Keep Lualine's defaults and add the native showcmd placeholder (%S).
 require("lualine").setup({
