@@ -27,9 +27,12 @@ idle minutes, turns the monitor off five minutes later, and locks before suspend
 - `hyprland.lua` - Main Hyprland config
 - `lua/` - Split Lua modules for monitors, binds, workspaces, and appearance
 - `hypridle.conf` - Idle timeouts and suspend hooks
-- `scripts/` - Recording and polkit helpers
+- `scripts/` - Recording helper
 
 ## Apps
+
+Home Manager links the Polkit authentication agent at `~/.local/bin/polkit-agent`;
+Hyprland starts it on login so privileged desktop actions can show password prompts.
 
 - `SUPER+Shift+Return` - Alacritty terminal
 

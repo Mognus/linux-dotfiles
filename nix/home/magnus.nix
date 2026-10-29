@@ -75,6 +75,9 @@ in
   # Keep the fixed path used by Hyprland and Quickshell, but point into the
   # Nix-built package instead of an untracked, manually compiled binary.
   home.file.".local/bin/appearancectl".source = "${appearancectl}/bin/appearancectl";
+  # Stable autostart path; Home Manager tracks the installed agent across updates.
+  home.file.".local/bin/polkit-agent".source =
+    "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
 
   # A named profile gives user.js a fixed path.
   programs.firefox = {

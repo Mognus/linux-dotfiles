@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
     hl.on("hyprland.start", function()
-        hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/polkit-agent.sh")
+        hl.exec_cmd(os.getenv("HOME") .. "/.local/bin/polkit-agent")
         hl.exec_cmd("hypridle")
         hl.exec_cmd("wl-paste --watch cliphist store")
         -- Generate the saved palette before themed desktop processes start.
