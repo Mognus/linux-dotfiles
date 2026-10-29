@@ -10,7 +10,7 @@ Apply changes with `sudo nixos-rebuild switch --flake ~/dotfiles/nix`.
 
 ## Shell
 
-- `fish` - daily interactive shell
+- `zsh` - daily interactive shell
 - `tmux` - persistent terminal sessions
 - `fzf` - fuzzy search for history, files, and directories
 - `fd` - fast, ignore-aware file search

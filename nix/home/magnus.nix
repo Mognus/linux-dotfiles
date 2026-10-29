@@ -17,7 +17,7 @@ in
 
   home.packages = with pkgs; [
     appearancectl
-    # fish: frg, fco, fkill and the fzf key bindings
+    # zsh: FZF key bindings
     fzf
     ripgrep
     fd
@@ -52,7 +52,14 @@ in
     brightnessctl
   ];
 
-  xdg.configFile."fish".source = link ".config/fish";
+  home.file.".zshenv".source = link ".config/zsh/.zshenv";
+  xdg.configFile."zsh/.zshenv".source = link ".config/zsh/.zshenv";
+  xdg.configFile."zsh/.zshrc".source = link ".config/zsh/.zshrc";
+  xdg.configFile."zsh/plugins/personal".source = link ".config/zsh/plugins/personal";
+  xdg.configFile."zsh/plugins/autosuggestions.zsh".source =
+    "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh";
+  xdg.configFile."zsh/plugins/syntax-highlighting.zsh".source =
+    "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
   xdg.configFile."nvim".source = link ".config/nvim";
   xdg.configFile."tmux".source = link ".config/tmux";
   xdg.configFile."hypr".source = link ".config/hypr";

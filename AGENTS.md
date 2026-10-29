@@ -23,7 +23,7 @@
 - Kernel: 7.2.8
 - Hostname: luxxer23-desktop
 - WM: Hyprland
-- Shell: fish
+- Shell: zsh (configured; existing sessions may still run Fish until rebuild/login)
 - Terminal multiplexer: tmux
 - Main IDE: nvim
 - Editor: nvim (terminal work, quick edits)

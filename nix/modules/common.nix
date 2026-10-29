@@ -38,7 +38,7 @@
     isNormalUser = true;
     description = "Magnus";
     extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
   };
 
   # Login: a text greeter that remembers the user and starts Hyprland through UWSM.
@@ -65,7 +65,9 @@
     nerd-fonts.symbols-only
   ];
 
-  programs.fish.enable = true;
+  programs.zsh.enable = true;
+  # The dotfiles initialize completion after setting up the interactive shell.
+  programs.zsh.enableCompletion = false;
   programs.hyprland.enable = true;
   # Activates graphical-session.target, which the portal (dark mode for
   # Firefox, screen sharing) requires before it starts.

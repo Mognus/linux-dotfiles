@@ -30,7 +30,6 @@ require("conform").setup({
         ["yaml.gitlab"] = { "prettier" },
         sh = { "shfmt" },
         bash = { "shfmt" },
-        fish = { "fish_indent" },
         qml = { "qmlformat" },
     },
     -- Other filetypes (e.g. XML, Svelte, Typst) use their attached language server.

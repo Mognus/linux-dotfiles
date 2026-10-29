@@ -197,10 +197,10 @@ in `lua/core/format.lua`:
 - Lua: StyLua; Nix: nixfmt
 - JS/TS (including JSX/TSX), JSON/JSONC, HTML, CSS/SCSS/Less, Markdown and YAML
   (including Ansible and Compose): Prettier
-- Shell: shfmt; Fish: fish_indent; QML: qmlformat
+- Bash/POSIX shell: shfmt; QML: qmlformat
 - Other filetypes, such as XML, Svelte and Typst: attached LSP, if it supports formatting
 
-Formatter executables are provided by `nix/home/packages.nix` and Fish.
+Formatter executables are provided by `nix/home/packages.nix`.
 After adding packages, run `sudo nixos-rebuild switch --flake ~/dotfiles/nix`.
 Conform uses the formatter's project configuration; its Prettier integration
 prefers a project-local executable when available. Run `:ConformInfo` to inspect
