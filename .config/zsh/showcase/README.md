@@ -2,12 +2,18 @@
 
 Zsh is the daily shell, without a framework.
 
-Native completion provides grouped descriptions and menu selection.
+The standalone `zimfw/completion` preset configures native completion with
+smart-case, partial-word and substring matching, grouped descriptions and menu
+selection. For example, `ukj<Tab>` can match `cover-letter-ukj-jena.pdf`.
+No Zim framework or plugin manager is loaded; Nix pins the module's revision.
+Ordinary shell globs remain case-sensitive.
 Standalone `zsh-autosuggestions` and `zsh-syntax-highlighting` add history
 suggestions and command highlighting; Home Manager links the Nix-built plugins.
 The entire `~/.config/zsh` directory links into the dotfiles repository; external
 plugins live separately in `~/.local/share/zsh/plugins`. The bootstrap file
 `~/.zshenv` is linked separately so Zsh can discover `ZDOTDIR`.
+The completion module initializes `compinit`; do not initialize it a second time.
+Its dumpfile and completion cache live under `~/.cache/zsh`.
 
 ## Does
 
@@ -19,6 +25,12 @@ plugins live separately in `~/.local/share/zsh/plugins`. The bootstrap file
 - `Ctrl+R` - Search command history through FZF
 - `Ctrl+T` - Search files through FZF
 - `Alt-C` - Jump to directory through FZF
+- `Ctrl+W` - Delete the previous word segment, stopping at punctuation
+- `Alt+Backspace` - Delete the previous whitespace-delimited word or path
+- `Ctrl+U` - Delete back to the beginning of the line, preserving text to the right
+
+`keybindings.zsh` defines the two word-deletion rules independently, without
+changing word navigation globally. Both common Alt+Backspace sequences are bound.
 
 ## Configuration
 

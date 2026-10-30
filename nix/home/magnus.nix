@@ -9,6 +9,12 @@ let
   # Link straight into the repo so edits apply without a rebuild.
   link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
   appearancectl = pkgs.callPackage ../packages/appearancectl.nix { };
+  zimCompletion = pkgs.fetchFromGitHub {
+    owner = "zimfw";
+    repo = "completion";
+    rev = "8d3e0f4e6272f4d3bad659eaa13929f9dd96f123";
+    hash = "sha256-xBurErM7KMMDObN3zPwTSOvKqXl9FDZxGfxugwlX/fk=";
+  };
 in
 {
   imports = [ ./packages.nix ];
@@ -54,6 +60,7 @@ in
 
   home.file.".zshenv".source = link ".config/zsh/.zshenv";
   xdg.configFile."zsh".source = link ".config/zsh";
+  xdg.dataFile."zsh/plugins/completion".source = zimCompletion;
   xdg.dataFile."zsh/plugins/autosuggestions.zsh".source =
     "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh";
   xdg.dataFile."zsh/plugins/syntax-highlighting.zsh".source =
