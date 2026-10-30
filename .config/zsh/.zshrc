@@ -11,7 +11,7 @@ if (( $+commands[fzf] )); then
     source <(fzf --zsh)
 fi
 
-# Load after FZF so native completion owns Tab; FZF keeps Ctrl+R/T and Alt+C.
+# Load after FZF so native completion owns Tab; keybindings.zsh remaps FZF.
 source "$ZDOTDIR/plugins/completion.zsh"
 source "$ZDOTDIR/plugins/gh-repos.zsh"
 

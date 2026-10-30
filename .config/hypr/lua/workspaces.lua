@@ -9,8 +9,8 @@ function M.setup(programs)
 				gaps_out = {
 					top = 0,
 					bottom = 0,
-					left = 24,
-					right = 24,
+					left = 60,
+					right = 60,
 				},
 			})
 

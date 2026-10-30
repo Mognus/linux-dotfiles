@@ -97,13 +97,16 @@ git -C ~/dotfiles remote set-url origin git@github.com:Mognus/linux-dotfiles.git
 
 ## 4. By hand
 
-These stay outside the repository on purpose:
+Copy the GPG key, `~/.password-store` and SSH keys only where they are needed.
+Keep VPN connection files outside the repository too; they can contain private
+keys. OpenVPN is installed system-wide. Start an HTB connection on demand with:
 
 ```sh
-netbird up                  # asks for the login or a setup key
+sudo openvpn --config ~/Downloads/your-htb-file.ovpn
 ```
 
-Copy the GPG key, `~/.password-store` and SSH keys only where they are needed.
+Leave the terminal open while connected; Ctrl+C disconnects. No VPN starts
+automatically at login.
 
 ## Everyday use
 

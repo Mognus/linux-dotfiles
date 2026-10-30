@@ -114,7 +114,6 @@
     gobuster
     hashcat
     john
-    openvpn
     dnsutils
 
     # --- TeX ---

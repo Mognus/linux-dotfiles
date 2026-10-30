@@ -56,6 +56,8 @@
     vim
     wget
     perf
+    # On-demand lab VPN connections, e.g. sudo openvpn --config htb.ovpn.
+    openvpn
   ];
 
   fonts.enableDefaultPackages = false;
@@ -69,8 +71,8 @@
   ];
 
   programs.zsh.enable = true;
-  # The dotfiles initialize completion after setting up the interactive shell.
-  programs.zsh.enableCompletion = false;
+  # Expose package completions; the dotfiles configure their own Tab menu.
+  programs.zsh.enableCompletion = true;
   programs.hyprland.enable = true;
   # Activates graphical-session.target, which the portal (dark mode for
   # Firefox, screen sharing) requires before it starts.
@@ -112,24 +114,11 @@
   # Rootless containers; the user socket lets compose tools reach Podman.
   virtualisation.podman.enable = true;
   systemd.user.sockets.podman.wantedBy = [ "sockets.target" ];
-  # NetBird's resolver is unreachable from containers; give them Quad9.
+  # Use explicit public DNS servers for containers.
   virtualisation.containers.containersConf.settings.containers.dns_servers = [ "9.9.9.9" "149.112.112.112" ];
   # Resolve short image names like "postgres:16" against Docker Hub, as Docker does.
   virtualisation.containers.registries.settings.unqualified-search-registries = [ "docker.io" ];
 
-  # VPN configurations
-  services.netbird.enable = true;
-  # Second NetBird client next to the default one (which listens on 51820).
-  services.netbird.clients.wt0 = {
-    port = 51821;
-    ui.enable = true;
-    openFirewall = true;
-    openInternalFirewall = true;
-    dns-resolver = {
-      address = "127.0.0.67";
-      port = 53;
-    };
-  };
-  # NetBird registers its DNS through systemd-resolved instead of rewriting resolv.conf.
+  # Keep the system DNS resolver available independently of VPN clients.
   services.resolved.enable = true;
 }

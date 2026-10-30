@@ -23,15 +23,19 @@ Its dumpfile lives under `~/.cache/zsh`.
 
 ## Keybinds
 
-- `Ctrl+R` - Search command history through FZF
-- `Ctrl+T` - Search files through FZF
-- `Alt-C` - Jump to directory through FZF
+- `Ctrl+R` - Standard incremental history search
+- `Ctrl+T` - Transpose characters (standard Emacs binding)
+- `Alt+C` - Capitalize a word (standard Emacs binding)
+- `Ctrl+X`, then `f`, then `f` - Search files through FZF
+- `Ctrl+X`, then `f`, then `d` - Jump to directory through FZF
+- `Ctrl+X`, then `f`, then `h` - Search command history through FZF
 - `Ctrl+W` - Delete the previous word segment, stopping at punctuation
-- `Alt+Backspace` - Delete the previous whitespace-delimited word or path
 - `Ctrl+U` - Delete back to the beginning of the line, preserving text to the right
 
-`keybindings.zsh` defines the two word-deletion rules independently, without
-changing word navigation globally. Both common Alt+Backspace sequences are bound.
+`keybindings.zsh` keeps the custom Ctrl+W/Ctrl+U deletion rules without changing
+word navigation globally. Alt+Backspace retains its standard Zsh behavior.
+FZF uses sequences under the existing Ctrl+X prefix instead of replacing the
+standard history search and editing shortcuts.
 
 ## Configuration
 
