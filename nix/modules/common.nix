@@ -10,6 +10,9 @@
   };
   nixpkgs.config.allowUnfree = true;
 
+  # Build the manual-page search index used by apropos and whatis.
+  documentation.man.cache.enable = true;
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.networkmanager.enable = true;
