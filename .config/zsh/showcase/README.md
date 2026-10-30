@@ -39,9 +39,12 @@ History is stored in `~/.local/state/zsh/history` and shared between shells.
 `~/.zshenv` sets `ZDOTDIR` to `~/.config/zsh` and exports the editor and PATH;
 `.zshrc` handles interactive configuration. Fish history is not imported.
 
-`prompt.zsh` keeps the former Fish appearance: an empty line, an abbreviated
-bright-green path, then a cyan `$` (red after a failed command). Accepted commands
-are redrawn without the path, with their submission time on the right.
+`prompt.zsh` sets `PS1` to an empty line, the full bright-green working directory
+(`~` for home), then a cyan `$` on the next line (`#` for privileged shells).
+The symbol turns red after errors. No username, hostname, path abbreviation or
+transient redraw is added. `RPS1` shows the time in gray on the right when the
+prompt is drawn; it is not a continuously updating clock. Both prompts use native
+Zsh escapes without custom hooks.
 
 ### GitHub completion
 
