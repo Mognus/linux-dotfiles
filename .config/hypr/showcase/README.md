@@ -94,7 +94,7 @@ Audio bindings also work on the lock screen. The Quickshell bar shows the level.
 ## Windows
 
 - `SUPER+Q` - Close window
-- `SUPER+F` - Fullscreen
+- `SUPER+Z` - Fullscreen
 - `SUPER+Shift+Space` - Toggle floating
 - `SUPER+J/K` - Focus next/previous window in the master stack, wrapping at the ends
 - `SUPER+Shift+J/K` - Swap with the next/previous window in the master stack, wrapping at the ends

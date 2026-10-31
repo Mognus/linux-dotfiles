@@ -1,5 +1,7 @@
 /.gitconfig-traeno
 /.config/fish/fish_variables
+# Generated Zsh completion cache
+/.config/zsh/.zcompdump*
 /.config/hypr/hyprland.conf
 /.codex/config.toml
 /.config/zed/settings_backup.json

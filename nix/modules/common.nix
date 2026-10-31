@@ -79,6 +79,8 @@
   programs.zsh.enable = true;
   # Expose package completions; the dotfiles configure their own Tab menu.
   programs.zsh.enableCompletion = true;
+  # Initialize once in the dotfiles, with the dump under ~/.cache/zsh.
+  programs.zsh.enableGlobalCompInit = false;
   programs.hyprland.enable = true;
   # Activates graphical-session.target, which the portal (dark mode for
   # Firefox, screen sharing) requires before it starts.
@@ -117,6 +119,8 @@
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
+  # Use Podman instead of the Docker daemon on every machine.
+  virtualisation.docker.enable = false;
   # Rootless containers; the user socket lets compose tools reach Podman.
   virtualisation.podman.enable = true;
   systemd.user.sockets.podman.wantedBy = [ "sockets.target" ];

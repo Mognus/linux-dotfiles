@@ -68,7 +68,7 @@ function M.setup(programs)
 	hl.bind("XF86MonBrightnessDown", exec("brightnessctl set 5%-"), { repeating = true, locked = true })
 
 	mod_bind("Q", hl.dsp.window.close())
-	mod_bind("F", hl.dsp.window.fullscreen())
+	mod_bind("Z", hl.dsp.window.fullscreen())
 	mod_bind("SHIFT + Space", hl.dsp.window.float({ action = "toggle" }))
 
 	-- dwm: j/k walk the master stack, h/l move the master split (mfact).

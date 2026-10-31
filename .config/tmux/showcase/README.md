@@ -42,7 +42,7 @@ as long as another session remains.
 - `Alt+Shift+J/K` - swap the current pane with the next/previous pane
 - `Alt+H/L` - shrink/grow the left master pane by five columns
 - `Alt+Q` - close the current pane
-- `Alt+F` - toggle pane zoom
+- `Alt+Z` - toggle pane zoom
 
 The master layout (`main-vertical`) gives the left master pane 55% of the width,
 matching Hyprland, and places the remaining panes in a stack on the right.
