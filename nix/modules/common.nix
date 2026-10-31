@@ -13,6 +13,12 @@
   # Build the manual-page search index used by apropos and whatis.
   documentation.man.cache.enable = true;
 
+  # Fast filename searches with locate; refresh the file index automatically.
+  services.locate = {
+    enable = true;
+    package = pkgs.plocate;
+  };
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.networkmanager.enable = true;
