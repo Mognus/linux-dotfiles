@@ -63,7 +63,7 @@ in
   xdg.configFile."xkb".source = link ".config/xkb";
   xdg.configFile."alacritty".source = link ".config/alacritty";
   xdg.configFile."btop/btop.conf".source = link ".config/btop/btop.conf";
-  xdg.configFile."wallpapers".source = link ".config/wallpapers";
+  home.file."Pictures/wallpapers".source = link "wallpapers";
   xdg.configFile."gtk-3.0".source = link ".config/gtk-3.0";
   xdg.configFile."gtk-4.0".source = link ".config/gtk-4.0";
   # Only the file: Home Manager keeps its own conf.d next to it.
