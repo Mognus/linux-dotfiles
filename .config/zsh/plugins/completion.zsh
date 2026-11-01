@@ -10,10 +10,10 @@ zstyle ':completion:*' menu select=1
 zstyle ':completion:*:descriptions' format '%B%d%b'
 zstyle ':completion:*' group-name ''
 
-# Select a matching candidate immediately instead of inserting a common prefix.
-setopt AUTO_LIST MENU_COMPLETE COMPLETE_IN_WORD ALWAYS_TO_END
+# Insert the common prefix and show the available completions.
+setopt AUTO_LIST COMPLETE_IN_WORD ALWAYS_TO_END
 unsetopt LIST_AMBIGUOUS
-bindkey '^I' menu-complete
+bindkey '^I' expand-or-complete
 bindkey '^[[Z' reverse-menu-complete
 bindkey -M menuselect '^I' menu-complete
 bindkey -M menuselect '^[[Z' reverse-menu-complete
