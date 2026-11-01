@@ -21,8 +21,8 @@ Hyprland uses `Super+A` as its leader, tmux uses `Alt+A`, and Neovim uses
 - Prefix, then `r` - rename the current session
 - Prefix, then `x` - close the current session after confirmation
 - Prefix, then `d` - detach; sessions keep running
-- Prefix, then `c` - create a window (tab)
-- Prefix, then `n` - create a window (tab) in the current directory
+- Prefix, then `c` - create a window (tab) in the current directory
+- Prefix, then `n` / `p` - swap the current tab with the next/previous tab
 - Prefix, then `q` - close the current window and all its panes after confirmation
 - Prefix, then `,` - rename the current tab
 - `Alt+1..9` - select a tab directly (also available with prefix, then `1..9`)

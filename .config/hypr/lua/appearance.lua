@@ -27,11 +27,6 @@ function M.setup()
         },
     })
 
-    hl.layer_rule({
-        match = { namespace = "^theme-switcher$" },
-        blur = true,
-        xray = false,
-    })
 end
 
 return M

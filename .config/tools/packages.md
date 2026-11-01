@@ -20,14 +20,14 @@ Apply changes with `sudo nixos-rebuild switch --flake ~/dotfiles/nix`.
 - `neovim` - editor
 - `alacritty` - terminal emulator
 
-NixOS supplies IBM VGA for monospace text, Alacritty and Quickshell, and IBM Plex
+NixOS supplies IBM VGA for monospace text and Alacritty, and IBM Plex
 Sans for GUI text. See `fonts.md`.
 
 ## Desktop
 
 - `hyprland` - Wayland compositor
-- `quickshell` - lightweight desktop widgets
-- `awww`, `hypridle` - wallpaper and idle handling
+- `awww` - wallpaper
+- `glib` - `gsettings` for native light/dark appearance preferences
 - `xdg-desktop-portal-hyprland` - portal integration for Wayland apps
 - `gvfs`, `tumbler`, `ffmpegthumbnailer` - file manager access and previews
 
@@ -36,7 +36,7 @@ Sans for GUI text. See `fonts.md`.
 - `grim` - screenshots
 - `slurp` - region selection
 - `wl-clipboard` - clipboard access
-- `cliphist` - clipboard history behind the Quickshell overlay
+- `cliphist` - clipboard history accessible from the terminal
 - `swappy` - screenshot editor
 - `socat` - IPC helper
 - `jq` - JSON processing

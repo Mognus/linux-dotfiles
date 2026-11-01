@@ -24,12 +24,6 @@ function M.setup(programs)
 			end)
 		end
 
-		leader_bind("G", exec("qs -p $HOME/.config/quickshell ipc call theme toggle"))
-		leader_bind("T", exec("qs -p $HOME/.config/quickshell ipc call tux toggle"))
-		leader_bind("S", exec([[grim -g "$(slurp)" -t png - | wl-copy --type image/png]]))
-		leader_bind("SHIFT + V", exec(os.getenv("HOME") .. "/.config/hypr/scripts/record-toggle.sh"))
-		leader_bind("P", exec("qs -p $HOME/.config/quickshell ipc call bottombar toggle"))
-
 		for _, program in pairs(programs) do
 			if program.workspace and program.key then
 				leader_bind(program.key, toggle_special(program.workspace))
@@ -41,12 +35,12 @@ function M.setup(programs)
 	end)
 
 	mod_bind("SHIFT + Return", exec(programs.terminal.command))
-	mod_bind("Escape", exec(programs.lock.command))
 	mod_bind("F1", exec("systemctl suspend"))
 
-	mod_bind("S", exec([[grim -g "$(slurp)" ~/Pictures/screenshots/$(date +%F_%T).png]]))
+	-- Canceling the selection must not capture the whole screen.
+	mod_bind("S", exec([[geometry="$(slurp)" && grim -g "$geometry" -t png - | wl-copy --type image/png]]))
 
-	-- Audio keeps working on the lock screen; the Quickshell bar shows the level.
+	-- Audio controls use PipeWire directly; no desktop shell is needed.
 	local volume_up = exec("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+")
 	local volume_down = exec("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")
 	local volume_mute = exec("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")

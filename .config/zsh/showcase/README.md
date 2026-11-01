@@ -45,19 +45,11 @@ transient redraw is added. `RPS1` shows the time in gray on the right when the
 prompt is drawn; it is not a continuously updating clock. Both prompts use native
 Zsh escapes without custom hooks.
 
-### GitHub completion
-
-`plugins/gh-repos.zsh` adds your configured GitHub account's repositories
-to `gh repo clone <Tab>`. Other positions, including flags and the destination
-directory, use the official GitHub CLI completion.
-
-The first lookup fetches up to 1,000 owned repositories (including private repos
-the account can access). Results are cached per host/account for five minutes in
-`~/.cache/zsh/gh-repos`, with private permissions. Refreshes time out after five
-seconds and fall back to old data when offline. No repository lookup runs at shell
-startup. Authentication is managed through `gh auth login` / `gh auth switch`;
-the completion reads the configured account locally.
-
 ## Workflow
 
 Use Zsh for interactive shell work and FZF for history, file, and directory search.
+
+`dark` selects Gruvbox Dark in Alacritty and native GTK dark mode; `light` selects
+Gruvbox Light and GTK light mode. Both are short functions in `.zshrc`, not a
+theme manager. They copy a static color file and leave terminal settings alone.
+The selected `alacritty/colors.toml` is tracked in Git; a clean checkout starts dark.

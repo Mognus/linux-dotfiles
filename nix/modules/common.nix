@@ -68,7 +68,7 @@
 
   fonts.enableDefaultPackages = false;
   fonts.packages = with pkgs; [
-    # VGA for monospace, Alacritty and Quickshell; Plex Sans for GUI text.
+    # VGA for monospace and Alacritty; Plex Sans for GUI text.
     ultimate-oldschool-pc-font-pack
     (ibm-plex.override { families = [ "sans" ]; })
     # Unicode terminal glyphs and Nerd Font icons missing from the VGA font.
@@ -85,8 +85,6 @@
   # Activates graphical-session.target, which the portal (dark mode for
   # Firefox, screen sharing) requires before it starts.
   programs.hyprland.withUWSM = true;
-  # PAM service the Quickshell lock screen (lock.qml) checks the password with.
-  security.pam.services.quickshell-lock = { };
   programs.neovim = {
     enable = true;
     defaultEditor = true;

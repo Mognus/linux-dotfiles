@@ -8,7 +8,6 @@ let
   dotfiles = "${config.home.homeDirectory}/dotfiles";
   # Link straight into the repo so edits apply without a rebuild.
   link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
-  appearancectl = pkgs.callPackage ../packages/appearancectl.nix { };
 in
 {
   imports = [ ./packages.nix ];
@@ -16,7 +15,6 @@ in
   home.stateVersion = "26.05";
 
   home.packages = with pkgs; [
-    appearancectl
     # zsh: FZF key bindings
     fzf
     ripgrep
@@ -30,21 +28,20 @@ in
     # hyprland: terminal bound in hypr/lua/programs.lua
     alacritty
     adwaita-icon-theme
+    # dark/light shell functions: native GTK appearance preferences
+    glib
     # JSON command-line utilities
     jq
-    # hyprland binds and scripts: clipboard, screenshots, recording, media keys
+    # Clipboard, screenshots, manual recording and media keys
     wl-clipboard
     cliphist
     grim
     slurp
     swappy
     wf-recorder
-    libnotify
     playerctl
-    # hyprland autostart: bar, notifications, wallpaper, idle, auth prompts
-    quickshell
+    # hyprland autostart: wallpaper and authentication prompts
     awww
-    hypridle
     polkit_gnome
     # audio and brightness keys: pactl in the autostart, mixer, laptop backlight
     pulseaudio
@@ -64,22 +61,16 @@ in
   xdg.configFile."xkb".source = link ".config/xkb";
   xdg.configFile."alacritty".source = link ".config/alacritty";
   xdg.configFile."btop/btop.conf".source = link ".config/btop/btop.conf";
-  xdg.configFile."quickshell".source = link ".config/quickshell";
   xdg.configFile."wallpapers".source = link ".config/wallpapers";
-  xdg.configFile."themes".source = link ".config/themes";
   xdg.configFile."gtk-3.0".source = link ".config/gtk-3.0";
   xdg.configFile."gtk-4.0".source = link ".config/gtk-4.0";
   # Only the file: Home Manager keeps its own conf.d next to it.
   xdg.configFile."fontconfig/fonts.conf".source = link ".config/fontconfig/fonts.conf";
   home.file.".icons".source = link ".icons";
   xdg.configFile."mimeapps.list".source = link ".config/mimeapps.list";
-  xdg.configFile."yt-dlp".source = link ".config/yt-dlp";
   xdg.configFile."ruff".source = link ".config/ruff";
   xdg.configFile."zed".source = link ".config/zed";
   xdg.configFile."opencode/tui.json".source = link ".config/opencode/tui.json";
-  # Keep the fixed path used by Hyprland and Quickshell, but point into the
-  # Nix-built package instead of an untracked, manually compiled binary.
-  home.file.".local/bin/appearancectl".source = "${appearancectl}/bin/appearancectl";
   # Stable autostart path; Home Manager tracks the installed agent across updates.
   home.file.".local/bin/polkit-agent".source =
     "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
@@ -110,13 +101,11 @@ in
     run ln -sfn ${dotfiles}/.claude/settings.json $HOME/.claude/settings.json
   '';
 
-  # grim does not create the folder the Hyprland screenshot binds write to.
-  # Screenshots are throwaway: anything untouched for a week gets deleted.
-  systemd.user.tmpfiles.rules = [ "d %h/Pictures/screenshots - - - 7d" ];
-
   # GTK apps read the cursor from dconf.
   # The fonts name no font: "Sans"/"Monospace" resolve through fontconfig/fonts.conf.
   dconf.settings."org/gnome/desktop/interface" = {
+    gtk-theme = "Adwaita-dark";
+    color-scheme = "prefer-dark";
     cursor-theme = "macOS";
     cursor-size = 40;
     font-name = "Sans 11";

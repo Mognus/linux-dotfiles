@@ -14,23 +14,7 @@ Retro system monitor using btop's built-in TTY mode. Configuration lives in
 
 ## Theme integration
 
-TTY mode ignores custom btop themes. Instead, `appearancectl` writes Alacritty's
-16 ANSI colors from the selected palette, so an already-running btop changes
-colors when the desktop theme changes. No btop theme file or reload is needed.
-
-| ANSI color | Palette value |
-| --- | --- |
-| Black | Terminal background |
-| Bright black | Muted text |
-| Red / bright red | Danger |
-| Green / bright green | Success |
-| Yellow / bright yellow | Warning |
-| Blue / bright blue | Secondary |
-| Magenta / bright magenta | Violet |
-| Cyan / bright cyan | Accent |
-| White / bright white | Terminal foreground |
-
-Terminal background/foreground overrides are respected. In particular, Light
-Gray keeps its dark terminal. This ANSI palette also applies to other terminal
-applications. In a real Linux virtual console, btop still works in TTY mode,
-but Alacritty's palette does not configure that console's colors.
+TTY mode ignores custom btop themes and uses Alacritty's 16 ANSI colors instead.
+The `dark` and `light` Zsh functions select static Gruvbox Dark/Light files;
+there is no palette generator. In a real Linux virtual console, Alacritty's
+theme does not configure the console colors.

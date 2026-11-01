@@ -19,7 +19,7 @@
 
   services.power-profiles-daemon.enable = true;
 
-  # Battery state on D-Bus, read by the Quickshell bar (Quickshell.Services.UPower).
+  # Expose battery state to desktop applications over D-Bus.
   services.upower.enable = true;
 
   # First NixOS release on this machine. Never change it, see

@@ -2,7 +2,7 @@
 
 `SUPER` is the main desktop modifier.
 
-![Hyprland desktop with the Quickshell bottom bar and Tank Girl wallpaper](desktop-overview.png)
+![Earlier Hyprland desktop with a bottom bar and Tank Girl wallpaper](desktop-overview.png)
 
 ## Does
 
@@ -10,24 +10,20 @@
 - Numbered workspaces for daily contexts
 - Scratchpads for temporary apps
 - `awww` wallpaper setup
-- Quickshell session locking, automatically through Hypridle after thirty idle minutes
 - Clipboard history stored by cliphist, accessible from the terminal
 - Volume and media keys through wpctl and playerctl
 - Polkit authentication prompts through the GNOME agent
-- Quickshell desktop widgets and theme switcher
 
 ## Desktop Role
 
-Hyprland runs the desktop, `awww` sets the wallpaper, Quickshell provides the
-desktop widgets and the lock screen, and Hypridle locks it after thirty
-idle minutes, turns the monitor off five minutes later, and locks before suspend.
+Hyprland runs the desktop and `awww` sets the wallpaper. There is no desktop
+shell, bar, notification daemon, lock screen or idle service. In particular,
+the session does not lock automatically or before suspend.
 
 ## Config
 
 - `hyprland.lua` - Main Hyprland config
 - `lua/` - Split Lua modules for monitors, binds, workspaces, and appearance
-- `hypridle.conf` - Idle timeouts and suspend hooks
-- `scripts/` - Recording helper
 
 ## Apps
 
@@ -43,11 +39,6 @@ without modifiers unless noted. Each action returns to normal bindings automatic
 
 | Key | Action |
 | --- | --- |
-| `g` | Quickshell theme switcher |
-| `p` | Toggle Quickshell bottom bar |
-| `t` | Toggle both Quickshell Tux widgets |
-| `s` | Area screenshot to clipboard |
-| `Shift+v` | Toggle recording |
 | `Enter` | Terminal scratchpad |
 | `b` | Browser scratchpad (LibreWolf) |
 | `d` | Discord scratchpad |
@@ -59,7 +50,7 @@ without modifiers unless noted. Each action returns to normal bindings automatic
 | `Escape` | Cancel |
 
 Unknown keys also cancel the leader mode. For example, `SUPER+A`, then
-`p` toggles the bottom bar. Scratchpad actions show or hide the corresponding app.
+`b` toggles the browser scratchpad.
 
 The command entry keys are `SUPER+A` for Hyprland, `Alt+A` for tmux, and
 `Space` for Neovim. The normal terminal launch remains `SUPER+Shift+Return`;
@@ -67,14 +58,17 @@ the browser is accessed through its scratchpad or the terminal.
 
 ## Session
 
-- `SUPER+Escape` - Lock
 - `SUPER+F1` - Suspend
-- `SUPER+S` - Area screenshot to file
+- `SUPER+S` - Select an area and copy the screenshot directly to the clipboard
+
+Cancel the area selection with Escape. No screenshot file is created, and no
+automatic screenshot cleanup is configured. Screen recordings are started
+manually with `wf-recorder` and stopped with Ctrl+C.
 
 ## Clipboard
 
 Every clipboard change is stored by cliphist. Use `cliphist list` in the terminal
-to inspect the history; there is no Quickshell clipboard picker.
+to inspect the history; there is no graphical clipboard picker.
 
 ## Audio
 
@@ -82,7 +76,14 @@ to inspect the history; there is no Quickshell clipboard picker.
 - `SUPER+0` - Toggle mute
 - `XF86Audio*` keys - Volume, mute, microphone mute, play/pause, next, previous
 
-Audio bindings also work on the lock screen. The Quickshell bar shows the level.
+For manual control, use `wpctl status`, `wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+`
+or `wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle`.
+
+## Appearance
+
+Run `dark` or `light` in Zsh for Gruvbox terminal colors and native GTK light/dark
+preferences. For wallpaper changes, use `awww img "/path/to/image.png"`.
+To change the login wallpaper permanently, edit `lua/autostart.lua`.
 
 ## Windows
 

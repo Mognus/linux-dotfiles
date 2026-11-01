@@ -1,19 +1,24 @@
 [general]
 import = [
-    "~/.local/state/dotfiles-theme/alacritty.toml",
+    "~/.config/alacritty/colors.toml",
 ]
 
 [env]
 TERM = "xterm-256color"
 
 # Classic console appearance; installed through nix/modules/common.nix.
-# Size is loaded from the shared state file and adjustable in Settings.
+# Permanent settings live here; Ctrl+Plus/Minus changes size for this window.
+[font]
+size = 19.0
+
 [font.normal]
 family = "PxPlus IBM VGA 8x16"
 style = "Regular"
 
 [window]
 decorations = "None"
+opacity = 0.85
+padding = { x = 23, y = 23 }
 
 [[keyboard.bindings]]
 key = "Return"

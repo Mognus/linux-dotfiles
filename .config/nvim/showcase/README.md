@@ -101,7 +101,7 @@ Enabled in `lua/core/lsp.lua`, one config per server in `lsp/<name>.lua`:
 - Nix `nixd`, Lua `lua_ls`, XML `lemminx` (Odoo views and data)
 - JSON `jsonls`, CSS `cssls`, HTML `html`, Svelte `svelte`
 - Bash `bashls`, Typst `tinymist`, YAML `yamlls`
-- Docker `dockerls` (Compose files go through `yamlls`), QML `qmlls` (Quickshell)
+- Docker `dockerls` (Compose files go through `yamlls`), QML `qmlls`
 - Ansible `ansiblels`, only for files under `playbooks/` or `roles/*/tasks|handlers/`
 
 The server binaries come from Nix (`nix/home/packages.nix`). Rust's standard

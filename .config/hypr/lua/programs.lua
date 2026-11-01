@@ -7,5 +7,4 @@ return {
     files = { command = "thunar", workspace = "files", key = "F" },
     music = { command = "chromium --app=https://music.youtube.com", workspace = "music", key = "M" },
     reader = { command = "foliate", workspace = "reader", key = "R" },
-    lock = { command = "qs -n -d -p $HOME/.config/quickshell/lock.qml" },
 }

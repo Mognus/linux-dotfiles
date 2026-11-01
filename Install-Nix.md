@@ -83,8 +83,8 @@ git clone https://github.com/Mognus/linux-dotfiles.git ~/dotfiles
 ```
 
 The clone must stay at `~/dotfiles`: `nix/home/magnus.nix` uses that path for
-the repository links. Nix installs `appearancectl` and Home Manager links it at
-`~/.local/bin/appearancectl`; no manual build is needed.
+the repository links. Terminal settings and the two Gruvbox themes are plain
+TOML files; there is no local appearance tool to build.
 
 **Ctrl+Alt+F1** returns to the greeter; logging in now starts Hyprland.
 
@@ -118,5 +118,5 @@ nix flake update --flake ~/dotfiles/nix               # newer packages; commit f
 
 Files and directories linked with `link` in `nix/home/magnus.nix` point straight
 into the repository, so editing their contents needs no rebuild. Other Home
-Manager files, including the Nix-built `appearancectl`, still require a rebuild.
+Manager files and package changes still require a rebuild.
 A broken switch is undone by picking the previous generation in the boot menu.

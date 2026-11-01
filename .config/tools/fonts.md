@@ -4,8 +4,7 @@ Fonts are part of the terminal and desktop experience.
 
 ## Current Font Choices
 
-- Alacritty: `PxPlus IBM VGA 8x16` at 20 points, set in `alacritty.toml`.
-- Quickshell: `PxPlus IBM VGA 8x16`, set in `Fonts.qml`.
+- Alacritty: `PxPlus IBM VGA 8x16` at 19 points, set in `alacritty.toml`.
 - Generic monospace: `PxPlus IBM VGA 8x16`, selected through fontconfig.
 - Generic sans-serif: `IBM Plex Sans`, selected through fontconfig.
 
@@ -22,8 +21,7 @@ Fontconfig lives at `.config/fontconfig/fonts.conf`.
 ## Does
 
 - Keeps font fallback predictable
-- Gives apps predictable generic fonts; Alacritty and Quickshell also explicitly
-  select the VGA font
+- Gives apps predictable generic fonts; Alacritty explicitly selects the VGA font
 
 ## Workflow
 

@@ -4,13 +4,23 @@ Media tooling is intentionally small and CLI-first.
 
 ## yt-dlp
 
-`yt-dlp` config lives at `.config/yt-dlp/config`.
+No global presets: choose the download behavior explicitly for each invocation.
 
-## Does
+```sh
+yt-dlp "URL"
+yt-dlp -x --audio-format mp3 "URL"
+```
 
-- Extracts audio
-- Writes MP3 files
-- Stores downloads under `~/Music/%(playlist_title)s/%(title)s.%(ext)s`
+## Recording
+
+No toggle script or recording shortcut. Start and stop from the terminal:
+
+```sh
+mkdir -p ~/Videos
+wf-recorder -f ~/Videos/aufnahme.mp4
+```
+
+Ctrl+C stops the recording.
 
 ## Playback
 
@@ -19,4 +29,4 @@ Media tooling is intentionally small and CLI-first.
 
 ## Workflow
 
-Use `yt-dlp` for music downloads, `mpv` for direct playback, and `playerctl` for desktop integration.
+Use `yt-dlp` for downloads, `mpv` for direct playback, and `playerctl` for desktop integration.

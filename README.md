@@ -12,6 +12,5 @@ Screenshots and details for each part of the setup:
 - [Zsh](.config/zsh/showcase/README.md)
 - [Hyprland](.config/hypr/showcase/README.md)
 - [Neovim](.config/nvim/showcase/README.md)
-- [Quickshell](.config/quickshell/showcase/README.md)
 - [Tmux](.config/tmux/showcase/README.md)
 - [Tools and packages](.config/tools/showcase/README.md)
