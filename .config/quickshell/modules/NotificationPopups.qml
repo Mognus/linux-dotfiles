@@ -9,7 +9,7 @@ PanelWindow {
     id: popups
 
     readonly property int popupWidth: 340
-    readonly property int defaultTimeout: Notifications.popupTimeout
+    readonly property int defaultTimeout: 5
 
     anchors {
         top: true
@@ -51,7 +51,7 @@ PanelWindow {
                 border.width: 1
                 border.color: popup.critical ? Colors.danger : mouse.containsMouse ? Colors.accent : Colors.border
 
-                // An inverted title bar, matching the settings menu's selection.
+                // Inverted title bar; critical notifications use the danger color.
                 Rectangle {
                     id: header
 

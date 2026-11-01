@@ -1,214 +1,76 @@
 # Quickshell
 
-My desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfoxxed.me/)
-(QtQuick/QML). Replaces the previous EWW setup.
+Small desktop shell for Hyprland, built with [Quickshell](https://quickshell.outfoxxed.me/).
+Configuration and daily controls otherwise live in the terminal.
 
-## Screenshots
+## What stays
 
-Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for each view.
+- **Bottom bar** — workspaces, special workspaces, clock, volume, battery and recording.
+- **Tux widgets** — both animated mascots.
+- **Theme switcher** — palette selection with terminal/browser previews.
+- **Notifications** — popups, click to dismiss; critical notifications do not expire.
+- **Lock screen** — separate process, PAM authentication, started by Hypridle.
 
-### Settings
+There is no settings menu, app launcher, window switcher, clipboard picker or
+wallpaper picker. Volume, terminal adjustments, wallpaper and session actions
+are managed with terminal commands or existing Hyprland bindings.
 
-![Settings menu with grouped categories over the Tiger and Dragon wallpaper](settings-menu.png)
+## Theme switcher
 
-### Applications
+Press `Super+A`, release it, then `g`, or run:
 
-![Application launcher over Die göttliche Natur by Dean Seville](app-launcher.png)
+```sh
+qs -p "$HOME/.config/quickshell" ipc call theme toggle
+```
 
-### Window switcher — Retro Cyan
+- Starts in normal mode: `j/k` or up/down select a palette.
+- `i` or `/` edits the filter. `Esc` returns to normal mode and keeps the filter.
+- While editing, arrows move the text cursor, not the result selection.
+- `Enter` applies the palette; `l` or right also applies in normal mode.
+- `h`, left or `Esc` closes in normal mode; the × always closes.
 
-![Retro Cyan window switcher with grouped applications and a live Neovim preview over the Mountain Goat wallpaper](window-switcher.png)
-
-### Clipboard
-
-![Filtered clipboard history with a screenshot preview over the Akira wallpaper](clipboard-history.png)
-
-### Theme selection
-
-![Gruvbox Light terminal and browser previews over the Earth from Moon wallpaper](theme-picker.png)
-
-### Wallpaper selection
-
-![Wallpaper list and Geese Picture preview over the matching desktop wallpaper](wallpaper-picker.png)
-
-### Audio — Dark Gray
-
-![Dark Gray output and microphone controls over the Bird wallpaper](audio-controls.png)
-
-### Terminal adjustments — Dark Gray
-
-![Dark Gray terminal opacity, font size and padding controls over the Lynx wallpaper](terminal-adjustments.png)
-
-### Notifications — Retro Dark
-
-![Black notification settings with do-not-disturb and timeout controls over the Saturn wallpaper](notifications.png)
-
-![Black notification popups over the Shiva wallpaper](notification-popups.png)
-
-### Session — Retro Dark
-
-![Black session menu with lock, logout, restart and power-off actions over the White Enso wallpaper](session-menu.png)
+![Theme palette selection with terminal and browser previews](theme-picker.png)
 
 ## Structure
 
-- `lock.qml` — lock screen, run as its own process (`qs -n -d -p
-  ~/.config/quickshell/lock.qml`) so a shell bug or hot reload can not unlock
-  the session: blurred wallpaper, clock, password checked through PAM
-  (`quickshell-lock` service from the NixOS config).
-- `shell.qml` — composition root: wires `modules/` components together, keeps no
-  state of its own beyond the Pipewire object tracker.
-- `Fonts.qml` — shared font family and pixel sizes for all shell text, including
-  the bar, launchers, settings, notifications and lock screen.
-- `ThemePaths.qml` — shared QML paths to `~/.local/bin/appearancectl` and
-  `~/.local/state/dotfiles-theme`, the writer's fixed state directory.
-- `LauncherStyle.qml` — shared spacing, icons and panel dimensions for the app
-  launcher, window switcher and clipboard history. Colors come from `Colors.qml`.
-- `services/` — singletons holding all shared state and logic:
-  - `ShellState.qml` — panel visibility (bottom bar, tux), the
-    current overlay page and its Settings origin, plus IPC toggles. Back returns
-    to Settings when opened there, otherwise closes; dismiss always closes.
-  - `Workspaces.qml` — Hyprland workspace/special-workspace queries and the
-    active-special-workspace tracking (seeded from `Hyprland.monitors`, kept
-    live via `rawEvent`).
-  - `Time.qml` — clock.
-  - `Battery.qml` — laptop battery percentage and charging state through UPower;
-    hidden on machines without a laptop battery.
-  - `Recording.qml` — `wf-recorder` status/toggle.
-  - `Notifications.qml` — notification daemon: owns
-    `org.freedesktop.Notifications` on D-Bus and keeps the open notifications.
-- `modules/` — UI panels, purely presentational, bound to the services above:
-  - `OverlayWindow.qml` — shared full-screen backdrop for settings and launchers:
-    50% black with Hyprland background blur, keeping the panel sharp and centered.
-  - `ShellOverlay.qml` — the single overlay window: loads the current page and
-    owns its title, content padding, dimensions and bottom keyboard legend.
-  - `OverlayPage.qml` — focus scope for page content, with presentation properties
-    for the shared frame and a required `keyBindings` reference. Each page explicitly
-    defines its actions, key handler and initial focus, including back navigation;
-    pages do not create windows or footers.
-  - `BottomBar.qml` — workspace strip, clock, recording indicator, volume text,
-    laptop battery percentage, settings menu trigger, special workspace buttons.
-  - `Breadcrumbs.qml` — display-only header with a single title string, e.g.
-    `× SETTINGS / Appearance / Theme`; the × reports a close request.
-  - `search/SearchField.qml` — `/ cy` search line; it only types and hands every
-    key to its `keyTargets` first, so the owner decides what keys drive.
-    All searchable pages start in normal mode: `i` or `/` focuses the input,
-    `Esc` returns to normal mode without clearing the filter. A nonempty filter
-    stays visible. Arrows and h/j/k/l navigate results only in normal mode;
-    while editing, left/right move the text cursor. Enter keeps the page's action.
-  - `search/SearchFilter.qml` — local `entries` + `query` + `textFor(entry)` →
-    `matches`. It owns no selection, focus or UI.
-  - `keyboard/KeyBindings.qml` — local `actions` with `keys`, optional exact
-    `modifiers`, `label`, optional `enabled`, and `run()` callbacks. `handle(event)`
-    executes an enabled matching action; `hints` describes the same enabled actions.
-  - `keyboard/KeyboardHints.qml` — display-only keyboard legend in the shared frame.
-    Each page supplies its own `keyBindings`, including control activation actions.
-    The legend is generated from the same enabled actions
-    used for keyboard handling. Extra text describes native controls or state.
-    All searchable pages compose a filter, native ListView/GridView, search field
-    and key bindings directly. Pages own their connections, current entry and
-    previews; there is no combined searchable-view wrapper or global key registry.
-  - `preview/ImagePreview.qml` — shared aspect-preserving image display with
-    asynchronous loading, empty text and loading/error states.
-  - `settings/wallpaper/WallpaperPreview.qml` — image preview, frame and filename.
-  - `settings/theme/ThemePreview.qml` — terminal/browser previews and empty state.
-  - `launcher/clipboard/ClipboardPreview.qml` — plain text or the shared image preview.
-  - `launcher/windows/WindowPreview.qml` — live capture of the selected window;
-    receives the toplevel and active state from the switcher page.
-  - `launcher/AppLauncher.qml` — GNOME-style grid of the desktop apps;
-    arrows or h/j/k/l move in normal mode, i or / edits the filter, Enter starts.
-    Esc leaves input first; in normal mode it returns to Settings when opened
-    there, otherwise closes. The × always closes everything.
-  - `launcher/WindowSwitcher.qml` — open windows of every workspace on the
-    left, grouped by app under an icon header, a live view of the highlighted
-    one on the right; same search.
-  - `launcher/ClipboardHistory.qml` — cliphist entries, newest first, with
-    the full text or image of the highlighted one on the right; same search,
-    Enter copies the entry back.
-  - `settings/` — the settings menu (Super+G), with all categories visible together:
-    - `SettingsMenu.qml` — General (Audio, Notifications, Session), Appearance (Theme, Wallpaper, Adjustments), and
-      Launcher (Applications, Windows, Clipboard). One definition supplies names,
-      routes and shortcut hints. Search removes empty categories; every entry
-      opens a page in the shared overlay with Settings as its one-level parent.
-      The TUI-style start list uses an inverted selection bar with a `>` marker.
-    - `AudioPage.qml` — output and microphone volume using the shared `SettingSlider`.
-      The page owns keyboard handling: j/k, up/down or Tab select a slider;
-      h/l or left/right adjust it in 1% steps. Dragging commits on release.
-      Device names and Pipewire status remain visible; unavailable devices are disabled.
-    - `NotificationsPage.qml` — focusable do-not-disturb button, a shared timeout
-      slider (1–10 seconds in 1-second steps), active count and dismiss-all controls.
-      j/k, arrows and Tab select controls; h/l or left/right adjust the timeout;
-      Enter/Space activates buttons. Critical notifications bypass DND.
-      These preferences apply to the current shell session.
-    - `SessionPage.qml` — searchable lock, logout, restart and shutdown actions.
-      Locking uses `loginctl lock-session` and the existing Hypridle handler.
-    - `SettingsButton.qml` — square buttons with Tab focus and a clicked signal;
-      the owning page defines keyboard activation.
-    - `AdjustmentsPage.qml` / `SettingSlider.qml` — terminal opacity, font size
-      and padding. The page owns selection and keyboard actions: j/k or arrows
-      select controls, h/l or left/right adjust values, and Enter/Space activates
-      reset. Keyboard changes save immediately; dragging saves on release through
-      the local Rust writer. Reset restores defaults without changing the theme.
-    - `ThemePage.qml` — searchable palette names with terminal and browser
-      color previews; highlighting previews a palette, Enter applies it.
-    - `theme/TerminalPreview.qml` / `theme/BrowserPreview.qml` — illustrative
-      previews that read the highlighted palette independently of the active theme.
-    - `WallpaperPage.qml` — searchable files from `~/.config/wallpapers` on
-      the left, an aspect-preserving preview on the right; Enter sets the
-      highlighted image through `awww`.
-  - `NotificationPopups.qml` — retro notification popups top right: square
-    borders, an inverted app-name header and VGA text. Titles use up to two
-    lines, bodies up to four with ellipsis. Normal ones expire after 5s,
-    critical ones have a red `!` header and stay; a click closes one.
-  - `TuxMascot.qml` — left/right mascot panel.
-- `lib/Audio.js` — Pipewire audio helper functions.
-- `services/Appearance.qml` — watches the shared terminal TOML, reads the current
-  values through `appearancectl get` and queues writes to its local binary.
-- `assets/` — animated angel/devil Tux sprites.
+- `shell.qml` — bottom bar, theme switcher, notifications, Tux and Pipewire tracking.
+- `modules/BottomBar.qml` / `TuxMascot.qml` / `NotificationPopups.qml` — desktop widgets.
+- `modules/ThemeSwitcher.qml` — the theme window, header and keyboard hints.
+- `modules/theme/` — palette loading, selection and previews.
+- `modules/search/` — text input, filtering and normal/insert focus switching.
+- `modules/keyboard/` — local action definitions and their visible hints.
+- `services/ShellState.qml` — visibility and IPC for the bar, Tux and theme switcher.
+- `services/Workspaces.qml` / `Time.qml` / `Battery.qml` / `Recording.qml` — bar data.
+- `services/Notifications.qml` — notification daemon.
+- `Colors.qml` / `Fonts.qml` / `ThemePaths.qml` — shared appearance and theme paths.
+- `lib/Audio.js` — read-only volume helpers for the bar.
+- `lock.qml` — independent lock screen, so a shell reload cannot unlock the session.
+- `assets/` — Tux sprites. Other showcase images document earlier configurations.
 
-## What it does
+## Terminal controls
 
-- **Workspaces** — live Hyprland workspaces plus named *special* workspaces
-  (term, files, music, notes, reader, discord, chat, firefox), highlighted with the shared accent.
-- **Clock** — `hh:mm`, centered in the bottom bar.
-- **Settings menu** — centered keyboard-driven menu on Super+G.
-- **Themes** — White, Light Gray, Dark Gray, Gruvbox Light, Gruvbox Dark, Retro Dark,
-  Retro Cyan and Retro Pink palettes from `~/.config/themes/palettes`.
-  Light Gray restores the original pale gray appearance with a dark terminal;
-  White uses a white background and terminal. Retro Dark is the black variant.
-  Gruvbox Light uses a warm beige background and a light terminal.
-  Gruvbox Dark uses a warm dark-gray background, beige text and a lighter bottom bar.
-  Shell backgrounds and text follow the palette, with a shared green accent and
-  red danger color. Alacritty and GTK colors are generated by `appearancectl`.
-- **Audio** — volume via Pipewire (`Quickshell.Services.Pipewire`).
-- **Battery** — percentage in the bar when a laptop battery is present; low charge
-  is red unless charging.
-- **Recording indicator** — shows when a screen recording is active.
-- **Notifications** — replaces Dunst, colored by the current theme. General >
-  Notifications controls do-not-disturb and the default popup duration; app-specified
-  timeouts still take precedence (in milliseconds; zero disables expiry), and
-  critical messages remain until dismissed.
-- **Session** — General > Session offers locking, logout, restart and shutdown.
-- **Tux mascot** — animated, can be toggled.
+```sh
+wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+awww img /path/to/wallpaper.png
+```
 
-## Requirements
-
-Nix builds and tests the local appearance writer as part of the shared Home
-Manager configuration. Apply source changes with
-`sudo nixos-rebuild switch --flake ~/dotfiles/nix`. Home Manager links the package
-to `~/.local/bin/appearancectl`, which Hyprland and Quickshell call for theme
-changes, login restoration and the terminal adjustment sliders.
-
-- `quickshell`
-- Hyprland (uses `Quickshell.Hyprland`)
-- Pipewire (uses `Quickshell.Services.Pipewire`)
-- UPower for the laptop battery indicator (`Quickshell.Services.UPower`)
-- `awww` for wallpapers; `dconf` for GTK theme preferences
-- `cliphist` and `wl-clipboard` for clipboard history; `wf-recorder` for recording
+The local appearance writer remains available at `~/.local/bin/appearancectl`.
+Theme changes still update Alacritty and GTK; terminal overrides remain supported.
+Build writer changes with `sudo nixos-rebuild switch --flake ~/dotfiles/nix`.
 
 ## Run
 
-```bash
+```sh
 qs -p "$HOME/.config/quickshell"
 ```
 
-Started automatically from Hyprland's native Lua autostart module.
+Started automatically by Hyprland. Requirements: Quickshell, Hyprland, Pipewire,
+UPower, `awww`, `dconf`, `wf-recorder` and the local appearance writer.
+
+The lock screen runs separately:
+
+```sh
+qs -n -d -p "$HOME/.config/quickshell/lock.qml"
+```

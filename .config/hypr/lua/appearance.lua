@@ -28,7 +28,7 @@ function M.setup()
     })
 
     hl.layer_rule({
-        match = { namespace = "^settings$" },
+        match = { namespace = "^theme-switcher$" },
         blur = true,
         xray = false,
     })

@@ -11,10 +11,10 @@
 - Scratchpads for temporary apps
 - `awww` wallpaper setup
 - Quickshell session locking, automatically through Hypridle after thirty idle minutes
-- Clipboard history with image previews through cliphist and Quickshell
+- Clipboard history stored by cliphist, accessible from the terminal
 - Volume and media keys through wpctl and playerctl
 - Polkit authentication prompts through the GNOME agent
-- Quickshell desktop widgets and settings menu
+- Quickshell desktop widgets and theme switcher
 
 ## Desktop Role
 
@@ -43,10 +43,7 @@ without modifiers unless noted. Each action returns to normal bindings automatic
 
 | Key | Action |
 | --- | --- |
-| `Space` | Quickshell app launcher |
-| `w` | Quickshell window switcher with a live preview |
-| `g` | Quickshell settings menu |
-| `v` | Quickshell clipboard history |
+| `g` | Quickshell theme switcher |
 | `p` | Toggle Quickshell bottom bar |
 | `t` | Toggle both Quickshell Tux widgets |
 | `s` | Area screenshot to clipboard |
@@ -66,10 +63,7 @@ Unknown keys also cancel the leader mode. For example, `SUPER+A`, then
 
 The command entry keys are `SUPER+A` for Hyprland, `Alt+A` for tmux, and
 `Space` for Neovim. The normal terminal launch remains `SUPER+Shift+Return`;
-the browser is accessed through its scratchpad or the app launcher.
-
-The app launcher and window switcher are Quickshell windows that open without
-compositor animations.
+the browser is accessed through its scratchpad or the terminal.
 
 ## Session
 
@@ -79,9 +73,8 @@ compositor animations.
 
 ## Clipboard
 
-Every clipboard change is stored by cliphist. The history shows the full text
-or image of the highlighted entry; inside it, `Delete` removes an entry and
-`Shift+Delete` wipes the history.
+Every clipboard change is stored by cliphist. Use `cliphist list` in the terminal
+to inspect the history; there is no Quickshell clipboard picker.
 
 ## Audio
 
@@ -115,6 +108,6 @@ Shift unless it is explicitly shown.
 
 ## Workflow
 
-Start from the launcher or terminal, keep long-running work on workspaces, pull
+Start from the terminal, keep long-running work on workspaces, pull
 scratchpads in only when needed, and walk the master stack with `SUPER+J/K`.
 Use `SUPER+H/L` to adjust the space given to the master window.

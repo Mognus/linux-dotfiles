@@ -147,7 +147,7 @@ PanelWindow {
                 font.bold: true
             }
 
-            // Left: special workspaces and settings.
+            // Left: special workspaces.
             Row {
                 anchors {
                     left: parent.left
@@ -176,38 +176,6 @@ PanelWindow {
                     }
                 }
 
-                Rectangle {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: 31
-                    height: bar.barHeight
-                    color: "transparent"
-
-                    Text {
-                        anchors.centerIn: parent
-                        text: "⚙"
-                        color: ShellState.settingsOpen ? Colors.accent : Colors.foreground
-                        font.family: Fonts.family
-                        font.pixelSize: Fonts.largeSize
-                        font.bold: true
-                    }
-
-                    Rectangle {
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                            bottom: parent.bottom
-                        }
-
-                        height: 2
-                        color: Colors.accent
-                        visible: ShellState.settingsOpen
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: ShellState.toggleSettings()
-                    }
-                }
             }
         }
     }

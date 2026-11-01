@@ -24,10 +24,7 @@ function M.setup(programs)
 			end)
 		end
 
-		leader_bind("Space", exec("qs -p $HOME/.config/quickshell ipc call launcher toggle"))
-		leader_bind("W", exec("qs -p $HOME/.config/quickshell ipc call windowswitcher toggle"))
-		leader_bind("G", exec("qs -p $HOME/.config/quickshell ipc call settings toggle"))
-		leader_bind("V", exec("qs -p $HOME/.config/quickshell ipc call clipboard toggle"))
+		leader_bind("G", exec("qs -p $HOME/.config/quickshell ipc call theme toggle"))
 		leader_bind("T", exec("qs -p $HOME/.config/quickshell ipc call tux toggle"))
 		leader_bind("S", exec([[grim -g "$(slurp)" -t png - | wl-copy --type image/png]]))
 		leader_bind("SHIFT + V", exec(os.getenv("HOME") .. "/.config/hypr/scripts/record-toggle.sh"))

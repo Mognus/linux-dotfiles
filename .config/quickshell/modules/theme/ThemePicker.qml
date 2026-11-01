@@ -3,31 +3,25 @@ import Quickshell.Io
 import QtQuick
 import Qt.labs.folderlistmodel
 import qs
-import qs.modules
 import qs.modules.search
 import qs.modules.keyboard
 import qs.services
-import "theme"
 
 // Highlighting only changes the previews; Enter applies the selected palette.
-OverlayPage {
+FocusScope {
     id: view
 
-    title: "Appearance / Theme"
-    panelWidth: 960
-    contentHeight: 440
-    keyBindings: keys
+    readonly property alias keyBindings: keys
+    readonly property string extraHint: mode.searching ? "" : "* ACTIVE THEME"
+    focus: true
     Keys.onPressed: event => keys.handle(event)
-    extraHint: view.searching ? "" : "* ACTIVE THEME"
-    property bool searching: false
 
     readonly property var current: filter.matches[list.currentIndex] ?? null
     readonly property var previewPalette: view.current ? view.current.themeColors : null
     property string activeTheme: ""
 
     function activate() {
-        if (view.searching) search.forceActiveFocus();
-        else list.forceActiveFocus();
+        mode.activate();
     }
 
     function applyCurrent() {
@@ -36,14 +30,10 @@ OverlayPage {
         }
     }
 
-    function startSearch() {
-        view.searching = true;
-        search.forceActiveFocus();
-    }
-
-    function stopSearch() {
-        view.searching = false;
-        list.forceActiveFocus();
+    SearchMode {
+        id: mode
+        normalTarget: list
+        insertTarget: search
     }
 
     SearchFilter {
@@ -56,13 +46,13 @@ OverlayPage {
     KeyBindings {
         id: keys
         actions: [
-            { keys: [Qt.Key_Up, Qt.Key_K], label: "SELECT", enabled: !view.searching, run: () => list.decrementCurrentIndex() },
-            { keys: [Qt.Key_Down, Qt.Key_J], label: "SELECT", enabled: !view.searching, run: () => list.incrementCurrentIndex() },
+            { keys: [Qt.Key_Up, Qt.Key_K], label: "SELECT", enabled: !mode.searching, run: () => list.decrementCurrentIndex() },
+            { keys: [Qt.Key_Down, Qt.Key_J], label: "SELECT", enabled: !mode.searching, run: () => list.incrementCurrentIndex() },
             { keys: [Qt.Key_Return, Qt.Key_Enter], label: "APPLY", enabled: view.previewPalette !== null, run: () => view.applyCurrent() },
-            { keys: [Qt.Key_Right, Qt.Key_L], label: "APPLY", enabled: !view.searching && view.previewPalette !== null, run: () => view.applyCurrent() },
-            { keys: [Qt.Key_I, Qt.Key_Slash], label: "FIND", enabled: !view.searching, run: () => view.startSearch() },
-            { keys: [Qt.Key_Left, Qt.Key_H], label: ShellState.overlayFromSettings ? "BACK" : "CLOSE", enabled: !view.searching, run: () => ShellState.backOverlay() },
-            { keys: [Qt.Key_Escape], label: view.searching ? "NORMAL" : ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => view.searching ? view.stopSearch() : ShellState.backOverlay() }
+            { keys: [Qt.Key_Right, Qt.Key_L], label: "APPLY", enabled: !mode.searching && view.previewPalette !== null, run: () => view.applyCurrent() },
+            { keys: [Qt.Key_I, Qt.Key_Slash], label: "FIND", enabled: !mode.searching, run: () => mode.startSearch() },
+            { keys: [Qt.Key_Left, Qt.Key_H], label: "CLOSE", enabled: !mode.searching, run: () => ShellState.closeThemeSwitcher() },
+            { keys: [Qt.Key_Escape], label: mode.searching ? "NORMAL" : "CLOSE", run: () => mode.searching ? mode.stopSearch() : ShellState.closeThemeSwitcher() }
         ]
     }
 
@@ -184,7 +174,7 @@ OverlayPage {
         anchors.bottom: parent.bottom
         width: list.width
         height: 36
-        visible: view.searching || search.text.length > 0
+        visible: mode.searching || search.text.length > 0
         keyTargets: [view]
     }
 

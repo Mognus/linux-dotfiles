@@ -8,12 +8,12 @@ ShellRoot {
     id: root
 
     PwObjectTracker {
-        objects: [Pipewire.defaultAudioSink, Pipewire.defaultAudioSource]
+        objects: [Pipewire.defaultAudioSink]
     }
 
     BottomBar {}
 
-    ShellOverlay {}
+    ThemeSwitcher {}
 
     NotificationPopups {}
 

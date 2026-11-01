@@ -10,25 +10,6 @@ Singleton {
     id: root
 
     readonly property var list: server.trackedNotifications
-    property bool doNotDisturb: false
-    property int popupTimeout: 5
-
-    function dismissAll() {
-        // Copy the list because dismissing a notification removes it immediately.
-        for (const notification of Array.from(root.list.values)) {
-            notification.dismiss();
-        }
-    }
-
-    onDoNotDisturbChanged: {
-        if (root.doNotDisturb) {
-            for (const notification of Array.from(root.list.values)) {
-                if (notification.urgency !== NotificationUrgency.Critical) {
-                    notification.dismiss();
-                }
-            }
-        }
-    }
 
     NotificationServer {
         id: server
@@ -37,7 +18,7 @@ Singleton {
 
         // Untracked notifications are dropped right away, tracking keeps them in the list.
         onNotification: notification => {
-            notification.tracked = !root.doNotDisturb || notification.urgency === NotificationUrgency.Critical;
+            notification.tracked = true;
         }
     }
 }
