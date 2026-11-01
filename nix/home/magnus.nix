@@ -27,6 +27,8 @@ in
     tmux
     # hyprland: terminal bound in hypr/lua/programs.lua
     alacritty
+    # Hyprland launcher: native Wayland application and window search
+    rofi
     adwaita-icon-theme
     # dark/light shell functions: native GTK appearance preferences
     glib

@@ -26,6 +26,7 @@ Sans for GUI text. See `fonts.md`.
 ## Desktop
 
 - `hyprland` - Wayland compositor
+- `rofi` - application launcher and native Wayland window switcher (Rofi 2)
 - `awww` - wallpaper
 - `glib` - `gsettings` for native light/dark appearance preferences
 - `xdg-desktop-portal-hyprland` - portal integration for Wayland apps

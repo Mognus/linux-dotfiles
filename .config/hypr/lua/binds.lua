@@ -24,6 +24,10 @@ function M.setup(programs)
 			end)
 		end
 
+		-- Separate native Rofi modes, opened through the desktop leader.
+		leader_bind("Space", exec("rofi -show drun -modes drun"))
+		leader_bind("W", exec("rofi -show window -modes window"))
+
 		for _, program in pairs(programs) do
 			if program.workspace and program.key then
 				leader_bind(program.key, toggle_special(program.workspace))

@@ -13,6 +13,7 @@
 - Clipboard history stored by cliphist, accessible from the terminal
 - Volume and media keys through wpctl and playerctl
 - Polkit authentication prompts through the GNOME agent
+- Rofi 2 for application launching and native Wayland window switching
 
 ## Desktop Role
 
@@ -32,6 +33,15 @@ Hyprland starts it on login so privileged desktop actions can show password prom
 
 - `SUPER+Shift+Return` - Alacritty terminal
 
+Type to filter, use up/down to select, Enter to activate, and Escape to cancel.
+The two launchers are separate: applications launch an app; windows focus an
+existing window. Neither launcher mixes both kinds of results.
+
+The bindings run `rofi -show drun -modes drun` and
+`rofi -show window -modes window` respectively.
+Rofi uses its standard configuration and runs only when opened. No custom scripts,
+extensions, background service or extra flake is needed.
+
 ## Leader
 
 Press `SUPER+A`, release both keys, then press one of the keys below
@@ -39,6 +49,8 @@ without modifiers unless noted. Each action returns to normal bindings automatic
 
 | Key | Action |
 | --- | --- |
+| `Space` | Rofi: search and launch installed applications |
+| `w` | Rofi: search and focus open windows |
 | `Enter` | Terminal scratchpad |
 | `b` | Browser scratchpad (LibreWolf) |
 | `d` | Discord scratchpad |
@@ -54,7 +66,7 @@ Unknown keys also cancel the leader mode. For example, `SUPER+A`, then
 
 The command entry keys are `SUPER+A` for Hyprland, `Alt+A` for tmux, and
 `Space` for Neovim. The normal terminal launch remains `SUPER+Shift+Return`;
-the browser is accessed through its scratchpad or the terminal.
+the browser is accessed through Rofi, its scratchpad or the terminal.
 
 ## Session
 
