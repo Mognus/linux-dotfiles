@@ -51,6 +51,7 @@ without modifiers unless noted. Each action returns to normal bindings automatic
 | --- | --- |
 | `Space` | Rofi: search and launch installed applications |
 | `w` | Rofi: search and focus open windows |
+| `s` | Select an area and copy the screenshot directly to the clipboard |
 | `Enter` | Terminal scratchpad |
 | `b` | Browser scratchpad (LibreWolf) |
 | `d` | Discord scratchpad |
@@ -71,7 +72,6 @@ the browser is accessed through Rofi, its scratchpad or the terminal.
 ## Session
 
 - `SUPER+F1` - Suspend
-- `SUPER+S` - Select an area and copy the screenshot directly to the clipboard
 
 Cancel the area selection with Escape. No screenshot file is created, and no
 automatic screenshot cleanup is configured. Screen recordings are started

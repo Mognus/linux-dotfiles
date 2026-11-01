@@ -27,6 +27,8 @@ function M.setup(programs)
 		-- Separate native Rofi modes, opened through the desktop leader.
 		leader_bind("Space", exec("rofi -show drun -modes drun"))
 		leader_bind("W", exec("rofi -show window -modes window"))
+		-- Canceling the selection leaves the clipboard unchanged.
+		leader_bind("S", exec([[geometry="$(slurp)" && grim -g "$geometry" - | wl-copy]]))
 
 		for _, program in pairs(programs) do
 			if program.workspace and program.key then
@@ -40,9 +42,6 @@ function M.setup(programs)
 
 	mod_bind("SHIFT + Return", exec(programs.terminal.command))
 	mod_bind("F1", exec("systemctl suspend"))
-
-	-- Canceling the selection must not capture the whole screen.
-	mod_bind("S", exec([[geometry="$(slurp)" && grim -g "$geometry" -t png - | wl-copy --type image/png]]))
 
 	-- Audio controls use PipeWire directly; no desktop shell is needed.
 	local volume_up = exec("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+")
