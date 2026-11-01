@@ -1,18 +1,14 @@
 import QtQuick
 import qs
 
-// Search line under a list: / cy▏. It only types; every key goes to
-// keyTargets first, so whoever uses it can still drive a list with it.
+// Search line under a list: / cy▏. Owners handle mode switches and actions;
+// result navigation is disabled while this field is being edited.
 FocusScope {
     id: search
 
     readonly property alias text: field.text
     // Items that see each key before the field types it.
     property list<Item> keyTargets
-
-    function clear() {
-        field.text = "";
-    }
 
     // Keys the field leaves alone (Left at the start) stay here instead of reaching the owner.
     Keys.onPressed: event => {

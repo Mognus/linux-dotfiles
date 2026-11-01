@@ -33,7 +33,6 @@ OverlayPage {
     }
 
     function stopSearch() {
-        search.clear();
         page.searching = false;
         list.forceActiveFocus();
     }
@@ -48,15 +47,13 @@ OverlayPage {
     KeyBindings {
         id: keys
         actions: [
-            { keys: [Qt.Key_Up], label: "SELECT", run: () => list.decrementCurrentIndex() },
-            { keys: [Qt.Key_Down], label: "SELECT", run: () => list.incrementCurrentIndex() },
-            { keys: [Qt.Key_K], modifiers: page.searching ? Qt.ControlModifier : Qt.NoModifier, label: "SELECT", run: () => list.decrementCurrentIndex() },
-            { keys: [Qt.Key_J], modifiers: page.searching ? Qt.ControlModifier : Qt.NoModifier, label: "SELECT", run: () => list.incrementCurrentIndex() },
+            { keys: [Qt.Key_Up, Qt.Key_K], label: "SELECT", enabled: !page.searching, run: () => list.decrementCurrentIndex() },
+            { keys: [Qt.Key_Down, Qt.Key_J], label: "SELECT", enabled: !page.searching, run: () => list.incrementCurrentIndex() },
             { keys: [Qt.Key_Return, Qt.Key_Enter], label: "EXECUTE", enabled: page.current !== null, run: () => page.executeCurrent() },
             { keys: [Qt.Key_Right, Qt.Key_L], label: "EXECUTE", enabled: !page.searching && page.current !== null, run: () => page.executeCurrent() },
-            { keys: [Qt.Key_Slash], label: "FIND", enabled: !page.searching, run: () => page.startSearch() },
+            { keys: [Qt.Key_I, Qt.Key_Slash], label: "FIND", enabled: !page.searching, run: () => page.startSearch() },
             { keys: [Qt.Key_Left, Qt.Key_H], label: ShellState.overlayFromSettings ? "BACK" : "CLOSE", enabled: !page.searching, run: () => ShellState.backOverlay() },
-            { keys: [Qt.Key_Escape], label: page.searching ? "CLEAR" : ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => page.searching ? page.stopSearch() : ShellState.backOverlay() }
+            { keys: [Qt.Key_Escape], label: page.searching ? "NORMAL" : ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => page.searching ? page.stopSearch() : ShellState.backOverlay() }
         ]
     }
 
@@ -73,7 +70,7 @@ OverlayPage {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.bottom: page.searching ? search.top : description.top
+        anchors.bottom: search.visible ? search.top : description.top
         anchors.bottomMargin: 16
         clip: true
         focus: true
@@ -117,7 +114,7 @@ OverlayPage {
         anchors.bottom: description.top
         anchors.bottomMargin: 16
         height: 36
-        visible: page.searching
+        visible: page.searching || search.text.length > 0
         keyTargets: [page]
     }
 

@@ -7,13 +7,13 @@ import qs.modules.search
 import qs.services
 import qs.modules.keyboard
 
-// App launcher: a GNOME-style grid of the desktop apps. The search line is
-// always active: typing filters, the arrows or Ctrl+hjkl move, Enter starts.
+// App launcher: navigate the grid in normal mode; i or / edits the filter.
 OverlayPage {
     id: window
 
     readonly property int columns: 6
     readonly property int rows: 4
+    property bool searching: false
     // The page supplies sorted data; SearchFilter handles the query.
     readonly property var entries: Array.from(DesktopEntries.applications.values).sort((a, b) => a.name.localeCompare(b.name))
     readonly property var current: filter.matches[grid.currentIndex] ?? null
@@ -49,21 +49,29 @@ OverlayPage {
     KeyBindings {
         id: keys
         actions: [
-            { keys: [Qt.Key_Left], label: "SELECT", run: () => grid.moveCurrentIndexLeft() },
-            { keys: [Qt.Key_Right], label: "SELECT", run: () => grid.moveCurrentIndexRight() },
-            { keys: [Qt.Key_Up], label: "SELECT", run: () => grid.moveCurrentIndexUp() },
-            { keys: [Qt.Key_Down], label: "SELECT", run: () => grid.moveCurrentIndexDown() },
-            { keys: [Qt.Key_H], modifiers: Qt.ControlModifier, label: "SELECT", run: () => grid.moveCurrentIndexLeft() },
-            { keys: [Qt.Key_L], modifiers: Qt.ControlModifier, label: "SELECT", run: () => grid.moveCurrentIndexRight() },
-            { keys: [Qt.Key_K], modifiers: Qt.ControlModifier, label: "SELECT", run: () => grid.moveCurrentIndexUp() },
-            { keys: [Qt.Key_J], modifiers: Qt.ControlModifier, label: "SELECT", run: () => grid.moveCurrentIndexDown() },
+            { keys: [Qt.Key_Left, Qt.Key_H], label: "SELECT", enabled: !window.searching, run: () => grid.moveCurrentIndexLeft() },
+            { keys: [Qt.Key_Right, Qt.Key_L], label: "SELECT", enabled: !window.searching, run: () => grid.moveCurrentIndexRight() },
+            { keys: [Qt.Key_Up, Qt.Key_K], label: "SELECT", enabled: !window.searching, run: () => grid.moveCurrentIndexUp() },
+            { keys: [Qt.Key_Down, Qt.Key_J], label: "SELECT", enabled: !window.searching, run: () => grid.moveCurrentIndexDown() },
+            { keys: [Qt.Key_I, Qt.Key_Slash], label: "FIND", enabled: !window.searching, run: () => window.startSearch() },
             { keys: [Qt.Key_Return, Qt.Key_Enter], label: "LAUNCH", enabled: window.current !== null, run: () => window.launchCurrent() },
-            { keys: [Qt.Key_Escape], label: ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => ShellState.backOverlay() }
+            { keys: [Qt.Key_Escape], label: window.searching ? "NORMAL" : ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => window.searching ? window.stopSearch() : ShellState.backOverlay() }
         ]
     }
 
     function activate() {
+        if (window.searching) footer.forceActiveFocus();
+        else grid.forceActiveFocus();
+    }
+
+    function startSearch() {
+        window.searching = true;
         footer.forceActiveFocus();
+    }
+
+    function stopSearch() {
+        window.searching = false;
+        grid.forceActiveFocus();
     }
 
     GridView {
@@ -81,6 +89,8 @@ OverlayPage {
         cellHeight: LauncherStyle.gridCellSize
         clip: true
         model: filter.matches
+        focus: true
+        Keys.forwardTo: [window]
 
         delegate: Item {
             id: cell
@@ -145,7 +155,6 @@ OverlayPage {
         }
 
         height: LauncherStyle.rowHeight
-        focus: true
         keyTargets: [window]
     }
 }

@@ -9,11 +9,13 @@ import qs.services
 import qs.modules.keyboard
 
 // Clipboard history from cliphist: the entries on the left, newest first, the
-// full text or image of the highlighted one on the right. The search line is
-// always active: typing filters, Up/Down or Ctrl+j/k move, Enter copies the
+// full text or image of the highlighted one on the right. Navigate in normal
+// mode; i or / edits the filter. Enter copies the
 // entry back into the clipboard, Delete removes it, Shift+Delete wipes all.
 OverlayPage {
     id: window
+
+    property bool searching: false
 
     // Parsed `cliphist list` output, refreshed on every opening.
     property var entries: []
@@ -112,20 +114,30 @@ OverlayPage {
     KeyBindings {
         id: keys
         actions: [
-            { keys: [Qt.Key_Up], label: "SELECT", run: () => list.decrementCurrentIndex() },
-            { keys: [Qt.Key_Down], label: "SELECT", run: () => list.incrementCurrentIndex() },
-            { keys: [Qt.Key_K], modifiers: Qt.ControlModifier, label: "SELECT", run: () => list.decrementCurrentIndex() },
-            { keys: [Qt.Key_J], modifiers: Qt.ControlModifier, label: "SELECT", run: () => list.incrementCurrentIndex() },
+            { keys: [Qt.Key_Up, Qt.Key_K], label: "SELECT", enabled: !window.searching, run: () => list.decrementCurrentIndex() },
+            { keys: [Qt.Key_Down, Qt.Key_J], label: "SELECT", enabled: !window.searching, run: () => list.incrementCurrentIndex() },
+            { keys: [Qt.Key_I, Qt.Key_Slash], label: "FIND", enabled: !window.searching, run: () => window.startSearch() },
             { keys: [Qt.Key_Return, Qt.Key_Enter], label: "COPY", enabled: window.current !== null, run: () => window.copyCurrent() },
             { keys: [Qt.Key_Delete], label: "DELETE", enabled: window.current !== null, run: () => window.remove(window.current) },
             { keys: [Qt.Key_Delete], modifiers: Qt.ShiftModifier, label: "WIPE ALL", run: () => window.wipe() },
-            { keys: [Qt.Key_Escape], label: ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => ShellState.backOverlay() }
+            { keys: [Qt.Key_Escape], label: window.searching ? "NORMAL" : ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => window.searching ? window.stopSearch() : ShellState.backOverlay() }
         ]
     }
 
     function activate() {
         history.running = true;
+        if (window.searching) footer.forceActiveFocus();
+        else list.forceActiveFocus();
+    }
+
+    function startSearch() {
+        window.searching = true;
         footer.forceActiveFocus();
+    }
+
+    function stopSearch() {
+        window.searching = false;
+        list.forceActiveFocus();
     }
 
     Process {
@@ -177,6 +189,8 @@ OverlayPage {
         width: LauncherStyle.listWidth
         clip: true
         model: filter.matches
+        focus: true
+        Keys.forwardTo: [window]
 
         delegate: Rectangle {
             id: row
@@ -222,7 +236,6 @@ OverlayPage {
 
         width: LauncherStyle.listWidth
         height: LauncherStyle.rowHeight
-        focus: true
         keyTargets: [window]
     }
 

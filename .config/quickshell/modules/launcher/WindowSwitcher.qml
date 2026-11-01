@@ -10,10 +10,12 @@ import qs.modules.keyboard
 import "windows"
 
 // Window switcher: the open windows of every workspace on the left, a live view
-// of the highlighted one on the right. The search line is always active: typing
-// filters by app and title, Up/Down or Ctrl+j/k move, Enter focuses.
+// of the highlighted one on the right. Navigate in normal mode; i or / edits
+// the app/title filter, Enter focuses the selected window.
 OverlayPage {
     id: window
+
+    property bool searching: false
 
     // Sort by app so the native list can group the filtered results.
     readonly property var entries: Array.from(Hyprland.toplevels.values)
@@ -75,18 +77,28 @@ OverlayPage {
     KeyBindings {
         id: keys
         actions: [
-            { keys: [Qt.Key_Up], label: "SELECT", run: () => list.decrementCurrentIndex() },
-            { keys: [Qt.Key_Down], label: "SELECT", run: () => list.incrementCurrentIndex() },
-            { keys: [Qt.Key_K], modifiers: Qt.ControlModifier, label: "SELECT", run: () => list.decrementCurrentIndex() },
-            { keys: [Qt.Key_J], modifiers: Qt.ControlModifier, label: "SELECT", run: () => list.incrementCurrentIndex() },
+            { keys: [Qt.Key_Up, Qt.Key_K], label: "SELECT", enabled: !window.searching, run: () => list.decrementCurrentIndex() },
+            { keys: [Qt.Key_Down, Qt.Key_J], label: "SELECT", enabled: !window.searching, run: () => list.incrementCurrentIndex() },
+            { keys: [Qt.Key_I, Qt.Key_Slash], label: "FIND", enabled: !window.searching, run: () => window.startSearch() },
             { keys: [Qt.Key_Return, Qt.Key_Enter], label: "FOCUS", enabled: window.current !== null, run: () => window.jumpToCurrent() },
-            { keys: [Qt.Key_Escape], label: ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => ShellState.backOverlay() }
+            { keys: [Qt.Key_Escape], label: window.searching ? "NORMAL" : ShellState.overlayFromSettings ? "BACK" : "CLOSE", run: () => window.searching ? window.stopSearch() : ShellState.backOverlay() }
         ]
     }
 
     function activate() {
         Hyprland.refreshToplevels();
+        if (window.searching) footer.forceActiveFocus();
+        else list.forceActiveFocus();
+    }
+
+    function startSearch() {
+        window.searching = true;
         footer.forceActiveFocus();
+    }
+
+    function stopSearch() {
+        window.searching = false;
+        list.forceActiveFocus();
     }
 
     ListView {
@@ -102,6 +114,8 @@ OverlayPage {
         width: LauncherStyle.listWidth
         clip: true
         model: filter.matches
+        focus: true
+        Keys.forwardTo: [window]
 
         // A header with icon and app name above each app's windows; the model is
         // sorted by app, so each app gets one.
@@ -186,7 +200,6 @@ OverlayPage {
 
         width: LauncherStyle.listWidth
         height: LauncherStyle.rowHeight
-        focus: true
         keyTargets: [window]
     }
 

@@ -91,7 +91,10 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
     `× SETTINGS / Appearance / Theme`; the × reports a close request.
   - `search/SearchField.qml` — `/ cy` search line; it only types and hands every
     key to its `keyTargets` first, so the owner decides what keys drive.
-    The settings, wallpaper and theme views open it on `/`.
+    All searchable pages start in normal mode: `i` or `/` focuses the input,
+    `Esc` returns to normal mode without clearing the filter. A nonempty filter
+    stays visible. Arrows and h/j/k/l navigate results only in normal mode;
+    while editing, left/right move the text cursor. Enter keeps the page's action.
   - `search/SearchFilter.qml` — local `entries` + `query` + `textFor(entry)` →
     `matches`. It owns no selection, focus or UI.
   - `keyboard/KeyBindings.qml` — local `actions` with `keys`, optional exact
@@ -111,9 +114,10 @@ Light Gray, Dark Gray, Retro Dark and Retro Cyan, with a different wallpaper for
   - `launcher/clipboard/ClipboardPreview.qml` — plain text or the shared image preview.
   - `launcher/windows/WindowPreview.qml` — live capture of the selected window;
     receives the toplevel and active state from the switcher page.
-  - `launcher/AppLauncher.qml` — GNOME-style grid of the desktop apps with an
-    always active search; arrows or Ctrl+hjkl move, Enter starts. Esc returns to
-    Settings when opened there, otherwise closes. The × always closes everything.
+  - `launcher/AppLauncher.qml` — GNOME-style grid of the desktop apps;
+    arrows or h/j/k/l move in normal mode, i or / edits the filter, Enter starts.
+    Esc leaves input first; in normal mode it returns to Settings when opened
+    there, otherwise closes. The × always closes everything.
   - `launcher/WindowSwitcher.qml` — open windows of every workspace on the
     left, grouped by app under an icon header, a live view of the highlighted
     one on the right; same search.

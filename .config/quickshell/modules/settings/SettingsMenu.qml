@@ -26,7 +26,6 @@ OverlayPage {
     }
 
     function stopSearch() {
-        search.clear();
         menu.searching = false;
         start.forceActiveFocus();
     }
@@ -41,15 +40,13 @@ OverlayPage {
     KeyBindings {
         id: keys
         actions: [
-            { keys: [Qt.Key_Up], label: "SELECT", run: () => start.decrementCurrentIndex() },
-            { keys: [Qt.Key_Down], label: "SELECT", run: () => start.incrementCurrentIndex() },
-            { keys: [Qt.Key_K], modifiers: menu.searching ? Qt.ControlModifier : Qt.NoModifier, label: "SELECT", run: () => start.decrementCurrentIndex() },
-            { keys: [Qt.Key_J], modifiers: menu.searching ? Qt.ControlModifier : Qt.NoModifier, label: "SELECT", run: () => start.incrementCurrentIndex() },
+            { keys: [Qt.Key_Up, Qt.Key_K], label: "SELECT", enabled: !menu.searching, run: () => start.decrementCurrentIndex() },
+            { keys: [Qt.Key_Down, Qt.Key_J], label: "SELECT", enabled: !menu.searching, run: () => start.incrementCurrentIndex() },
             { keys: [Qt.Key_Return, Qt.Key_Enter], label: "OPEN", enabled: menu.current !== null, run: () => menu.openCurrent() },
             { keys: [Qt.Key_Right, Qt.Key_L], label: "OPEN", enabled: !menu.searching && menu.current !== null, run: () => menu.openCurrent() },
-            { keys: [Qt.Key_Slash], label: "FIND", enabled: !menu.searching, run: () => menu.startSearch() },
+            { keys: [Qt.Key_I, Qt.Key_Slash], label: "FIND", enabled: !menu.searching, run: () => menu.startSearch() },
             { keys: [Qt.Key_Left, Qt.Key_H], label: "CLOSE", enabled: !menu.searching, run: () => ShellState.backOverlay() },
-            { keys: [Qt.Key_Escape], label: menu.searching ? "CLEAR" : "CLOSE", run: () => menu.searching ? menu.stopSearch() : ShellState.backOverlay() }
+            { keys: [Qt.Key_Escape], label: menu.searching ? "NORMAL" : "CLOSE", run: () => menu.searching ? menu.stopSearch() : ShellState.backOverlay() }
         ]
     }
 
@@ -100,8 +97,8 @@ OverlayPage {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.bottom: menu.searching ? search.top : parent.bottom
-        anchors.bottomMargin: menu.searching ? 12 : 0
+        anchors.bottom: search.visible ? search.top : parent.bottom
+        anchors.bottomMargin: search.visible ? 12 : 0
         clip: true
         focus: true
         model: filter.matches
@@ -206,7 +203,7 @@ OverlayPage {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: 36
-        visible: menu.searching
+        visible: menu.searching || search.text.length > 0
         keyTargets: [menu]
     }
 }
