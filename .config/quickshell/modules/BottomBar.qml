@@ -42,7 +42,7 @@ PanelWindow {
             width: parent.width
             height: bar.barHeight
             y: bar.shown ? 0 : height
-            color: Colors.bar
+            color: "black"
 
             Behavior on y {
                 NumberAnimation {
