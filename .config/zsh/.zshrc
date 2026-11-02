@@ -14,8 +14,14 @@ if (( $+commands[fzf] )); then
     source <(fzf --zsh)
 fi
 
-# Fish-like completion. Runs compinit itself, so load it before any compdef.
+# Keep the completion menu, but only show it on Tab, not while typing.
+zstyle ':autocomplete:*' ignored-input '*'
+# Runs compinit itself, so load it before any compdef.
 source "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/autocomplete.zsh"
+# Enter menu selection so the current completion is highlighted.
+# Inside the menu, Tab / Shift+Tab already select the next / previous item.
+bindkey '^I' menu-select
+bindkey "$terminfo[kcbt]" menu-select
 
 # Plain theme files, no generator. Alacritty reloads colors.toml automatically.
 dark() {
