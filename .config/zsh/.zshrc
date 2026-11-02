@@ -14,8 +14,8 @@ if (( $+commands[fzf] )); then
     source <(fzf --zsh)
 fi
 
-# Load after FZF so native completion owns Tab.
-source "$ZDOTDIR/plugins/completion.zsh"
+# Fish-like completion. Runs compinit itself, so load it before any compdef.
+source "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/autocomplete.zsh"
 
 # Plain theme files, no generator. Alacritty reloads colors.toml automatically.
 dark() {

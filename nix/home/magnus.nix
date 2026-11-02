@@ -58,6 +58,8 @@ in
     "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh";
   xdg.dataFile."zsh/plugins/syntax-highlighting.zsh".source =
     "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
+  xdg.dataFile."zsh/plugins/autocomplete.zsh".source =
+    "${pkgs.zsh-autocomplete}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh";
   xdg.configFile."nvim".source = link ".config/nvim";
   xdg.configFile."tmux".source = link ".config/tmux";
   xdg.configFile."hypr".source = link ".config/hypr";

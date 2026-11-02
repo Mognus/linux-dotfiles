@@ -2,21 +2,19 @@
 
 Zsh is the daily shell, without a framework.
 
-`plugins/completion.zsh` configures native Zsh completion without a framework:
-case-insensitive prefix matching, grouped descriptions and immediate menu
-selection. Only if no prefix matches does it fall back to substring matching:
-`uk<Tab>` prefers `uk-notes.md`; without prefix matches, it can select
-`cover-letter-ukj-jena.pdf`. Prefix and substring results are not mixed.
-Tab and Shift+Tab cycle forward/backward through only the matching candidates;
-Enter accepts a menu selection without executing the command. Ordinary shell
-globs remain case-sensitive. FZF handles its search shortcuts, not Tab.
-Standalone `zsh-autosuggestions` and `zsh-syntax-highlighting` add history
-suggestions and command highlighting; Home Manager links the Nix-built plugins.
-The entire `~/.config/zsh` directory links into the dotfiles repository; external
-plugins live separately in `~/.local/share/zsh/plugins`. The bootstrap file
-`~/.zshenv` is linked separately so Zsh can discover `ZDOTDIR`.
-The completion plugin initializes `compinit`; do not initialize it a second time.
-Its dumpfile lives under `~/.cache/zsh`.
+Completion comes from `marlonrichert/zsh-autocomplete`, linked from Nix into
+`~/.local/share/zsh/plugins`. Candidates are listed while typing, with
+case-insensitive substring matching: `weimar` already offers every
+`cover-letter-*-weimar*.pdf`. Tab inserts the top candidate; Down enters the
+menu, where Tab and Shift+Tab cycle through the candidates and Enter accepts.
+The plugin initializes `compinit` itself, so nothing else may call it.
+Ordinary shell globs remain case-sensitive. FZF handles its search shortcuts,
+not Tab. Standalone `zsh-autosuggestions` and `zsh-syntax-highlighting` add
+history suggestions and command highlighting; Home Manager links the Nix-built
+plugins. The entire `~/.config/zsh` directory links into the dotfiles
+repository; external plugins live separately in `~/.local/share/zsh/plugins`.
+The bootstrap file `~/.zshenv` is linked separately so Zsh can discover
+`ZDOTDIR`.
 
 ## Does
 
@@ -30,9 +28,12 @@ Its dumpfile lives under `~/.cache/zsh`.
 - `Alt+C` - Jump to directory through FZF
 - `Ctrl+W` - Delete the previous word; `/` separates path components
 - `Ctrl+U` - Delete the whole line (native Zsh Emacs binding)
+- `Tab` - Insert the top completion; inside the menu, next candidate
+- `Shift+Tab` - Previous candidate inside the completion menu
+- `Down` / `Alt+Down` - Enter the completion menu
 
 FZF uses its default shortcuts without a custom shell leader. Other Emacs editing
-bindings remain unchanged. Tab completion keeps its separate menu configuration.
+bindings remain unchanged. Tab completion is owned by `zsh-autocomplete`.
 `WORDCHARS` excludes `/`, so `cd .config/zsh/plugins/personal` becomes
 `cd .config/zsh/plugins/` after one Ctrl+W. Other word characters stay unchanged.
 

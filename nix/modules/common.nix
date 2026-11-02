@@ -77,9 +77,9 @@
   ];
 
   programs.zsh.enable = true;
-  # Expose package completions; the dotfiles configure their own Tab menu.
+  # Expose package completions; zsh-autocomplete runs compinit itself.
   programs.zsh.enableCompletion = true;
-  # Initialize once in the dotfiles, with the dump under ~/.cache/zsh.
+  # No global compinit: the interactive shell's plugin does it.
   programs.zsh.enableGlobalCompInit = false;
   programs.hyprland.enable = true;
   # Activates graphical-session.target, which the portal (dark mode for
