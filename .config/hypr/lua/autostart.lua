@@ -6,6 +6,7 @@ function M.setup()
         hl.exec_cmd("wl-paste --watch cliphist store")
         hl.exec_cmd("awww-daemon")
         hl.exec_cmd("awww img " .. os.getenv("HOME") .. "/Pictures/wallpapers/tank-girl-wallpaper-black.png")
+        hl.exec_cmd("qs -p " .. os.getenv("HOME") .. "/.config/quickshell")
     end)
 end
 

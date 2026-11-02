@@ -42,7 +42,8 @@ in
     swappy
     wf-recorder
     playerctl
-    # hyprland autostart: wallpaper and authentication prompts
+    # hyprland autostart: bottom bar, tux mascots, wallpaper and authentication prompts
+    quickshell
     awww
     polkit_gnome
     # audio and brightness keys: pactl in the autostart, mixer, laptop backlight
@@ -63,6 +64,7 @@ in
   xdg.configFile."xkb".source = link ".config/xkb";
   xdg.configFile."alacritty".source = link ".config/alacritty";
   xdg.configFile."btop/btop.conf".source = link ".config/btop/btop.conf";
+  xdg.configFile."quickshell".source = link ".config/quickshell";
   home.file."Pictures/wallpapers".source = link "wallpapers";
   xdg.configFile."gtk-3.0".source = link ".config/gtk-3.0";
   xdg.configFile."gtk-4.0".source = link ".config/gtk-4.0";

@@ -1,0 +1,182 @@
+import Quickshell
+import Quickshell.Hyprland
+import Quickshell.Services.Pipewire
+import QtQuick
+import qs
+import qs.services
+import "../lib/Audio.js" as Audio
+
+PanelWindow {
+    id: bar
+
+    readonly property bool shown: ShellState.bottomBarVisible
+    readonly property int barHeight: 34
+    readonly property int contentGap: 4
+
+    anchors {
+        bottom: true
+        left: true
+        right: true
+    }
+
+    // Collapse the surface so a hidden bar does not reserve screen space.
+    implicitHeight: bar.shown ? bar.barHeight : 0
+    // Keep a small visual separation above the bottom bar while it is visible.
+    exclusiveZone: bar.implicitHeight + (bar.shown ? bar.contentGap : 0)
+    color: "transparent"
+    aboveWindows: true
+
+    Behavior on implicitHeight {
+        NumberAnimation {
+            duration: 180
+            easing.type: Easing.OutCubic
+        }
+    }
+
+    // Clip the fixed-height content while it moves below the collapsing surface.
+    Item {
+        anchors.fill: parent
+        clip: true
+
+        Rectangle {
+            width: parent.width
+            height: bar.barHeight
+            y: bar.shown ? 0 : height
+            color: Colors.bar
+
+            Behavior on y {
+                NumberAnimation {
+                    duration: 180
+                    easing.type: Easing.OutCubic
+                }
+            }
+
+            // Right: audio, battery, numbered workspaces and recording.
+            Row {
+                anchors {
+                    right: parent.right
+                    rightMargin: 8
+                    verticalCenter: parent.verticalCenter
+                }
+
+                height: parent.height
+                spacing: 14
+
+                Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: "VOL " + Audio.percent(Pipewire.defaultAudioSink)
+                    color: Audio.muted(Pipewire.defaultAudioSink) ? Colors.muted : Colors.foreground
+                    font.family: Fonts.family
+                    font.pixelSize: Fonts.size
+                }
+
+                Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible: Battery.present
+                    text: "BAT " + Battery.percent
+                    color: Battery.percent <= 15 && !Battery.charging ? Colors.danger : Colors.foreground
+                    font.family: Fonts.family
+                    font.pixelSize: Fonts.size
+                }
+
+                Row {
+                    height: parent.height
+                    spacing: 2
+
+                    Repeater {
+                        model: 9
+
+                        Rectangle {
+                            width: 36
+                            height: bar.barHeight
+                            color: "transparent"
+
+                            Text {
+                                anchors.centerIn: parent
+                                text: modelData + 1
+                                color: Workspaces.workspaceActive(modelData + 1) ? Colors.accent : Colors.foreground
+                                opacity: Workspaces.workspaceActive(modelData + 1) ? 1.0 : Workspaces.workspaceExists(modelData + 1) ? 0.82 : 0.42
+                                font.family: Fonts.family
+                                font.pixelSize: Fonts.largeSize
+                                font.bold: Workspaces.workspaceActive(modelData + 1)
+                            }
+
+                            Rectangle {
+                                anchors {
+                                    left: parent.left
+                                    right: parent.right
+                                    bottom: parent.bottom
+                                }
+
+                                height: 2
+                                color: Workspaces.workspaceUrgent(modelData + 1) ? Colors.danger : Workspaces.workspaceActive(modelData + 1) ? Colors.accent : Colors.faint
+                                visible: Workspaces.workspaceActive(modelData + 1) || Workspaces.workspaceExists(modelData + 1) || Workspaces.workspaceUrgent(modelData + 1)
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: Hyprland.dispatch(`hl.dsp.focus({ workspace = ${modelData + 1} })`)
+                            }
+                        }
+                    }
+                }
+
+                Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: "●"
+                    color: Recording.recording ? Colors.accent : "transparent"
+                    font.family: Fonts.family
+                    font.pixelSize: Fonts.size
+                    font.bold: true
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: Recording.toggle()
+                    }
+                }
+
+            }
+
+            // Center: clock.
+            Text {
+                anchors.centerIn: parent
+                text: Time.clock
+                color: Colors.foreground
+                font.family: Fonts.family
+                font.pixelSize: Fonts.smallSize
+                font.bold: true
+            }
+
+            // Left: special workspaces.
+            Row {
+                anchors {
+                    left: parent.left
+                    leftMargin: 10
+                    verticalCenter: parent.verticalCenter
+                }
+
+                height: parent.height
+                spacing: 14
+
+                Repeater {
+                    model: Workspaces.specialWorkspaces
+
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: modelData.label
+                        color: Workspaces.specialWorkspaceVisible(modelData.name) ? modelData.accent : Workspaces.specialWorkspaceExists(modelData.name) ? Colors.foreground : Colors.muted
+                        font.family: Fonts.family
+                        font.pixelSize: Fonts.iconSize
+                        font.bold: true
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: Workspaces.toggleSpecialWorkspace(modelData.name)
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}

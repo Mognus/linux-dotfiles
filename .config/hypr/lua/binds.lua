@@ -29,6 +29,9 @@ function M.setup(programs)
 		leader_bind("W", exec("rofi -show window -modes window"))
 		-- Canceling the selection leaves the clipboard unchanged.
 		leader_bind("S", exec([[geometry="$(slurp)" && grim -g "$geometry" - | wl-copy]]))
+		-- Quickshell desktop widgets.
+		leader_bind("T", exec("qs -p $HOME/.config/quickshell ipc call tux toggle"))
+		leader_bind("P", exec("qs -p $HOME/.config/quickshell ipc call bottombar toggle"))
 
 		for _, program in pairs(programs) do
 			if program.workspace and program.key then
