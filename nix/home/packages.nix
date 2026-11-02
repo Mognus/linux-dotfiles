@@ -99,6 +99,7 @@
     mpv
 
     # --- Tools ---
+    mdcat
     btop
     pass
     curl
