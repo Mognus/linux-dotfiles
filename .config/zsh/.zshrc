@@ -17,9 +17,6 @@ fi
 # Fish-like completion. Runs compinit itself, so load it before any compdef.
 source "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/autocomplete.zsh"
 
-# Hide the "common substring:" line above the completion list.
-zstyle ':completion:*:unambiguous' format ''
-
 # Plain theme files, no generator. Alacritty reloads colors.toml automatically.
 dark() {
     cp "$HOME/.config/alacritty/themes/gruvbox-dark.toml" "$HOME/.config/alacritty/colors.toml" || return
