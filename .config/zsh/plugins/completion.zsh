@@ -3,9 +3,11 @@ zmodload zsh/complist
 autoload -Uz compinit
 compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION"
 
-# One matching rule: ignore case and allow text before/after the typed fragment.
-# Example: uk matches cover-letter-ukj-jena.pdf, but not cover-letter-other.pdf.
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
+# Ignore case. Try prefixes first; match inside names only if no prefix matches.
+# Example: uk prefers uk-notes.md; otherwise it can match cover-letter-ukj.pdf.
+zstyle ':completion:*' matcher-list \
+    'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
+    'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
 zstyle ':completion:*' menu select=1
 zstyle ':completion:*:descriptions' format '%B%d%b'
 zstyle ':completion:*' group-name ''

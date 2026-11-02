@@ -3,8 +3,10 @@
 Zsh is the daily shell, without a framework.
 
 `plugins/completion.zsh` configures native Zsh completion without a framework:
-case-insensitive substring matching, grouped descriptions and immediate menu
-selection. For example, `uk<Tab>` selects a matching `cover-letter-ukj-jena.pdf`.
+case-insensitive prefix matching, grouped descriptions and immediate menu
+selection. Only if no prefix matches does it fall back to substring matching:
+`uk<Tab>` prefers `uk-notes.md`; without prefix matches, it can select
+`cover-letter-ukj-jena.pdf`. Prefix and substring results are not mixed.
 Tab and Shift+Tab cycle forward/backward through only the matching candidates;
 Enter accepts a menu selection without executing the command. Ordinary shell
 globs remain case-sensitive. FZF handles its search shortcuts, not Tab.
@@ -26,11 +28,13 @@ Its dumpfile lives under `~/.cache/zsh`.
 - `Ctrl+R` - Search command history through FZF
 - `Ctrl+T` - Search files through FZF
 - `Alt+C` - Jump to directory through FZF
-- `Ctrl+W` - Delete the previous word (native Zsh behavior)
+- `Ctrl+W` - Delete the previous word; `/` separates path components
 - `Ctrl+U` - Delete the whole line (native Zsh Emacs binding)
 
 FZF uses its default shortcuts without a custom shell leader. Other Emacs editing
 bindings remain unchanged. Tab completion keeps its separate menu configuration.
+`WORDCHARS` excludes `/`, so `cd .config/zsh/plugins/personal` becomes
+`cd .config/zsh/plugins/` after one Ctrl+W. Other word characters stay unchanged.
 
 ## Configuration
 

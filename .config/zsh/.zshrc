@@ -7,6 +7,9 @@ setopt SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE
 
 bindkey -e
 
+# Treat / as a word boundary: Ctrl+W removes one path component at a time.
+WORDCHARS=${WORDCHARS//\/}
+
 if (( $+commands[fzf] )); then
     source <(fzf --zsh)
 fi
