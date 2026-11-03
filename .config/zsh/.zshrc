@@ -18,6 +18,10 @@ fi
 zstyle ':autocomplete:*' ignored-input '*'
 # Runs compinit itself, so load it before any compdef.
 source "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/autocomplete.zsh"
+# Restore FZF history search after autocomplete overrides Ctrl+R.
+if (( $+widgets[fzf-history-widget] )); then
+    bindkey '^R' fzf-history-widget
+fi
 # Enter menu selection so the current completion is highlighted.
 # Inside the menu, Tab / Shift+Tab already select the next / previous item.
 bindkey '^I' menu-select
