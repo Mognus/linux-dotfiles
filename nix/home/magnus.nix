@@ -65,6 +65,9 @@ in
   xdg.configFile."hypr".source = link ".config/hypr";
   xdg.configFile."xkb".source = link ".config/xkb";
   xdg.configFile."alacritty".source = link ".config/alacritty";
+  # gsettings searches this standard XDG location, not Nix's package-specific one.
+  xdg.dataFile."glib-2.0/schemas".source =
+    "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas";
   xdg.configFile."btop/btop.conf".source = link ".config/btop/btop.conf";
   xdg.configFile."quickshell".source = link ".config/quickshell";
   home.file."Pictures/wallpapers".source = link "wallpapers";
