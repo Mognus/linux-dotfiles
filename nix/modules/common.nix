@@ -74,6 +74,8 @@
     # Unicode terminal glyphs and Nerd Font icons missing from the VGA font.
     dejavu_fonts
     nerd-fonts.symbols-only
+    # Chinese, Japanese and Korean glyphs missing from the base fonts.
+    noto-fonts-cjk-sans
   ];
 
   programs.zsh.enable = true;

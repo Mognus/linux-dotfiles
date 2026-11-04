@@ -1,5 +1,7 @@
 /.gitconfig-traeno
 /.config/fish/fish_variables
+# Local Alacritty theme selection; theme templates stay tracked.
+/.config/alacritty/colors.toml
 # Generated Zsh completion cache
 /.config/zsh/.zcompdump*
 /.config/hypr/hyprland.conf

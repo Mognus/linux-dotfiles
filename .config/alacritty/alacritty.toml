@@ -1,5 +1,7 @@
 [general]
 import = [
+    # Default for fresh checkouts; dark/light creates the local override below.
+    "~/.config/alacritty/themes/gruvbox-dark.toml",
     "~/.config/alacritty/colors.toml",
 ]
 
