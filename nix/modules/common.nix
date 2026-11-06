@@ -79,9 +79,9 @@
   ];
 
   programs.zsh.enable = true;
-  # Expose package completions; zsh-autocomplete runs compinit itself.
+  # Expose package completions; .zshrc runs compinit itself.
   programs.zsh.enableCompletion = true;
-  # No global compinit: the interactive shell's plugin does it.
+  # Initialize completion only once, in .zshrc.
   programs.zsh.enableGlobalCompInit = false;
   programs.hyprland.enable = true;
   # Activates graphical-session.target, which the portal (dark mode for

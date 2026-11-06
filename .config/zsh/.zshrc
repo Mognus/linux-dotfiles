@@ -10,22 +10,18 @@ bindkey -e
 # Treat / as a word boundary: Ctrl+W removes one path component at a time.
 WORDCHARS=${WORDCHARS//\/}
 
+# Native completion: Tab opens the menu, Tab / Shift+Tab cycle candidates.
+autoload -Uz compinit
+compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
+zmodload zsh/complist
+zstyle ':completion:*' menu select
+bindkey '^I' complete-word
+bindkey -M menuselect '^I' menu-complete
+bindkey -M menuselect '^[[Z' reverse-menu-complete
+
 if (( $+commands[fzf] )); then
     source <(fzf --zsh)
 fi
-
-# Keep the completion menu, but only show it on Tab, not while typing.
-zstyle ':autocomplete:*' ignored-input '*'
-# Runs compinit itself, so load it before any compdef.
-source "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/autocomplete.zsh"
-# Restore FZF history search after autocomplete overrides Ctrl+R.
-if (( $+widgets[fzf-history-widget] )); then
-    bindkey '^R' fzf-history-widget
-fi
-# Enter menu selection so the current completion is highlighted.
-# Inside the menu, Tab / Shift+Tab already select the next / previous item.
-bindkey '^I' menu-select
-bindkey "$terminfo[kcbt]" menu-select
 
 # Plain theme files, no generator. Alacritty reloads colors.toml automatically.
 dark() {

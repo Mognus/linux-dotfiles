@@ -2,14 +2,12 @@
 
 Zsh is the daily shell, without a framework.
 
-Completion comes from `marlonrichert/zsh-autocomplete`, linked from Nix into
-`~/.local/share/zsh/plugins`. Candidates are listed while typing, with
-case-insensitive substring matching: `weimar` already offers every
-`cover-letter-*-weimar*.pdf`. Tab inserts the top candidate; Down enters the
-menu, where Tab and Shift+Tab cycle through the candidates and Enter accepts.
-The plugin initializes `compinit` itself, so nothing else may call it.
-Ordinary shell globs remain case-sensitive. FZF handles its search shortcuts,
-not Tab. Standalone `zsh-autosuggestions` and `zsh-syntax-highlighting` add
+Completion uses Zsh's built-in `compinit` and `zsh/complist`, initialized in
+`.zshrc`. Tab completes the current prefix and opens a selection menu when
+there are multiple candidates; Tab and Shift+Tab cycle, and Enter accepts.
+Candidates are not listed while typing. Matching uses Zsh's defaults, not
+case-insensitive substring matching. FZF handles its search shortcuts, not Tab.
+Standalone `zsh-autosuggestions` and `zsh-syntax-highlighting` add
 history suggestions and command highlighting; Home Manager links the Nix-built
 plugins. The entire `~/.config/zsh` directory links into the dotfiles
 repository; external plugins live separately in `~/.local/share/zsh/plugins`.
@@ -28,12 +26,11 @@ The bootstrap file `~/.zshenv` is linked separately so Zsh can discover
 - `Alt+C` - Jump to directory through FZF
 - `Ctrl+W` - Delete the previous word; `/` separates path components
 - `Ctrl+U` - Delete the whole line (native Zsh Emacs binding)
-- `Tab` - Insert the top completion; inside the menu, next candidate
+- `Tab` - Complete the current prefix; inside the menu, next candidate
 - `Shift+Tab` - Previous candidate inside the completion menu
-- `Down` / `Alt+Down` - Enter the completion menu
 
 FZF uses its default shortcuts without a custom shell leader. Other Emacs editing
-bindings remain unchanged. Tab completion is owned by `zsh-autocomplete`.
+bindings remain unchanged. Tab completion uses native Zsh widgets.
 `WORDCHARS` excludes `/`, so `cd .config/zsh/plugins/personal` becomes
 `cd .config/zsh/plugins/` after one Ctrl+W. Other word characters stay unchanged.
 
