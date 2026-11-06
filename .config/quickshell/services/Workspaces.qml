@@ -3,21 +3,20 @@ pragma Singleton
 import Quickshell
 import Quickshell.Hyprland
 import QtQuick
-import qs
 
 Singleton {
     id: root
 
     property string activeSpecialWorkspace: ""
     property var specialWorkspaces: [
-        { name: "term", label: "RETURN", accent: Colors.accent },
-        { name: "files", label: "F", accent: Colors.accent },
-        { name: "music", label: "M", accent: Colors.accent },
-        { name: "notes", label: "N", accent: Colors.accent },
-        { name: "reader", label: "R", accent: Colors.accent },
-        { name: "discord", label: "D", accent: Colors.accent },
-        { name: "chat", label: "C", accent: Colors.accent },
-        { name: "browser", label: "B", accent: Colors.accent },
+        { name: "term", label: "RETURN" },
+        { name: "files", label: "F" },
+        { name: "music", label: "M" },
+        { name: "notes", label: "N" },
+        { name: "reader", label: "R" },
+        { name: "discord", label: "D" },
+        { name: "chat", label: "C" },
+        { name: "browser", label: "B" },
     ]
 
     function workspaceFor(id) {
@@ -70,13 +69,6 @@ Singleton {
         root.activeSpecialWorkspace = root.specialWorkspaceVisible(name) ? "" : "special:" + name;
         // With the Lua config, dispatch takes a Lua dispatcher.
         Hyprland.dispatch(`hl.dsp.workspace.toggle_special("${name}")`);
-    }
-
-    // Hides the special workspace that is open, if any: "special:term" → term toggled off.
-    function hideSpecialWorkspace() {
-        if (root.activeSpecialWorkspace !== "") {
-            root.toggleSpecialWorkspace(root.activeSpecialWorkspace.replace("special:", ""));
-        }
     }
 
     function setActiveSpecialFromEvent(event) {

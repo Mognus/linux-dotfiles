@@ -46,50 +46,21 @@ adding one asks for confirmation.
 - `snacks.nvim` - file explorer and pickers (files, grep, LSP symbols, git status,
   diagnostics), plus indentation guides with the current scope highlighted.
   Opening a directory (`nvim .`) opens the explorer instead of netrw.
-- `gitsigns.nvim` - marks changed lines in the sign column, side-by-side diff
+- `gitsigns.nvim` - marks changed lines in the sign column and navigates hunks
 - `which-key.nvim` - popup after `Space` listing the possible next keys
 - `conform.nvim` - formats the current buffer with the formatter for its filetype
 - `lualine.nvim` - statusline with mode, git branch, diff, diagnostics, file and
   cursor position; font rendering is handled by Alacritty
-- `noice.nvim` - popup command/search input, message history and LSP UI;
-  complements Lualine rather than replacing the statusline
-- `nui.nvim` - required UI library for Noice's popups, menus and layouts;
-  no separate user-facing commands or configuration needed
 - `flash.nvim` - labeled jumps, Treesitter selections and remote operator actions;
   native `/`, `?`, `f`, `F`, `t`, `T`, `;` and `,` stay unchanged
 - `render-markdown.nvim` - renders Markdown in the buffer; `:RenderMarkdown toggle`
   switches back to plain text
 
-## Command line and messages (Noice)
+## Command line and messages
 
-`:` commands and `/` / `?` searches open in a popup. Command-line completion
-appears alongside it (`command_palette` preset); long messages open in a split
-(`long_message_to_split` preset). Lualine keeps its existing statusline setup.
-No additional notification plugin is installed: Noice can use the existing
-Snacks notification backend, with its built-in mini view as a fallback.
-
-- `:Noice` or `:Noice history` - message history
-- `:Noice last` - last message in a popup
-- `:Noice errors` - error history
-- `:Noice dismiss` - dismiss visible messages
-- `:Noice disable` / `:Noice enable` - temporarily switch Noice off/on
-- `:checkhealth noice` - check dependencies and parser availability
-
-Setup lives in `lua/core/plugins.lua`; `nui.nvim` and `noice.nvim` are installed
-through `vim.pack` and pinned in `nvim-pack-lock.json`. The additional `vim`,
-`regex` and `bash` Treesitter parsers highlight command and search input.
+Commands (`:`), searches (`/` and `?`) and messages use Neovim's native UI.
+Use `:messages` for message history. Lualine uses its default configuration.
 Restart Neovim after configuration changes; no NixOS rebuild is needed.
-
-Neovim's native partial-command display is enabled with `showcmd = true` and
-`showcmdloc = "statusline"`. Lualine's right-hand section includes `%S` before
-encoding, file format and filetype; its other default sections stay unchanged.
-The Noice search popup also shows `d/`, `y/`, `c?`, etc. in place of its search
-icon when an operator is pending. Plain searches show `/` (forward) or `?`
-(backward) instead of magnifying-glass and arrow icons.
-Noice has no built-in option for this; the small `SearchOperator` autocmd in
-`lua/core/plugins.lua` changes only the displayed icon, not the search text or
-keybindings. Counts and register prefixes remain in Lualine's native display;
-the popup prefix shows only the operator and search direction.
 
 ## Language servers
 
@@ -152,9 +123,7 @@ on demand; leader help remains available in Visual mode.
 - `Space+f+S` - search LSP symbols across the workspace, updated live while typing (`S` = Shift+s)
 - `Space+/` - grep across the git repo
 - `Space+g+s` - changed files of the git repo, including untracked ones
-  - `Enter` on a submodule - open its git status
-  - `Ctrl+G` inside the picker - back up to the parent repo
-- `Space+g+d` - toggle side-by-side diff of the current file against git
+- `Space+g+d` - Snacks diff picker with change previews
 - `Space+x+x` - all LSP errors and warnings (like "Problems" in VS Code/Zed)
 - `Space+x+e` - full diagnostics for the current line in a focused, scrollable popup
 - `Space+x+d` - toggle inline diagnostic text; other diagnostics remain active

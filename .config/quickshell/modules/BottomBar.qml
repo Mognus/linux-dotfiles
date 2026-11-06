@@ -164,7 +164,7 @@ PanelWindow {
                     Text {
                         anchors.verticalCenter: parent.verticalCenter
                         text: modelData.label
-                        color: Workspaces.specialWorkspaceVisible(modelData.name) ? modelData.accent : Workspaces.specialWorkspaceExists(modelData.name) ? Colors.foreground : Colors.muted
+                        color: Workspaces.specialWorkspaceVisible(modelData.name) ? Colors.accent : Workspaces.specialWorkspaceExists(modelData.name) ? Colors.foreground : Colors.muted
                         font.family: Fonts.family
                         font.pixelSize: Fonts.iconSize
                         font.bold: true
