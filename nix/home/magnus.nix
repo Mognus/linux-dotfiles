@@ -98,9 +98,10 @@ in
   xdg.configFile."librewolf/librewolf/default/chrome/userChrome.css".source =
     link ".config/librewolf/librewolf/chrome/userChrome.css";
 
-  # Both agents share one instruction file; their folders also hold local state.
+  # All agents share one instruction file; their folders also hold local state.
   home.file.".claude/CLAUDE.md".source = link "AGENTS.md";
   home.file.".codex/AGENTS.md".source = link "AGENTS.md";
+  xdg.configFile."opencode/AGENTS.md".source = link "AGENTS.md";
   # Claude Code saves via a temp file next to the first link hop, so this link
   # must skip the read-only store. Back to home.file once
   # https://github.com/anthropics/claude-code/issues/78162 is fixed.
