@@ -48,6 +48,7 @@
     typescript
     vtsls
     python3
+    php
     pipx
     ruff
     pyright
