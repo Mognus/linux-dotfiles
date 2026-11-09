@@ -5,7 +5,6 @@ WORDCHARS=${WORDCHARS//\/}
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 
-# Native completion menu.
-bindkey '^I' complete-word
-bindkey -M menuselect '^I' menu-complete
-bindkey -M menuselect '^[[Z' reverse-menu-complete
+# Tab completes and cycles through the candidates; Shift+Tab reverses.
+bindkey '^I' menu-complete
+bindkey '^[[Z' reverse-menu-complete
