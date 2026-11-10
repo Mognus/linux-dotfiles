@@ -84,7 +84,8 @@ PanelWindow {
                     spacing: 2
 
                     Repeater {
-                        model: 9
+                        // Five numbered workspaces; keep in sync with hypr/lua/binds.lua.
+                        model: 5
 
                         Rectangle {
                             width: 36

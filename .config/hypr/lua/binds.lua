@@ -88,7 +88,8 @@ function M.setup(programs)
 	mod_bind("ALT + bracketleft", hl.dsp.window.move({ workspace = "r-1" }))
 	mod_bind("ALT + bracketright", hl.dsp.window.move({ workspace = "r+1" }))
 
-	for i = 1, 9 do
+	-- Five numbered workspaces; keep in sync with quickshell/modules/BottomBar.qml.
+	for i = 1, 5 do
 		local key = tostring(i)
 
 		mod_bind(key, hl.dsp.focus({ workspace = i }))
