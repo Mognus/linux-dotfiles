@@ -85,7 +85,6 @@
 
     # --- AI Agents ---
     claude-code
-    codex
     opencode
     bubblewrap
 
