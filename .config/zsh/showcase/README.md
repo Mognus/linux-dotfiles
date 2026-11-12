@@ -24,7 +24,7 @@ The bootstrap file `~/.zshenv` is linked separately so Zsh can discover
 - `Ctrl+R` - Search command history through FZF
 - `Ctrl+T` - Search files through FZF
 - `Alt+C` - Jump to directory through FZF
-- `Ctrl+W` - Delete the previous word; `/` separates path components
+- `Ctrl+W` - Delete the previous word; `_`, `-` and `/` separate words
 - `Ctrl+Left` / `Ctrl+Right` - Move one word backward / forward
 - `Ctrl+U` - Delete the whole line (native Zsh Emacs binding)
 - `Tab` - Complete the current prefix; inside the menu, next candidate
@@ -32,8 +32,10 @@ The bootstrap file `~/.zshenv` is linked separately so Zsh can discover
 
 FZF uses its default shortcuts without a custom shell leader. Other Emacs editing
 bindings remain unchanged. Tab completion uses native Zsh widgets.
-`WORDCHARS` excludes `/`, so `cd .config/zsh/plugins/personal` becomes
-`cd .config/zsh/plugins/` after one Ctrl+W. Other word characters stay unchanged.
+`WORDCHARS` is set explicitly: it lists the special characters that count as part of
+a word, which is everything except `_`, `-` and `/`. Those three are word boundaries,
+so `cd .config/zsh/plugins/personal` becomes `cd .config/zsh/plugins/` after one
+Ctrl+W, and `c-programming-style` breaks at each dash.
 
 ## Configuration
 
