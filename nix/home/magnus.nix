@@ -77,7 +77,7 @@ in
   xdg.configFile."mimeapps.list".source = link ".config/mimeapps.list";
   xdg.configFile."ruff".source = link ".config/ruff";
   xdg.configFile."zed".source = link ".config/zed";
-  xdg.configFile."opencode/tui.json".source = link ".config/opencode/tui.json";
+  xdg.configFile."opencode/cli.json".source = link ".config/opencode/cli.json";
   # Stable autostart path; Home Manager tracks the installed agent across updates.
   home.file.".local/bin/polkit-agent".source =
     "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
